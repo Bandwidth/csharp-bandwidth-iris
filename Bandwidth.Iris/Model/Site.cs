@@ -9,7 +9,7 @@ namespace Bandwidth.Iris.Model
         public static async Task<Site> Get(Client client, string id)
         {
             if (id == null) throw new ArgumentNullException("id");
-            var item = await client.MakeGetRequest<Site>(client.ConcatAccountPath(SitePath), null, id);
+            var item = (await client.MakeGetRequest<SiteResponse>(client.ConcatAccountPath(SitePath), null, id)).Site;
             item.Client = client;
             return item;
         }
@@ -22,7 +22,7 @@ namespace Bandwidth.Iris.Model
 
         public static async Task<Site[]> List(Client client)
         {
-            var items = await client.MakeGetRequest<Site[]>(client.ConcatAccountPath(SitePath)) ?? new Site[0];
+            var items = (await client.MakeGetRequest<SitesResponse>(client.ConcatAccountPath(SitePath))).Sites ?? new Site[0];
             foreach (var item in items)
             {
                 item.Client = client;
@@ -70,9 +70,9 @@ namespace Bandwidth.Iris.Model
 
         public async Task<SipPeer> CreateSipPeer(SipPeer item)
         {
-            item = 
-                await Client.MakePostRequest<SipPeer>(
-                    Client.ConcatAccountPath(string.Format("{0}/{1}/{2}", SitePath, Id, SipPeerPath)), item);
+            item =
+                (await Client.MakePostRequest<TNSipPeersResponse>(
+                    Client.ConcatAccountPath(string.Format("{0}/{1}/{2}", SitePath, Id, SipPeerPath)), item)).SipPeers.SipPeer;
             item.Client = Client;
             item.SiteId = Id;
             return item;
@@ -81,5 +81,25 @@ namespace Bandwidth.Iris.Model
         public string Name { get; set; }
         public string Description { get; set; }
         public Address Address { get; set; }
+    }
+
+    public class SitesResponse
+    {
+        public Site[] Sites { get; set; }
+    }
+
+    public class SiteResponse
+    {
+        public Site Site { get; set; }
+    }
+
+    public class TNSipPeersResponse
+    {
+        public SipPeers SipPeers { get; set; }
+    }
+
+    public class SipPeers
+    {
+        public SipPeer SipPeer { get; set; }
     }
 }
