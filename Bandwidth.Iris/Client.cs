@@ -14,23 +14,21 @@ namespace Bandwidth.Iris
 {
     public sealed class Client
     {
-        private readonly string _accountId;
-        private readonly string _siteId;
         private readonly string _userName;
         private readonly string _password;
         private readonly string _apiEndpoint;
         private readonly string _apiVersion;
+        private readonly string _accountPath;
 
-        public static Client GetInstance(string accountId, string siteId, string userName, string password, string apiEndpoint = "https://api.catapult.inetwork.com", string apiVersion = "v1")
+        public static Client GetInstance(string accountId, string userName, string password, string apiEndpoint = "https://api.inetwork.com", string apiVersion = "v1.0")
         {
-            return new Client(accountId, siteId, userName, password, apiEndpoint, apiVersion);
+            return new Client(accountId, userName, password, apiEndpoint, apiVersion);
         }
 
         
 #if !PCL
         public const string BandwidthUserId = "BANDWIDTH_USER_ID";
         public const string BandwidthApiAccountId = "BANDWIDTH_API_ACCOUNT_ID";
-        public const string BandwidthApiSiteId = "BANDWIDTH_API_SITE_ID";
         public const string BandwidthApiUserName = "BANDWIDTH_API_USERNAME";
         public const string BandwidthApiPassword = "BANDWIDTH_API_PASSWORD";
         public const string BandwidthApiEndpoint = "BANDWIDTH_API_ENDPOINT";
@@ -40,7 +38,6 @@ namespace Bandwidth.Iris
         {
             return GetInstance(
                 Environment.GetEnvironmentVariable(BandwidthApiAccountId),
-                Environment.GetEnvironmentVariable(BandwidthApiSiteId),
                 Environment.GetEnvironmentVariable(BandwidthApiUserName),
                 Environment.GetEnvironmentVariable(BandwidthApiPassword),
                 Environment.GetEnvironmentVariable(BandwidthApiEndpoint),
@@ -49,21 +46,18 @@ namespace Bandwidth.Iris
 
         
 #endif
-        private Client(string accountId, string siteId, string userName, string password, string apiEndpoint, string apiVersion)
+        private Client(string accountId, string userName, string password, string apiEndpoint, string apiVersion)
         {
             if (accountId == null) throw new ArgumentNullException("accountId");
-            if (siteId == null) throw new ArgumentNullException("siteId");
             if (userName == null) throw new ArgumentNullException("userName");
             if (password == null) throw new ArgumentNullException("password");
             if (apiEndpoint == null) throw new ArgumentNullException("apiEndpoint");
             if (apiVersion == null) throw new ArgumentNullException("apiVersion");
-            _accountId = accountId;
-            _siteId = siteId;
             _userName = userName;
             _password = password;
             _apiEndpoint = apiEndpoint;
             _apiVersion = apiVersion;
-
+            _accountPath = string.Format("aacounts/{0}", accountId);
         }
 
         private HttpClient CreateHttpClient()
@@ -158,6 +152,33 @@ namespace Bandwidth.Iris
             }
         }
 
+        internal async Task<HttpResponseMessage> MakePutRequest(string path, object data, bool disposeResponse = false)
+        {
+            var serializer = new XmlSerializer(data.GetType());
+            using (var writer = new StringWriter())
+            {
+                serializer.Serialize(writer, data);
+                var xml = writer.ToString();
+                using (var client = CreateHttpClient())
+                {
+                    var response =
+                        await client.PutAsync(FixPath(path), new StringContent(xml, Encoding.UTF8, "text/xml"));
+                    try
+                    {
+                        await CheckResponse(response);
+                    }
+                    catch
+                    {
+                        response.Dispose();
+                        throw;
+                    }
+                    if (!disposeResponse) return response;
+                    response.Dispose();
+                    return null;
+                }
+            }
+        }
+
         internal async Task<HttpResponseMessage> PutData(string path, Stream stream, string mediaType,
             bool disposeResponse = false)
         {
@@ -215,6 +236,8 @@ namespace Bandwidth.Iris
             return default(TResult);
         }
 
+        
+
         internal async Task MakeDeleteRequest(string path, string id = null)
         {
             if (id != null)
@@ -229,8 +252,6 @@ namespace Bandwidth.Iris
         }
 
         #endregion
-
-
         
         private static string FixPath(string path)
         {
@@ -261,6 +282,31 @@ namespace Bandwidth.Iris
                 }
                 throw new BandwidthIrisException("", string.Format("Http code {0}", response.StatusCode), response.StatusCode);
             }
+        }
+
+        internal string GetIdFromLocationHeader(Uri locationHeader)
+        {
+            if (locationHeader == null)
+            {
+                throw new Exception("Missing location header in response");
+            }
+            var location = locationHeader.PathAndQuery;
+            var index = location.LastIndexOf("/", StringComparison.Ordinal);
+            if (index < 0)
+            {
+                throw new Exception("Missing id in response");
+            }
+            return location.Substring(index + 1);
+        }
+
+        internal string ConcatAccountPath(string path)
+        {
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (path[0] == '/')
+            {
+                return _accountPath + path;
+            }
+            return string.Format("{0}/{1}", _accountPath, path);
         }
     }
 }
