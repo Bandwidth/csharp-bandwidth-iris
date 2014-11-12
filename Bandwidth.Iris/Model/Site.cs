@@ -5,7 +5,7 @@ namespace Bandwidth.Iris.Model
 {
     public class Site: BaseModel
     {
-        private const string SitePath = "sites";
+        internal const string SitePath = "sites";
         public static async Task<Site> Get(Client client, string id)
         {
             if (id == null) throw new ArgumentNullException("id");
@@ -64,6 +64,18 @@ namespace Bandwidth.Iris.Model
         public Task Delete()
         {
             return Client.MakeDeleteRequest(Client.ConcatAccountPath(string.Format("{0}/{1}", SitePath, Id)));
+        }
+
+        internal const string SipPeerPath = "sippeers";
+
+        public async Task<SipPeer> CreateSipPeer(SipPeer item)
+        {
+            item = 
+                await Client.MakePostRequest<SipPeer>(
+                    Client.ConcatAccountPath(string.Format("{0}/{1}/{2}", SitePath, Id, SipPeerPath)), item);
+            item.Client = Client;
+            item.SiteId = Id;
+            return item;
         }
 
         public string Name { get; set; }

@@ -3,7 +3,7 @@
     public class BaseModel
     {
         private Client _client;
-        public string Id { get; set; }
+        public virtual string Id { get; set; }
 
         internal Client Client
         {
