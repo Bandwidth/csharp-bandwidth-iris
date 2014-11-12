@@ -50,6 +50,7 @@
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utf8StringWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

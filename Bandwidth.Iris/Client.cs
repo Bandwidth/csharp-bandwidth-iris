@@ -27,7 +27,6 @@ namespace Bandwidth.Iris
 
         
 #if !PCL
-        public const string BandwidthUserId = "BANDWIDTH_USER_ID";
         public const string BandwidthApiAccountId = "BANDWIDTH_API_ACCOUNT_ID";
         public const string BandwidthApiUserName = "BANDWIDTH_API_USERNAME";
         public const string BandwidthApiPassword = "BANDWIDTH_API_PASSWORD";
@@ -128,7 +127,7 @@ namespace Bandwidth.Iris
         internal async Task<HttpResponseMessage> MakePostRequest(string path, object data, bool disposeResponse = false)
         {
             var serializer = new XmlSerializer(data.GetType());
-            using (var writer = new StringWriter())
+            using (var writer = new Utf8StringWriter())
             {
                 serializer.Serialize(writer, data);
                 var xml = writer.ToString();
@@ -155,7 +154,7 @@ namespace Bandwidth.Iris
         internal async Task<HttpResponseMessage> MakePutRequest(string path, object data, bool disposeResponse = false)
         {
             var serializer = new XmlSerializer(data.GetType());
-            using (var writer = new StringWriter())
+            using (var writer = new Utf8StringWriter())
             {
                 serializer.Serialize(writer, data);
                 var xml = writer.ToString();
@@ -226,11 +225,13 @@ namespace Bandwidth.Iris
                 if (response.Content.Headers.ContentType != null &&
                     response.Content.Headers.ContentType.MediaType == "text/xml")
                 {
-                    var stream = await response.Content.ReadAsStreamAsync();
-                    var serializer = new XmlSerializer(typeof(TResult));
-                    return stream.Length > 0
-                        ? (TResult)serializer.Deserialize(stream)
-                        : default(TResult);
+                    using (var stream = await response.Content.ReadAsStreamAsync())
+                    {
+                        var serializer = new XmlSerializer(typeof (TResult));
+                        return stream.Length > 0
+                            ? (TResult) serializer.Deserialize(stream)
+                            : default(TResult);
+                    }
                 }
             }
             return default(TResult);
