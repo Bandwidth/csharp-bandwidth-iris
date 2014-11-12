@@ -59,6 +59,7 @@
     <Compile Include="ClientTests.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="HttpServer.cs" />
+    <Compile Include="Models\SipPeerTests.cs" />
     <Compile Include="Models\SiteTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

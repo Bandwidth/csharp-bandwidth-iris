@@ -279,6 +279,41 @@ namespace Bandwidth.Iris.Tests.Models
                 if (server.Error != null) throw server.Error;
             }
         }
+
+        [TestMethod]
+        public void CreateSipPeerTest()
+        {
+            var item = new SipPeer
+            {
+                Name = "test",
+                IsDefaultPeer = true
+            };
+            var createdItem = new SipPeer
+            {
+                Id = "1",
+                SiteId = "1",
+                Name = "test",
+                IsDefaultPeer = true
+            };
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "POST",
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers", Helper.AccountId),
+                    EstimatedContent = Helper.ToXmlString(item),
+                    ContentToSend = Helper.CreateXmlContent(createdItem)
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var i = new Site { Id = "1" };
+                i.SetClient(client);
+                var r = i.CreateSipPeer(item).Result;
+                Helper.AssertObjects(createdItem, r);
+                if (server.Error != null) throw server.Error;
+            }
+        }
     }
 
 }

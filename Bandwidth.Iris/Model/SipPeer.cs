@@ -32,7 +32,7 @@ namespace Bandwidth.Iris.Model
                     Site.SipPeerPath, Id, TnsPath, number)), data, true);
         }
 
-        public Task MoveTns(string[] numbers)
+        public Task MoveTns(params string[] numbers)
         {
             if (SiteId == null) throw new ArgumentNullException("SiteId");
             return Client.MakePutRequest(
@@ -41,9 +41,14 @@ namespace Bandwidth.Iris.Model
                     new SipPeerTelephoneNumbers{Numbers = numbers}, true);
         }
         public string SiteId { get; set; }
-        
-        [XmlElement("PeerId")]
-        public override string Id { get; set; }
+
+        public override string Id
+        {
+            get { return PeerId; }
+            set { PeerId = value; }
+        }
+
+        public string PeerId { get; set; }
 
         [XmlElement("PeerName")]
         public string Name { get; set; }
@@ -97,12 +102,10 @@ namespace Bandwidth.Iris.Model
 
         public void WriteXml(System.Xml.XmlWriter writer)
         {
-            writer.WriteStartElement("SipPeerTelephoneNumbers");
             foreach (var number in Numbers ?? new string[0])
             {
                 writer.WriteElementString("FullNumber", number);
             }
-            writer.WriteEndElement();
         }
     }
 }
