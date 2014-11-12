@@ -47,7 +47,16 @@ namespace Bandwidth.Iris.Tests
             {
                 var est = property.GetValue(estimated);
                 var val = property.GetValue(value);
-                Assert.AreEqual(est, val, string.Format("Values of property {0} are mismatched", property.Name));
+                if(est == null && val == null) continue;
+                var t = (val ?? est).GetType();
+                if (t.IsPrimitive || val is string)
+                {
+                    Assert.AreEqual(est, val, string.Format("Values of property {0} are mismatched", property.Name));
+                }
+                else
+                {
+                    AssertObjects(est, val);
+                }
             }
         }
 

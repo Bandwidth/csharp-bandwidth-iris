@@ -56,7 +56,7 @@ namespace Bandwidth.Iris
             _password = password;
             _apiEndpoint = apiEndpoint;
             _apiVersion = apiVersion;
-            _accountPath = string.Format("aacounts/{0}", accountId);
+            _accountPath = string.Format("accounts/{0}", accountId);
         }
 
         private HttpClient CreateHttpClient()
@@ -112,11 +112,14 @@ namespace Bandwidth.Iris
                 if (response.Content.Headers.ContentType != null &&
                     response.Content.Headers.ContentType.MediaType == "text/xml")
                 {
-                    var stream = await response.Content.ReadAsStreamAsync();
-                    var serializer = new XmlSerializer(typeof(TResult));
-                    return stream.Length > 0
-                        ? (TResult)serializer.Deserialize(stream)
-                        : default(TResult);
+                    using (var stream = await response.Content.ReadAsStreamAsync())
+                    {
+                        var serializer = new XmlSerializer(typeof (TResult));
+                        return stream.Length > 0
+                            ? (TResult) serializer.Deserialize(stream)
+                            : default(TResult);
+                    }
+
                 }
             }
             return default(TResult);
@@ -291,7 +294,7 @@ namespace Bandwidth.Iris
             {
                 throw new Exception("Missing location header in response");
             }
-            var location = locationHeader.PathAndQuery;
+            var location = locationHeader.ToString();
             var index = location.LastIndexOf("/", StringComparison.Ordinal);
             if (index < 0)
             {

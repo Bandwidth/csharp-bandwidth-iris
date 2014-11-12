@@ -42,7 +42,7 @@ namespace Bandwidth.Iris.Model
 
         public static async Task<Site> Create(Client client, Site item)
         {
-            using (var response = await client.MakePostRequest(SitePath, item))
+            using (var response = await client.MakePostRequest(client.ConcatAccountPath(SitePath), item))
             {
                 return await Get(client, client.GetIdFromLocationHeader(response.Headers.Location));
             }
