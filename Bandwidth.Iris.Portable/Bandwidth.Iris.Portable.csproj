@@ -70,6 +70,9 @@
     <Compile Include="..\Bandwidth.Iris\Model\Site.cs">
       <Link>Site.cs</Link>
     </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\TnReservation.cs">
+      <Link>TnReservation.cs</Link>
+    </Compile>
     <Compile Include="..\Bandwidth.Iris\Utf8StringWriter.cs">
       <Link>Utf8StringWriter.cs</Link>
     </Compile>

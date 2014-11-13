@@ -16,9 +16,9 @@ namespace Bandwidth.Iris.Model
             return item;
         }
 #if !PCL
-        public static Task<Site> Get(string callId)
+        public static Task<Site> Get(string id)
         {
-            return Get(Client.GetInstance(), callId);
+            return Get(Client.GetInstance(), id);
         }
 #endif
 
