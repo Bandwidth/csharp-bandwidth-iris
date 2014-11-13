@@ -30,7 +30,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1", Helper.AccountId),
-                ContentToSend = Helper.CreateXmlContent(item)
+                ContentToSend = Helper.CreateXmlContent(new SiteResponse{Site = item})
             }))
             {
                 var client = Helper.CreateClient();
@@ -57,7 +57,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1", Helper.AccountId),
-                ContentToSend = Helper.CreateXmlContent(item)
+                ContentToSend = Helper.CreateXmlContent(new SiteResponse { Site = item })
             }))
             {
                 var result = Site.Get("1").Result;
@@ -96,7 +96,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites", Helper.AccountId),
-                ContentToSend = Helper.CreateXmlContent(items)
+                ContentToSend = Helper.CreateXmlContent(new SitesResponse{Sites = items})
             }))
             {
                 var client = Helper.CreateClient();
@@ -137,7 +137,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites", Helper.AccountId),
-                ContentToSend = Helper.CreateXmlContent(items)
+                ContentToSend = Helper.CreateXmlContent(new SitesResponse { Sites = items })
             }))
             {
                 var result = Site.List().Result;
@@ -177,7 +177,7 @@ namespace Bandwidth.Iris.Tests.Models
                 {
                     EstimatedMethod = "GET",
                     EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1", Helper.AccountId),
-                    ContentToSend = Helper.CreateXmlContent(new Site {Id = "1"})
+                    ContentToSend = Helper.CreateXmlContent(new SiteResponse{Site = new Site {Id = "1"}})
                 }
             }))
             {
@@ -219,7 +219,7 @@ namespace Bandwidth.Iris.Tests.Models
                 {
                     EstimatedMethod = "GET",
                     EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1", Helper.AccountId),
-                    ContentToSend = Helper.CreateXmlContent(new Site {Id = "1"})
+                    ContentToSend = Helper.CreateXmlContent(new SiteResponse{Site = new Site {Id = "1"}})
                 }
             }))
             {
@@ -302,7 +302,7 @@ namespace Bandwidth.Iris.Tests.Models
                     EstimatedMethod = "POST",
                     EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers", Helper.AccountId),
                     EstimatedContent = Helper.ToXmlString(item),
-                    ContentToSend = Helper.CreateXmlContent(createdItem)
+                    ContentToSend = Helper.CreateXmlContent(new TnSipPeersResponse{SipPeers = new SipPeers{SipPeer = createdItem}})
                 }
             }))
             {

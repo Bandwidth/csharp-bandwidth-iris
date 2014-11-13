@@ -184,7 +184,8 @@ namespace Bandwidth.Iris.Tests
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "GET",
-                EstimatedHeaders = new Dictionary<string, string> { { "Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", Helper.UserName, Helper.Password)))} }
+                EstimatedHeaders = new Dictionary<string, string> { { "Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", Helper.UserName, Helper.Password)))} },
+                ContentToSend = Helper.CreateXmlContent(new SitesResponse())
             }))
             {
                 var client = Helper.CreateClient();

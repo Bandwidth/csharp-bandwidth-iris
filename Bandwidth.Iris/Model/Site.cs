@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
 {
@@ -71,7 +73,7 @@ namespace Bandwidth.Iris.Model
         public async Task<SipPeer> CreateSipPeer(SipPeer item)
         {
             item =
-                (await Client.MakePostRequest<TNSipPeersResponse>(
+                (await Client.MakePostRequest<TnSipPeersResponse>(
                     Client.ConcatAccountPath(string.Format("{0}/{1}/{2}", SitePath, Id, SipPeerPath)), item)).SipPeers.SipPeer;
             item.Client = Client;
             item.SiteId = Id;
@@ -93,7 +95,8 @@ namespace Bandwidth.Iris.Model
         public Site Site { get; set; }
     }
 
-    public class TNSipPeersResponse
+    [XmlType("TNSipPeersResponse")]
+    public class TnSipPeersResponse
     {
         public SipPeers SipPeers { get; set; }
     }
