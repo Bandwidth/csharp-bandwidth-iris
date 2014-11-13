@@ -92,10 +92,10 @@ namespace Bandwidth.Iris
                 {
                     await CheckResponse(response);
                 }
-                catch
+                catch(Exception ex)
                 {
                     response.Dispose();
-                    throw;
+                    throw ex;
                 }
                 if (!disposeResponse) return response;
                 response.Dispose();
@@ -271,7 +271,7 @@ namespace Bandwidth.Iris
                 {
                     var xml = await response.Content.ReadAsStringAsync();
                     var doc = XDocument.Parse(xml);
-                    var code = doc.Descendants("ErrorCode").FirstOrDefault();
+                    var code = doc.Descendants("ErrorCode").FirstOrDefault() ?? doc.Descendants("Code").FirstOrDefault();
                     var description = doc.Descendants("Description").FirstOrDefault();
                     if (code != null && description != null)
                     {

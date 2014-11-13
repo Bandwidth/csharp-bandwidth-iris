@@ -72,6 +72,7 @@ namespace Bandwidth.Iris.Tests
                         Assert.AreEqual(estimatedHeader.Value, request.Headers[estimatedHeader.Key]);
                     }
                 }
+                response.StatusCode = handler.StatusCodeToSend;
                 if (handler.HeadersToSend != null)
                 {
                     foreach (var header in handler.HeadersToSend)
@@ -90,7 +91,7 @@ namespace Bandwidth.Iris.Tests
                     }
                     await handler.ContentToSend.CopyToAsync(response.OutputStream);
                 }
-                response.StatusCode = handler.StatusCodeToSend;
+                
                 response.Close();
             }
             catch(Exception ex)

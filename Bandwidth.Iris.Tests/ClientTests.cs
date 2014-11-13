@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net;
 using System.Text;
+using System.Xml.Serialization;
 using Bandwidth.Iris.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -233,6 +236,87 @@ namespace Bandwidth.Iris.Tests
                 if (server.Error != null) throw server.Error;
             }
 
+        }
+
+        [XmlInclude(typeof(Error1))]
+        [XmlInclude(typeof(Error2))]
+        public class ErrorResponse
+        {
+            public object Error { get; set; }
+        }
+
+        public class Error1
+        {
+            public string ErrorCode { get; set; }
+            public string Description { get; set; }
+        }
+
+        public class Error2
+        {
+            public string Code { get; set; }
+            public string Description { get; set; }
+        }
+        [TestMethod]
+        public void ErrorTest()
+        {
+            using (new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                ContentToSend = Helper.CreateXmlContent(new ErrorResponse
+                {
+                    Error = new Error1
+                    {
+                        ErrorCode = "1000",
+                        Description = "Error text"
+                    }
+                }),
+                StatusCodeToSend = 400
+            }))
+            {
+                var client = Helper.CreateClient();
+                try
+                {
+                    Site.List(client).Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    var err = (BandwidthIrisException)ex.InnerExceptions.First();
+                    Assert.AreEqual("1000", err.Code);
+                    Assert.AreEqual("Error text", err.Message);
+                    Assert.AreEqual(HttpStatusCode.BadRequest, err.HttpStatusCode);
+                }
+            }
+        }
+
+        public void Error2Test()
+        {
+            using (new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                ContentToSend = Helper.CreateXmlContent(new ErrorResponse
+                {
+                    Error = new Error2
+                    {
+                        Code = "1001",
+                        Description = "Error text"
+                    }
+                }),
+                StatusCodeToSend = 400
+            }))
+            {
+                var client = Helper.CreateClient();
+                try
+                {
+                    Site.List(client).Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    var err = (BandwidthIrisException)ex.InnerExceptions.First();
+                    Assert.AreEqual("1001", err.Code);
+                    Assert.AreEqual("Error text", err.Message);
+                    Assert.AreEqual(HttpStatusCode.BadRequest, err.HttpStatusCode);
+                }
+            }
         }
     }
 }
