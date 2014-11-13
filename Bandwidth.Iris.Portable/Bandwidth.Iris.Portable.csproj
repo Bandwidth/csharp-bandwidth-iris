@@ -55,6 +55,9 @@
     <Compile Include="..\Bandwidth.Iris\Model\Address.cs">
       <Link>Address.cs</Link>
     </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\AvailableNumbers.cs">
+      <Link>AvailableNumbers.cs</Link>
+    </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\SipPeer.cs">
       <Link>SipPeer.cs</Link>
     </Compile>
