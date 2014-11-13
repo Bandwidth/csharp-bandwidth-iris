@@ -55,9 +55,6 @@
     <Compile Include="..\Bandwidth.Iris\DefaultDateTimeAttribute.cs">
       <Link>DefaultDateTimeAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\Bandwidth.Iris\Model\Address.cs">
-      <Link>Address.cs</Link>
-    </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\AvailableNpaNxx.cs">
       <Link>AvailableNpaNxx.cs</Link>
     </Compile>

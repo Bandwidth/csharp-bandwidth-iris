@@ -265,25 +265,27 @@ namespace Bandwidth.Iris
 
         private async Task CheckResponse(HttpResponseMessage response)
         {
-            if (!response.IsSuccessStatusCode)
+            try
             {
-                try
+                var xml = await response.Content.ReadAsStringAsync();
+                if (xml.Length > 0)
                 {
-                    var xml = await response.Content.ReadAsStringAsync();
                     var doc = XDocument.Parse(xml);
                     var code = doc.Descendants("ErrorCode").FirstOrDefault() ?? doc.Descendants("Code").FirstOrDefault();
                     var description = doc.Descendants("Description").FirstOrDefault();
                     if (code != null && description != null)
                     {
-                        throw  new BandwidthIrisException(code.Value, description.Value, response.StatusCode);
+                        throw new BandwidthIrisException(code.Value, description.Value, response.StatusCode);
                     }
-
                 }
-                catch(Exception ex)
-                {
-                    if (ex is BandwidthIrisException) throw;
-                    Debug.WriteLine(ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                if (ex is BandwidthIrisException) throw;
+                Debug.WriteLine(ex.Message);
+            }
+            if (!response.IsSuccessStatusCode)
+            {
                 throw new BandwidthIrisException("", string.Format("Http code {0}", response.StatusCode), response.StatusCode);
             }
         }

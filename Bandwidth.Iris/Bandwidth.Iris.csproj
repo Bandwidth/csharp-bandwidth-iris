@@ -49,7 +49,6 @@
     <Compile Include="BaseModel.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="DefaultDateTimeAttribute.cs" />
-    <Compile Include="Model\Address.cs" />
     <Compile Include="Model\AvailableNpaNxx.cs" />
     <Compile Include="Model\AvailableNumbers.cs" />
     <Compile Include="Model\SipPeer.cs" />
