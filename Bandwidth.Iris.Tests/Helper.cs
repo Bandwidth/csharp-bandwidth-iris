@@ -49,7 +49,7 @@ namespace Bandwidth.Iris.Tests
                 var val = property.GetValue(value);
                 if(est == null && val == null) continue;
                 var t = (val ?? est).GetType();
-                if (t.IsPrimitive || val is string)
+                if (t.IsPrimitive || val is IComparable)
                 {
                     Assert.AreEqual(est, val, string.Format("Values of property {0} are mismatched", property.Name));
                 }

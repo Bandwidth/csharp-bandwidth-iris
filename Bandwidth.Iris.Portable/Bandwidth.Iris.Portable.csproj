@@ -52,6 +52,9 @@
     <Compile Include="..\Bandwidth.Iris\Client.cs">
       <Link>Client.cs</Link>
     </Compile>
+    <Compile Include="..\Bandwidth.Iris\DefaultDateTimeAttribute.cs">
+      <Link>DefaultDateTimeAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\Address.cs">
       <Link>Address.cs</Link>
     </Compile>

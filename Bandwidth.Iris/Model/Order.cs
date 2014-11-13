@@ -9,6 +9,10 @@ namespace Bandwidth.Iris.Model
     {
         internal const string OrderPath = "orders";
 
+        public Order()
+        {
+            PartialAllowed = true;
+        }
 
         public static Task<OrderResult> Create(Client client, Order item)
         {
@@ -34,43 +38,30 @@ namespace Bandwidth.Iris.Model
         }
         
         [XmlAttribute("id")]
-        [DefaultValue(null)]
         public string OrderId { get; set; }
-        [DefaultValue(null)]
         public string Name { get; set; }
-        [DefaultValue(null)]
         public string SiteId { get; set; }
-        [DefaultValue(null)]
-        public bool? BackOrderRequested { get; set; }
-        [DefaultValue(null)]
-        public DateTime? OrderCreateDate { get; set; }
+        [DefaultValue(false)]
+        public bool BackOrderRequested { get; set; }
+        [DefaultDateTime]
+        public DateTime OrderCreateDate { get; set; }
         public string CustomerOrderId { get; set; }
-        [DefaultValue(null)]
-        public bool? PartialAllowed { get; set; }
-        [DefaultValue(null)]
-        public bool? CloseOrder { get; set; }
-        [DefaultValue(null)]
+        [DefaultValue(true)]
+        public bool PartialAllowed { get; set; }
+        [DefaultValue(false)] 
+        public bool CloseOrder { get; set; }
         public ExistingTelephoneNumberOrderType ExistingTelephoneNumberOrderType { get; set; }
-        [DefaultValue(null)]
         public AreaCodeSearchAndOrderType AreaCodeSearchAndOrderType { get; set; }
-        [DefaultValue(null)]
         public RateCenterSearchAndOrderType RateCenterSearchAndOrderType { get; set; }
         [XmlElement("NPANXXSearchAndOrderType")]
-        [DefaultValue(null)]
         public NpaNxxSearchAndOrderType NpaNxxSearchAndOrderType { get; set; }
-        [DefaultValue(null)]
         public TollFreeVanitySearchAndOrderType TollFreeVanitySearchAndOrderType { get; set; }
-        [DefaultValue(null)]
         public TollFreeWildCharSearchAndOrderType TollFreeWildCharSearchAndOrderType { get; set; }
-        [DefaultValue(null)]
         public StateSearchAndOrderType StateSearchAndOrderType { get; set; }
-        [DefaultValue(null)]
         public CitySearchAndOrderType CitySearchAndOrderType { get; set; }
         [XmlElement("ZIPSearchAndOrderType")]
-        [DefaultValue(null)]
         public ZipSearchAndOrderType ZipSearchAndOrderType { get; set; }
         [XmlElement("LATASearchAndOrderType")]
-        [DefaultValue(null)]
         public LataSearchAndOrderType LataSearchAndOrderType { get; set; }
 
     }
