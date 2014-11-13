@@ -52,7 +52,7 @@
     <Compile Include="Model\AvailableNpaNxx.cs" />
     <Compile Include="Model\AvailableNumbers.cs" />
     <Compile Include="Model\SipPeer.cs" />
-    <Compile Include="Model\SipPeerTelephoneNumber.cs" />
+    <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utf8StringWriter.cs" />

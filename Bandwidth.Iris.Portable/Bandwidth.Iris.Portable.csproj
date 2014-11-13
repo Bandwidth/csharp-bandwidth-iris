@@ -61,11 +61,11 @@
     <Compile Include="..\Bandwidth.Iris\Model\AvailableNumbers.cs">
       <Link>AvailableNumbers.cs</Link>
     </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\Order.cs">
+      <Link>Order.cs</Link>
+    </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\SipPeer.cs">
       <Link>SipPeer.cs</Link>
-    </Compile>
-    <Compile Include="..\Bandwidth.Iris\Model\SipPeerTelephoneNumber.cs">
-      <Link>SipPeerTelephoneNumber.cs</Link>
     </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\Site.cs">
       <Link>Site.cs</Link>
