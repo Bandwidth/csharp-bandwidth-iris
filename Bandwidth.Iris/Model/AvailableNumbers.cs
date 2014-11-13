@@ -11,6 +11,12 @@ namespace Bandwidth.Iris.Model
         {
             return client.MakeGetRequest<AvailableNumbersResult>(client.ConcatAccountPath(AvailableNumbersPath), query);
         }
+#if !PCL
+        public static Task<AvailableNumbersResult> List(IDictionary<string, object> query = null)
+        {
+            return List(Client.GetInstance(), query);
+        }
+#endif
     }
 
     [XmlType("SearchResult")]
