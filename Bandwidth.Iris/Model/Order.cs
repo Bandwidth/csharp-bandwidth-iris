@@ -50,8 +50,6 @@ namespace Bandwidth.Iris.Model
         public bool PartialAllowed { get; set; }
         [DefaultValue(false)] 
         public bool CloseOrder { get; set; }
-        [XmlArrayItem("ReservationId")]
-        public string[] ReservationIdList { get; set; }
         public ExistingTelephoneNumberOrderType ExistingTelephoneNumberOrderType { get; set; }
         public AreaCodeSearchAndOrderType AreaCodeSearchAndOrderType { get; set; }
         public RateCenterSearchAndOrderType RateCenterSearchAndOrderType { get; set; }
@@ -132,6 +130,8 @@ namespace Bandwidth.Iris.Model
     {
         [XmlArrayItem("TelephoneNumber")]
         public string[] TelephoneNumberList { get; set; }
+        [XmlArrayItem("ReservationId")]
+        public string[] ReservationIdList { get; set; }
     }
 
     [XmlType("OrderResponse")]
