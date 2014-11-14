@@ -27,7 +27,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/tnreservation/1", Helper.AccountId),
-                ContentToSend = Helper.CreateXmlContent(new TnReservationResponse { Reservation = item })
+                ContentToSend = Helper.CreateXmlContent(new ReservationResponse { Reservation = item })
             }))
             {
                 var client = Helper.CreateClient();
@@ -51,7 +51,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/tnreservation/1", Helper.AccountId),
-                ContentToSend = Helper.CreateXmlContent(new TnReservationResponse { Reservation = item })
+                ContentToSend = Helper.CreateXmlContent(new ReservationResponse { Reservation = item })
             }))
             {
                 var result = TnReservation.Get("1").Result;
@@ -88,7 +88,7 @@ namespace Bandwidth.Iris.Tests.Models
                 {
                     EstimatedMethod = "GET",
                     EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/tnreservation/1", Helper.AccountId),
-                    ContentToSend = Helper.CreateXmlContent(new TnReservationResponse{Reservation = new TnReservation {Id = "1"}})
+                    ContentToSend = Helper.CreateXmlContent(new ReservationResponse{Reservation = new TnReservation {Id = "1"}})
                 }
             }))
             {
@@ -127,7 +127,7 @@ namespace Bandwidth.Iris.Tests.Models
                 {
                     EstimatedMethod = "GET",
                     EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/tnreservation/1", Helper.AccountId),
-                    ContentToSend = Helper.CreateXmlContent(new TnReservationResponse{Reservation = new TnReservation {Id = "1"}})
+                    ContentToSend = Helper.CreateXmlContent(new ReservationResponse{Reservation = new TnReservation {Id = "1"}})
                 }
             }))
             {

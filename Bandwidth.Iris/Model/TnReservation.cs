@@ -11,7 +11,7 @@ namespace Bandwidth.Iris.Model
         public static async Task<TnReservation> Get(Client client, string id)
         {
             if (id == null) throw new ArgumentNullException("id");
-            var item = (await client.MakeGetRequest<TnReservationResponse>(client.ConcatAccountPath(TnReservationPath), null, id)).Reservation;
+            var item = (await client.MakeGetRequest<ReservationResponse>(client.ConcatAccountPath(TnReservationPath), null, id)).Reservation;
             item.Client = client;
             return item;
         }
@@ -56,7 +56,7 @@ namespace Bandwidth.Iris.Model
         public string ReservedTn { get; set; }
     }
 
-    public class TnReservationResponse
+    public class ReservationResponse
     {
         public TnReservation Reservation { get; set; }
     }
