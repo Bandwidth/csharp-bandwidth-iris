@@ -302,7 +302,17 @@ namespace Bandwidth.Iris.Tests.Models
                     EstimatedMethod = "POST",
                     EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers", Helper.AccountId),
                     EstimatedContent = Helper.ToXmlString(item),
-                    ContentToSend = Helper.CreateXmlContent(new TnSipPeersResponse{SipPeers = new SipPeers{SipPeer = createdItem}})
+                    HeadersToSend = new Dictionary<string, string>
+                    {
+                        {"Location", string.Format("/v1.0/accounts/{0}/sites/1/sippeers/10", Helper.AccountId)}
+                    },
+                    StatusCodeToSend = 201
+                },
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers/10", Helper.AccountId),
+                    ContentToSend = Helper.CreateXmlContent(new SipPeerResponse{SipPeer = createdItem})
                 }
             }))
             {
@@ -312,6 +322,36 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = i.CreateSipPeer(item).Result;
                 Helper.AssertObjects(createdItem, r);
                 if (server.Error != null) throw server.Error;
+            }
+        }
+
+        [TestMethod]
+        public void GetSipPeerTest()
+        {
+            var item = new SipPeer
+            {
+                Id = "10",
+                SiteId = "1",
+                Name = "test",
+                IsDefaultPeer = true
+            };
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers/10", Helper.AccountId),
+                    ContentToSend = Helper.CreateXmlContent(new SipPeerResponse{SipPeer = item})
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var i = new Site { Id = "1" };
+                i.SetClient(client);
+                var r = i.GetSipPeer("10").Result;
+                if (server.Error != null) throw server.Error;
+                Helper.AssertObjects(item, r);
+                
             }
         }
     }

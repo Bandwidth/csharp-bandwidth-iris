@@ -14,11 +14,24 @@ namespace Bandwidth.Iris.Model
             return site.CreateSipPeer(item);
         }
 
+        public static Task<SipPeer> Get(Client client, string siteId, string id)
+        {
+            if (siteId == null) throw new ArgumentNullException("siteId");
+            if (id == null) throw new ArgumentNullException("id");
+            var site = new Site { Id = siteId };
+            site.SetClient(client);
+            return site.GetSipPeer(id);
+        }
+
 
 #if !PCL
         public static Task<SipPeer> Create(SipPeer item)
         {
             return Create(Client.GetInstance(), item);
+        }
+        public static Task<SipPeer> Get(string siteId, string id)
+        {
+            return Get(Client.GetInstance(), siteId, id);
         }
 
 #endif
