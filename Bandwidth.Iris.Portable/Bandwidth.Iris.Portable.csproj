@@ -64,6 +64,9 @@
     <Compile Include="..\Bandwidth.Iris\Model\Disconnect.cs">
       <Link>Disconnect.cs</Link>
     </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\LnpChecker.cs">
+      <Link>LnpChecker.cs</Link>
+    </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\Order.cs">
       <Link>Order.cs</Link>
     </Compile>

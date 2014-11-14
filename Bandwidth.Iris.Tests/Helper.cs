@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using System.Net.Http;
 using System.Reflection;
@@ -55,7 +56,28 @@ namespace Bandwidth.Iris.Tests
                 }
                 else
                 {
-                    AssertObjects(est, val);
+                    var valCollection = val as IList;
+                    var estCollection = est as IList;
+                    if (valCollection != null && estCollection != null)
+                    {
+                        Assert.AreEqual(estCollection.Count, valCollection.Count);
+                        for (var i = 0; i < estCollection.Count; i++)
+                        {
+                            if (estCollection[i] is IComparable)
+                            {
+                                Assert.AreEqual(estCollection[i], valCollection[i],
+                                    string.Format("Values of list of property {0} are mismatched", property.Name));
+                            }
+                            else
+                            {
+                                AssertObjects(estCollection[i], valCollection[i]);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        AssertObjects(est, val);
+                    }
                 }
             }
         }

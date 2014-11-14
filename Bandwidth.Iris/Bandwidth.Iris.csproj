@@ -52,6 +52,7 @@
     <Compile Include="Model\AvailableNpaNxx.cs" />
     <Compile Include="Model\Disconnect.cs" />
     <Compile Include="Model\AvailableNumbers.cs" />
+    <Compile Include="Model\LnpChecker.cs" />
     <Compile Include="Model\SipPeer.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\TnReservation.cs" />
