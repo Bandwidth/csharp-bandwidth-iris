@@ -50,6 +50,7 @@
     <Compile Include="Client.cs" />
     <Compile Include="DefaultDateTimeAttribute.cs" />
     <Compile Include="Model\AvailableNpaNxx.cs" />
+    <Compile Include="Model\Disconnect.cs" />
     <Compile Include="Model\AvailableNumbers.cs" />
     <Compile Include="Model\SipPeer.cs" />
     <Compile Include="Model\Order.cs" />
