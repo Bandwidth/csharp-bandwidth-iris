@@ -131,7 +131,7 @@ namespace Bandwidth.Iris
                 using (var client = CreateHttpClient())
                 {
                     var response =
-                        await client.PostAsync(FixPath(path), new StringContent(xml, Encoding.UTF8, "text/xml"));
+                        await client.PostAsync(FixPath(path), new StringContent(xml, Encoding.UTF8, "application/xml"));
                     try
                     {
                         await CheckResponse(response);
@@ -158,7 +158,7 @@ namespace Bandwidth.Iris
                 using (var client = CreateHttpClient())
                 {
                     var response =
-                        await client.PutAsync(FixPath(path), new StringContent(xml, Encoding.UTF8, "text/xml"));
+                        await client.PutAsync(FixPath(path), new StringContent(xml, Encoding.UTF8, "application/xml"));
                     try
                     {
                         await CheckResponse(response);

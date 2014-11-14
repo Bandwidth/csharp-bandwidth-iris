@@ -27,7 +27,7 @@ namespace Bandwidth.Iris.Tests
             {
                 var serializer = new XmlSerializer(data.GetType());
                 serializer.Serialize(writer, data);
-                return new StringContent(writer.ToString(), Encoding.UTF8, "text/xml");
+                return new StringContent(writer.ToString(), Encoding.UTF8, "application/xml");
             }
         }
 
