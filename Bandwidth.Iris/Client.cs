@@ -109,20 +109,14 @@ namespace Bandwidth.Iris
         {
             using (var response = await MakeGetRequest(path, query, id))
             {
-                if (response.Content.Headers.ContentType != null &&
-                    response.Content.Headers.ContentType.MediaType == "text/xml")
+                using (var stream = await response.Content.ReadAsStreamAsync())
                 {
-                    using (var stream = await response.Content.ReadAsStreamAsync())
-                    {
-                        var serializer = new XmlSerializer(typeof (TResult));
-                        return stream.Length > 0
-                            ? (TResult) serializer.Deserialize(stream)
-                            : default(TResult);
-                    }
-
+                    var serializer = new XmlSerializer(typeof(TResult));
+                    return stream.Length > 0
+                        ? (TResult)serializer.Deserialize(stream)
+                        : default(TResult);
                 }
             }
-            return default(TResult);
         }
 
         
@@ -225,19 +219,14 @@ namespace Bandwidth.Iris
         {
             using (var response = await MakePostRequest(path, data))
             {
-                if (response.Content.Headers.ContentType != null &&
-                    response.Content.Headers.ContentType.MediaType == "text/xml")
+                using (var stream = await response.Content.ReadAsStreamAsync())
                 {
-                    using (var stream = await response.Content.ReadAsStreamAsync())
-                    {
-                        var serializer = new XmlSerializer(typeof (TResult));
-                        return stream.Length > 0
-                            ? (TResult) serializer.Deserialize(stream)
-                            : default(TResult);
-                    }
+                    var serializer = new XmlSerializer(typeof(TResult));
+                    return stream.Length > 0
+                        ? (TResult)serializer.Deserialize(stream)
+                        : default(TResult);
                 }
             }
-            return default(TResult);
         }
 
         
