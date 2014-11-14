@@ -14,6 +14,7 @@ namespace Bandwidth.Iris.Model
             return site.CreateSipPeer(item);
         }
 
+
 #if !PCL
         public static Task<SipPeer> Create(SipPeer item)
         {
@@ -136,5 +137,10 @@ namespace Bandwidth.Iris.Model
     public class SipPeerTelephoneNumberResponse
     {
         public SipPeerTelephoneNumber SipPeerTelephoneNumber { get; set; }
+    }
+
+    public class SipPeerResponse
+    {
+        public SipPeer SipPeer { get; set; }
     }
 }

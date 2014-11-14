@@ -72,9 +72,18 @@ namespace Bandwidth.Iris.Model
 
         public async Task<SipPeer> CreateSipPeer(SipPeer item)
         {
-            item =
-                (await Client.MakePostRequest<TnSipPeersResponse>(
-                    Client.ConcatAccountPath(string.Format("{0}/{1}/{2}", SitePath, Id, SipPeerPath)), item)).SipPeers.SipPeer;
+            using (var response = await Client.MakePostRequest(Client.ConcatAccountPath(string.Format("{0}/{1}/{2}", SitePath, Id, SipPeerPath)), item))
+            {
+                return await GetSipPeer(Client.GetIdFromLocationHeader(response.Headers.Location));
+            }
+            
+        }
+
+        public async Task<SipPeer> GetSipPeer(string id)
+        {
+            var item =
+                (await Client.MakeGetRequest<SipPeerResponse>(
+                    Client.ConcatAccountPath(string.Format("{0}/{1}/{2}/{3}", SitePath, Id, SipPeerPath, id)))).SipPeer;
             item.Client = Client;
             item.SiteId = Id;
             return item;
