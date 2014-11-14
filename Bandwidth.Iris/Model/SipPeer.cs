@@ -6,6 +6,21 @@ namespace Bandwidth.Iris.Model
 {
     public class SipPeer: BaseModel
     {
+        public static Task<SipPeer> Create(Client client, SipPeer item)
+        {
+            if (item.SiteId == null) throw new ArgumentException("SiteId is required");
+            var site = new Site {Id = item.SiteId};
+            site.SetClient(client);
+            return site.CreateSipPeer(item);
+        }
+
+#if !PCL
+        public static Task<SipPeer> Create(SipPeer item)
+        {
+            return Create(Client.GetInstance(), item);
+        }
+
+#endif
         public Task Delete()
         {
             if(SiteId == null) throw new ArgumentNullException("SiteId");
@@ -35,7 +50,7 @@ namespace Bandwidth.Iris.Model
         public Task MoveTns(params string[] numbers)
         {
             if (SiteId == null) throw new ArgumentNullException("SiteId");
-            return Client.MakePutRequest(
+            return Client.MakePostRequest(
                 Client.ConcatAccountPath(string.Format("{0}/{1}/{2}/{3}/{4}", 
                     Site.SitePath, SiteId, Site.SipPeerPath, Id, MoveTnsPath)), 
                     new SipPeerTelephoneNumbers{Numbers = numbers}, true);
