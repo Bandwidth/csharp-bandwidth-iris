@@ -214,14 +214,14 @@ namespace Bandwidth.Iris.Tests
                 var client = Helper.CreateClient();
                 using (var stream = new MemoryStream(data))
                 {
-                    client.PutData("test", stream, "media/type", true).Wait();
+                    client.SendData("test",  stream, "media/type", "PUT",  true).Wait();
                     if (server.Error != null) throw server.Error;
                 }
             }
 
         }
         [TestMethod]
-        public void PutDataWithByteArrayTest()
+        public void SendDataWithByteArrayTest()
         {
             var data = Encoding.UTF8.GetBytes("hello");
             using (var server = new HttpServer(new RequestHandler
@@ -233,7 +233,7 @@ namespace Bandwidth.Iris.Tests
             }))
             {
                 var client = Helper.CreateClient();
-                client.PutData("test", data, "media/type", true).Wait();
+                client.SendData("test", data, "media/type", "PUT", true).Wait();
                 if (server.Error != null) throw server.Error;
             }
 
@@ -256,6 +256,12 @@ namespace Bandwidth.Iris.Tests
         {
             public string Code { get; set; }
             public string Description { get; set; }
+        }
+
+        public class UploadError
+        {
+            public string resultCode { get; set; }
+            public string resultMessage { get; set; }
         }
         public class ErrorList
         {
@@ -364,6 +370,34 @@ namespace Bandwidth.Iris.Tests
                     Assert.AreEqual("Description1", list[0].Message);
                     Assert.AreEqual("102", list[1].Code);
                     Assert.AreEqual("Description2", list[1].Message);
+                }
+            }
+        }
+        [TestMethod]
+        public void Error4Test()
+        {
+            using (new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                ContentToSend = Helper.CreateXmlContent(new UploadError
+                {
+                    resultCode = "1000",
+                    resultMessage = "Error text"
+                }),
+                StatusCodeToSend = 400
+            }))
+            {
+                var client = Helper.CreateClient();
+                try
+                {
+                    Site.List(client).Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    var err = (BandwidthIrisException)ex.InnerExceptions.First();
+                    Assert.AreEqual("1000", err.Code);
+                    Assert.AreEqual("Error text", err.Message);
+                    Assert.AreEqual(HttpStatusCode.BadRequest, err.HttpStatusCode);
                 }
             }
         }

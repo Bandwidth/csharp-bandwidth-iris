@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using System.Xml.XPath;
 
 namespace Bandwidth.Iris
 {
@@ -176,22 +175,22 @@ namespace Bandwidth.Iris
             }
         }
 
-        internal async Task<HttpResponseMessage> PutData(string path, Stream stream, string mediaType,
+        internal async Task<HttpResponseMessage> SendData(string path, Stream stream, string mediaType, string method = "POST",
             bool disposeResponse = false)
         {
             if (stream == null) throw new ArgumentNullException("stream");
-            return await PutFileContent(path, mediaType, disposeResponse, new StreamContent(stream));
+            return await SendFileContent(path, mediaType, disposeResponse, new StreamContent(stream), method);
         }
 
-        internal async Task<HttpResponseMessage> PutData(string path, byte[] buffer, string mediaType,
+        internal async Task<HttpResponseMessage> SendData(string path,  byte[] buffer, string mediaType, string method = "POST",
             bool disposeResponse = false)
         {
             if (buffer == null) throw new ArgumentNullException("buffer");
-            return await PutFileContent(path, mediaType, disposeResponse, new ByteArrayContent(buffer));
+            return await SendFileContent(path, mediaType, disposeResponse, new ByteArrayContent(buffer), method);
         }
 
-        private async Task<HttpResponseMessage> PutFileContent(string path, string mediaType, bool disposeResponse,
-            HttpContent content)
+        private async Task<HttpResponseMessage> SendFileContent(string path, string mediaType, bool disposeResponse,
+            HttpContent content, string method)
         {
             if (mediaType != null)
             {
@@ -199,7 +198,8 @@ namespace Bandwidth.Iris
             }
             using (var client = CreateHttpClient())
             {
-                var response = await client.PutAsync(FixPath(path), content);
+                var makeAction = ((method == "PUT") ? client.PutAsync : new Func<string, HttpContent, Task<HttpResponseMessage>>(client.PostAsync));
+                var response = await makeAction(FixPath(path), content);
                 try
                 {
                     await CheckResponse(response);
@@ -277,6 +277,8 @@ namespace Bandwidth.Iris
                             {
                                 throw new AggregateException(exceptions);
                             }
+                            code = doc.Descendants("resultCode").FirstOrDefault();
+                            description = doc.Descendants("resultMessage").FirstOrDefault();
                         }
                         else
                         {
@@ -284,7 +286,7 @@ namespace Bandwidth.Iris
                             description = error.Element("Description");    
                         }
                     }
-                    if (code != null && description != null)
+                    if (code != null && description != null && !string.IsNullOrEmpty(code.Value) && code.Value != "0")
                     {
                         throw new BandwidthIrisException(code.Value, description.Value, response.StatusCode);
                     }
