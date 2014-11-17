@@ -406,6 +406,32 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
         [TestMethod]
+        public void GetSipPeerWithXmlTest()
+        {
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers/10", Helper.AccountId),
+                    ContentToSend = new StringContent(TestXmlStrings.ValidSipPeerResponseXml, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var i = new Site { Id = "1" };
+                i.SetClient(client);
+                var r = i.GetSipPeer("10").Result;
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual("10", r.Id);
+                Assert.AreEqual("SIP Peer 1", r.Name);
+                Assert.AreEqual("Sip Peer 1 description", r.Description);
+                Assert.IsTrue(r.IsDefaultPeer);
+                Assert.AreEqual("SIP", r.ShortMessagingProtocol);
+            }
+        }
+
+        [TestMethod]
         public void GetSipPeersTest()
         {
             var items = new[]{

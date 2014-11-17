@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
 using Bandwidth.Iris.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -258,6 +260,29 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = peer.GetTns("00").Result;
                 if (server.Error != null) throw server.Error;
                 Helper.AssertObjects(item, result);
+            }
+        }
+
+        [TestMethod]
+        public void GetTnsWithXmlTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers/10/tns/00", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.ValidSipPeerTnResponseXml, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                var peer = new SipPeer
+                {
+                    Id = "10",
+                    SiteId = "1"
+                };
+                peer.SetClient(client);
+                var result = peer.GetTns("00").Result;
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual("9195551212", result.FullNumber);
             }
         }
 
