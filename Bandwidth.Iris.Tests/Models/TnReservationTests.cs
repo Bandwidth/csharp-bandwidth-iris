@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
 using Bandwidth.Iris.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,7 +24,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Id = "1",
                 AccountId = "111",
                 ReservedTn = "000",
-                ReservationExpires = "0"
+                ReservationExpires = 0
             };
             using (var server = new HttpServer(new RequestHandler
             {
@@ -38,6 +41,56 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
         [TestMethod]
+        public void GetWithXmlTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/tnreservation/1", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.ValidReservationResponseXml, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                var result = TnReservation.Get(client, "1").Result;
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual("1", result.Id);
+                Assert.AreEqual("accountId", result.AccountId);
+                Assert.AreEqual(30, result.ReservationExpires);
+                Assert.AreEqual("9195551212", result.ReservedTn);
+            }
+        }
+
+        [TestMethod]
+        public void GetWithErrorXmlTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/tnreservation/1", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.InvalidReservationResponseXml, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                try
+                {
+                    TnReservation.Get(client, "1").Wait();
+                    if (server.Error != null) throw server.Error;
+                }
+                catch (AggregateException exc)
+                {
+                    var ex = exc.InnerExceptions[0] as BandwidthIrisException;
+                    if (ex != null)
+                    {
+                        Assert.AreEqual("Reservation failed: telephone number 9195551212 is not available.", ex.Message);
+                        Assert.AreEqual("5041", ex.Code);
+                        return;
+                    }
+                }
+                Assert.Fail("should throw an error");
+            }
+        }
+
+        [TestMethod]
         public void GetWithDefaultClientTest()
         {
             var item = new TnReservation
@@ -45,7 +98,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Id = "1",
                 AccountId = "111",
                 ReservedTn = "000",
-                ReservationExpires = "0"
+                ReservationExpires = 0
             };
             using (var server = new HttpServer(new RequestHandler
             {
@@ -67,7 +120,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 AccountId = "111",
                 ReservedTn = "000",
-                ReservationExpires = "0"
+                ReservationExpires = 0
             };
             
 
@@ -106,7 +159,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 AccountId = "111",
                 ReservedTn = "000",
-                ReservationExpires = "0"
+                ReservationExpires = 0
             };
 
 

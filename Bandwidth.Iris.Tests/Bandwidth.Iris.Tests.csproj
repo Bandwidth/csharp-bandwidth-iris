@@ -69,6 +69,7 @@
     <Compile Include="Models\TnReservationTests.cs" />
     <Compile Include="Models\SiteTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestXmlStrings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

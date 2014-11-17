@@ -52,7 +52,7 @@ namespace Bandwidth.Iris.Model
         }
         public string ReservationId { get; set; }
         public string AccountId { get; set; }
-        public string ReservationExpires { get; set; }
+        public int ReservationExpires { get; set; }
         public string ReservedTn { get; set; }
     }
 
