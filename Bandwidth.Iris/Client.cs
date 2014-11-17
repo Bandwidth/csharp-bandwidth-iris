@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using System.Xml.XPath;
 
 namespace Bandwidth.Iris
 {
@@ -260,8 +261,29 @@ namespace Bandwidth.Iris
                 if (xml.Length > 0)
                 {
                     var doc = XDocument.Parse(xml);
-                    var code = doc.Descendants("ErrorCode").FirstOrDefault() ?? doc.Descendants("Code").FirstOrDefault();
+                    var code = doc.Descendants("ErrorCode").FirstOrDefault();
                     var description = doc.Descendants("Description").FirstOrDefault();
+                    if (code == null)
+                    {
+                        var error = doc.Descendants("Error").FirstOrDefault();
+                        if (error == null)
+                        {
+                            var exceptions =
+                                (from item in doc.Descendants("Errors")
+                                    select
+                                        (Exception) new BandwidthIrisException(item.Element("Code").Value,
+                                            item.Element("Description").Value, response.StatusCode)).ToArray();
+                            if (exceptions.Length > 0)
+                            {
+                                throw new AggregateException(exceptions);
+                            }
+                        }
+                        else
+                        {
+                            code = error.Element("Code");
+                            description = error.Element("Description");    
+                        }
+                    }
                     if (code != null && description != null)
                     {
                         throw new BandwidthIrisException(code.Value, description.Value, response.StatusCode);
@@ -270,7 +292,7 @@ namespace Bandwidth.Iris
             }
             catch (Exception ex)
             {
-                if (ex is BandwidthIrisException) throw;
+                if (ex is BandwidthIrisException || ex is AggregateException) throw;
                 Debug.WriteLine(ex.Message);
             }
             if (!response.IsSuccessStatusCode)

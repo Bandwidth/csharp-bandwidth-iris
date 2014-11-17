@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
@@ -7,13 +8,13 @@ namespace Bandwidth.Iris.Model
     {
         private const string PortInPath = "portins";
 
-        public static Task CreateOrder(Client client, LnpOrder order)
+        public static Task<LnpOrderResponse> CreateOrder(Client client, LnpOrder order)
         {
-            return client.MakePostRequest(client.ConcatAccountPath(PortInPath), order, true);
+            return client.MakePostRequest<LnpOrderResponse>(client.ConcatAccountPath(PortInPath), order);
         }
 
 #if !PCL
-        public static Task CreateOrder(LnpOrder order)
+        public static Task<LnpOrderResponse> CreateOrder(LnpOrder order)
         {
             return CreateOrder(Client.GetInstance(), order);
         }
@@ -36,5 +37,18 @@ namespace Bandwidth.Iris.Model
         public string SubscriberType { get; set; }
         public string BusinessName { get; set; }
         public Address ServiceAddress { get; set; }
+    }
+
+    public class LnpOrderResponse : LnpOrder
+    {
+        public string ProcessingStatus { get; set; }
+        public DateTime RequestedFocDate { get; set; }
+        public Status Status { get; set; }
+    }
+
+    public class Status
+    {
+        public string Code { get; set; }
+        public string Description { get; set; }
     }
 }

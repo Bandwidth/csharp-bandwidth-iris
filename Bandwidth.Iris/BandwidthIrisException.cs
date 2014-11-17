@@ -14,4 +14,5 @@ namespace Bandwidth.Iris
             HttpStatusCode = statusCode;
         }
     }
+
 }
