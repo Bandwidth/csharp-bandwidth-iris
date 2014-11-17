@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
 using Bandwidth.Iris.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -53,6 +55,42 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = Order.Create(client, order).Result;
                 if (server.Error != null) throw server.Error;
                 Helper.AssertObjects(orderResult, result);
+            }
+        }
+
+        [TestMethod]
+        public void CreateWithXmlTest()
+        {
+            var order = new Order
+            {
+                Name = "Test",
+                SiteId = "10",
+                CustomerOrderId = "11",
+                LataSearchAndOrderType = new LataSearchAndOrderType
+                {
+                    Lata = "224",
+                    Quantity = 1
+                }
+            };
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "POST",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/orders", Helper.AccountId),
+                EstimatedContent = Helper.ToXmlString(order),
+                ContentToSend = new StringContent(TestXmlStrings.ValidOrderResponseXml, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                var result = Order.Create(client, order).Result;
+                if (server.Error != null) throw server.Error;
+                var o = result.Order;
+                Assert.AreEqual("1", o.Id);
+                Assert.AreEqual("2858", o.SiteId);
+                Assert.AreEqual("A New Order", o.Name);
+                Assert.AreEqual(DateTime.Parse("2014-10-14T17:58:15.299Z").ToUniversalTime(), o.OrderCreateDate);
+                Assert.IsFalse(o.BackOrderRequested);
+                Assert.AreEqual("2052865046", o.ExistingTelephoneNumberOrderType.TelephoneNumberList[0]);
+                Assert.IsFalse(o.PartialAllowed);
             }
         }
 

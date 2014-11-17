@@ -33,10 +33,11 @@ namespace Bandwidth.Iris.Model
     public class TelephoneNumberDetail
     {
         public string City { get; set; }
+        [XmlElement("LATA")]
         public string Lata { get; set; }
         public string RateCenter { get; set; }
         public string State { get; set; }
-        public string FullNumber { get; set; }
+        public string TelephoneNumber { get; set; }
         public string Tier { get; set; }
         public string VendorId { get; set; }
         public string VendorName { get; set; }

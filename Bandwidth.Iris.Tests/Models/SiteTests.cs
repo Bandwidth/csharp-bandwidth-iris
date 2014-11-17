@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
 using Bandwidth.Iris.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -37,6 +39,33 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = Site.Get(client, "1").Result;
                 if (server.Error != null) throw server.Error;
                 Helper.AssertObjects(item, result);
+            }
+        }
+
+        [TestMethod]
+        public void GetWithXmlTest()
+        {
+            
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.ValidSiteResponseXml, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                var result = Site.Get(client, "1").Result;
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual("1", result.Id);
+                Assert.AreEqual("Test Site", result.Name);
+                Assert.AreEqual("A Site Description", result.Description);
+                Assert.AreEqual("900", result.Address.HouseNumber);
+                Assert.AreEqual("Main Campus Drive", result.Address.StreetName);
+                Assert.AreEqual("Raleigh", result.Address.City);
+                Assert.AreEqual("NC", result.Address.StateCode);
+                Assert.AreEqual("27615", result.Address.Zip);
+                Assert.AreEqual("United States", result.Address.Country);
+                Assert.AreEqual("Service", result.Address.AddressType);
             }
         }
 
@@ -104,6 +133,27 @@ namespace Bandwidth.Iris.Tests.Models
                 if (server.Error != null) throw server.Error;
                 Helper.AssertObjects(items[0], result[0]);
                 Helper.AssertObjects(items[1], result[1]);
+            }
+        }
+
+        [TestMethod]
+        public void ListWithXmlTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.ValidSitesResponseXml, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                var result = Site.List(client).Result;
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual(1, result.Length);
+                Assert.AreEqual("1", result[0].Id);
+                Assert.AreEqual("Test Site", result[0].Name);
+                Assert.AreEqual("A site description", result[0].Description);
+                
             }
         }
 

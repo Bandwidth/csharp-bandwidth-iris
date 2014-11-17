@@ -37,7 +37,7 @@ namespace Bandwidth.Iris.Model
             set { OrderId = value; } 
         }
         
-        [XmlAttribute("id")]
+        [XmlElement("id")]
         public string OrderId { get; set; }
         public string Name { get; set; }
         public string SiteId { get; set; }
