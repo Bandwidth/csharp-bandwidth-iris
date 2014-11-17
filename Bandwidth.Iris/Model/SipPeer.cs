@@ -23,6 +23,13 @@ namespace Bandwidth.Iris.Model
             return site.GetSipPeer(id);
         }
 
+        public static Task<SipPeer[]> List(Client client, string siteId)
+        {
+            if (siteId == null) throw new ArgumentNullException("siteId");
+            var site = new Site { Id = siteId };
+            site.SetClient(client);
+            return site.GetSipPeers();
+        }
 
 #if !PCL
         public static Task<SipPeer> Create(SipPeer item)
@@ -32,6 +39,11 @@ namespace Bandwidth.Iris.Model
         public static Task<SipPeer> Get(string siteId, string id)
         {
             return Get(Client.GetInstance(), siteId, id);
+        }
+
+        public static Task<SipPeer[]> List(string siteId)
+        {
+            return List(Client.GetInstance(), siteId);
         }
 
 #endif
@@ -91,17 +103,13 @@ namespace Bandwidth.Iris.Model
         public Host[] VoiceHosts { get; set; }
         
         public Host[] SmsHosts { get; set; }
-        
-        public Host[] TerminationHosts { get; set; }
+
+        public TerminationHost[] TerminationHosts { get; set; }
         
         public CallingName CallingName { get; set; }
         
-        public VoiceHostGroup[] VoiceHostGroups { get; set; }
     }
 
-    public class VoiceHostGroup
-    {
-    }
 
     public class CallingName
     {
@@ -112,6 +120,14 @@ namespace Bandwidth.Iris.Model
     public class Host
     {
         public string HostName { get; set; }
+    }
+
+    public class TerminationHost
+    {
+        public string HostName { get; set; }
+        public int Port { get; set; }
+        public string CustomerTrafficAllowed { get; set; }
+        public bool DataAllowed { get; set; }
     }
 
     public class SipPeerTelephoneNumbers: IXmlSerializable

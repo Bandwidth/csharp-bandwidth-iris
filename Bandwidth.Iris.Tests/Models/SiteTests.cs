@@ -404,6 +404,80 @@ namespace Bandwidth.Iris.Tests.Models
                 
             }
         }
+
+        [TestMethod]
+        public void GetSipPeersTest()
+        {
+            var items = new[]{
+                new SipPeer
+                {
+                    Id = "10",
+                    SiteId = "1",
+                    Name = "test",
+                    IsDefaultPeer = true
+                },
+                new SipPeer
+                {
+                    Id = "11",
+                    SiteId = "1",
+                    Name = "test2",
+                    IsDefaultPeer = false
+                }
+
+            };
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers", Helper.AccountId),
+                    ContentToSend = Helper.CreateXmlContent(new SipPeersResponse{SipPeers = items})
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var i = new Site { Id = "1" };
+                i.SetClient(client);
+                var r = i.GetSipPeers().Result;
+                if (server.Error != null) throw server.Error;
+                Helper.AssertObjects(items[0], r[0]);
+                Helper.AssertObjects(items[1], r[1]);
+            }
+        }
+
+        [TestMethod]
+        public void GetSipPeersWithXmlTest()
+        {
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers", Helper.AccountId),
+                    ContentToSend = new StringContent(TestXmlStrings.ValidSipPeersResponseXml, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var i = new Site { Id = "1" };
+                i.SetClient(client);
+                var r = i.GetSipPeers().Result[0];
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual("12345", r.Id);
+                Assert.AreEqual("SIP Peer 1", r.Name);
+                Assert.AreEqual("Sip Peer 1 description", r.Description);
+                Assert.IsTrue(r.IsDefaultPeer);
+                Assert.AreEqual("SIP", r.ShortMessagingProtocol);
+                Assert.AreEqual("70.62.112.156", r.VoiceHosts[0].HostName);
+                Assert.AreEqual("70.62.112.156", r.SmsHosts[0].HostName);
+                Assert.AreEqual("70.62.112.156", r.TerminationHosts[0].HostName);
+                Assert.AreEqual(5060, r.TerminationHosts[0].Port);
+                Assert.AreEqual("DOMESTIC", r.TerminationHosts[0].CustomerTrafficAllowed);
+                Assert.IsTrue(r.TerminationHosts[0].DataAllowed);
+                Assert.IsFalse(r.CallingName.Enforced);
+                Assert.IsTrue(r.CallingName.Display);
+            }
+        }
     }
 
 }

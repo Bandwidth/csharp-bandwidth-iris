@@ -155,6 +155,81 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
         [TestMethod]
+        public void ListTest()
+        {
+            var items = new[]{
+                new SipPeer
+                {
+                    Id = "10",
+                    SiteId = "1",
+                    Name = "test",
+                    IsDefaultPeer = true
+                },
+                new SipPeer
+                {
+                    Id = "11",
+                    SiteId = "1",
+                    Name = "test2",
+                    IsDefaultPeer = false
+                }
+
+            };
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers", Helper.AccountId),
+                    ContentToSend = Helper.CreateXmlContent(new SipPeersResponse{SipPeers = items})
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var r = SipPeer.List(client, "1").Result;
+                if (server.Error != null) throw server.Error;
+                Helper.AssertObjects(items[0], r[0]);
+                Helper.AssertObjects(items[1], r[1]);
+            }
+        }
+
+        [TestMethod]
+        public void ListWithDefaultClientTest()
+        {
+            var items = new[]{
+                new SipPeer
+                {
+                    Id = "10",
+                    SiteId = "1",
+                    Name = "test",
+                    IsDefaultPeer = true
+                },
+                new SipPeer
+                {
+                    Id = "11",
+                    SiteId = "1",
+                    Name = "test2",
+                    IsDefaultPeer = false
+                }
+
+            };
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers", Helper.AccountId),
+                    ContentToSend = Helper.CreateXmlContent(new SipPeersResponse{SipPeers = items})
+                }
+            }))
+            {
+                var r = SipPeer.List("1").Result;
+                if (server.Error != null) throw server.Error;
+                Helper.AssertObjects(items[0], r[0]);
+                Helper.AssertObjects(items[1], r[1]);
+            }
+        }
+
+        [TestMethod]
         public void GetTnsTest()
         {
             var item = new SipPeerTelephoneNumber

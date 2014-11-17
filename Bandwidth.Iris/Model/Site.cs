@@ -89,6 +89,19 @@ namespace Bandwidth.Iris.Model
             return item;
         }
 
+        public async Task<SipPeer[]> GetSipPeers()
+        {
+            var items =
+                (await Client.MakeGetRequest<SipPeersResponse>(
+                    Client.ConcatAccountPath(string.Format("{0}/{1}/{2}", SitePath, Id, SipPeerPath)))).SipPeers;
+            foreach(var item in items)
+            {
+                item.Client = Client;
+                item.SiteId = Id;    
+            }
+            return items;
+        }
+
         public string Name { get; set; }
         public string Description { get; set; }
         public Address Address { get; set; }
@@ -105,16 +118,12 @@ namespace Bandwidth.Iris.Model
     }
 
     [XmlType("TNSipPeersResponse")]
-    public class TnSipPeersResponse
+    public class SipPeersResponse
     {
-        public SipPeers SipPeers { get; set; }
+        public SipPeer[] SipPeers { get; set; }
     }
 
-    public class SipPeers
-    {
-        public SipPeer SipPeer { get; set; }
-    }
-
+    
     public class Address
     {
         public string HouseNumber { get; set; }
