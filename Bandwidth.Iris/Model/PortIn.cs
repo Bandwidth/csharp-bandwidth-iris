@@ -1,28 +1,28 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
 {
-    public class PortIn
+    public class PortIn: BaseModel
     {
         private const string PortInPath = "portins";
 
-        public static Task<LnpOrderResponse> CreateOrder(Client client, LnpOrder order)
+        public async static Task<PortIn> Create(Client client, PortIn order)
         {
-            return client.MakePostRequest<LnpOrderResponse>(client.ConcatAccountPath(PortInPath), order);
+            return (await client.MakePostRequest<LnpOrderResponse>(client.ConcatAccountPath(PortInPath), order)) as PortIn;
         }
 
 #if !PCL
-        public static Task<LnpOrderResponse> CreateOrder(LnpOrder order)
+        public static Task<PortIn> Create(PortIn order)
         {
-            return CreateOrder(Client.GetInstance(), order);
+            return Create(Client.GetInstance(), order);
         }
 #endif
-    }
-
-    public class LnpOrder
-    {
+        public override string Id {
+            get { return OrderId; }
+            set { OrderId = value; } 
+        }
+        public string OrderId { get; set; }
         public string BillingTelephoneNumber { get; set; }
         public Subscriber Subscriber { get; set; }
         public string LoaAuthorizingPerson { get; set; }
@@ -30,6 +30,17 @@ namespace Bandwidth.Iris.Model
         [XmlArrayItem("PhoneNumber")]
         public string[] ListOfPhoneNumbers { get; set; }
         public string SiteId { get; set; }
+        public string ProcessingStatus { get; set; }
+        public Status Status { get; set; }
+        public bool Triggered { get; set; }
+        public string BillingType { get; set; }
+
+    }
+
+
+    public class LnpOrderResponse : PortIn
+    {
+        
     }
 
     public class Subscriber
@@ -39,13 +50,7 @@ namespace Bandwidth.Iris.Model
         public Address ServiceAddress { get; set; }
     }
 
-    public class LnpOrderResponse : LnpOrder
-    {
-        public string ProcessingStatus { get; set; }
-        public DateTime RequestedFocDate { get; set; }
-        public Status Status { get; set; }
-    }
-
+    
     public class Status
     {
         public string Code { get; set; }
