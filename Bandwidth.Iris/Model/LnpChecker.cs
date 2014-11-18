@@ -26,6 +26,24 @@ namespace Bandwidth.Iris.Model
     {
         public RateCenterGroup[] SupportedRateCenters { get; set; }
         public RateCenterGroup[] UnsupportedRateCenters { get; set; }
+        [XmlArrayItem("Tn")]
+        public string[] PortableNumbers { get; set; }
+        public LosingCarriers SupportedLosingCarriers { get; set; }
+        public LosingCarriers UnsupportedLosingCarriers { get; set; }
+    }
+
+    public class LosingCarriers
+    {
+        public LosingCarrierTnList LosingCarrierTnList { get; set; }
+    }
+
+    public class LosingCarrierTnList
+    {
+        [XmlElement("LosingCarrierSPID")]
+        public string LosingCarrierSpid { get; set; }
+        public string LosingCarrierName { get; set; }
+        [XmlArrayItem("Tn")]
+        public string[] TnList { get; set; }
     }
 
     public class RateCenterGroup
