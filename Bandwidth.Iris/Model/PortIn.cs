@@ -137,6 +137,11 @@ namespace Bandwidth.Iris.Model
         public string BillingType { get; set; }
         [XmlElement("WirelessInfo")]
         public WirelessInfo[] WirelessInfo { get; set; }
+        public string LosingCarrierName { get; set; }
+        public DateTime LastModifiedDate { get; set; }
+        [XmlElement("userId")]
+        public string UserId { get; set; }
+
     }
 
     public class LnpOrderSupp: PortIn
@@ -144,10 +149,6 @@ namespace Bandwidth.Iris.Model
         public DateTime RequestedFocDate { get; set; }
         [XmlElement("WirelessInfo")]
         public WirelessInfo[] WirelessInfo { get; set; }
-        public string LosingCarrierName { get; set; }
-        public DateTime LastModifiedDate { get; set; }
-        [XmlElement("userId")]
-        public string UserId { get; set; }
     }
 
     public class WirelessInfo
