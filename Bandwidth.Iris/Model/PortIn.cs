@@ -7,6 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using Bandwidth.Iris.Model;
 
 namespace Bandwidth.Iris.Model
 {
@@ -80,9 +81,10 @@ namespace Bandwidth.Iris.Model
 
         public async Task<FileData[]> GetFiles(bool metadata = false)
         {
-            return
-                (await Client.MakeGetRequest<FileListResponse>(
-                    Client.ConcatAccountPath(string.Format("{0}/{1}/{2}", PortInPath, Id, LoasPath)), new Dictionary<string, object> { { "metadata", metadata } })).FileData.ToArray();
+            var r = (await Client.MakeGetRequest<FileListResponse>(
+                Client.ConcatAccountPath(string.Format("{0}/{1}/{2}", PortInPath, Id, LoasPath)),
+                new Dictionary<string, object> {{"metadata", metadata.ToString().ToLowerInvariant()}}));
+            return (r == null)?new FileData[0]: r.FileData.ToArray();
         }
 
         public async Task<FileContent> GetFile(string fileName, bool asStream = false)
@@ -165,30 +167,14 @@ namespace Bandwidth.Iris.Model
         public string DocumentName { get; set; }
     }
 
-    public class FileListResponse: IXmlSerializable
+    [XmlType("fileListResponse")]
+    public class FileListResponse
     {
-        public readonly List<FileData> FileData = new List<FileData>(); 
-        public XmlSchema GetSchema()
-        {
-            return null;
-        }
+        [XmlElement("fileCount")]
+        public int FileCount { get; set; }
 
-        public void ReadXml(XmlReader reader)
-        {
-            var serializer = new XmlSerializer(typeof (FileData));
-            while (reader.Read())
-            {
-                if (reader.NodeType == XmlNodeType.Element && reader.Name == "fileData")
-                {
-                    FileData.Add((FileData) serializer.Deserialize(reader));
-                } 
-            }
-        }
-
-        public void WriteXml(XmlWriter writer)
-        {
-            throw new NotImplementedException();
-        }
+        [XmlElement("fileData")]
+        public FileData[] FileData { get; set; }
     }
 
     public class FileData
