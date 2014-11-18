@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
-using System.Xml.Schema;
 using System.Xml.Serialization;
-using Bandwidth.Iris.Model;
 
 namespace Bandwidth.Iris.Model
 {
@@ -17,15 +14,15 @@ namespace Bandwidth.Iris.Model
         private const string PortInPath = "portins";
         private const string LoasPath = "loas";
 
-        public async static Task<PortIn> Create(Client client, PortIn order)
+        public async static Task<LnpOrderResponse> Create(Client client, PortIn order)
         {
-            var item = (PortIn)(await client.MakePostRequest<LnpOrderResponse>(client.ConcatAccountPath(PortInPath), order));
+            var item = await client.MakePostRequest<LnpOrderResponse>(client.ConcatAccountPath(PortInPath), order);
             item.Client = client;
             return item;
         }
 
 #if !PCL
-        public static Task<PortIn> Create(PortIn order)
+        public static Task<LnpOrderResponse> Create(PortIn order)
         {
             return Create(Client.GetInstance(), order);
         }
@@ -128,23 +125,29 @@ namespace Bandwidth.Iris.Model
         [XmlArrayItem("PhoneNumber")]
         public string[] ListOfPhoneNumbers { get; set; }
         public string SiteId { get; set; }
-        public string ProcessingStatus { get; set; }
-        public Status Status { get; set; }
-        public bool Triggered { get; set; }
-        public string BillingType { get; set; }
-
+  
     }
 
    
     public class LnpOrderResponse : PortIn
     {
-        
+        public string ProcessingStatus { get; set; }
+        public Status Status { get; set; }
+        public bool Triggered { get; set; }
+        public string BillingType { get; set; }
+        [XmlElement("WirelessInfo")]
+        public WirelessInfo[] WirelessInfo { get; set; }
     }
 
     public class LnpOrderSupp: PortIn
     {
         public DateTime RequestedFocDate { get; set; }
-        public WirelessInfo WirelessInfo { get; set; }
+        [XmlElement("WirelessInfo")]
+        public WirelessInfo[] WirelessInfo { get; set; }
+        public string LosingCarrierName { get; set; }
+        public DateTime LastModifiedDate { get; set; }
+        [XmlElement("userId")]
+        public string UserId { get; set; }
     }
 
     public class WirelessInfo

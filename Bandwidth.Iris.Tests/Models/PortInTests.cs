@@ -353,11 +353,11 @@ namespace Bandwidth.Iris.Tests.Models
             var data = new LnpOrderSupp
             {
                 RequestedFocDate = DateTime.Parse("2014-11-18T00:00:00.000Z"),
-                WirelessInfo = new WirelessInfo
+                WirelessInfo = new []{new WirelessInfo
                 {
                     AccountNumber = "77129766500001",
                     PinNumber = "0000"
-                }
+                }}
             };
             using (var server = new HttpServer(new RequestHandler
             {
