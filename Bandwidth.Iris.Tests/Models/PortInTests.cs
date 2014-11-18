@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -326,6 +327,50 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = portIn.GetFileMetadata("test").Result;
                 if (server.Error != null) throw server.Error;
                 Assert.AreEqual("LOA", r.DocumentType);
+            }
+        }
+
+        [TestMethod]
+        public void DeleteTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "DELETE",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portins/1", Helper.AccountId)
+            }))
+            {
+                var client = Helper.CreateClient();
+                var portIn = new PortIn { Id = "1" };
+                portIn.SetClient(client);
+                portIn.Delete().Wait();
+                if (server.Error != null) throw server.Error;
+            }
+        }
+
+        [TestMethod]
+        public void UpdateTest()
+        {
+            var data = new LnpOrderSupp
+            {
+                RequestedFocDate = DateTime.Parse("2014-11-18T00:00:00.000Z"),
+                WirelessInfo = new WirelessInfo
+                {
+                    AccountNumber = "77129766500001",
+                    PinNumber = "0000"
+                }
+            };
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "PUT",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portins/1", Helper.AccountId),
+                EstimatedContent = Helper.ToXmlString(data)
+            }))
+            {
+                var client = Helper.CreateClient();
+                var portIn = new PortIn { Id = "1" };
+                portIn.SetClient(client);
+                portIn.Update(data).Wait();
+                if (server.Error != null) throw server.Error;
             }
         }
     }

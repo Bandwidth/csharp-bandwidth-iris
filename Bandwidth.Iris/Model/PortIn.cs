@@ -141,9 +141,16 @@ namespace Bandwidth.Iris.Model
         
     }
 
-    public class LnpOrderSupp : PortIn
+    public class LnpOrderSupp: PortIn
     {
-        
+        public DateTime RequestedFocDate { get; set; }
+        public WirelessInfo WirelessInfo { get; set; }
+    }
+
+    public class WirelessInfo
+    {
+        public string AccountNumber { get; set; }
+        public string PinNumber { get; set; }
     }
 
     public class Subscriber
