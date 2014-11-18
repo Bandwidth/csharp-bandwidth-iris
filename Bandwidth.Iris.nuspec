@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Bandwidth.Iris</id>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <title>Bandwidth.Iris</title>
         <authors>Bandwidth</authors>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
@@ -11,9 +11,6 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>.NET SDK for use with the Iris API</description>
         <copyright>Bandwidth</copyright>
-        <dependencies>
-            <dependency id="Newtonsoft.Json" version="6.0.6" />
-        </dependencies>
     </metadata>
     <files>
         <file src="Bandwidth.Iris\bin\Release\Bandwidth.Iris.dll" target="lib\net45\Bandwidth.Iris.dll" />
