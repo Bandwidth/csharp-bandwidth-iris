@@ -49,6 +49,7 @@
     <Compile Include="BaseModel.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="DefaultDateTimeAttribute.cs" />
+    <Compile Include="Model\RateCenter.cs" />
     <Compile Include="Model\AvailableNpaNxx.cs" />
     <Compile Include="Model\Disconnect.cs" />
     <Compile Include="Model\AvailableNumbers.cs" />

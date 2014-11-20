@@ -59,6 +59,7 @@
     <Compile Include="ClientTests.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="HttpServer.cs" />
+    <Compile Include="Models\RateCenterTests.cs" />
     <Compile Include="Models\PortInTests.cs" />
     <Compile Include="Models\LnpCheckerTests.cs" />
     <Compile Include="Models\DisconnectTests.cs" />
