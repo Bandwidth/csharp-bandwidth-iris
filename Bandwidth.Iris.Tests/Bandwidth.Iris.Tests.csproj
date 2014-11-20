@@ -68,6 +68,7 @@
     <Compile Include="Models\ImportToAccountTests.cs" />
     <Compile Include="Models\PortOutTests.cs" />
     <Compile Include="Models\SipPeerTests.cs" />
+    <Compile Include="Models\SubscriptionTests.cs" />
     <Compile Include="Models\TnReservationTests.cs" />
     <Compile Include="Models\SiteTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
