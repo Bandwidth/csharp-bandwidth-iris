@@ -61,6 +61,9 @@
     <Compile Include="..\Bandwidth.Iris\Model\AvailableNumbers.cs">
       <Link>AvailableNumbers.cs</Link>
     </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\City.cs">
+      <Link>City.cs</Link>
+    </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\Disconnect.cs">
       <Link>Disconnect.cs</Link>
     </Compile>
