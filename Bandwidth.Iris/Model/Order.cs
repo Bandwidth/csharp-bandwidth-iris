@@ -19,10 +19,20 @@ namespace Bandwidth.Iris.Model
             return client.MakePostRequest<OrderResult>(client.ConcatAccountPath(OrderPath), item);
         }
 
+        public static Task<OrderResult> Get(Client client, string id)
+        {
+            return client.MakeGetRequest<OrderResult>(client.ConcatAccountPath(OrderPath), null, id);
+        }
+
 #if !PCL
         public static Task<OrderResult> Create(Order item)
         {
             return Create(Client.GetInstance(), item);
+        }
+
+        public static Task<OrderResult> Get(string id)
+        {
+            return Get(Client.GetInstance(), id);
         }
 
 #endif

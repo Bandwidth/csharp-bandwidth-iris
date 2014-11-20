@@ -134,6 +134,65 @@ namespace Bandwidth.Iris.Tests.Models
                 Helper.AssertObjects(orderResult, result);
             }
         }
+
+        [TestMethod]
+        public void GetTest()
+        {
+            var orderResult = new OrderResult
+            {
+                CompletedQuantity = 1,
+                CreatedByUser = "test",
+                Order = new Order
+                {
+                    Name = "Test",
+                    SiteId = "10",
+                    CustomerOrderId = "11",
+                    Id = "101",
+                    OrderCreateDate = DateTime.Now
+                }
+            };
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/orders/101", Helper.AccountId),
+                ContentToSend = Helper.CreateXmlContent(orderResult)
+            }))
+            {
+                var client = Helper.CreateClient();
+                var result = Order.Get(client, "101").Result;
+                if (server.Error != null) throw server.Error;
+                Helper.AssertObjects(orderResult, result);
+            }
+        }
+
+        [TestMethod]
+        public void GetWithDefaultClientTest()
+        {
+            var orderResult = new OrderResult
+            {
+                CompletedQuantity = 1,
+                CreatedByUser = "test",
+                Order = new Order
+                {
+                    Name = "Test",
+                    SiteId = "10",
+                    CustomerOrderId = "11",
+                    Id = "101",
+                    OrderCreateDate = DateTime.Now
+                }
+            };
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/orders/101", Helper.AccountId),
+                ContentToSend = Helper.CreateXmlContent(orderResult)
+            }))
+            {
+                var result = Order.Get("101").Result;
+                if (server.Error != null) throw server.Error;
+                Helper.AssertObjects(orderResult, result);
+            }
+        }
         [TestMethod]
         public void UpdateTest()
         {
