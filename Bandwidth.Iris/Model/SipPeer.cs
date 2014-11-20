@@ -63,6 +63,13 @@ namespace Bandwidth.Iris.Model
             return response.SipPeerTelephoneNumber;
         }
 
+        public async Task<SipPeerTelephoneNumber[]> GetTns()
+        {
+            if (SiteId == null) throw new ArgumentNullException("SiteId");
+            var response = await Client.MakeGetRequest<SipPeerTelephoneNumbersResponse>(Client.ConcatAccountPath(string.Format("{0}/{1}/{2}/{3}/{4}", Site.SitePath, SiteId, Site.SipPeerPath, Id, TnsPath)));
+            return response.SipPeerTelephoneNumbers;
+        }
+
         public Task UpdateTns(string number, SipPeerTelephoneNumber data)
         {
             if (number == null) throw new ArgumentNullException("number");
@@ -166,6 +173,11 @@ namespace Bandwidth.Iris.Model
     public class SipPeerTelephoneNumberResponse
     {
         public SipPeerTelephoneNumber SipPeerTelephoneNumber { get; set; }
+    }
+
+    public class SipPeerTelephoneNumbersResponse
+    {
+        public SipPeerTelephoneNumber[] SipPeerTelephoneNumbers { get; set; }
     }
 
     public class SipPeerResponse

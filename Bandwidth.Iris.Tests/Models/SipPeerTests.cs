@@ -287,6 +287,31 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
         [TestMethod]
+        public void GetTns2WithXmlTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers/10/tns", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.ValidSipPeerTnsResponseXml, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                var peer = new SipPeer
+                {
+                    Id = "10",
+                    SiteId = "1"
+                };
+                peer.SetClient(client);
+                var result = peer.GetTns().Result;
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual(17, result.Length);
+                Assert.AreEqual("3034162216", result[0].FullNumber);
+                Assert.AreEqual("3034162218", result[1].FullNumber);
+            }
+        }
+
+        [TestMethod]
         public void UpdateTnsTest()
         {
             var item = new SipPeerTelephoneNumber
