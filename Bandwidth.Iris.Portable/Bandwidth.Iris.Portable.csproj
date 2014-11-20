@@ -64,8 +64,14 @@
     <Compile Include="..\Bandwidth.Iris\Model\Disconnect.cs">
       <Link>Disconnect.cs</Link>
     </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\ImportToAccount.cs">
+      <Link>ImportToAccount.cs</Link>
+    </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\LnpChecker.cs">
       <Link>LnpChecker.cs</Link>
+    </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\Note.cs">
+      <Link>Note.cs</Link>
     </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\Order.cs">
       <Link>Order.cs</Link>
@@ -73,11 +79,17 @@
     <Compile Include="..\Bandwidth.Iris\Model\PortIn.cs">
       <Link>PortIn.cs</Link>
     </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\PortOut.cs">
+      <Link>PortOut.cs</Link>
+    </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\SipPeer.cs">
       <Link>SipPeer.cs</Link>
     </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\Site.cs">
       <Link>Site.cs</Link>
+    </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\Subscription.cs">
+      <Link>Subscription.cs</Link>
     </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\TnReservation.cs">
       <Link>TnReservation.cs</Link>

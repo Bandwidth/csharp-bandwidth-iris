@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
@@ -41,6 +42,25 @@ namespace Bandwidth.Iris.Model
             return Client.MakePutRequest(Client.ConcatAccountPath(string.Format("{0}/{1}", OrderPath, Id)),
                 item, true);
         }
+
+        public async Task<Note> AddNote(Note note)
+        {
+            using (var response = await Client.MakePostRequest(Client.ConcatAccountPath(string.Format("{0}/{1}/notes", OrderPath, Id)), note))
+            {
+                var list = await GetNotes();
+                var id = Client.GetIdFromLocationHeader(response.Headers.Location);
+                return list.First(n => n.Id == id);
+            }
+        }
+
+        public async Task<Note[]> GetNotes()
+        {
+            return
+                (await
+                    Client.MakeGetRequest<Notes>(Client.ConcatAccountPath(string.Format("{0}/{1}/notes", OrderPath, Id))))
+                    .List;
+        }
+
 
         public override string Id {
             get { return OrderId; }

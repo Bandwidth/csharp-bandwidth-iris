@@ -113,6 +113,24 @@ namespace Bandwidth.Iris.Model
                 Client.MakeDeleteRequest(
                     Client.ConcatAccountPath(string.Format("{0}/{1}", PortInPath, Id)));
         }
+        public async Task<Note> AddNote(Note note)
+        {
+            using (var response = await Client.MakePostRequest(Client.ConcatAccountPath(string.Format("{0}/{1}/notes", PortInPath, Id)), note))
+            {
+                var list = await GetNotes();
+                var id = Client.GetIdFromLocationHeader(response.Headers.Location);
+                return list.First(n => n.Id == id);
+            }
+        }
+        
+        public async Task<Note[]> GetNotes()
+        {
+            return
+                (await
+                    Client.MakeGetRequest<Notes>(Client.ConcatAccountPath(string.Format("{0}/{1}/notes", PortInPath, Id))))
+                    .List;
+        }
+
         public override string Id {
             get { return OrderId; }
             set { OrderId = value; } 

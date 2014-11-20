@@ -53,9 +53,13 @@
     <Compile Include="Model\Disconnect.cs" />
     <Compile Include="Model\AvailableNumbers.cs" />
     <Compile Include="Model\LnpChecker.cs" />
+    <Compile Include="Model\Note.cs" />
+    <Compile Include="Model\ImportToAccount.cs" />
+    <Compile Include="Model\PortOut.cs" />
     <Compile Include="Model\PortIn.cs" />
     <Compile Include="Model\SipPeer.cs" />
     <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\Subscription.cs" />
     <Compile Include="Model\TnReservation.cs" />
     <Compile Include="Model\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
