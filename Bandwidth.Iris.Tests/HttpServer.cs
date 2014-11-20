@@ -43,6 +43,7 @@ namespace Bandwidth.Iris.Tests
 
         private async void HandlerRequest(Task<HttpListenerContext> obj)
         {
+            if(obj.Status == TaskStatus.Faulted) return;
             var context = obj.Result;
             var handler = GetRequestHandler();
             try
@@ -62,7 +63,8 @@ namespace Bandwidth.Iris.Tests
                 {
                     using (var reader = new StreamReader(request.InputStream, Encoding.UTF8))
                     {
-                        Assert.AreEqual(handler.EstimatedContent, reader.ReadToEnd());    
+                        var content = reader.ReadToEnd();
+                        Assert.AreEqual(handler.EstimatedContent, content);    
                     }
                 }
                 if (handler.EstimatedHeaders != null)

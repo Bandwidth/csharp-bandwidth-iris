@@ -122,7 +122,7 @@ namespace Bandwidth.Iris.Model
                 return list.First(n => n.Id == id);
             }
         }
-        
+
         public async Task<Note[]> GetNotes()
         {
             return

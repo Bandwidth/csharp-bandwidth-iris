@@ -65,6 +65,8 @@
     <Compile Include="Models\OrderTests.cs" />
     <Compile Include="Models\AvailableNpaNxxTests.cs" />
     <Compile Include="Models\AvailableNumbersTests.cs" />
+    <Compile Include="Models\ImportToAccountTests.cs" />
+    <Compile Include="Models\PortOutTests.cs" />
     <Compile Include="Models\SipPeerTests.cs" />
     <Compile Include="Models\TnReservationTests.cs" />
     <Compile Include="Models\SiteTests.cs" />
