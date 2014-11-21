@@ -97,6 +97,9 @@
     <Compile Include="..\Bandwidth.Iris\Model\Subscription.cs">
       <Link>Subscription.cs</Link>
     </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\Tn.cs">
+      <Link>Tn.cs</Link>
+    </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\TnReservation.cs">
       <Link>TnReservation.cs</Link>
     </Compile>
