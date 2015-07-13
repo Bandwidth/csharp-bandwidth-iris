@@ -143,6 +143,7 @@ namespace Bandwidth.Iris.Model
         [XmlArrayItem("PhoneNumber")]
         public string[] ListOfPhoneNumbers { get; set; }
         public string SiteId { get; set; }
+        public bool Triggered { get; set; }
   
     }
 

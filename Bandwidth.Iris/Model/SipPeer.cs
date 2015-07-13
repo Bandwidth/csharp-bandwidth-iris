@@ -114,6 +114,8 @@ namespace Bandwidth.Iris.Model
         public TerminationHost[] TerminationHosts { get; set; }
         
         public CallingName CallingName { get; set; }
+
+        public string FinalDestinationUri { get; set; }
         
     }
 
