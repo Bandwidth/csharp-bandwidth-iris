@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Bandwidth.Iris</id>
+        <version>1.0.1</version>
+        <title>Bandwidth.Iris</title>
+        <authors>Bandwidth</authors>
+        <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+        <projectUrl>https://github.com/bandwidthcom/csharp-bandwidth-iris</projectUrl>
+        <iconUrl>http://bandwidth.com/sites/all/themes/bandwidth/images/logo-color.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>.NET SDK for use with the Iris API</description>
+        <copyright>Bandwidth</copyright>
+    </metadata>
+    <files>
+        <file src="Bandwidth.Iris\bin\Release\Bandwidth.Iris.dll" target="lib\net45\Bandwidth.Iris.dll" />
+        <file src="Bandwidth.Iris\bin\Release\Bandwidth.Iris.XML" target="lib\net45\Bandwidth.Iris.XML" />
+        <file src="Bandwidth.Iris.Portable\bin\Release\Bandwidth.Iris.dll" target="lib\portable-net45+wp8+win8\Bandwidth.Iris.dll" />
+        <file src="Bandwidth.Iris.Portable\bin\Release\Bandwidth.Iris.XML" target="lib\portable-net45+wp8+win8\Bandwidth.Iris.XML" />
+    </files>
+</package>
