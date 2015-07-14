@@ -8,5 +8,9 @@
     <add key="username" value="username"/>
     <add key="password" value="yourpassword"/>
     <add key="apiEndpoint" value="https://api.inetwork.com"/>
+    <add key="selectedSiteId" value=""/>
+    <add key="selectedSipPeerId" value=""/>
+    <add key="sipPeerHost" value=""/>
+
   </appSettings>
 </configuration>
