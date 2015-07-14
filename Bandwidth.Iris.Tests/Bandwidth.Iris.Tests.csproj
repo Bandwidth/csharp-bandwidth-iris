@@ -59,7 +59,14 @@
     <Compile Include="ClientTests.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="HttpServer.cs" />
+    <Compile Include="Models\AccountTests.cs" />
     <Compile Include="Models\CityTests.cs" />
+    <Compile Include="Models\CoveredRateCenterTests.cs" />
+    <Compile Include="Models\DiscNumberTest.cs" />
+    <Compile Include="Models\LineOptionTests.cs" />
+    <Compile Include="Models\HostTests.cs" />
+    <Compile Include="Models\InServiceNumberTest.cs" />
+    <Compile Include="Models\LsrOrderTests.cs" />
     <Compile Include="Models\RateCenterTests.cs" />
     <Compile Include="Models\PortInTests.cs" />
     <Compile Include="Models\LnpCheckerTests.cs" />
@@ -70,6 +77,8 @@
     <Compile Include="Models\ImportToAccountTests.cs" />
     <Compile Include="Models\PortOutTests.cs" />
     <Compile Include="Models\SipPeerTests.cs" />
+    <Compile Include="Models\DldaTests.cs" />
+    <Compile Include="Models\LidbTests.cs" />
     <Compile Include="Models\SubscriptionTests.cs" />
     <Compile Include="Models\TnReservationTests.cs" />
     <Compile Include="Models\SiteTests.cs" />

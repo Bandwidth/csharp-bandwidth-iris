@@ -25,7 +25,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Address = new Address
                 {
                     City = "City",
-                    Country = "Country"
+                    Country = "County"
                 }
             };
             using (var server = new HttpServer(new RequestHandler
@@ -79,7 +79,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Address = new Address
                 {
                     City = "City",
-                    Country = "Country"
+                    Country = "County"
                 }
             };
             using (var server = new HttpServer(new RequestHandler

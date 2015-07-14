@@ -49,7 +49,16 @@
     <Compile Include="BaseModel.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="DefaultDateTimeAttribute.cs" />
+    <Compile Include="Model\Account.cs" />
     <Compile Include="Model\City.cs" />
+    <Compile Include="Model\CoveredRateCenter.cs" />
+    <Compile Include="Model\DiscNumber.cs" />
+    <Compile Include="Model\LineOptionOrder.cs" />
+    <Compile Include="Model\Host.cs" />
+    <Compile Include="Model\Dlda.cs" />
+    <Compile Include="Model\InServiceNumber.cs" />
+    <Compile Include="Model\Links.cs" />
+    <Compile Include="Model\LsrOrder.cs" />
     <Compile Include="Model\RateCenter.cs" />
     <Compile Include="Model\AvailableNpaNxx.cs" />
     <Compile Include="Model\Disconnect.cs" />
@@ -61,6 +70,7 @@
     <Compile Include="Model\PortIn.cs" />
     <Compile Include="Model\SipPeer.cs" />
     <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\Lidb.cs" />
     <Compile Include="Model\Subscription.cs" />
     <Compile Include="Model\Tn.cs" />
     <Compile Include="Model\TnReservation.cs" />

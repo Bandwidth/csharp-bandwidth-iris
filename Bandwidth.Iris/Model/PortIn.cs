@@ -143,6 +143,7 @@ namespace Bandwidth.Iris.Model
         [XmlArrayItem("PhoneNumber")]
         public string[] ListOfPhoneNumbers { get; set; }
         public string SiteId { get; set; }
+        public string PeerId { get; set; }
         public bool Triggered { get; set; }
   
     }
@@ -152,7 +153,6 @@ namespace Bandwidth.Iris.Model
     {
         public string ProcessingStatus { get; set; }
         public Status Status { get; set; }
-        public bool Triggered { get; set; }
         public string BillingType { get; set; }
         [XmlElement("WirelessInfo")]
         public WirelessInfo[] WirelessInfo { get; set; }
@@ -180,7 +180,11 @@ namespace Bandwidth.Iris.Model
     {
         public string SubscriberType { get; set; }
         public string BusinessName { get; set; }
+        public string AccountNumber { get; set; }
+        public string PinNumber { get; set; }
+
         public Address ServiceAddress { get; set; }
+
     }
 
     

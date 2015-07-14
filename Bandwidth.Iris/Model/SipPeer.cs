@@ -107,9 +107,11 @@ namespace Bandwidth.Iris.Model
 
         public string ShortMessagingProtocol { get; set; }
 
-        public Host[] VoiceHosts { get; set; }
-        
-        public Host[] SmsHosts { get; set; }
+        [XmlArrayItem("Host")]
+        public HostData[] VoiceHosts { get; set; }
+
+        [XmlArrayItem("Host")]
+        public HostData[] SmsHosts { get; set; }
 
         public TerminationHost[] TerminationHosts { get; set; }
         
@@ -126,9 +128,10 @@ namespace Bandwidth.Iris.Model
         public bool Enforced { get; set; }
     }
 
-    public class Host
+    public class HostData
     {
         public string HostName { get; set; }
+        public int Port { get; set; }
     }
 
     public class TerminationHost

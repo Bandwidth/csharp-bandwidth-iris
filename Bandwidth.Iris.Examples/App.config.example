@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.1" />
+    </startup>
+  <appSettings>
+    <add key="accountId" value="youraccountId"/>
+    <add key="username" value="username"/>
+    <add key="password" value="yourpassword"/>
+    <add key="apiEndpoint" value="https://api.inetwork.com"/>
+  </appSettings>
+</configuration>

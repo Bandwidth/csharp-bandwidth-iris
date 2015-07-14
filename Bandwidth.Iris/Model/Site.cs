@@ -126,7 +126,10 @@ namespace Bandwidth.Iris.Model
     public class Address
     {
         public string HouseNumber { get; set; }
+        public string HouseSuffix { get; set; }
         public string StreetName { get; set; }
+        public string StreetSuffix { get; set; }
+        public string AddressLine2 { get; set; }
         public string City { get; set; }
         public string StateCode { get; set; }
         public string Zip { get; set; }

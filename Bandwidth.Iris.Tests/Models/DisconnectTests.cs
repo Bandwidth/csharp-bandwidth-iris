@@ -23,7 +23,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Name = "order",
                 DisconnectTelephoneNumberOrderType = new DisconnectTelephoneNumberOrderType
                 {
-                    TelephoneNumberList = new[] {"111", "222"}
+                    TelephoneNumbers = new[] {"111", "222"}
                 }
             };
             using (var server = new HttpServer(new RequestHandler
@@ -34,7 +34,7 @@ namespace Bandwidth.Iris.Tests.Models
             }))
             {
                 var client = Helper.CreateClient();
-                Disconnect.DisconnectNumbers(client, "order", "111", "222").Wait();
+                Disconnect.Create(client, "order", "111", "222").Wait();
                 if (server.Error != null) throw server.Error;
             }
         }
@@ -46,7 +46,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Name = "order",
                 DisconnectTelephoneNumberOrderType = new DisconnectTelephoneNumberOrderType
                 {
-                    TelephoneNumberList = new[] { "111", "222" }
+                    TelephoneNumbers = new[] { "111", "222" }
                 }
             };
             using (var server = new HttpServer(new RequestHandler
@@ -56,7 +56,7 @@ namespace Bandwidth.Iris.Tests.Models
                 EstimatedContent = Helper.ToXmlString(data)
             }))
             {
-                Disconnect.DisconnectNumbers("order", "111", "222").Wait();
+                Disconnect.Create("order", "111", "222").Wait();
                 if (server.Error != null) throw server.Error;
             }
         }

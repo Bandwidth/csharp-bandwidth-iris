@@ -275,5 +275,85 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.AreEqual("Test", r.Description);
             }
         }
+
+        [TestMethod]
+        public void GetAreaCodesTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/orders/1/areaCodes", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.OrderAreaCodes, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                var order = new Order { Id = "1" };
+                order.SetClient(client);
+                var list = order.GetAreaCodes().Result;
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual(1, list.Length);
+                Assert.AreEqual("888", list[0].Code);
+            }
+        }
+
+        [TestMethod]
+        public void GetNpaNxxTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/orders/1/npaNxx", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.OrderNpaNxx, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                var order = new Order { Id = "1" };
+                order.SetClient(client);
+                var list = order.GetNpaNxx().Result;
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual(1, list.Length);
+            }
+        }
+
+        [TestMethod]
+        public void GetTotalsTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/orders/1/totals", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.OrderTotals, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                var order = new Order { Id = "1" };
+                order.SetClient(client);
+                var list = order.GetTotals().Result;
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual(1, list.Length);
+            }
+        }
+
+        [TestMethod]
+        public void GetHistoryTest()
+        {
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/orders/1/history", Helper.AccountId),
+                    ContentToSend = new StringContent(TestXmlStrings.OrderHistory, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var i = new Order { Id = "1" };
+                i.SetClient(client);
+                var result = i.GetHistory().Result;
+                if (server.Error != null) throw server.Error;
+                Assert.IsTrue(result.Length > 0);
+            }
+        }
     }
 }

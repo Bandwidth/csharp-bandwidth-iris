@@ -8,22 +8,22 @@ namespace Bandwidth.Iris.Model
     public class Disconnect: BaseModel
     {
         private const string DisconnectNumbersPath = "disconnects";
-        public static Task DisconnectNumbers(Client client, string orderName, params string[] numbers)
+        public static Task Create(Client client, string orderName, params string[] numbers)
         {
             var order = new DisconnectTelephoneNumberOrder
             {
                 Name = orderName,
                 DisconnectTelephoneNumberOrderType = new DisconnectTelephoneNumberOrderType
                 {
-                    TelephoneNumberList = numbers
+                    TelephoneNumbers = numbers
                 }
             };
             return client.MakePostRequest(client.ConcatAccountPath(DisconnectNumbersPath), order, true);
         }
 #if !PCL
-        public static Task DisconnectNumbers(string orderName, params string[] numbers)
+        public static Task Create(string orderName, params string[] numbers)
         {
-            return DisconnectNumbers(Client.GetInstance(), orderName, numbers);
+            return Create(Client.GetInstance(), orderName, numbers);
         }
 #endif
         public async Task<Note> AddNote(string orderId, Note note)
@@ -56,7 +56,7 @@ namespace Bandwidth.Iris.Model
 
     public class DisconnectTelephoneNumberOrderType
     {
-        [XmlArrayItem("TelephoneNumber")]
-        public string[] TelephoneNumberList { get; set; }
+        [XmlElement("TelephoneNumber")]
+        public string[] TelephoneNumbers { get; set; }
     }
 }

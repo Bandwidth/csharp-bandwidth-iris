@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -18,11 +19,21 @@ namespace Bandwidth.Iris.Model
             item.Client = client;
             return item;
         }
+
+        public static async Task<TelephoneNumbersResponse> List(Client client, IDictionary<string, object> query = null)
+        {
+            return await client.MakeGetRequest<TelephoneNumbersResponse>(TnsPath, query);
+        }
         
 #if !PCL
         public static Task<Tn> Get(string number)
         {
             return Get(Client.GetInstance(), number);
+        }
+
+        public static Task<TelephoneNumbersResponse> List(IDictionary<string, object> query = null)
+        {
+            return List(Client.GetInstance(), query);
         }
 
         [XmlIgnore]
@@ -129,5 +140,12 @@ namespace Bandwidth.Iris.Model
         public string VendorName { get; set; }
         public DateTime LastModified { get; set; }
         public string State { get; set; }
+    }
+
+    public class TelephoneNumbersResponse
+    {
+        public int TelephoneNumberCount { get; set; }
+        public Links Links { get; set; }
+        public TelephoneNumber[] TelephoneNumbers;
     }
 }

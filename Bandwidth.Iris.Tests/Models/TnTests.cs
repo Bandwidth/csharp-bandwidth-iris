@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -34,6 +35,43 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.AreEqual("NEW_NUMBER_ORDER", result.OrderType);
                 
             }
+        }
+
+        [TestMethod]
+        public void ListTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/tns?npa=818", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.TnsListResponse, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                var result = Tn.List(client, new Dictionary<string, object>{{"npa", "818"}}).Result;
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual(5, result.TelephoneNumberCount);
+
+            }
+            
+        }
+
+        [TestMethod]
+        public void ListWithDefaultClientTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/tns?npa=818", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.TnsListResponse, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var result = Tn.List(new Dictionary<string, object> { { "npa", "818" } }).Result;
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual(5, result.TelephoneNumberCount);
+
+            }
+            
         }
 
         [TestMethod]

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -62,7 +63,7 @@ namespace Bandwidth.Iris
         private HttpClient CreateHttpClient()
         {
             var url = new UriBuilder(_apiEndpoint) { Path = string.Format("/{0}/", _apiVersion) };
-            var client = new HttpClient { BaseAddress = url.Uri };
+            var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { BaseAddress = url.Uri };
             client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Basic",
                     Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", _userName, _password))));
@@ -88,6 +89,30 @@ namespace Bandwidth.Iris
             using (var client = CreateHttpClient())
             {
                 var response = await client.GetAsync(urlPath);
+                if (response.StatusCode == HttpStatusCode.SeeOther)
+                {
+                    var location = response.Headers.Location.PathAndQuery;
+                    var index = location.IndexOf("/", 1, StringComparison.Ordinal);
+                    if (index >= 0)
+                    {
+                        location = location.Substring(index);
+                    }
+                    index = location.IndexOf("?", StringComparison.Ordinal);
+                    var q = new Dictionary<string, object>();
+                    if (index > 0)
+                    {
+                        var d = location.Substring(index + 1);
+                        foreach (var pair in d.Split('&'))
+                        {
+                            var values = pair.Split('=');
+                            q.Add(values[0], Uri.UnescapeDataString(values[1]));
+                        }
+                        location = location.Substring(0, index);
+                    }
+
+                    response.Dispose();
+                    return await MakeGetRequest(location, q, id, disposeResponse);
+                }
                 try
                 {
                     await CheckResponse(response);
@@ -320,7 +345,8 @@ namespace Bandwidth.Iris
 
         internal string ConcatAccountPath(string path)
         {
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
+            if (string.IsNullOrEmpty(path))
+                return _accountPath;
             if (path[0] == '/')
             {
                 return _accountPath + path;

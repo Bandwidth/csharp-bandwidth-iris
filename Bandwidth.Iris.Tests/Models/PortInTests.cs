@@ -33,7 +33,7 @@ namespace Bandwidth.Iris.Tests.Models
                    {
                        City = "City",
                        StateCode = "State",
-                       Country = "Country"
+                       Country = "County"
                    }
                 },
                 SiteId = "1"                 
@@ -68,7 +68,7 @@ namespace Bandwidth.Iris.Tests.Models
                     {
                         City = "City",
                         StateCode = "State",
-                        Country = "Country"
+                        Country = "County"
                     }
                 },
                 SiteId = "1"
@@ -111,7 +111,7 @@ namespace Bandwidth.Iris.Tests.Models
                     {
                         City = "City",
                         StateCode = "State",
-                        Country = "Country"
+                        Country = "County"
                     }
                 },
                 SiteId = "1"

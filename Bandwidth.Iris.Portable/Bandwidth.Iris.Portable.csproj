@@ -55,6 +55,9 @@
     <Compile Include="..\Bandwidth.Iris\DefaultDateTimeAttribute.cs">
       <Link>DefaultDateTimeAttribute.cs</Link>
     </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\Account.cs">
+      <Link>Account.cs</Link>
+    </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\AvailableNpaNxx.cs">
       <Link>AvailableNpaNxx.cs</Link>
     </Compile>
@@ -64,14 +67,41 @@
     <Compile Include="..\Bandwidth.Iris\Model\City.cs">
       <Link>City.cs</Link>
     </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\CoveredRateCenter.cs">
+      <Link>CoveredRateCenter.cs</Link>
+    </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\DiscNumber.cs">
+      <Link>DiscNumber.cs</Link>
+    </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\Disconnect.cs">
       <Link>Disconnect.cs</Link>
+    </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\Dlda.cs">
+      <Link>Dlda.cs</Link>
+    </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\Host.cs">
+      <Link>Host.cs</Link>
     </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\ImportToAccount.cs">
       <Link>ImportToAccount.cs</Link>
     </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\InServiceNumber.cs">
+      <Link>InServiceNumber.cs</Link>
+    </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\Lidb.cs">
+      <Link>Lidb.cs</Link>
+    </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\LineOptionOrder.cs">
+      <Link>LineOptionOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\Links.cs">
+      <Link>Links.cs</Link>
+    </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\LnpChecker.cs">
       <Link>LnpChecker.cs</Link>
+    </Compile>
+    <Compile Include="..\Bandwidth.Iris\Model\LsrOrder.cs">
+      <Link>LsrOrder.cs</Link>
     </Compile>
     <Compile Include="..\Bandwidth.Iris\Model\Note.cs">
       <Link>Note.cs</Link>

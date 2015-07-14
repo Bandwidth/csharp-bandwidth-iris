@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,6 +26,11 @@ namespace Bandwidth.Iris.Model
             return client.MakeGetRequest<OrderResult>(client.ConcatAccountPath(OrderPath), null, id);
         }
 
+        public static async Task<OrderResult[]> List(Client client, IDictionary<string, object> query = null)
+        {
+            return (await client.MakeGetRequest<Orders>(client.ConcatAccountPath(OrderPath), query)).List;
+        }
+
 #if !PCL
         public static Task<OrderResult> Create(Order item)
         {
@@ -34,6 +40,11 @@ namespace Bandwidth.Iris.Model
         public static Task<OrderResult> Get(string id)
         {
             return Get(Client.GetInstance(), id);
+        }
+
+        public static Task<OrderResult[]> List(IDictionary<string, object> query = null)
+        {
+            return List(Client.GetInstance(), query);
         }
 
 #endif
@@ -59,6 +70,42 @@ namespace Bandwidth.Iris.Model
                 (await
                     Client.MakeGetRequest<Notes>(Client.ConcatAccountPath(string.Format("{0}/{1}/notes", OrderPath, Id))))
                     .List;
+        }
+
+        public async Task<AreaCode[]> GetAreaCodes()
+        {
+            return
+                (await Client.MakeGetRequest<TelephoneDetailsReportsWithAreaCodes>(Client.ConcatAccountPath(string.Format("{0}/{1}/areaCodes", OrderPath, Id))))
+                    .Codes;
+        }
+
+        public async Task<NpaNxx[]> GetNpaNxx()
+        {
+            return
+                (await Client.MakeGetRequest<TelephoneDetailsReportsWithNpaNxx>(Client.ConcatAccountPath(string.Format("{0}/{1}/npaNxx", OrderPath, Id))))
+                    .List;
+        }
+
+        public async Task<object[]> GetTotals()
+        {
+            return
+                (await Client.MakeGetRequest<TelephoneDetailsReportsWithTotals>(Client.ConcatAccountPath(string.Format("{0}/{1}/totals", OrderPath, Id))))
+                    .List;
+        }
+
+        public async Task<string[]> GetTns()
+        {
+            return
+                (await Client.MakeGetRequest<TelephoneNumbers>(Client.ConcatAccountPath(string.Format("{0}/{1}/areaCodes", OrderPath, Id))))
+                    .Numbers;
+        }
+
+        public async Task<OrderHistoryItem[]> GetHistory()
+        {
+            return
+                (await
+                    Client.MakeGetRequest<OrderHistoryWrapper>(Client.ConcatAccountPath(string.Format("{0}/{1}/history", OrderPath, Id))))
+                    .Items;
         }
 
 
@@ -181,5 +228,46 @@ namespace Bandwidth.Iris.Model
     public class TelephoneNumber
     {
         public string FullNumber { get; set; }
+    }
+
+    public class Orders
+    {
+        [XmlElement("Order")]
+        public OrderResult[] List { get; set; }
+    }
+
+    [XmlRoot("TelephoneDetailsReports")]
+    public class TelephoneDetailsReportsWithAreaCodes
+    {
+        [XmlElement("TelephoneDetailsReport")]
+        public AreaCode[] Codes { get; set; }
+    }
+
+    public class AreaCode
+    {
+        [XmlElement("AreaCode")]
+        public string Code { get; set; }
+        public int Count { get; set; }
+    }
+
+    [XmlRoot("TelephoneDetailsReports")]
+    public class TelephoneDetailsReportsWithNpaNxx
+    {
+        [XmlElement("TelephoneDetailsReport")]
+        public NpaNxx[] List { get; set; }
+    }
+
+    public class NpaNxx
+    {
+        [XmlElement("NPA-NXX")]
+        public string Value { get; set; }
+        public int Count { get; set; }
+    }
+
+    [XmlRoot("TelephoneDetailsReports")]
+    public class TelephoneDetailsReportsWithTotals
+    {
+        [XmlElement("TelephoneDetailsReport")]
+        public object[] List { get; set; }
     }
 }
