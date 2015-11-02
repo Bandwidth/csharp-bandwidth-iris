@@ -133,6 +133,9 @@
     <Compile Include="..\Bandwidth.Iris\Model\TnReservation.cs">
       <Link>TnReservation.cs</Link>
     </Compile>
+    <Compile Include="..\Bandwidth.Iris\Properties\AssemblyInfo.cs">
+      <Link>AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Bandwidth.Iris\Utf8StringWriter.cs">
       <Link>Utf8StringWriter.cs</Link>
     </Compile>
