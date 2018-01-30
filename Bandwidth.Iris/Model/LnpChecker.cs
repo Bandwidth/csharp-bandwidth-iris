@@ -24,6 +24,7 @@ namespace Bandwidth.Iris.Model
 
     public class NumberPortabilityResponse
     {
+        public string PortType { get; set; }
         public RateCenterGroup[] SupportedRateCenters { get; set; }
         public RateCenterGroup[] UnsupportedRateCenters { get; set; }
         public RateCenterGroup[] PartnerSupportedRateCenters { get; set; }
