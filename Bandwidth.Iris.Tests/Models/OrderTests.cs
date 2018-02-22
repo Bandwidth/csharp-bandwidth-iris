@@ -23,6 +23,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 Name = "Test",
                 SiteId = "10",
+                PeerId = "12",
                 CustomerOrderId = "11",
                 LataSearchAndOrderType = new LataSearchAndOrderType
                 {

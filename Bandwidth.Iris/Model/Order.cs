@@ -118,6 +118,7 @@ namespace Bandwidth.Iris.Model
         public string OrderId { get; set; }
         public string Name { get; set; }
         public string SiteId { get; set; }
+        public string PeerId { get; set; }
         [DefaultValue(false)]
         public bool BackOrderRequested { get; set; }
         [DefaultDateTime]
