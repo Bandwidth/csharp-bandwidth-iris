@@ -44,8 +44,6 @@ namespace Bandwidth.Iris.Tests.Models
                     OrderCreateDate = DateTime.Now
                 }
             };
-            var xml = Helper.ToXmlString(order);
-            Console.WriteLine(xml);
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "POST",
