@@ -447,6 +447,7 @@ var item = new TnLineOptions
     CallingNameDisplay = "off"
 };
 var numbers = await LineOptionOrder.Create(item);
+```
 
 ## InServiceNumber
 
@@ -461,6 +462,7 @@ var list = await InServiceNumber.List(new Dictionary<string, object>{{"city", "C
 
 ```csharp
 var totals = await InServiceNumber.GetTotals();
+```
 
 ## DiscNumber
 
