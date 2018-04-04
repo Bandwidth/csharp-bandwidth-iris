@@ -23,7 +23,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 Id = "1",
                 AccountId = "111",
-                ReservedTn = "000",
+                ReservedTn = new[]{"000"},
                 ReservationExpires = 0
             };
             using (var server = new HttpServer(new RequestHandler
@@ -56,7 +56,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.AreEqual("1", result.Id);
                 Assert.AreEqual("accountId", result.AccountId);
                 Assert.AreEqual(30, result.ReservationExpires);
-                Assert.AreEqual("9195551212", result.ReservedTn);
+                Assert.AreEqual("9195551212", result.ReservedTn[0]);
             }
         }
 
@@ -97,7 +97,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 Id = "1",
                 AccountId = "111",
-                ReservedTn = "000",
+                ReservedTn = new []{"000"},
                 ReservationExpires = 0
             };
             using (var server = new HttpServer(new RequestHandler
@@ -119,10 +119,9 @@ namespace Bandwidth.Iris.Tests.Models
             var item = new TnReservation
             {
                 AccountId = "111",
-                ReservedTn = "000",
+                ReservedTn = new[]{"000"},
                 ReservationExpires = 0
             };
-            
 
             using (var server = new HttpServer(new[]
             {
@@ -158,7 +157,7 @@ namespace Bandwidth.Iris.Tests.Models
             var item = new TnReservation
             {
                 AccountId = "111",
-                ReservedTn = "000",
+                ReservedTn = new []{"000"},
                 ReservationExpires = 0
             };
 

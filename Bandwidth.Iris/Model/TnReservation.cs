@@ -53,7 +53,9 @@ namespace Bandwidth.Iris.Model
         public string ReservationId { get; set; }
         public string AccountId { get; set; }
         public int ReservationExpires { get; set; }
-        public string ReservedTn { get; set; }
+
+        [XmlElement("ReservedTn")]
+        public string[] ReservedTn { get; set; }
     }
 
     public class ReservationResponse
