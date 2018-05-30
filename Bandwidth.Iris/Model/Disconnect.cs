@@ -51,6 +51,7 @@ namespace Bandwidth.Iris.Model
     {
         [XmlElement("name")]
         public string Name { get; set; }
+        [XmlElement("TelephoneNumberList")]
         public DisconnectTelephoneNumberOrderType DisconnectTelephoneNumberOrderType { get; set; }
     }
 
