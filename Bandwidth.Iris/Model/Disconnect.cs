@@ -15,7 +15,10 @@ namespace Bandwidth.Iris.Model
                 Name = orderName,
                 DisconnectTelephoneNumberOrderType = new DisconnectTelephoneNumberOrderType
                 {
-                    TelephoneNumbers = numbers
+                    TelephoneNumberList = new TelephoneNumberList 
+                    {
+                         TelephoneNumbers = numbers
+                    }
                 }
             };
             return client.MakePostRequest(client.ConcatAccountPath(DisconnectNumbersPath), order, true);
@@ -51,11 +54,17 @@ namespace Bandwidth.Iris.Model
     {
         [XmlElement("name")]
         public string Name { get; set; }
-        [XmlElement("TelephoneNumberList")]
-        public DisconnectTelephoneNumberOrderType DisconnectTelephoneNumberOrderType { get; set; }
+        [XmlElement("DisconnectTelephoneNumberOrderType")]
+        public DisconnectTelephoneNumberOrderType DisconnectTelephoneNumberOrderType { get; set; } 
     }
 
     public class DisconnectTelephoneNumberOrderType
+    {
+        [XmlElement("TelephoneNumberList")]
+        public TelephoneNumberList TelephoneNumberList { get; set; } 
+    }
+
+    public class TelephoneNumberList
     {
         [XmlElement("TelephoneNumber")]
         public string[] TelephoneNumbers { get; set; }
