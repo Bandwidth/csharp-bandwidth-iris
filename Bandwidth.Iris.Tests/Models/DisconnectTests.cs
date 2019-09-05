@@ -23,7 +23,10 @@ namespace Bandwidth.Iris.Tests.Models
                 Name = "order",
                 DisconnectTelephoneNumberOrderType = new DisconnectTelephoneNumberOrderType
                 {
-                    TelephoneNumbers = new[] {"111", "222"}
+                    TelephoneNumberList = new TelephoneNumberList
+                    {
+                        TelephoneNumbers = new[] {"111", "222" }
+                    }
                 }
             };
             using (var server = new HttpServer(new RequestHandler
@@ -46,7 +49,10 @@ namespace Bandwidth.Iris.Tests.Models
                 Name = "order",
                 DisconnectTelephoneNumberOrderType = new DisconnectTelephoneNumberOrderType
                 {
-                    TelephoneNumbers = new[] { "111", "222" }
+                    TelephoneNumberList = new TelephoneNumberList
+                    {
+                        TelephoneNumbers = new[] { "111", "222" }
+                    }
                 }
             };
             using (var server = new HttpServer(new RequestHandler
