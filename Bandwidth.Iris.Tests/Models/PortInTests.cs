@@ -331,6 +331,30 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
         [TestMethod]
+        public void PutFileMetadataTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "PUT",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portins/1/loas/test/metadata", Helper.AccountId),
+                EstimatedContent = TestXmlStrings.FileMetadataPut
+            }))
+            {
+
+                var fileMetadata = new FileMetadata {
+                    DocumentType = "INVOICE",
+                    DocumentName = "docName"
+                };
+                var client = Helper.CreateClient();
+                var portIn = new PortIn { Id = "1" };
+                portIn.SetClient(client);
+                var r = portIn.PutFileMetadata("test", fileMetadata).Result;
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual("OK", r.StatusCode.ToString());
+            }
+        }
+
+        [TestMethod]
         public void DeleteTest()
         {
             using (var server = new HttpServer(new RequestHandler

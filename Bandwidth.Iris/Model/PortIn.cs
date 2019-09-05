@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using System.Net.Http;
 
 namespace Bandwidth.Iris.Model
 {
@@ -67,6 +68,12 @@ namespace Bandwidth.Iris.Model
             return
                 Client.MakeGetRequest<FileMetadata>(
                     Client.ConcatAccountPath(string.Format("{0}/{1}/{3}/{2}/metadata", PortInPath, Id, fileName, LoasPath)));
+        }
+
+        public Task<HttpResponseMessage> PutFileMetadata(string fileName, FileMetadata fileMetadata)
+        {
+            return
+                Client.MakePutRequest(Client.ConcatAccountPath(string.Format("{0}/{1}/{3}/{2}/metadata", PortInPath, Id, fileName, LoasPath)), fileMetadata);
         }
 
         public Task DeleteFile(string fileName)
