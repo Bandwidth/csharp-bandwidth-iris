@@ -15,7 +15,5 @@
     <files>
         <file src="Bandwidth.Iris\bin\Release\Bandwidth.Iris.dll" target="lib\net45\Bandwidth.Iris.dll" />
         <file src="Bandwidth.Iris\bin\Release\Bandwidth.Iris.XML" target="lib\net45\Bandwidth.Iris.XML" />
-        <file src="Bandwidth.Iris.Portable\bin\Release\Bandwidth.Iris.dll" target="lib\portable-net45+wp8+win8\Bandwidth.Iris.dll" />
-        <file src="Bandwidth.Iris.Portable\bin\Release\Bandwidth.Iris.XML" target="lib\portable-net45+wp8+win8\Bandwidth.Iris.XML" />
     </files>
 </package>
