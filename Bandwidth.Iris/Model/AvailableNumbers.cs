@@ -41,5 +41,6 @@ namespace Bandwidth.Iris.Model
         public string Tier { get; set; }
         public string VendorId { get; set; }
         public string VendorName { get; set; }
+        public string TelephoneNumber { get; set; }
     }
 }

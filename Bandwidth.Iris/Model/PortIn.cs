@@ -189,6 +189,8 @@ namespace Bandwidth.Iris.Model
         public string BusinessName { get; set; }
         public string AccountNumber { get; set; }
         public string PinNumber { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         public Address ServiceAddress { get; set; }
 
