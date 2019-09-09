@@ -194,6 +194,19 @@ var order = await PortIn.Create(_client, data);
 var portInOrder = PortIn.Get("orderId");
 ```
 
+### Put File Metadata
+```csharp
+var portIn = new PortIn { Id = "1" };
+portIn.SetClient(client);
+
+var fileMetadata = new FileMetadata {
+	DocumentType = "INVOICE",
+	DocumentName = "docName"
+};
+
+var r = portIn.PutFileMetadata("test", fileMetadata).Result;
+```
+
 ### PortIn Instance Methods
 ```csharp
 portInOrder.Update();
@@ -210,6 +223,7 @@ portInOrder.CreateFile(byte[] buffer, string mediaType);
 portInOrder.UpdateFile(string fileName, Stream s, string mediaType);
 portInOrder.UpdateFile(string fileName, byte[] buffer, string mediaType);
 portInOrder.GetFileMetaData(string fileName);
+PutFileMetadata(string fileName, FileMetadata fileMetadata);
 portInOrder.DeleteFile(string fileName);
 portInOrder.GetFiles(bool metaData);
 portInOrder.GetFile(string fileName);
