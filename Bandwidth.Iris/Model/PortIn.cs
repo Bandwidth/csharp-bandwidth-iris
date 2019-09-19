@@ -120,6 +120,11 @@ namespace Bandwidth.Iris.Model
                 Client.MakeDeleteRequest(
                     Client.ConcatAccountPath(string.Format("{0}/{1}", PortInPath, Id)));
         }
+
+        public Task<LnpOrderResponse> GetOrder()
+        {
+            return Client.MakeGetRequest<LnpOrderResponse>( Client.ConcatAccountPath(string.Format("{0}/{1}", PortInPath, Id)) );
+        }
         public async Task<Note> AddNote(Note note)
         {
             using (var response = await Client.MakePostRequest(Client.ConcatAccountPath(string.Format("{0}/{1}/notes", PortInPath, Id)), note))
@@ -142,8 +147,18 @@ namespace Bandwidth.Iris.Model
             get { return OrderId; }
             set { OrderId = value; } 
         }
+
+        public string CustomerOrderId { get; set; }
+        public string RequestedFocDate { get; set; }
+        public string AlternateSpid { get; set; }
+        public string AccountNumber { get; set; }
+        public string PinNumber { get; set; }
+        public string PartialPort { get; set; }
+        [XmlArrayItem("TnAttribute")]
+        public string[] TnAttributes { get; set; }
         public string OrderId { get; set; }
         public string BillingTelephoneNumber { get; set; }
+        public string NewBillingTelephoneNumber { get; set; }
         public Subscriber Subscriber { get; set; }
         public string LoaAuthorizingPerson { get; set; }
 
@@ -158,23 +173,60 @@ namespace Bandwidth.Iris.Model
    
     public class LnpOrderResponse : PortIn
     {
+        public string OrderId { get; set; }
         public string ProcessingStatus { get; set; }
+        public string RequestedFocDate { get; set; }
+        public string CustomerOrderId { get; set; }
         public Status Status { get; set; }
+        public string LoaAuthorizingPerson { get; set; }
+        public Subscriber Subscriber { get; set; }
         public string BillingType { get; set; }
         [XmlElement("WirelessInfo")]
         public WirelessInfo[] WirelessInfo { get; set; }
+        [XmlArrayItem("TnAttribute")]
+        public string[] TnAttributes { get; set; }
+        public string BillingTelephoneNumber { get; set; }
+        public string NewBillingTelephoneNumber { get; set; }
+        [XmlArrayItem("PhoneNumber")]
+        public string[] ListOfPhoneNumbers { get; set; }
+        public string AlternateSpid { get; set; }
+        public string AccountId { get; set; }
+        public string SiteId { get; set;}
+        public string PeerId { get; set; }
+        public string VendorName { get; set; }
+        public DateTime OrderCreateDate { get; set; }
+
+        public bool Triggered { get; set; }
         public string LosingCarrierName { get; set; }
         public DateTime LastModifiedDate { get; set; }
+        public string LastModifiedBy { get; set; }
+        public string PartialPort { get; set; }
+        public PortType PortType { get; set; }
         [XmlElement("userId")]
         public string UserId { get; set; }
+        public Errors[] Errors { get; set; }
 
     }
 
     public class LnpOrderSupp: PortIn
     {
+        public string CustomerOrderId { get; set; }
+        public string BillingTelephoneNumber { get; set; }
+        public string NewBillingTelephoneNumber { get; set; }
         public DateTime RequestedFocDate { get; set; }
         [XmlElement("WirelessInfo")]
         public WirelessInfo[] WirelessInfo { get; set; }
+        [XmlArrayItem("TnAttribute")]
+        public string[] TnAttributes { get; set; }
+        public Subscriber Subscriber { get; set; }
+        public string SiteId { get; set; }
+        public bool PartialPort { get; set; }
+        [XmlArrayItem("PhoneNumber")]
+        public string[] ListOfPhoneNumbers { get; set; }
+        public string LoaAuthorizingPerson { get; set; }
+        public string AlternateSpid { get; set; }
+
+
     }
 
     public class WirelessInfo
@@ -190,13 +242,13 @@ namespace Bandwidth.Iris.Model
         public string AccountNumber { get; set; }
         public string PinNumber { get; set; }
         public string FirstName { get; set; }
+        public string MiddleInitial { get; set; }
         public string LastName { get; set; }
 
         public Address ServiceAddress { get; set; }
 
     }
 
-    
     public class Status
     {
         public string Code { get; set; }
@@ -226,7 +278,17 @@ namespace Bandwidth.Iris.Model
         [XmlElement("FileMetaData")]
         public FileMetadata FileMetadata { get; set; }
     }
+    
+    public class Errors
+    {
+        public string Code { get; set; }
+        public string Description { get; set; }
+    }
 
+    public enum PortType
+    {
+        AUTOMATED, INTERNAL, MANUALOFFNET
+    }
     public sealed class FileContent : IDisposable
     {
         private readonly IDisposable _owner;
