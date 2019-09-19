@@ -459,5 +459,33 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.AreEqual("Test", r.Description);
             }
         }
+
+        [TestMethod]
+        public void LnpOrderResponseTest()
+        {
+            string xmlLnpOrderResponse = "<LnpOrderResponse><Errors><Code>4000</Code><Description>generic error</Description></Errors><Errors><Code>7205</Code><Description>Telephonenumberisalreadybeingprocessedonanotherorder</Description></Errors><ProcessingStatus>CANCELLED</ProcessingStatus><RequestedFocDate>2016-03-25T21:15:00.000Z</RequestedFocDate><CustomerOrderId>SJM00002</CustomerOrderId><LoaAuthorizingPerson>TheAuthguy</LoaAuthorizingPerson><Subscriber><SubscriberType>BUSINESS</SubscriberType><FirstName>First</FirstName><LastName>Last</LastName><ServiceAddress><HouseNumber>11235</HouseNumber><StreetName>Back</StreetName><City>Denver</City><StateCode>CO</StateCode><Zip>27541</Zip><County>Canyon</County><Country>UnitedStates</Country><AddressType>Service</AddressType></ServiceAddress></Subscriber><WirelessInfo><AccountNumber>771297665AABC</AccountNumber><PinNumber>1234</PinNumber></WirelessInfo><TnAttributes><TnAttribute>Protected</TnAttribute></TnAttributes><BillingTelephoneNumber>9195551234</BillingTelephoneNumber><NewBillingTelephoneNumber>9175131245</NewBillingTelephoneNumber><ListOfPhoneNumbers><PhoneNumber>9194809871</PhoneNumber></ListOfPhoneNumbers><AlternateSpid>Foo</AlternateSpid><AccountId>20</AccountId><SiteId>2857</SiteId><PeerId>317771</PeerId><LosingCarrierName>MockCarrier</LosingCarrierName><VendorName>BandwidthCLEC</VendorName><OrderCreateDate>2014-08-04T13:37:06.323Z</OrderCreateDate><LastModifiedDate>2014-08-04T13:37:08.676Z</LastModifiedDate><userId>jbm</userId><LastModifiedBy>jbm</LastModifiedBy><PartialPort>false</PartialPort><Triggered>false</Triggered><PortType>AUTOMATED</PortType></LnpOrderResponse>";
+
+            LnpOrderResponse lnpOrderResponse = Helper.ParseXml<LnpOrderResponse>(xmlLnpOrderResponse);
+
+            Assert.AreEqual("SJM00002", lnpOrderResponse.CustomerOrderId);
+            Assert.AreEqual("SJM00002", lnpOrderResponse.ProcessingStatus);
+            Assert.AreEqual(DateTime.Parse("2016-03-25T21:15:00.000Z"), lnpOrderResponse.RequestedFocDate);
+            Assert.AreEqual("The Authguy", lnpOrderResponse.LoaAuthorizingPerson);
+            Assert.AreEqual("9195551234", lnpOrderResponse.BillingTelephoneNumber);
+            Assert.AreEqual("9175131245", lnpOrderResponse.NewBillingTelephoneNumber);
+            Assert.AreEqual("Foo", lnpOrderResponse.AlternateSpid);
+            Assert.AreEqual("SJM00002", lnpOrderResponse.AccountId);
+            Assert.AreEqual("SJM00002", lnpOrderResponse.SiteId);
+            Assert.AreEqual("SJM00002", lnpOrderResponse.PeerId);
+            Assert.AreEqual("SJM00002", lnpOrderResponse.LosingCarrierName);
+            Assert.AreEqual("SJM00002", lnpOrderResponse.VendorName);
+            Assert.AreEqual("SJM00002", lnpOrderResponse.OrderCreateDate);
+            Assert.AreEqual("SJM00002", lnpOrderResponse.LastModifiedDate);
+            Assert.AreEqual("SJM00002", lnpOrderResponse.UserId);
+            Assert.AreEqual("SJM00002", lnpOrderResponse.LastModifiedBy);
+            Assert.AreEqual("SJM00002", lnpOrderResponse.PartialPort);
+            Assert.AreEqual("SJM00002", lnpOrderResponse.Triggered);
+            Assert.AreEqual("SJM00002", lnpOrderResponse.PortType);
+        }
     }
 }

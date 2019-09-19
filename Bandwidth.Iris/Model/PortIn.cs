@@ -175,7 +175,7 @@ namespace Bandwidth.Iris.Model
     {
         public string OrderId { get; set; }
         public string ProcessingStatus { get; set; }
-        public string RequestedFocDate { get; set; }
+        public DateTime RequestedFocDate { get; set; }
         public string CustomerOrderId { get; set; }
         public Status Status { get; set; }
         public string LoaAuthorizingPerson { get; set; }
@@ -204,6 +204,7 @@ namespace Bandwidth.Iris.Model
         public PortType PortType { get; set; }
         [XmlElement("userId")]
         public string UserId { get; set; }
+        [XmlElement("Errors")]
         public Errors[] Errors { get; set; }
 
     }

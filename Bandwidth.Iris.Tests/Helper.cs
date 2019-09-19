@@ -41,6 +41,16 @@ namespace Bandwidth.Iris.Tests
             }
         }
 
+        public static T ParseXml<T>(string xml)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(xml);
+            using (var stream = new MemoryStream(bytes))
+            {
+                var serializer = new XmlSerializer(typeof(T));
+                return (T)serializer.Deserialize(stream);
+            }
+        }
+
         public static void AssertObjects(object estimated, object value)
         {
             var type = estimated.GetType();
