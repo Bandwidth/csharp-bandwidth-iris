@@ -183,7 +183,7 @@ UpgradeLog*.htm
 FakesAssemblies/
 
 # Config
-Bandwidth.Iris.Examples/App.config
+##Bandwidth.Iris.Examples/App.config
 
 *._*
 
