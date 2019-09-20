@@ -137,6 +137,7 @@ namespace Bandwidth.Iris.Model
         public string Zip { get; set; }
         public string PlusFour { get; set; }
         public string Country { get; set; }
+        public string County { get; set; }
         public string AddressType { get; set; }
         public bool ResetAddressFields { get; set; }
     }

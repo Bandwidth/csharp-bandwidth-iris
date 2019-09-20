@@ -149,11 +149,11 @@ namespace Bandwidth.Iris.Model
         }
 
         public string CustomerOrderId { get; set; }
-        public string RequestedFocDate { get; set; }
+        public DateTime RequestedFocDate { get; set; }
         public string AlternateSpid { get; set; }
         public string AccountNumber { get; set; }
         public string PinNumber { get; set; }
-        public string PartialPort { get; set; }
+        public bool PartialPort { get; set; }
         [XmlArrayItem("TnAttribute")]
         public string[] TnAttributes { get; set; }
         public string OrderId { get; set; }
@@ -175,7 +175,6 @@ namespace Bandwidth.Iris.Model
     {
         public string OrderId { get; set; }
         public string ProcessingStatus { get; set; }
-        public DateTime RequestedFocDate { get; set; }
         public string CustomerOrderId { get; set; }
         public Status Status { get; set; }
         public string LoaAuthorizingPerson { get; set; }
@@ -200,7 +199,6 @@ namespace Bandwidth.Iris.Model
         public string LosingCarrierName { get; set; }
         public DateTime LastModifiedDate { get; set; }
         public string LastModifiedBy { get; set; }
-        public string PartialPort { get; set; }
         public PortType PortType { get; set; }
         [XmlElement("userId")]
         public string UserId { get; set; }
