@@ -72,7 +72,7 @@ namespace Bandwidth.Iris
 
         #region Base Http methods
 
-        public async Task<HttpResponseMessage> MakeGetRequest(string path, IDictionary<string, object> query = null,
+        internal async Task<HttpResponseMessage> MakeGetRequest(string path, IDictionary<string, object> query = null,
             string id = null, bool disposeResponse = false)
         {
             var urlPath = FixPath(path);
@@ -129,7 +129,7 @@ namespace Bandwidth.Iris
         }
 
 
-        public async Task<TResult> MakeGetRequest<TResult>(string path, IDictionary<string, object> query = null,
+        internal async Task<TResult> MakeGetRequest<TResult>(string path, IDictionary<string, object> query = null,
             string id = null)
         {
             using (var response = await MakeGetRequest(path, query, id))
@@ -144,9 +144,9 @@ namespace Bandwidth.Iris
             }
         }
 
-        
 
-        public async Task<HttpResponseMessage> MakePostRequest(string path, object data, bool disposeResponse = false)
+
+        internal async Task<HttpResponseMessage> MakePostRequest(string path, object data, bool disposeResponse = false)
         {
             var serializer = new XmlSerializer(data.GetType());
             using (var writer = new Utf8StringWriter())
@@ -173,7 +173,7 @@ namespace Bandwidth.Iris
             }
         }
 
-        public async Task<HttpResponseMessage> MakePutRequest(string path, object data, bool disposeResponse = false)
+        internal async Task<HttpResponseMessage> MakePutRequest(string path, object data, bool disposeResponse = false)
         {
             var serializer = new XmlSerializer(data.GetType());
             using (var writer = new Utf8StringWriter())
@@ -200,7 +200,7 @@ namespace Bandwidth.Iris
             }
         }
 
-        public async Task<HttpResponseMessage> SendData(string path, Stream stream, string mediaType, string method = "POST",
+        internal async Task<HttpResponseMessage> SendData(string path, Stream stream, string mediaType, string method = "POST",
             bool disposeResponse = false)
         {
             if (stream == null) throw new ArgumentNullException("stream");
@@ -241,7 +241,7 @@ namespace Bandwidth.Iris
         }
 
 
-        public async Task<TResult> MakePostRequest<TResult>(string path, object data)
+        internal async Task<TResult> MakePostRequest<TResult>(string path, object data)
         {
             using (var response = await MakePostRequest(path, data))
             {
@@ -255,9 +255,9 @@ namespace Bandwidth.Iris
             }
         }
 
-        
 
-        public async Task MakeDeleteRequest(string path, string id = null)
+
+        internal async Task MakeDeleteRequest(string path, string id = null)
         {
             if (id != null)
             {
