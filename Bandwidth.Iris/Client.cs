@@ -144,7 +144,7 @@ namespace Bandwidth.Iris
             }
         }
 
-        
+
 
         internal async Task<HttpResponseMessage> MakePostRequest(string path, object data, bool disposeResponse = false)
         {
@@ -255,7 +255,7 @@ namespace Bandwidth.Iris
             }
         }
 
-        
+
 
         internal async Task MakeDeleteRequest(string path, string id = null)
         {

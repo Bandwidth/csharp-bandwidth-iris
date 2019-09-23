@@ -233,7 +233,7 @@ namespace Bandwidth.Iris.Tests
             }))
             {
                 var client = Helper.CreateClient();
-                client.SendData("test", data, "media/type", "PUT", true).Wait();
+                client.SendData("test", new MemoryStream( data), "media/type", "PUT", true).Wait();
                 if (server.Error != null) throw server.Error;
             }
 

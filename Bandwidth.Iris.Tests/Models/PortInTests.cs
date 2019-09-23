@@ -85,7 +85,6 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var r = PortIn.Create(client, order).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("d28b36f7-fa96-49eb-9556-a40fca49f7c6", r.Id);
                 Assert.AreEqual("201", r.Status.Code);
                 Assert.AreEqual("Order request received. Please use the order id to check the status of your order later.", r.Status.Description);
                 Assert.AreEqual("PENDING_DOCUMENTS", r.ProcessingStatus);
@@ -458,6 +457,123 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.AreEqual("customer", r.UserId);
                 Assert.AreEqual("Test", r.Description);
             }
+        }
+
+        [TestMethod]
+        public void GetPortInTest()
+        {
+
+            var portIn = new PortIn { Id = "1" };
+
+            using (var server = new HttpServer(new[]{
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portins/{1}", Helper.AccountId, portIn.Id),
+                    EstimatedContent = "",
+                    ContentToSend = new StringContent(TestXmlStrings.xmlLnpOrderResponseNoErrors, Encoding.UTF8, "application/xml")
+                }                
+            }))
+            {
+                var client = Helper.CreateClient();
+                
+                portIn.SetClient(client);
+                var r = portIn.GetOrder().Result;
+                Assert.AreEqual("SJM00002", r.CustomerOrderId);
+                Assert.AreEqual("CANCELLED", r.ProcessingStatus);
+                Assert.AreEqual(DateTime.Parse("2014-08-04T13:37:06.323"), r.OrderCreateDate);
+                Assert.AreEqual(DateTime.Parse("2014-08-04T13:37:08.676"), r.LastModifiedDate);
+                Assert.AreEqual(DateTime.Parse("2014-08-04T13:37:08.676"), r.RequestedFocDate);
+                Assert.AreEqual("The Authguy", r.LoaAuthorizingPerson);
+                Assert.AreEqual("9195551234", r.BillingTelephoneNumber);
+                Assert.AreEqual("9175131245", r.NewBillingTelephoneNumber);
+                Assert.AreEqual("Foo", r.AlternateSpid);
+                Assert.AreEqual("20", r.AccountId);
+                Assert.AreEqual("2857", r.SiteId);
+                Assert.AreEqual("317771", r.PeerId);
+                Assert.AreEqual("Mock Carrier", r.LosingCarrierName);
+                Assert.AreEqual("Bandwidth CLEC", r.VendorName);
+
+                Assert.AreEqual("jbm", r.UserId);
+                Assert.AreEqual("jbm", r.LastModifiedBy);
+                Assert.AreEqual(false, r.PartialPort);
+                Assert.AreEqual(false, r.Triggered);
+                Assert.AreEqual(PortType.AUTOMATED, r.PortType);
+
+                //TnAttributes
+                Assert.AreEqual(1, r.TnAttributes.Length);
+                Assert.AreEqual("Protected", r.TnAttributes[0]);
+
+                //Suscriber
+                Assert.AreEqual("BUSINESS", r.Subscriber.SubscriberType);
+                Assert.AreEqual("First", r.Subscriber.FirstName);
+                Assert.AreEqual("Last", r.Subscriber.LastName);
+                Assert.AreEqual("11235", r.Subscriber.ServiceAddress.HouseNumber);
+                Assert.AreEqual("Back", r.Subscriber.ServiceAddress.StreetName);
+                Assert.AreEqual("Denver", r.Subscriber.ServiceAddress.City);
+                Assert.AreEqual("CO", r.Subscriber.ServiceAddress.StateCode);
+                Assert.AreEqual("27541", r.Subscriber.ServiceAddress.Zip);
+                Assert.AreEqual("Canyon", r.Subscriber.ServiceAddress.County);
+                Assert.AreEqual("United States", r.Subscriber.ServiceAddress.Country);
+                Assert.AreEqual("Service", r.Subscriber.ServiceAddress.AddressType);
+            }
+        }
+
+        [TestMethod]
+        public void LnpOrderResponseTest()
+        {
+            string xmlLnpOrderResponse = TestXmlStrings.xmlLnpOrderResponse;
+
+            LnpOrderResponse lnpOrderResponse = Helper.ParseXml<LnpOrderResponse>(xmlLnpOrderResponse);
+
+            Assert.AreEqual("SJM00002", lnpOrderResponse.CustomerOrderId);
+            Assert.AreEqual("CANCELLED", lnpOrderResponse.ProcessingStatus);
+            Assert.AreEqual(DateTime.Parse("2014-08-04T13:37:06.323"), lnpOrderResponse.OrderCreateDate);
+            Assert.AreEqual(DateTime.Parse("2014-08-04T13:37:08.676"), lnpOrderResponse.LastModifiedDate);
+            Assert.AreEqual(DateTime.Parse("2014-08-04T13:37:08.676"), lnpOrderResponse.RequestedFocDate);
+            Assert.AreEqual("The Authguy", lnpOrderResponse.LoaAuthorizingPerson);
+            Assert.AreEqual("9195551234", lnpOrderResponse.BillingTelephoneNumber);
+            Assert.AreEqual("9175131245", lnpOrderResponse.NewBillingTelephoneNumber);
+            Assert.AreEqual("Foo", lnpOrderResponse.AlternateSpid);
+            Assert.AreEqual("20", lnpOrderResponse.AccountId);
+            Assert.AreEqual("2857", lnpOrderResponse.SiteId);
+            Assert.AreEqual("317771", lnpOrderResponse.PeerId);
+            Assert.AreEqual("Mock Carrier", lnpOrderResponse.LosingCarrierName);
+            Assert.AreEqual("Bandwidth CLEC", lnpOrderResponse.VendorName);
+            
+            Assert.AreEqual("jbm", lnpOrderResponse.UserId);
+            Assert.AreEqual("jbm", lnpOrderResponse.LastModifiedBy);
+            Assert.AreEqual(false, lnpOrderResponse.PartialPort);
+            Assert.AreEqual(false, lnpOrderResponse.Triggered);
+            Assert.AreEqual(PortType.AUTOMATED, lnpOrderResponse.PortType);
+
+            //Errors
+            Assert.AreEqual(2, lnpOrderResponse.Errors.Length);
+            Assert.AreEqual("7205", lnpOrderResponse.Errors[1].Code);
+            Assert.AreEqual("Telephone number is already being processed on another order", lnpOrderResponse.Errors[1].Description);
+
+            //TnAttributes
+            Assert.AreEqual(1, lnpOrderResponse.TnAttributes.Length);
+            Assert.AreEqual("Protected", lnpOrderResponse.TnAttributes[0]);
+
+            //Suscriber
+            Assert.AreEqual("BUSINESS", lnpOrderResponse.Subscriber.SubscriberType);
+            Assert.AreEqual("First", lnpOrderResponse.Subscriber.FirstName);
+            Assert.AreEqual("Last", lnpOrderResponse.Subscriber.LastName);
+            Assert.AreEqual("11235", lnpOrderResponse.Subscriber.ServiceAddress.HouseNumber);
+            Assert.AreEqual("Back", lnpOrderResponse.Subscriber.ServiceAddress.StreetName);
+            Assert.AreEqual("Denver", lnpOrderResponse.Subscriber.ServiceAddress.City);
+            Assert.AreEqual("CO", lnpOrderResponse.Subscriber.ServiceAddress.StateCode);
+            Assert.AreEqual("27541", lnpOrderResponse.Subscriber.ServiceAddress.Zip);
+            Assert.AreEqual("Canyon", lnpOrderResponse.Subscriber.ServiceAddress.County);
+            Assert.AreEqual("United States", lnpOrderResponse.Subscriber.ServiceAddress.Country);
+            Assert.AreEqual("Service", lnpOrderResponse.Subscriber.ServiceAddress.AddressType);
+
+
+
+
+
+
         }
     }
 }
