@@ -114,5 +114,22 @@ namespace Bandwidth.Iris.Tests.Models
                 Helper.AssertObjects(response, result);
             }
         }
+
+        [TestMethod]
+        public void LnpCheckerPortabilityErrorsTest()
+        {
+            var xml = TestXmlStrings.xmlNumberPortabilityResponseWithPortabilityErrros;
+
+            NumberPortabilityResponse numberPortabilityResponse = Helper.ParseXml<NumberPortabilityResponse>(xml);
+
+
+            Assert.AreEqual(2, numberPortabilityResponse.PortabilityErrors.Errors.Length);
+            Assert.AreEqual("7378", numberPortabilityResponse.PortabilityErrors.Errors[0].Code);
+            Assert.AreEqual("test description", numberPortabilityResponse.PortabilityErrors.Errors[0].Description);
+            Assert.AreEqual(2, numberPortabilityResponse.PortabilityErrors.Errors[0].TelephoneNumbers.Length);
+            Assert.AreEqual("9199199999", numberPortabilityResponse.PortabilityErrors.Errors[0].TelephoneNumbers[0]);
+
+        }
+
     }
 }

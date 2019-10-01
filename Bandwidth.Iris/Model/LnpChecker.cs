@@ -32,6 +32,22 @@ namespace Bandwidth.Iris.Model
         public string[] PortableNumbers { get; set; }
         public LosingCarriers SupportedLosingCarriers { get; set; }
         public LosingCarriers UnsupportedLosingCarriers { get; set; }
+
+        public PortabilityErrors PortabilityErrors { get; set; }
+    }
+
+    public class PortabilityErrors
+    {
+        [XmlElement("Error")]
+        public Error[] Errors { get; set; }
+    }
+
+    public class Error
+    {
+        public string Code { get; set; }
+        public string Description { get; set; }
+        [XmlArrayItem("Tn")]
+        public string[] TelephoneNumbers { get; set; }
     }
 
     public class LosingCarriers
