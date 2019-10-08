@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bandwidth.Iris", "Bandwidth
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bandwidth.Iris.Tests", "Bandwidth.Iris.Tests\Bandwidth.Iris.Tests.csproj", "{4C0A7165-E7FF-492E-9522-B46B0BE44B21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bandwidth.Iris.Examples", "Bandwidth.Iris.Examples\Bandwidth.Iris.Examples.csproj", "{B9F61285-F795-4343-A28D-6C5C5D6C21B4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,14 +18,6 @@ Global
 		{4C0A7165-E7FF-492E-9522-B46B0BE44B21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4C0A7165-E7FF-492E-9522-B46B0BE44B21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C0A7165-E7FF-492E-9522-B46B0BE44B21}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{760EA33E-04EE-4B57-BFFF-433AF92A096D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{760EA33E-04EE-4B57-BFFF-433AF92A096D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{760EA33E-04EE-4B57-BFFF-433AF92A096D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{760EA33E-04EE-4B57-BFFF-433AF92A096D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B9F61285-F795-4343-A28D-6C5C5D6C21B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9F61285-F795-4343-A28D-6C5C5D6C21B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9F61285-F795-4343-A28D-6C5C5D6C21B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9F61285-F795-4343-A28D-6C5C5D6C21B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
