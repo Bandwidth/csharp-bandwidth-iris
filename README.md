@@ -3,8 +3,8 @@
 ## Installing
 Bandwidth C# SDK uses Nuget for Package Management
 
-Run 
-``` 
+Run
+```
 nuget install Bandwidth.Iris
 ```
 Or install Bandwidth.Iris via UI in Visual Studio
@@ -12,7 +12,7 @@ Or install Bandwidth.Iris via UI in Visual Studio
 ## Getting Started
 * Install Bandwidth.Iris
 * Get an account ID, user name and password from Bandwidth for your account
-* Configure the Client 
+* Configure the Client
 
 ```csharp
 var client = Client.GetInstance("accountId", "username", "password", "apiEndpoint")
@@ -149,6 +149,7 @@ var order = await Order.Get("orderId");
 ```
 
 ### Order Instance Methods
+
 ```csharp
 order.Update()
 order.AddNote(var note);
@@ -157,14 +158,38 @@ order.GetAreaCodes();
 order.GetNpaNxx();
 order.GetTotals();
 order.GetTns();
-order.GetHistory()
+order.GetHistory();
 ```
 
 ## Port Ins
 
 ### Port In Check
+
+For LNP Checker, send one number at a time when using the C# SDK.
+
+#### Example request and error handling iterating over each error in the response.
+
 ```csharp
-var result = LnpChecker.Check(new string[]{"9195551212", true});
+try
+{
+    var result = await LnpChecker.Check(client, new string[] { "555555" });
+    Console.WriteLine(result);
+}
+catch (Bandwidth.Iris.BandwidthIrisException error)
+{
+    Console.WriteLine(error.Message);
+}
+catch (Exception e)
+{
+    Exception innerEx = e;
+
+    while(innerEx != null)
+    {
+        string msg = innerEx.Message;
+        Console.WriteLine(msg);
+        innerEx = innerEx.InnerException;
+    }
+}
 ```
 
 ### Create PortIn
@@ -432,14 +457,14 @@ var list = await Dlda.GetHistory();
 var item = new Lidb
     {
         CustomerOrderId = "A Test order",
-        LidbTnGroups = new[] { 
+        LidbTnGroups = new[] {
             new LidbTnGroup{
                 TelephoneNumbers = new []{"8048030097", "8045030098"},
                 SubscriberInformation = "Joes Grarage",
                 UseType = "RESIDENTIAL",
                 Visibility = "PUBLIC"
             }
-        } 
+        }
     };
 await Lidb.Create(item);
 ```
@@ -467,14 +492,14 @@ var numbers = await LineOptionOrder.Create(item);
 
 ## InServiceNumber
 
-### List 
+### List
 
 ```csharp
 var list = await InServiceNumber.List(new Dictionary<string, object>{{"city", "Cary"}});
 
 ```
 
-### Get totals 
+### Get totals
 
 ```csharp
 var totals = await InServiceNumber.GetTotals();
