@@ -584,12 +584,15 @@ namespace Bandwidth.Iris.Tests.Models
 
             DateTime startdate = DateTime.Parse("2014-11-21T14:00:33.836Z");
             DateTime enddate = DateTime.Parse("2014-11-21T14:00:33.835Z");
+            DateTime date = DateTime.Parse("2014-11-21T14:00:33.834Z");
 
             using (var server = new HttpServer(new[]{
                 new RequestHandler
                 {
                     EstimatedMethod = "GET",
-                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portins/?page={1}&size={2}&enddate={3}&startdate={4}&pon={5}&status={6}&tn={7}", Helper.AccountId, 1, 300,
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portins/?page={1}&size={2}&date={3}&enddate={4}&startdate={5}&pon={6}&status={7}&tn={8}", 
+                        Helper.AccountId, 1, 300,
+                        Uri.EscapeDataString(date.ToString()),
                         Uri.EscapeDataString(enddate.ToString()),
                         Uri.EscapeDataString(startdate.ToString()),
                         "ponstr", "completed",  "9199199191"),
@@ -601,7 +604,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
 
                 portIn.SetClient(client);
-                var r = portIn.GetPortIns(Helper.AccountId, enddate, startdate, "ponstr", "completed", "9199199191").Result;
+                var r = portIn.GetPortIns(Helper.AccountId, date, enddate, startdate, "ponstr", "completed", "9199199191").Result;
 
                 Assert.AreEqual(" -- link -- ", r.Links.First);
                 Assert.AreEqual(" -- link -- ", r.Links.Next);

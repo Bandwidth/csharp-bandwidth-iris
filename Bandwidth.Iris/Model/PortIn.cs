@@ -143,14 +143,15 @@ namespace Bandwidth.Iris.Model
                     .List;
         }
 
-        public Task<LnpResponseWrapper> GetPortIns(string accountId, DateTime enddate, DateTime startdate, string pon, string status, string tn, int page = 1, int size = 300)
+        public Task<LnpResponseWrapper> GetPortIns(string accountId, DateTime date, DateTime enddate, DateTime startdate, string pon, string status, string tn, int page = 1, int size = 300)
         {
 
             Dictionary<string, object> query = new Dictionary<string, object>();
 
             query.Add("page", page);
             query.Add("size", size);
-            
+
+            if (date != null) query.Add("date", date);
             if (enddate != null) query.Add("enddate", enddate);
             if (startdate != null) query.Add("startdate", startdate);
             if (pon != null) query.Add("pon", pon);
