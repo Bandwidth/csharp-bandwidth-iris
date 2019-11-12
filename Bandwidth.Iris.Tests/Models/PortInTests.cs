@@ -575,5 +575,53 @@ namespace Bandwidth.Iris.Tests.Models
 
 
         }
+
+        [TestMethod]
+        public void GetPortInsTest()
+        {
+
+            var portIn = new PortIn();
+
+            DateTime startdate = DateTime.Parse("2014-11-21T14:00:33.836Z");
+            DateTime enddate = DateTime.Parse("2014-11-21T14:00:33.835Z");
+
+            using (var server = new HttpServer(new[]{
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portins/?page={1}&size={2}&enddate={3}&startdate={4}&pon={5}&status={6}&tn={7}", Helper.AccountId, 1, 300,
+                        Uri.EscapeDataString(enddate.ToString()),
+                        Uri.EscapeDataString(startdate.ToString()),
+                        "ponstr", "completed",  "9199199191"),
+                    EstimatedContent = "",
+                    ContentToSend = new StringContent(TestXmlStrings.xmlLNPResponseWrapper, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+
+                portIn.SetClient(client);
+                var r = portIn.GetPortIns(Helper.AccountId, enddate, startdate, "ponstr", "completed", "9199199191").Result;
+
+                Assert.AreEqual(" -- link -- ", r.Links.First);
+                Assert.AreEqual(" -- link -- ", r.Links.Next);
+                Assert.AreEqual(3176, r.TotalCount);
+                Assert.AreEqual(1, r.lnpPortInfoForGivenStatuses[0].CountOfTNs);
+                Assert.AreEqual("Neustar", r.lnpPortInfoForGivenStatuses[0].UserId);
+                Assert.AreEqual(DateTime.Parse("2014-11-21T14:00:33.836"), r.lnpPortInfoForGivenStatuses[0].LastModifiedDate);
+                Assert.AreEqual(DateTime.Parse("2014-11-05T19:34:53.176"), r.lnpPortInfoForGivenStatuses[0].OrderDate);
+                Assert.AreEqual("982e3c10-3840-4251-abdd-505cd8610788", r.lnpPortInfoForGivenStatuses[0].OrderId);
+                Assert.AreEqual("port_out", r.lnpPortInfoForGivenStatuses[0].OrderType);
+                Assert.AreEqual(200, r.lnpPortInfoForGivenStatuses[0].ErrorCode);
+                Assert.AreEqual("Port out successful.", r.lnpPortInfoForGivenStatuses[0].ErrorMessage);
+                Assert.AreEqual("9727717577", r.lnpPortInfoForGivenStatuses[0].FullNumber);
+                Assert.AreEqual("COMPLETE", r.lnpPortInfoForGivenStatuses[0].ProcessingStatus);
+                Assert.AreEqual(DateTime.Parse("2014-11-20T00:00:00.000"), r.lnpPortInfoForGivenStatuses[0].RequestedFOCDate);
+                Assert.AreEqual("512E", r.lnpPortInfoForGivenStatuses[0].VendorId);
+
+
+            }
+
+        }
     }
 }
