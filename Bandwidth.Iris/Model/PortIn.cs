@@ -143,6 +143,24 @@ namespace Bandwidth.Iris.Model
                     .List;
         }
 
+        public Task<LnpResponseWrapper> GetPortIns(string accountId, DateTime date, DateTime enddate, DateTime startdate, string pon, string status, string tn, int page = 1, int size = 300)
+        {
+
+            Dictionary<string, object> query = new Dictionary<string, object>();
+
+            query.Add("page", page);
+            query.Add("size", size);
+
+            if (date != null) query.Add("date", date);
+            if (enddate != null) query.Add("enddate", enddate);
+            if (startdate != null) query.Add("startdate", startdate);
+            if (pon != null) query.Add("pon", pon);
+            if (status != null) query.Add("status", status);
+            if (tn != null) query.Add("tn", tn);
+            
+            return Client.MakeGetRequest<LnpResponseWrapper>(Client.ConcatAccountPath( "/portins/"), query);
+        }
+
         public override string Id {
             get { return OrderId; }
             set { OrderId = value; } 
@@ -170,6 +188,50 @@ namespace Bandwidth.Iris.Model
   
     }
 
+    [XmlType("LNPResponseWrapper")]
+    public class LnpResponseWrapper
+    {
+        public int TotalCount { get; set; }
+
+        public Links Links { get; set; }
+
+        public string Snip { get; set; }
+
+        [XmlElement("lnpPortInfoForGivenStatus")]
+        public LnpPortInfoForGivenStatus[] lnpPortInfoForGivenStatuses { get; set; }
+
+    }
+
+    public class LnpPortInfoForGivenStatus
+    {
+        public int CountOfTNs { get; set; }
+
+        [XmlElement("userId")]
+        public string UserId { get; set; }
+
+        [XmlElement("lastModifiedDate")]
+        public DateTime LastModifiedDate { get; set; }
+
+        public DateTime OrderDate { get; set;  }
+
+        public string OrderId { get; set; }
+
+        public string OrderType { get; set; }
+
+        public int ErrorCode { get; set; }
+
+        public string ErrorMessage { get; set; }
+
+        public string FullNumber { get; set; }
+
+        public string ProcessingStatus { get; set; }
+
+        public DateTime RequestedFOCDate { get; set; }
+
+        public string VendorId { get; set; }
+
+
+    }
    
     public class LnpOrderResponse : PortIn
     {
