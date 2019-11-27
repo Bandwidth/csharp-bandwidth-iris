@@ -40,17 +40,6 @@ var site = await Site.get(client, "siteId");
 var site = await Site.get("siteId"); //This will use the default client where supported
 ```
 
-## Examples
-There is a Project in the solution called Bandwidth.Iris.Examples.  This project has working code examples for the most commonly used objects and methods.
-
-To run the examples, from the Bandwidth Iris Project root folder:
-
-```bash
-copy Bandwidth.Iris.Examples\App.config.example Bandwidth.Iris.Examples\App.config
-```
-* Fill in the config file with the values from your account or credentials provided by Bandwidth
-* Compile the project and run the Examples from Visual Studio or from the command line
-
 ## API Objects
 
 ### General Principles
