@@ -17,18 +17,23 @@ Or install Bandwidth.Iris via UI in Visual Studio
 ```csharp
 var client = Client.GetInstance("accountId", "username", "password", "apiEndpoint")
 //Or
-// Configure System Environment Variables as detailed below:
-public static Client GetInstance()
-{
-    return GetInstance(
-        Environment.GetEnvironmentVariable(BandwidthApiAccountId),
-        Environment.GetEnvironmentVariable(BandwidthApiUserName),
-        Environment.GetEnvironmentVariable(BandwidthApiPassword),
-        Environment.GetEnvironmentVariable(BandwidthApiEndpoint),
-        Environment.GetEnvironmentVariable(BandwidthApiVersion));
-}
+//Uses the System Environment Variables as detailed below
 var client = Client.GetInstance()
 ```
+
+| Environment Variable | Definition |
+|----------------------|------------|
+|BANDWIDTH_API_ACCOUNT_ID| Your Bandwidth Account Id |
+|------------------------|--------------------------|
+|BANDWIDTH_API_USERNAME| Your Bandwidth username |
+|----------------------|-------------------------|
+|BANDWIDTH_API_PASSWORD| Your Bandwidth password|
+|----------------------|------------------------|
+|BANDWIDTH_API_ENDPOINT| https://api.inetwork.com |
+|----------------------|--------------------------|
+|BANDWIDTH_API_VERSION| v1.0 |
+|---------------------|------|
+
 
 ## Usage
 All static functions support 2 ways to be called: With a client instance as the first arg or without the client instance (default client instance will then be used)
