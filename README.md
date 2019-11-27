@@ -26,7 +26,7 @@ var client = Client.GetInstance()
 |BANDWIDTH_API_ACCOUNT_ID| Your Bandwidth Account Id |
 |BANDWIDTH_API_USERNAME| Your Bandwidth username |
 |BANDWIDTH_API_PASSWORD| Your Bandwidth password|
-|BANDWIDTH_API_ENDPOINT| https://api.inetwork.com |
+|BANDWIDTH_API_ENDPOINT| https://dashboard.bandwidth.com/api |
 |BANDWIDTH_API_VERSION| v1.0 |
 
 
