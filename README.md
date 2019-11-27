@@ -17,18 +17,19 @@ Or install Bandwidth.Iris via UI in Visual Studio
 ```csharp
 var client = Client.GetInstance("accountId", "username", "password", "apiEndpoint")
 //Or
-// Configure System Environment Variables as detailed below:
-public static Client GetInstance()
-{
-    return GetInstance(
-        Environment.GetEnvironmentVariable(BandwidthApiAccountId),
-        Environment.GetEnvironmentVariable(BandwidthApiUserName),
-        Environment.GetEnvironmentVariable(BandwidthApiPassword),
-        Environment.GetEnvironmentVariable(BandwidthApiEndpoint),
-        Environment.GetEnvironmentVariable(BandwidthApiVersion));
-}
+//Uses the System Environment Variables as detailed below
 var client = Client.GetInstance()
 ```
+
+| Environment Variable | Definition |
+|----------------------|------------|
+|BANDWIDTH_API_ACCOUNT_ID| Your Bandwidth Account Id |
+|BANDWIDTH_API_USERNAME| Your Bandwidth username |
+|BANDWIDTH_API_PASSWORD| Your Bandwidth password|
+|BANDWIDTH_API_ENDPOINT| https://dashboard.bandwidth.com/api |
+|BANDWIDTH_API_VERSION| v1.0 |
+
+
 
 ## Usage
 All static functions support 2 ways to be called: With a client instance as the first arg or without the client instance (default client instance will then be used)
@@ -38,17 +39,6 @@ var site = await Site.get(client, "siteId");
 //Or
 var site = await Site.get("siteId"); //This will use the default client where supported
 ```
-
-## Examples
-There is a Project in the solution called Bandwidth.Iris.Examples.  This project has working code examples for the most commonly used objects and methods.
-
-To run the examples, from the Bandwidth Iris Project root folder:
-
-```bash
-copy Bandwidth.Iris.Examples\App.config.example Bandwidth.Iris.Examples\App.config
-```
-* Fill in the config file with the values from your account or credentials provided by Bandwidth
-* Compile the project and run the Examples from Visual Studio or from the command line
 
 ## API Objects
 
