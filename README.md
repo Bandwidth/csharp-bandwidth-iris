@@ -24,15 +24,11 @@ var client = Client.GetInstance()
 | Environment Variable | Definition |
 |----------------------|------------|
 |BANDWIDTH_API_ACCOUNT_ID| Your Bandwidth Account Id |
-|------------------------|--------------------------|
 |BANDWIDTH_API_USERNAME| Your Bandwidth username |
-|----------------------|-------------------------|
 |BANDWIDTH_API_PASSWORD| Your Bandwidth password|
-|----------------------|------------------------|
 |BANDWIDTH_API_ENDPOINT| https://api.inetwork.com |
-|----------------------|--------------------------|
 |BANDWIDTH_API_VERSION| v1.0 |
-|---------------------|------|
+
 
 
 ## Usage
