@@ -58,7 +58,7 @@ site.Delete();
 
 ### Error Handling Tips
 
-When making making API calls the client can throw an `AggregateException` this normally will contain a `BandwidthIrisException` it is suggested to handle as the following:
+When making making API calls the client can throw an `AggregateException` this normally will contain a `BandwidthIrisException`.  A suggested way to handle the API calls is to catch the `AggregateException` that API calls can crate and `#Handle` the `BandwidthIrisException` like the following:
 
 ```csharp
  try
