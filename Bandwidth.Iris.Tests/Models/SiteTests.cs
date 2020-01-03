@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
@@ -235,6 +236,8 @@ namespace Bandwidth.Iris.Tests.Models
                 var i = Site.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
                 Assert.AreEqual("1", i.Id);
+
+            
             }
 
         }
@@ -502,6 +505,57 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.IsTrue(r.TerminationHosts[0].DataAllowed);
                 Assert.IsFalse(r.CallingName.Enforced);
                 Assert.IsTrue(r.CallingName.Display);
+            }
+        }
+
+        [TestMethod]
+        public void BandwidthIrisExcpetionTest()
+        {
+
+
+            var item = new Site
+            {
+                Name = "Name",
+                Address = new Address
+                {
+                    City = "City",
+                    StateCode = "State"
+                }
+            };
+
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1", Helper.AccountId),
+                    ContentToSend = new StringContent(TestXmlStrings.xmlError, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+
+                bool error = false;
+                try
+                {
+                    var i = Site.Get("1").Result;
+                } catch (AggregateException e)
+                {
+                    e.Handle((x) =>
+                    {
+                        if(x is BandwidthIrisException)
+                        {
+                            error = true; 
+                            return true;
+                        }
+
+                        return false;
+                    });
+
+                }
+                Assert.AreEqual(true, error);
+
+
             }
         }
     }

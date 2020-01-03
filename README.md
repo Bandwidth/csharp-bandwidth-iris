@@ -56,6 +56,29 @@ var sipPeers = await site.GetSipPeers();
 site.Delete();
 ```
 
+### Error Handling Tips
+
+When making making API calls the client can throw an `AggregateException` this normally will containg a `BandwidthIrisException` it is suggested to handle as the following:
+
+```csharp
+ try
+{
+    var site = await Site.Get(client, "siteId");
+} catch (AggregateException e)
+{
+    e.Handle((x) =>
+    {
+        if(x is BandwidthIrisException)
+        {
+            //Do something 
+            return true;
+        }
+
+        return false;
+    });
+}
+```
+
 ## Available NpaNxx
 ```csharp
 var query = new Dictionary<string, object>();
