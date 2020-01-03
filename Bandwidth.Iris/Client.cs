@@ -313,7 +313,7 @@ namespace Bandwidth.Iris
                     }
                     if (code != null && description != null && !string.IsNullOrEmpty(code.Value) && code.Value != "0")
                     {
-                        throw new BandwidthIrisException(code.Value, description.Value, response.StatusCode);
+                        throw new BandwidthIrisException(code.Value, description.Value, response.StatusCode, doc);
                     }
                 }
             }
