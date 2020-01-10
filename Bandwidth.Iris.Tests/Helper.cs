@@ -102,6 +102,20 @@ namespace Bandwidth.Iris.Tests
             }
         }
 
+        public static string ToXmlStringMinified(object data)
+        {
+            var serializer = new XmlSerializer(data.GetType());
+
+
+
+            using (var writer = new Utf8StringWriter())
+            using (var xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent = false, OmitXmlDeclaration = true}))
+            {
+                serializer.Serialize(xmlWriter, data);
+                return writer.ToString();
+            }
+        }
+
         public static void SetEnvironmetVariables(string baseUrl = null)
         {
             Environment.SetEnvironmentVariable(Client.BandwidthApiUserName, UserName);

@@ -173,6 +173,46 @@ namespace Bandwidth.Iris
             }
         }
 
+        internal async Task<HttpResponseMessage> MakePatchRequest(string path, object data, bool disposeResponse = false)
+        {
+            var serializer = new XmlSerializer(data.GetType());
+            using (var writer = new Utf8StringWriter())
+            {
+                serializer.Serialize(writer, data);
+                var xml = writer.ToString();
+
+                HttpContent content = new StringContent(xml, Encoding.UTF8, "application/xml");
+
+                
+
+                using (var client = CreateHttpClient())
+                {
+
+                    var request = new HttpRequestMessage
+                    {
+                        Method = new HttpMethod("PATCH"),
+                        Content = content,
+                        RequestUri = new Uri(client.BaseAddress + FixPath(path))
+                    };
+
+                    var response =
+                        await client.SendAsync(request);
+                    try
+                    {
+                        await CheckResponse(response);
+                    }
+                    catch
+                    {
+                        response.Dispose();
+                        throw;
+                    }
+                    if (!disposeResponse) return response;
+                    response.Dispose();
+                    return null;
+                }
+            }
+        }
+
         internal async Task<HttpResponseMessage> MakePutRequest(string path, object data, bool disposeResponse = false)
         {
             var serializer = new XmlSerializer(data.GetType());
@@ -255,6 +295,34 @@ namespace Bandwidth.Iris
             }
         }
 
+        internal async Task<TResult> MakePutRequest<TResult>(string path, object data)
+        {
+            using (var response = await MakePutRequest(path, data))
+            {
+                using (var stream = await response.Content.ReadAsStreamAsync())
+                {
+                    var serializer = new XmlSerializer(typeof(TResult));
+                    return stream.Length > 0
+                        ? (TResult)serializer.Deserialize(stream)
+                        : default(TResult);
+                }
+            }
+        }
+
+        internal async Task<TResult> MakePatchRequest<TResult>(string path, object data)
+        {
+            using (var response = await MakePatchRequest(path, data)) 
+            {
+                using (var stream = await response.Content.ReadAsStreamAsync())
+                {
+                    var serializer = new XmlSerializer(typeof(TResult));
+                    return stream.Length > 0
+                        ? (TResult)serializer.Deserialize(stream)
+                        : default(TResult);
+                }
+            }
+        }
+
 
 
         internal async Task MakeDeleteRequest(string path, string id = null)
@@ -270,8 +338,22 @@ namespace Bandwidth.Iris
             }
         }
 
+        internal async Task<HttpResponseMessage> MakeDeleteRequestWithResponse(string path, string id = null)
+        {
+            if (id != null)
+            {
+                path = path + "/" + id;
+            }
+            using (var client = CreateHttpClient())
+            using (var response = await client.DeleteAsync(FixPath(path)))
+            {
+                await CheckResponse(response);
+                return response;
+            }
+        }
+
         #endregion
-        
+
         private static string FixPath(string path)
         {
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
