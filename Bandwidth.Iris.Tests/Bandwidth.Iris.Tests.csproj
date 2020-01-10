@@ -60,6 +60,7 @@
     <Compile Include="Helper.cs" />
     <Compile Include="HttpServer.cs" />
     <Compile Include="Models\AccountTests.cs" />
+    <Compile Include="Models\ApplicationTest.cs" />
     <Compile Include="Models\CityTests.cs" />
     <Compile Include="Models\CoveredRateCenterTests.cs" />
     <Compile Include="Models\DiscNumberTest.cs" />

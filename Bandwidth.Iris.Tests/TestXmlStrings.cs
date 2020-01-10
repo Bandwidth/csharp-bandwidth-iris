@@ -2,7 +2,87 @@
 {
     public static class TestXmlStrings
     {
-        public static string xmlError = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SiteResponse><ResponseStatus><ErrorCode>12112</ErrorCode><Description>The verifiable address closest to the submitted access is included below. Please use that street address or another valid street address in your next request</Description></ResponseStatus><AddressErrorDescription><AddressInconsistencies>Some adjustments are required to allow the address to pass geocoding:Specified value - Street Suffix : \"PARKWAY\" Valid value - \"PKWY\"</AddressInconsistencies><RecommendedAddress><AddressLine1>320 DIVERSEY PKWY</AddressLine1><HouseNumber>320</HouseNumber><StreetName>DIVERSEY</StreetName><StreetSuffix>PKWY</StreetSuffix><City>WEST CHICAGO</City><StateCode>IL</StateCode><Zip>60185</Zip><PlusFour>6204</PlusFour><Country>US</Country></RecommendedAddress></AddressErrorDescription><Site><Name>Csharp Test Site</Name><Description>A site from the C# Example</Description><Address><HouseNumber>320</HouseNumber><StreetName>Diversey Parkway</StreetName><City>West Chicago</City><StateCode>IL</StateCode><Zip>60185</Zip><AddressType>Service</AddressType></Address></Site></SiteResponse>";
+
+        public static string multiApplicationProvisionResponse = @"<ApplicationProvisioningResponse xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+                                                                        <ApplicationList>
+                                                                        <Application>
+                                                                            <ApplicationId>2cfcb382-161c-46d4-8c67-87ca09a72c85</ApplicationId>
+                                                                            <ServiceType>Messaging-V2</ServiceType>
+                                                                            <AppName>app1</AppName>
+                                                                            <MsgCallbackUrl>http://a.com</MsgCallbackUrl>
+                                                                        </Application>
+                                                                        <Application>
+                                                                            <ApplicationId>0cb0112b-5998-4c81-999a-0d3fb5e3f8e2</ApplicationId>
+                                                                            <ServiceType>Voice-V2</ServiceType>
+                                                                            <AppName>app2</AppName>
+                                                                            <MsgCallbackUrl>http://b.com</MsgCallbackUrl>
+                                                                            <CallbackCreds>
+                                                                            <UserId>15jPWZmXdm</UserId>
+                                                                            </CallbackCreds>
+                                                                        </Application>
+                                                                        </ApplicationList>
+                                                                    </ApplicationProvisioningResponse>";
+
+        public static string singleApplicationProvisionResponse = @"<ApplicationProvisioningResponse  xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+                                                                      <Application>
+                                                                        <ApplicationId>d3e418e9-1833-49c1-b6c7-ca1700f79586</ApplicationId>
+                                                                        <ServiceType>Voice-V2</ServiceType>
+                                                                        <AppName>v1</AppName>
+                                                                        <CallbackCreds>
+                                                                          <UserId>login123</UserId>
+                                                                        </CallbackCreds>
+                                                                        <CallStatusMethod>GET</CallStatusMethod>
+                                                                        <CallInitiatedMethod>GET</CallInitiatedMethod>
+                                                                        <CallInitiatedCallbackUrl>https://a.com</CallInitiatedCallbackUrl>
+                                                                        <CallStatusCallbackUrl>https://b.com</CallStatusCallbackUrl>
+                                                                      </Application>
+                                                                    </ApplicationProvisioningResponse>";
+
+        public static string singleApplicationRequest = @"<Application>
+                                                            <ApplicationId>d3e418e9-1833-49c1-b6c7-ca1700f79586</ApplicationId>
+                                                            <ServiceType>Voice-V2</ServiceType>
+                                                            <AppName>v1</AppName>
+                                                            <CallbackCreds>
+                                                                <UserId>login123</UserId>
+                                                            </CallbackCreds>
+                                                            <CallStatusMethod>GET</CallStatusMethod>
+                                                            <CallInitiatedMethod>GET</CallInitiatedMethod>
+                                                            <CallInitiatedCallbackUrl>https://a.com</CallInitiatedCallbackUrl>
+                                                            <CallStatusCallbackUrl>https://b.com</CallStatusCallbackUrl>
+                                                          </Application>";
+
+        public static string associatedSipPeerResponse = @"<AssociatedSipPeersResponse xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+                                                                <AssociatedSipPeers>
+                                                                    <AssociatedSipPeer>
+                                                                        <SiteId>13651</SiteId>
+                                                                        <SiteName>Prod Sub-account</SiteName>
+                                                                        <PeerId>540341</PeerId>
+                                                                        <PeerName>Prod</PeerName>
+                                                                    </AssociatedSipPeer>
+                                                                    <AssociatedSipPeer>
+                                                                        <SiteId>13622</SiteId>
+                                                                        <SiteName>Dev Sub-zccount</SiteName>
+                                                                        <PeerId>540349</PeerId>
+                                                                        <PeerName>Dev</PeerName>
+                                                                    </AssociatedSipPeer>
+                                                                </AssociatedSipPeers>
+                                                            </AssociatedSipPeersResponse>";
+
+        public static string associatedSipPeerResponse400 = @"<AssociatedSipPeersResponse xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+                                                                <ResponseStatus>
+                                                                    <ErrorCode>12103</ErrorCode>
+                                                                    <Description> Current 1 Account have no Catapult association </Description>
+                                                                </ResponseStatus>
+                                                            </AssociatedSipPeersResponse>";
+
+        public static string associatedSipPeerResponse404 = @"<AssociatedSipPeersResponse xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+                                                                <ResponseStatus>
+                                                                    <ErrorCode>13629</ErrorCode>
+                                                                    <Description> Application with id 'non_existing' not found </Description>
+                                                                </ResponseStatus>
+                                                            </AssociatedSipPeersResponse>";
+
+        public static string xmlError = " <?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SiteResponse><ResponseStatus><ErrorCode>12112</ErrorCode><Description>The verifiable address closest to the submitted access is included below. Please use that street address or another valid street address in your next request</Description></ResponseStatus><AddressErrorDescription><AddressInconsistencies>Some adjustments are required to allow the address to pass geocoding:Specified value - Street Suffix : \"PARKWAY\" Valid value - \"PKWY\"</AddressInconsistencies><RecommendedAddress><AddressLine1>320 DIVERSEY PKWY</AddressLine1><HouseNumber>320</HouseNumber><StreetName>DIVERSEY</StreetName><StreetSuffix>PKWY</StreetSuffix><City>WEST CHICAGO</City><StateCode>IL</StateCode><Zip>60185</Zip><PlusFour>6204</PlusFour><Country>US</Country></RecommendedAddress></AddressErrorDescription><Site><Name>Csharp Test Site</Name><Description>A site from the C# Example</Description><Address><HouseNumber>320</HouseNumber><StreetName>Diversey Parkway</StreetName><City>West Chicago</City><StateCode>IL</StateCode><Zip>60185</Zip><AddressType>Service</AddressType></Address></Site></SiteResponse>";
         public static string xmlLNPResponseWrapper = "<LNPResponseWrapper><TotalCount>3176</TotalCount><Links><first> -- link -- </first><next> -- link -- </next></Links><lnpPortInfoForGivenStatus><CountOfTNs>1</CountOfTNs><userId>Neustar</userId><lastModifiedDate>2014-11-21T14:00:33.836Z</lastModifiedDate><OrderDate>2014-11-05T19:34:53.176Z</OrderDate><OrderId>982e3c10-3840-4251-abdd-505cd8610788</OrderId><OrderType>port_out</OrderType><ErrorCode>200</ErrorCode><ErrorMessage>Port out successful.</ErrorMessage><FullNumber>9727717577</FullNumber><ProcessingStatus>COMPLETE</ProcessingStatus><RequestedFOCDate>2014-11-20T00:00:00.000Z</RequestedFOCDate><VendorId>512E</VendorId></lnpPortInfoForGivenStatus><Snip>   ---   </Snip><lnpPortInfoForGivenStatus><CountOfTNs>1</CountOfTNs><userId>Neustar</userId><lastModifiedDate>2015-03-30T14:01:59.049Z</lastModifiedDate><OrderDate>2015-03-24T17:47:17.605Z</OrderDate><OrderId>f8f02d0a-d1a4-42eb-8f45-ce8187cd73ff</OrderId><OrderType>port_out</OrderType><ErrorCode>200</ErrorCode><ErrorMessage>Port out successful.</ErrorMessage><FullNumber>2092660315</FullNumber><ProcessingStatus>COMPLETE</ProcessingStatus><RequestedFOCDate>2015-03-27T00:00:00.000Z</RequestedFOCDate><VendorId>512E</VendorId></lnpPortInfoForGivenStatus></LNPResponseWrapper>";
 
         public static string xmlNumberPortabilityResponseWithPortabilityErrros = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><NumberPortabilityResponse><PortabilityErrors><Error><Code>7378</Code><Description>test description</Description><TelephoneNumbers><Tn>9199199999</Tn><Tn>9199199999</Tn></TelephoneNumbers></Error><Error><Code>7478</Code><Description>test description</Description><TelephoneNumbers><Tn>9199199999</Tn></TelephoneNumbers></Error></PortabilityErrors><PortableNumbers><Tn>9195551212</Tn><Tn>9195551213</Tn></PortableNumbers><SupportedRateCenters><RateCenterGroup><RateCenter>RALEIGH</RateCenter><City>RALEIGH</City><State>NC</State><LATA>426</LATA><Tiers><Tier>0</Tier></Tiers><TnList><Tn>9195551212</Tn><Tn>9195551213</Tn></TnList></RateCenterGroup></SupportedRateCenters><UnsupportedRateCenters/><SupportedLosingCarriers><LosingCarrierTnList><LosingCarrierSPID>6214</LosingCarrierSPID><LosingCarrierName>Cingular</LosingCarrierName><TnList><Tn>9195551212</Tn><Tn>9195551213</Tn></TnList></LosingCarrierTnList></SupportedLosingCarriers><UnsupportedLosingCarriers/></NumberPortabilityResponse>";

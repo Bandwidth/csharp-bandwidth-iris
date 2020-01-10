@@ -174,6 +174,77 @@ order.GetTns();
 order.GetHistory();
 ```
 
+## Applications 
+
+### Create Application 
+```csharp
+var application = new Application
+{
+    ApplicationId = "d3e418e9-1833-49c1-b6c7-ca1700f79586",
+    ServiceType = "Voice-V2",
+    AppName = "v1",
+    CallbackCreds = new CallbackCreds
+    {
+        UserId = "login123"
+    },
+    CallStatusMethod = "GET",
+    CallInitiatedMethod = "GET",
+    CallInitiatedCallbackUrl = "https://a.com",
+    CallStatusCallbackUrl = "https://b.com"
+};
+
+var response = await Application.Create(client, application);
+```
+
+### List Applications
+```csharp
+var response = await Application.List(client);
+```
+
+### Get Application
+```csharp
+var response = await Application.Get(client, applicationId);
+```
+
+### Partial Update Application
+```csharp
+var application = new Application
+{
+    AppName = "XgRIdP"
+};
+
+var response = await Application.PartialUpdate(client, applicationId, application);
+```
+
+### Full Update Application
+```csharp
+var application = new Application
+{
+    ServiceType = "Voice-V2",
+    AppName = "v1",
+    CallbackCreds = new CallbackCreds
+    {
+        UserId = "login123"
+    },
+    CallStatusMethod = "GET",
+    CallInitiatedMethod = "GET",
+    CallInitiatedCallbackUrl = "https://a.com",
+    CallStatusCallbackUrl = "https://b.com"
+};
+
+var response = await Application.FullUpdate(client, applicationId, application);
+```
+
+### Delete Application
+```csharp
+var response = await Application.Delete(client, applicationId);
+```
+
+### List Application's Associated Peers
+```csharp
+var response = await Application.ListAssociatedSippeers(client, applicationId);
+```
+
 ## Port Ins
 
 ### Port In Check
