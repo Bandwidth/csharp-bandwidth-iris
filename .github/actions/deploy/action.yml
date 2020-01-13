@@ -1,0 +1,6 @@
+# action.yml
+name: 'NuGet Deploy'
+description: 'Deploys C# sdk to NuGet'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
