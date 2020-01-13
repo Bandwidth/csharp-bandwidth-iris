@@ -1,4 +1,4 @@
-name: Generate SDKs
+name: Deploy Release
 
 on:
   push:
