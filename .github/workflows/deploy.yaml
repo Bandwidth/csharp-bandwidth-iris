@@ -6,13 +6,15 @@ on:
       - 'v*'
 
 jobs:
-  deploy:
-    name: Deploy SDK
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code into VM
-      uses: actions/checkout@v1
-    - name: Deploy package
-      uses: ./.github/actions/deploy
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
       env:
         NUGET_KEY: ${{ secrets.NUGET_KEY }}
