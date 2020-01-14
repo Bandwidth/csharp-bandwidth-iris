@@ -283,58 +283,91 @@ namespace Bandwidth.Iris.Model
             return await DeleteSMSSettings(Client.GetInstance(), siteId, id);
         }
 
-        public static async Task<SipPeerSmsFeatureResponse> GetSMSSetting(Client client, string siteId, string id)
+        public static async Task<MmsFeatureResponse> GetMMSSetting(Client client, string siteId, string id)
         {
-            return await client.MakeGetRequest<SipPeerSmsFeatureResponse>(
-                    client.ConcatAccountPath($"/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{SMS}")
+            return await client.MakeGetRequest<MmsFeatureResponse>(
+                    client.ConcatAccountPath($"/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{MMS}")
                 );
         }
 
-        public static async Task<SipPeerSmsFeatureResponse> GetSMSSetting(string siteId, string id)
+        public static async Task<MmsFeatureResponse> GetMMSSetting(string siteId, string id)
         {
-            return await GetSMSSetting(Client.GetInstance(), siteId, id);
+            return await GetMMSSetting(Client.GetInstance(), siteId, id);
         }
 
-        public static async Task<SipPeerSmsFeatureResponse> CreateSMSSettings(Client client, string siteId, string id, SipPeerSmsFeature settings)
+        public static async Task<MmsFeatureResponse> CreateMMSSettings(Client client, string siteId, string id, MmsFeature feature)
         {
-            return await client.MakePostRequest<SipPeerSmsFeatureResponse>(
-                    client.ConcatAccountPath($"/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{SMS}"),
-                    settings
+            return await client.MakePostRequest<MmsFeatureResponse>(
+                    client.ConcatAccountPath($"/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{MMS}"),
+                    feature
                 );
         }
 
-        public static async Task<SipPeerSmsFeatureResponse> CreateSMSSettings(string siteId, string id, SipPeerSmsFeature settings)
+        public static async Task<MmsFeatureResponse> CreateMMSSettings(string siteId, string id, MmsFeature feature)
         {
-            return await CreateSMSSettings(Client.GetInstance(), siteId, id, settings);
+            return await CreateMMSSettings(Client.GetInstance(), siteId, id, feature);
         }
 
-        public static async Task<HttpResponseMessage> UpdateSMSSettings(Client client, string siteId, string id, SipPeerSmsFeature settings)
+        public static async Task<HttpResponseMessage> UpdateMMSSettings(Client client, string siteId, string id, MmsFeature feature)
         {
             return await client.MakePutRequest<HttpResponseMessage>(
-                    client.ConcatAccountPath($"/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{SMS}"),
-                    settings
+                    client.ConcatAccountPath($"/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{MMS}"),
+                    feature
                 );
         }
 
-        public static async Task<HttpResponseMessage> UpdateSMSSettings(string siteId, string id, SipPeerSmsFeature settings)
+        public static async Task<HttpResponseMessage> UpdateMMSSettings(string siteId, string id, MmsFeature feature)
         {
-            return await UpdateSMSSettings(Client.GetInstance(), siteId, id, settings);
+            return await UpdateMMSSettings(Client.GetInstance(), siteId, id, feature);
         }
 
-        public static async Task<HttpResponseMessage> DeleteSMSSettings(Client client, string siteId, string id)
+        public static async Task<HttpResponseMessage> DeleteMMSSettings(Client client, string siteId, string id)
         {
             return await client.MakeDeleteRequestWithResponse(
-                    client.ConcatAccountPath($"/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{SMS}")
+                    client.ConcatAccountPath($"/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{MMS}")
                 );
         }
 
-        public static async Task<HttpResponseMessage> DeleteSMSSettings(string siteId, string id)
+        public static async Task<HttpResponseMessage> DeleteMMSSettings(string siteId, string id)
         {
-            return await DeleteSMSSettings(Client.GetInstance(), siteId, id);
+            return await DeleteMMSSettings(Client.GetInstance(), siteId, id);
         }
 
         #endregion
 
+        #region .../products/messaging/applicationSettings
+
+        public static readonly string  APPLICATION_SETTINGS = "applicationSettings";
+
+        public static async Task<ApplicationsSettingsResponse> GetApplicationSetting(Client client, string siteId, string id)
+        {
+            return await client.MakeGetRequest<ApplicationsSettingsResponse>(
+                    client.ConcatAccountPath($"/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{APPLICATION_SETTINGS}")
+                );
+        }
+
+        public static async Task<ApplicationsSettingsResponse> GetApplicationSetting(string siteId, string id)
+        {
+            return await GetApplicationSetting(Client.GetInstance(), siteId, id);
+        }
+
+        public static async Task<HttpResponseMessage> UpdateApplicationSettings(Client client, string siteId, string id, ApplicationsSettings settings)
+        {
+            return await client.MakePutRequest<HttpResponseMessage>(
+                    client.ConcatAccountPath($"/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{APPLICATION_SETTINGS}"),
+                    settings
+                );
+        }
+
+        public static async Task<HttpResponseMessage> UpdateApplicationSettings(string siteId, string id, ApplicationsSettings settings)
+        {
+            return await UpdateApplicationSettings(Client.GetInstance(), siteId, id, settings);
+        }
+
+
+
+
+        #endregion
     }
 
 
@@ -503,7 +536,6 @@ namespace Bandwidth.Iris.Model
     public class MM4
     {
         public string Tls { get; set; }
-
         public MmsMM4TermHosts MmsMM4TermHosts { get; set; }
         public MmsMM4OrigHosts MmsMM4OrigHosts { get; set; }
     }
@@ -528,9 +560,20 @@ namespace Bandwidth.Iris.Model
     public class OrigHost
     {
         public string HostName { get; set; }
+        public int HostId { get; set; }
         public int Port { get; set; }
         public int Priority { get; set; }
 
+    }
+
+    public class ApplicationsSettingsResponse
+    {
+        public ApplicationSettings ApplicationSettings { get; set; }
+    }
+
+    public class ApplicationsSettings
+    {
+        public string HttpMessagingV2AppId { get; set; }
     }
 
 }
