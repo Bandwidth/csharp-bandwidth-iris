@@ -424,6 +424,77 @@ sipPeer.UpdateTns(number, data);
 sipPeer.MoveTns(new string[] numbers);
 ```
 
+### Get Origination Settings for Sip Peer
+```csharp
+var sipPeerOriginationSettingsResponse = await SipPeer.GetOriginationSettings(siteId, sipPeerId);
+```
+
+### Set Origination Settings for Sip Peer
+```csharp
+var sipPeerOriginationSettings = new SipPeerOriginationSettings
+{
+    VoiceProtocol = "HTTP",
+    HttpSettings = new HttpSettings
+    {
+        HttpVoiceV2AppId = "469ebbac-4459-4d98-bc19-a038960e787f"
+    }
+};
+
+var sipPeerOriginationSettingsResponse = await SipPeer.SetOriginationSettings(siteId, sipPeerId, sipPeerOriginationSettings);
+```
+
+### Update Origination Settings for Sip Peer
+```csharp
+var sipPeerOriginationSettings = new SipPeerOriginationSettings
+{
+    VoiceProtocol = "HTTP",
+    HttpSettings = new HttpSettings
+    {
+        HttpVoiceV2AppId = "469ebbac-4459-4d98-bc19-a038960e787f"
+    }
+};
+
+SipPeer.UpdateOriginationSettings(siteId, sipPeerId, SipPeerOriginationSettings).Wait();
+```
+
+
+### Get Termination Settings for Sip Peer
+```csharp
+var sipPeerTerminationSettingsResponse = await SipPeer.GetTerminationSetting(siteId, sipPeerId);
+```
+
+### Set Termination Settings for Sip Peer
+```csharp
+var sipPeerTerminationSettings = new SipPeerTerminationSettings
+{
+    VoiceProtocol = "HTTP",
+    HttpSettings = new HttpSettings
+    {
+        HttpVoiceV2AppId = "469ebbac-4459-4d98-bc19-a038960e787f"
+    }
+};
+
+var sipPeerTerminationSettingsResponse = await SipPeer.GetTerminationSetting(siteId, sipPeerId, sipPeerTerminationSettings);
+```
+
+### Update Termination Settings for Sip Peer
+```csharp
+var sipPeerTerminationSettings = new SipPeerTerminationSettings
+{
+    VoiceProtocol = "HTTP",
+    HttpSettings = new HttpSettings
+    {
+        HttpVoiceV2AppId = "469ebbac-4459-4d98-bc19-a038960e787f"
+    }
+};
+
+SipPeer.UpdateTerminationSettings(client, siteId, sipPeerId, SipPeerTerminationSettings).Wait();
+```
+
+### Get SMS Feature Settings for Sip Peer
+```csharp
+```
+
 ## Subscriptions
 ### Create Subscription
 ```csharp
