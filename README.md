@@ -493,6 +493,114 @@ SipPeer.UpdateTerminationSettings(client, siteId, sipPeerId, SipPeerTerminationS
 
 ### Get SMS Feature Settings for Sip Peer
 ```csharp
+var sipPeerSmsFeatureResponse = await SipPeer.GetSMSSetting(siteId, sipPeerId);
+```
+
+### Set SMS Feature Setting for Sip Peer
+```csharp
+var sipPeerSmsFeature = new SipPeerSmsFeature
+{
+    SipPeerSmsFeatureSettings = new SipPeerSmsFeatureSettings
+    {
+        TollFree = true
+    },
+    SmppHosts = new SmppHost[]
+    {
+        new SmppHost
+        {
+            HostName = "Host"
+        }
+    }
+};
+
+var sipPeerSmsFeatureResponse = await SipPeer.CreateSMSSettings(siteId, sipPeerId, sipPeerSmsFeature);
+```
+
+### Update SMS Feature Setting for Sip Peer
+```csharp
+var sipPeerSmsFeature = new SipPeerSmsFeature
+{
+    SipPeerSmsFeatureSettings = new SipPeerSmsFeatureSettings
+    {
+        TollFree = true
+    },
+    SmppHosts = new SmppHost[]
+    {
+        new SmppHost
+        {
+            HostName = "Host"
+        }
+    }
+};
+
+var sipPeerSmsFeatureResponse = await SipPeer.UpdateSMSSettings(siteId, sipPeerId, sipPeerSmsFeature);
+```
+
+### Delete SMS Feature Settings for Sip Peer
+```csharp
+SipPeer.DeleteSMSSettings(siteId, sipPeerId).Wait();
+```
+
+### Get MMS Feature Settings for Sip Peer
+```csharp
+var MmsFeatureResponse = await SipPeer.GetMMSSetting(siteId, sipPeerId);
+```
+
+### Set MMS Feature Setting for Sip Peer
+```csharp
+var mmsFeature = new MmsFeature
+{
+    Protocols = new Protocols
+    {
+        MM4 = new MM4
+        {
+            Tls = "OFF"
+        }
+    }
+};
+
+var MmsFeatureResponse = await SipPeer.CreateMMSSettings(siteId, sipPeerId, mmsFeature);
+```
+
+### Update MMS Feature Setting for Sip Peer
+```csharp
+var mmsFeature = new MmsFeature
+{
+    Protocols = new Protocols
+    {
+        MM4 = new MM4
+        {
+            Tls = "OFF"
+        }
+    }
+};
+
+SipPeer.UpdateMMSSettings(siteId, sipPeerId, MmsFeature).Wait();
+```
+
+### Delete MMS Feature Settings for Sip Peer
+```csharp
+SipPeer.DeleteMMSSettings(siteId, sipPeerId).Wait();
+```
+
+### Get Application Settings
+```csharp
+var applicationsSettingsResponse = await SipPeer.GetApplicationSetting(siteId, sipPeerId);
+```
+
+### Update Application Settings
+```csharp
+var applicationSettings = new ApplicationsSettings
+{
+    HttpMessagingV2AppId = "c3b0f805-06ab-4d36-8bf4-8baff7623398"
+};
+
+SipPeer.UpdateApplicationSettings(siteId, sipPeerId, applicationSettings).Wait();
+```
+
+### Remove Application Settings
+```csharp
+SipPeer.RemoveApplicationSettings(siteId, sipPeerId).Wait();
 ```
 
 ## Subscriptions
