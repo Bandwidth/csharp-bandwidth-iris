@@ -3,6 +3,110 @@
     public static class TestXmlStrings
     {
 
+        public static string RemoveApplicationResponse = "<ApplicationsSettings>remove</ApplicationsSettings>";
+
+        public static string ApplicationSettings = @"<ApplicationsSettings>
+                                                        <HttpMessagingV2AppId>4a4ca6c1-156b-4fca-84e9-34e35e2afc32</HttpMessagingV2AppId>
+                                                    </ApplicationsSettings>";
+
+        public static string ApplicationSettingsResponse = $@"<ApplicationsSettingsResponse>
+                                                                    {ApplicationSettings}
+                                                              </ApplicationsSettingsResponse>";
+
+        public static string MmsFeature = @"<MmsFeature>
+                                                <MmsSettings>
+                                                    <Protocol>MM4</Protocol>
+                                                </MmsSettings>
+                                                <Protocols>
+                                                    <MM4>
+                                                        <!--Tls element is optional. If not included default value OFF will be used.-->
+                                                        <Tls>OFF</Tls>
+                                                        <MmsMM4TermHosts>
+                                                            <TermHosts>
+                                                                <TermHost>
+                                                                    <HostName>206.107.248.58</HostName>
+                                                                </TermHost>
+                                                            </TermHosts>
+                                                        </MmsMM4TermHosts>
+                                                        <MmsMM4OrigHosts>
+                                                            <OrigHosts>
+                                                                <OrigHost>
+                                                                    <!--If Tls is ON you can pass only FQDN as hostname. If Tls is OFF you can send either FQDN or IP address.-->
+                                                                    <HostName>30.239.72.55</HostName>
+                                                                    <!--Port element is optional. If not included port will be set based on TLS value (25 for OFF and 587 for ON).-->
+                                                                    <Port>8726</Port>
+                                                                    <Priority>0</Priority>
+                                                                </OrigHost>
+                                                                <OrigHost>
+                                                                    <HostName>25.231.123.32</HostName>
+                                                                    <Priority>0</Priority>
+                                                                </OrigHost>
+                                                            </OrigHosts>
+                                                        </MmsMM4OrigHosts>
+                                                    </MM4>
+                                                </Protocols>
+                                            </MmsFeature>";
+
+        public static string MmsFeatureResponse = $@"<MmsFeatureResponse>
+                                                        {MmsFeature}
+                                                    </MmsFeatureResponse>";
+
+        
+
+        public static string SipPeerSmsFeature = @"<SipPeerSmsFeature>
+                                                    <SipPeerSmsFeatureSettings>
+                                                        <TollFree>true</TollFree>
+                                                        <ShortCode>true</ShortCode>
+                                                        <A2pLongCode>DefaultOff</A2pLongCode>
+                                                        <A2pMessageClass>SomeMessageClass</A2pMessageClass>
+                                                        <A2pCampaignId>SomeCampaignId</A2pCampaignId>
+                                                        <Protocol>SMPP</Protocol>
+                                                        <Zone1>true</Zone1>
+                                                        <Zone2>true</Zone2>
+                                                        <Zone3>true</Zone3>
+                                                        <Zone4>true</Zone4>
+                                                        <Zone5>true</Zone5>
+                                                    </SipPeerSmsFeatureSettings>
+                                                    <SmppHosts>
+                                                        <SmppHost>
+                                                            <HostName>54.10.88.146</HostName>
+                                                            <Priority>0</Priority>
+                                                            <ConnectionType>RECEIVER_ONLY</ConnectionType>
+                                                        </SmppHost>
+                                                        <SmppHost>
+                                                            <HostName>47.123.17.16/30</HostName>
+                                                            <Priority>0</Priority>
+                                                            <ConnectionType>RECEIVER_ONLY</ConnectionType>
+                                                        </SmppHost>
+                                                    </SmppHosts>
+                                                </SipPeerSmsFeature>";
+
+        public static string SipPeerSmsFeatureResponse = $@"<SipPeerSmsFeatureResponse>
+                                                                {SipPeerSmsFeature}
+                                                            </SipPeerSmsFeatureResponse>";
+
+        public static string SipPeerTerminationSettings = @"<SipPeerTerminationSettings>
+                                                                <VoiceProtocol>HTTP</VoiceProtocol>
+                                                                <HttpSettings>
+                                                                    <HttpVoiceV2AppId>469ebbac-4459-4d98-bc19-a038960e787f</HttpVoiceV2AppId>
+                                                                </HttpSettings>
+                                                            </SipPeerTerminationSettings>";
+
+        public static string SipPeerTerminationSettingResponse = $@"<SipPeerTerminationSettingsResponse>
+                                                                        {SipPeerTerminationSettings}
+                                                                    </SipPeerTerminationSettingsResponse>";
+
+        public static string SipPeerOriginationSettings = @"<SipPeerOriginationSettings>
+                                                                <VoiceProtocol>HTTP</VoiceProtocol>
+                                                                <HttpSettings>
+                                                                    <HttpVoiceV2AppId>469ebbac-4459-4d98-bc19-a038960e787f</HttpVoiceV2AppId>
+                                                                </HttpSettings>
+                                                            </SipPeerOriginationSettings>";
+
+        public static string SipPeerOriginationSettingsResponse = $@"<SipPeerOriginationSettingsResponse>
+                                                                        {SipPeerOriginationSettings}
+                                                                    </SipPeerOriginationSettingsResponse>";
+
         public static string multiApplicationProvisionResponse = @"<ApplicationProvisioningResponse xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
                                                                         <ApplicationList>
                                                                         <Application>

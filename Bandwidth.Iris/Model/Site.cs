@@ -88,6 +88,16 @@ namespace Bandwidth.Iris.Model
             return item;
         }
 
+        public async Task<SipPeer> UpdateSipPeer(string id, SipPeer sipPeer)
+        {
+            var item =
+                (await Client.MakePutRequest<SipPeerResponse>(
+                    Client.ConcatAccountPath(string.Format("{0}/{1}/{2}/{3}", SitePath, Id, SipPeerPath, id)), sipPeer)).SipPeer;
+            item.Client = Client;
+            item.SiteId = Id;
+            return item;
+        }
+
         public async Task<SipPeer[]> GetSipPeers()
         {
             var items =

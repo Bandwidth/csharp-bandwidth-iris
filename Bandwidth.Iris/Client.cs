@@ -215,15 +215,24 @@ namespace Bandwidth.Iris
 
         internal async Task<HttpResponseMessage> MakePutRequest(string path, object data, bool disposeResponse = false)
         {
-            var serializer = new XmlSerializer(data.GetType());
+            
             using (var writer = new Utf8StringWriter())
             {
-                serializer.Serialize(writer, data);
-                var xml = writer.ToString();
+                var payload = "";
+                if (data is string)
+                {
+                    payload = (string)data;
+                } else
+                {
+                    var serializer = new XmlSerializer(data.GetType());
+                    serializer.Serialize(writer, data);
+                    payload = writer.ToString();
+                }
+                
                 using (var client = CreateHttpClient())
                 {
                     var response =
-                        await client.PutAsync(FixPath(path), new StringContent(xml, Encoding.UTF8, "application/xml"));
+                        await client.PutAsync(FixPath(path), new StringContent(payload, Encoding.UTF8, "application/xml"));
                     try
                     {
                         await CheckResponse(response);

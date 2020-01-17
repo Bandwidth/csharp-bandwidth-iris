@@ -359,6 +359,585 @@ namespace Bandwidth.Iris.Tests.Models
                 if (server.Error != null) throw server.Error;
             }
         }
+
+        [TestMethod]
+        public void GetOriginationSettingsTest()
+        {
+
+            string siteId = "1";
+            string sipPeerId = "test";
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/origination/settings",
+                    ContentToSend = new StringContent(TestXmlStrings.SipPeerOriginationSettingsResponse, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var r = SipPeer.GetOriginationSettings(siteId, sipPeerId).Result;
+                if (server.Error != null) throw server.Error;
+
+                Assert.IsNotNull(r.SipPeerOriginationSettings);
+                Assert.AreEqual("HTTP", r.SipPeerOriginationSettings.VoiceProtocol);
+                Assert.AreEqual("469ebbac-4459-4d98-bc19-a038960e787f", r.SipPeerOriginationSettings.HttpSettings.HttpVoiceV2AppId);
+
+
+            }
+        }
+
+        [TestMethod]
+        public void SetOriginationSettingsTest()
+        {
+
+            string siteId = "1";
+            string sipPeerId = "test";
+
+            var SipPeerOriginationSettings = new SipPeerOriginationSettings
+            {
+                VoiceProtocol = "HTTP",
+                HttpSettings = new HttpSettings
+                {
+                    HttpVoiceV2AppId = "469ebbac-4459-4d98-bc19-a038960e787f"
+                }
+            };
+
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "POST",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/origination/settings",
+                    ContentToSend = new StringContent(TestXmlStrings.SipPeerOriginationSettingsResponse, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var r = SipPeer.SetOriginationSettings(siteId, sipPeerId, SipPeerOriginationSettings).Result;
+                if (server.Error != null) throw server.Error;
+
+                Assert.IsNotNull(r.SipPeerOriginationSettings);
+                Assert.AreEqual("HTTP", r.SipPeerOriginationSettings.VoiceProtocol);
+                Assert.AreEqual("469ebbac-4459-4d98-bc19-a038960e787f", r.SipPeerOriginationSettings.HttpSettings.HttpVoiceV2AppId);
+
+
+            }
+        }
+
+        [TestMethod]
+        public void UpdateOriginationSettingsTest()
+        {
+            string siteId = "1";
+            string sipPeerId = "test";
+
+            var SipPeerOriginationSettings = new SipPeerOriginationSettings
+            {
+                VoiceProtocol = "HTTP",
+                HttpSettings = new HttpSettings
+                {
+                    HttpVoiceV2AppId = "469ebbac-4459-4d98-bc19-a038960e787f"
+                }
+            };
+
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "PUT",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/origination/settings",
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                SipPeer.UpdateOriginationSettings(siteId, sipPeerId, SipPeerOriginationSettings).Wait();
+                if (server.Error != null) throw server.Error;
+
+            }
+        }
+
+
+        [TestMethod]
+        public void GetTerminationSettingsTest()
+        {
+
+            string siteId = "1";
+            string sipPeerId = "test";
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/termination/settings",
+                    ContentToSend = new StringContent(TestXmlStrings.SipPeerTerminationSettingResponse, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var r = SipPeer.GetTerminationSetting(siteId, sipPeerId).Result;
+                if (server.Error != null) throw server.Error;
+
+                Assert.IsNotNull(r.SipPeerTerminationSettings);
+                Assert.AreEqual("HTTP", r.SipPeerTerminationSettings.VoiceProtocol);
+                Assert.AreEqual("469ebbac-4459-4d98-bc19-a038960e787f", r.SipPeerTerminationSettings.HttpSettings.HttpVoiceV2AppId);
+
+
+            }
+        }
+
+        [TestMethod]
+        public void SetTerminationSettingsTest()
+        {
+
+            string siteId = "1";
+            string sipPeerId = "test";
+
+            var SipPeerTerminationSettings = new SipPeerTerminationSettings
+            {
+                VoiceProtocol = "HTTP",
+                HttpSettings = new HttpSettings
+                {
+                    HttpVoiceV2AppId = "469ebbac-4459-4d98-bc19-a038960e787f"
+                }
+            };
+
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "POST",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/termination/settings",
+                    ContentToSend = new StringContent(TestXmlStrings.SipPeerTerminationSettingResponse, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var r = SipPeer.SetTerminationSettings(client, siteId, sipPeerId, SipPeerTerminationSettings).Result;
+                if (server.Error != null) throw server.Error;
+
+                Assert.IsNotNull(r.SipPeerTerminationSettings);
+                Assert.AreEqual("HTTP", r.SipPeerTerminationSettings.VoiceProtocol);
+                Assert.AreEqual("469ebbac-4459-4d98-bc19-a038960e787f", r.SipPeerTerminationSettings.HttpSettings.HttpVoiceV2AppId);
+
+
+            }
+        }
+
+        [TestMethod]
+        public void UpdateTerminationSettingsTest()
+        {
+            string siteId = "1";
+            string sipPeerId = "test";
+
+            var SipPeerTerminationSettings = new SipPeerTerminationSettings
+            {
+                VoiceProtocol = "HTTP",
+                HttpSettings = new HttpSettings
+                {
+                    HttpVoiceV2AppId = "469ebbac-4459-4d98-bc19-a038960e787f"
+                }
+            };
+
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "PUT",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/termination/settings",
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                SipPeer.UpdateTerminationSettings(client, siteId, sipPeerId, SipPeerTerminationSettings).Wait();
+                if (server.Error != null) throw server.Error;
+
+            }
+        }
+
+        [TestMethod]
+        public void GetSMSSettingTest()
+        {
+            string siteId = "1";
+            string sipPeerId = "test";
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/sms",
+                    ContentToSend = new StringContent(TestXmlStrings.SipPeerSmsFeatureResponse, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var r = SipPeer.GetSMSSetting(siteId, sipPeerId).Result;
+                if (server.Error != null) throw server.Error;
+
+                Assert.IsNotNull(r.SipPeerSmsFeature);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
+                Assert.AreEqual("DefaultOff", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pLongCode);
+                Assert.AreEqual("SomeMessageClass", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pMessageClass);
+                Assert.AreEqual("SomeCampaignId", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pCampaignId);
+                Assert.AreEqual("SMPP", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Protocol);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
+
+                Assert.AreEqual(2, r.SipPeerSmsFeature.SmppHosts.Length);
+                Assert.AreEqual("RECEIVER_ONLY", r.SipPeerSmsFeature.SmppHosts[0].ConnectionType);
+                Assert.AreEqual("54.10.88.146", r.SipPeerSmsFeature.SmppHosts[0].HostName);
+                Assert.AreEqual(0, r.SipPeerSmsFeature.SmppHosts[0].Priority);
+
+            }
+        }
+
+        [TestMethod]
+        public void SetSMSSettingTest()
+        {
+            string siteId = "1";
+            string sipPeerId = "test";
+
+            var SipPeerSmsFeature = new SipPeerSmsFeature
+            {
+                SipPeerSmsFeatureSettings = new SipPeerSmsFeatureSettings
+                {
+                    TollFree = true
+                },
+                SmppHosts = new SmppHost[]
+                {
+                    new SmppHost
+                    {
+                        HostName = "Host"
+                    }
+                }
+            };
+
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "POST",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/sms",
+                    ContentToSend = new StringContent(TestXmlStrings.SipPeerSmsFeatureResponse, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var r = SipPeer.CreateSMSSettings(siteId, sipPeerId, SipPeerSmsFeature).Result;
+                if (server.Error != null) throw server.Error;
+
+                Assert.IsNotNull(r.SipPeerSmsFeature);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
+                Assert.AreEqual("DefaultOff", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pLongCode);
+                Assert.AreEqual("SomeMessageClass", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pMessageClass);
+                Assert.AreEqual("SomeCampaignId", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pCampaignId);
+                Assert.AreEqual("SMPP", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Protocol);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
+
+                Assert.AreEqual(2, r.SipPeerSmsFeature.SmppHosts.Length);
+                Assert.AreEqual("RECEIVER_ONLY", r.SipPeerSmsFeature.SmppHosts[0].ConnectionType);
+                Assert.AreEqual("54.10.88.146", r.SipPeerSmsFeature.SmppHosts[0].HostName);
+                Assert.AreEqual(0, r.SipPeerSmsFeature.SmppHosts[0].Priority);
+
+            }
+        }
+
+        [TestMethod]
+        public void UpdateSMSSettingTest()
+        {
+            string siteId = "1";
+            string sipPeerId = "test";
+
+            var SipPeerSmsFeature = new SipPeerSmsFeature
+            {
+                SipPeerSmsFeatureSettings = new SipPeerSmsFeatureSettings
+                {
+                    TollFree = true
+                },
+                SmppHosts = new SmppHost[]
+                {
+                    new SmppHost
+                    {
+                        HostName = "Host"
+                    }
+                }
+            };
+
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "PUT",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/sms",
+                    ContentToSend = new StringContent(TestXmlStrings.SipPeerSmsFeatureResponse, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var r = SipPeer.UpdateSMSSettings(siteId, sipPeerId, SipPeerSmsFeature).Result;
+                if (server.Error != null) throw server.Error;
+
+                Assert.IsNotNull(r.SipPeerSmsFeature);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
+                Assert.AreEqual("DefaultOff", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pLongCode);
+                Assert.AreEqual("SomeMessageClass", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pMessageClass);
+                Assert.AreEqual("SomeCampaignId", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pCampaignId);
+                Assert.AreEqual("SMPP", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Protocol);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
+                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
+
+                Assert.AreEqual(2, r.SipPeerSmsFeature.SmppHosts.Length);
+                Assert.AreEqual("RECEIVER_ONLY", r.SipPeerSmsFeature.SmppHosts[0].ConnectionType);
+                Assert.AreEqual("54.10.88.146", r.SipPeerSmsFeature.SmppHosts[0].HostName);
+                Assert.AreEqual(0, r.SipPeerSmsFeature.SmppHosts[0].Priority);
+
+            }
+        }
+
+        [TestMethod]
+        public void DeleteSMSSettingTest()
+        {
+            string siteId = "1";
+            string sipPeerId = "test";
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "DELETE",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/sms",
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                SipPeer.DeleteSMSSettings(siteId, sipPeerId).Wait();
+                if (server.Error != null) throw server.Error;
+
+            }
+        }
+
+
+        [TestMethod]
+        public void GetMMSSettingTest()
+        {
+            string siteId = "1";
+            string sipPeerId = "test";
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/mms",
+                    ContentToSend = new StringContent(TestXmlStrings.MmsFeatureResponse, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var r = SipPeer.GetMMSSetting(siteId, sipPeerId).Result;
+                if (server.Error != null) throw server.Error;
+
+                Assert.IsNotNull(r.MmsFeature);
+                Assert.AreEqual("OFF", r.MmsFeature.Protocols.MM4.Tls);
+                Assert.AreEqual(1, r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts.Length);
+                Assert.AreEqual("206.107.248.58", r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts[0].HostName);
+
+                Assert.AreEqual(2, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts.Length);
+                Assert.AreEqual("30.239.72.55", r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].HostName);
+                Assert.AreEqual(8726, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].Port);
+                Assert.AreEqual(0, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].Priority);
+
+            }
+        }
+
+        [TestMethod]
+        public void SetMMSSettingTest()
+        {
+            string siteId = "1";
+            string sipPeerId = "test";
+
+            var MmsFeature = new MmsFeature
+            {
+                Protocols = new Protocols
+                {
+                    MM4 = new MM4
+                    {
+                        Tls = "OFF"
+                    }
+                }
+            };
+
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "POST",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/mms",
+                    ContentToSend = new StringContent(TestXmlStrings.MmsFeatureResponse, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var r = SipPeer.CreateMMSSettings(siteId, sipPeerId, MmsFeature).Result;
+                if (server.Error != null) throw server.Error;
+
+                Assert.IsNotNull(r.MmsFeature);
+                Assert.AreEqual("OFF", r.MmsFeature.Protocols.MM4.Tls);
+                Assert.AreEqual(1, r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts.Length);
+                Assert.AreEqual("206.107.248.58", r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts[0].HostName);
+
+                Assert.AreEqual(2, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts.Length);
+                Assert.AreEqual("30.239.72.55", r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].HostName);
+                Assert.AreEqual(8726, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].Port);
+                Assert.AreEqual(0, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].Priority);
+
+            }
+        }
+
+        [TestMethod]
+        public void UpdateMMSSettingTest()
+        {
+            string siteId = "1";
+            string sipPeerId = "test";
+
+            var MmsFeature = new MmsFeature
+            {
+                Protocols = new Protocols
+                {
+                    MM4 = new MM4
+                    {
+                        Tls = "OFF"
+                    }
+                }
+            };
+
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "PUT",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/mms",
+                    ContentToSend = new StringContent(TestXmlStrings.SipPeerSmsFeatureResponse, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                SipPeer.UpdateMMSSettings(siteId, sipPeerId, MmsFeature).Wait();
+                if (server.Error != null) throw server.Error;
+
+              
+
+            }
+        }
+
+        [TestMethod]
+        public void DeleteMMSSettingTest()
+        {
+            string siteId = "1";
+            string sipPeerId = "test";
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "DELETE",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/mms",
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                SipPeer.DeleteMMSSettings(siteId, sipPeerId).Wait();
+                if (server.Error != null) throw server.Error;
+
+            }
+        }
+
+
+        [TestMethod]
+        public void GetApplicationSettingTest()
+        {
+            string siteId = "1";
+            string sipPeerId = "test";
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "GET",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/applicationSettings",
+                    ContentToSend = new StringContent(TestXmlStrings.ApplicationSettingsResponse, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                var r = SipPeer.GetApplicationSetting(siteId, sipPeerId).Result;
+                if (server.Error != null) throw server.Error;
+
+                Assert.IsNotNull(r.ApplicationsSettings);
+                Assert.AreEqual("4a4ca6c1-156b-4fca-84e9-34e35e2afc32", r.ApplicationsSettings.HttpMessagingV2AppId);
+                
+
+            }
+        }
+
+        [TestMethod]
+        public void UpdateApplicationSettingTest()
+        {
+            string siteId = "1";
+            string sipPeerId = "test";
+
+            var ApplicationSettings = new ApplicationsSettings
+            {
+                HttpMessagingV2AppId = "c3b0f805-06ab-4d36-8bf4-8baff7623398"
+            };
+
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "PUT",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/applicationSettings",
+                    ContentToSend = new StringContent(TestXmlStrings.ApplicationSettingsResponse, Encoding.UTF8, "application/xml")
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                SipPeer.UpdateApplicationSettings(siteId, sipPeerId, ApplicationSettings).Wait();
+                if (server.Error != null) throw server.Error;
+            }
+        }
+
+        [TestMethod]
+        public void RemoveApplicationSettingsTest()
+        {
+            string siteId = "1";
+            string sipPeerId = "test";
+
+            using (var server = new HttpServer(new[]
+            {
+                new RequestHandler
+                {
+                    EstimatedMethod = "PUT",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/applicationSettings",
+                    EstimatedContent = TestXmlStrings.RemoveApplicationResponse
+                }
+            }))
+            {
+                var client = Helper.CreateClient();
+                SipPeer.RemoveApplicationSettings(siteId, sipPeerId).Wait();
+                if (server.Error != null) throw server.Error;
+            }
+        }
+
     }
 
 }
