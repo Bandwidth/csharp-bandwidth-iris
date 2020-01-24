@@ -3,6 +3,28 @@
     public static class TestXmlStrings
     {
 
+        public static string SiteWithAddressPostDirectional = @"<SiteResponse>
+                                                                    <Site>
+                                                                        <Name>Raleigh</Name>
+                                                                        <Description>Test Gateway</Description>
+                                                                        <CustomerName>BW</CustomerName>
+                                                                        <Address>
+                                                                            <HouseNumber>1600</HouseNumber>
+                                                                            <StreetName>PENNSYLVANIA</StreetName>
+                                                                            <StreetSuffix>AVE</StreetSuffix>
+                                                                            <PostDirectional>NW</PostDirectional>
+                                                                            <City>WASHINGTON</City>
+                                                                            <StateCode>DC</StateCode>
+                                                                            <Zip>20006</Zip>
+                                                                            <Country>US</Country>
+                                                                        </Address>
+                                                                        <UcTrunkingConfiguration>
+                                                                            <Type>Seats</Type>
+                                                                            <UsageCategory>UC500</UsageCategory>
+                                                                        </UcTrunkingConfiguration>
+                                                                    </Site>
+                                                                </SiteResponse>";
+
         public static string RemoveApplicationResponse = "<ApplicationsSettings>remove</ApplicationsSettings>";
 
         public static string ApplicationSettings = @"<ApplicationsSettings>

@@ -139,6 +139,7 @@ namespace Bandwidth.Iris.Model
         public string HousePrefix { get; set; }
         public string HouseSuffix { get; set; }
         public string PreDirectional { get; set; }
+        public string PostDirectional { get; set; }
         public string StreetName { get; set; }
         public string StreetSuffix { get; set; }
         public string AddressLine2 { get; set; }
