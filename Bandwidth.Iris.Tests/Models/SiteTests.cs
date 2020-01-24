@@ -71,6 +71,25 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
         [TestMethod]
+        public void PostDirectionalAddressTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.SiteWithAddressPostDirectional, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                var result = Site.Get(client, "1").Result;
+                if (server.Error != null) throw server.Error;
+                Assert.AreEqual("Raleigh", result.Name);
+                Assert.AreEqual("NW", result.Address.PostDirectional);
+
+            }
+        }
+
+        [TestMethod]
         public void GetWithDefaultClientTest()
         {
             var item = new Site
