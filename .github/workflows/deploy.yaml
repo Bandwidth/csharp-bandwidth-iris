@@ -20,8 +20,10 @@ jobs:
       run: dotnet build --configuration Release
     - name: Pack with nuget
       run: .\.nuget\nuget pack -Properties Configuration=Release
-    - name: Display directory 
-      run: dir
+    - name: Display key 
+      run: echo %NUGET_KEY%
+      env:
+        NUGET_KEY: ${{ secrets.NUGET_KEY }}
     - name: Push to Nuget with dotnet
       run: dotnet nuget push Bandwidth.Iris.*.nupkg -s nuget.org -k %NUGET_KEY%
       env:
