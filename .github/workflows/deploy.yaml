@@ -16,8 +16,8 @@ jobs:
         dotnet-version: 2.2.401
     - name: Build with dotnet
       run: dotnet build --configuration Release
-    - name: Push to Nuget with dotnet
-      run: dir /B
+    - name: Display directory 
+      run: dir
     - name: Push to Nuget with dotnet
       run: dotnet nuget push Bandwidth.Iris.*.nupkg -s nuget.org -k %NUGET_KEY%
       env:
