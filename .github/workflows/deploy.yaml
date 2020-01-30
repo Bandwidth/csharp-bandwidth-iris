@@ -21,7 +21,7 @@ jobs:
     - name: Pack with nuget
       run: .\.nuget\nuget pack -Properties Configuration=Release
     - name: Display key 
-      run: echo %NUGET_KEY%
+      run: echo This is a test %NUGET_KEY% %DOTNET_ROOT%
       env:
         NUGET_KEY: ${{ secrets.NUGET_KEY }}
     - name: Push to Nuget with dotnet
