@@ -15,7 +15,7 @@ jobs:
       with:
         dotnet-version: 2.2.401
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: .\.nuget\nuget pack -Properties Configuration=Release
     - name: Display directory 
       run: dir
     - name: Push to Nuget with dotnet
