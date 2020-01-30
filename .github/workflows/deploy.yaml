@@ -16,5 +16,7 @@ jobs:
         dotnet-version: 2.2.401
     - name: Build with dotnet
       run: dotnet build --configuration Release
+    - name: Push to Nuget with dotnet
+      run: dotnet nuget push Bandwidth.Iris.*.nupkg -s nuget.org -k %NUGET_KEY%
       env:
         NUGET_KEY: ${{ secrets.NUGET_KEY }}
