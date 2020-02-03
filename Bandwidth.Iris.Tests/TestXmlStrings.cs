@@ -2,6 +2,40 @@
 {
     public static class TestXmlStrings
     {
+        public static string ImportTnOrderResponse = $@"<ImportTnOrderResponse>
+                                                            {ImportTnOrder}
+                                                       </ImportTnOrderResponse>";
+
+        public static string ImportTnOrder = @"<ImportTnOrder>
+                                                <CustomerOrderId>SJM000001</CustomerOrderId>
+                                                <OrderCreateDate>2018-01-20T02:59:54.000Z</OrderCreateDate>
+                                                <AccountId>9900012</AccountId>
+                                                <CreatedByUser>smckinnon</CreatedByUser>
+                                                <OrderId>b05de7e6-0cab-4c83-81bb-9379cba8efd0</OrderId>
+                                                <LastModifiedDate>2018-01-20T02:59:54.000Z</LastModifiedDate>
+                                                <SiteId>202</SiteId>
+                                                <SipPeerId>520565</SipPeerId>
+                                                <Subscriber>
+                                                    <Name>ABC Inc.</Name>
+                                                    <ServiceAddress>
+                                                        <HouseNumber>11235</HouseNumber>
+                                                        <StreetName>Back</StreetName>
+                                                        <City>Denver</City>
+                                                        <StateCode>CO</StateCode>
+                                                        <Zip>27541</Zip>
+                                                        <County>Canyon</County>
+                                                    </ServiceAddress>
+                                                </Subscriber>
+                                                <LoaAuthorizingPerson>The Authguy</LoaAuthorizingPerson>
+                                                <TelephoneNumbers>
+                                                    <TelephoneNumber>9199918388</TelephoneNumber>
+                                                    <TelephoneNumber>4158714245</TelephoneNumber>
+                                                    <TelephoneNumber>4352154439</TelephoneNumber>
+                                                    <TelephoneNumber>4352154466</TelephoneNumber>
+                                                </TelephoneNumbers>
+                                                <ProcessingStatus>PROCESSING</ProcessingStatus>
+                                                <Errors/>
+                                                </ImportTnOrder>";
 
         public static string SiteWithAddressPostDirectional = @"<SiteResponse>
                                                                     <Site>
@@ -73,7 +107,7 @@
                                                         {MmsFeature}
                                                     </MmsFeatureResponse>";
 
-        
+
 
         public static string SipPeerSmsFeature = @"<SipPeerSmsFeature>
                                                     <SipPeerSmsFeatureSettings>
@@ -230,7 +264,7 @@
         public static string ValidSipPeersResponseXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><TNSipPeersResponse><SipPeers><SipPeer xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"SipPeer\"><PeerId>12345</PeerId><PeerName>SIP Peer 1</PeerName><Description>Sip Peer 1 description</Description><IsDefaultPeer>true</IsDefaultPeer><ShortMessagingProtocol>SIP</ShortMessagingProtocol><VoiceHosts><Host><HostName>70.62.112.156</HostName></Host></VoiceHosts><VoiceHostGroups/><SmsHosts><Host><HostName>70.62.112.156</HostName></Host></SmsHosts><TerminationHosts><TerminationHost><HostName>70.62.112.156</HostName><Port>5060</Port><CustomerTrafficAllowed>DOMESTIC</CustomerTrafficAllowed><DataAllowed>true</DataAllowed></TerminationHost></TerminationHosts><CallingName><Display>true</Display><Enforced>false</Enforced></CallingName></SipPeer></SipPeers></TNSipPeersResponse>";
         public static string ValidSipPeerResponseXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SipPeerResponse><SipPeer><PeerId>10</PeerId><PeerName>SIP Peer 1</PeerName><Description>Sip Peer 1 description</Description><IsDefaultPeer>true</IsDefaultPeer><ShortMessagingProtocol>SIP</ShortMessagingProtocol><VoiceHosts/><VoiceHostGroups/><SmsHosts/><TerminationHosts/><CallingName><Display>true</Display><Enforced>false</Enforced></CallingName></SipPeer></SipPeerResponse>";
         public static string ValidSipPeerTnResponseXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SipPeerTelephoneNumberResponse><SipPeerTelephoneNumber><FullNumber>9195551212</FullNumber></SipPeerTelephoneNumber></SipPeerTelephoneNumberResponse>";
-        public static string ValidSipPeerTnsResponseXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SipPeerTelephoneNumbersResponse><SipPeerTelephoneNumbers><SipPeerTelephoneNumber><FullNumber>3034162216</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162218</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162227</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7025097265</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162212</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7024759964</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162226</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162231</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162223</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>2143770078</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3302699968</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>8665711365</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>9284448929</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3302710174</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7024797571</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7025091999</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7022579119</FullNumber></SipPeerTelephoneNumber></SipPeerTelephoneNumbers></SipPeerTelephoneNumbersResponse>"; 
+        public static string ValidSipPeerTnsResponseXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SipPeerTelephoneNumbersResponse><SipPeerTelephoneNumbers><SipPeerTelephoneNumber><FullNumber>3034162216</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162218</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162227</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7025097265</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162212</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7024759964</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162226</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162231</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162223</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>2143770078</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3302699968</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>8665711365</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>9284448929</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3302710174</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7024797571</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7025091999</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7022579119</FullNumber></SipPeerTelephoneNumber></SipPeerTelephoneNumbers></SipPeerTelephoneNumbersResponse>";
         /**
          * Order Xmls
          */
@@ -256,7 +290,7 @@
         public static string CoveredRateCentersResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><CoveredRateCenters><CoveredRateCenter><Abbreviation>ACME</Abbreviation><Name>ACME</Name></CoveredRateCenter></CoveredRateCenters>";
         public static string CitiesResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><CityResponse><ResultCount>2</ResultCount><Cities><City><RcAbbreviation>SOUTHEPINS</RcAbbreviation><Name>ABERDEEN</Name></City><City><RcAbbreviation>JULIAN</RcAbbreviation><Name>ADVANCE</Name></City></Cities></CityResponse>";
         public static string TnResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><TelephoneNumberResponse><TelephoneNumber>1234</TelephoneNumber><Status>Inservice</Status><LastModifiedDate>2014-05-09T21:12:03.000Z</LastModifiedDate><OrderCreateDate>2014-05-09T21:12:03.835Z</OrderCreateDate><OrderId>5f3a4dab-aac7-4b0a-8ee4-1b6a67ae04be</OrderId><OrderType>NEW_NUMBER_ORDER</OrderType><SiteId>1091</SiteId><AccountId>9500149</AccountId></TelephoneNumberResponse>";
-        public static string TnsListResponse ="<?xml version=\"1.0\"?><TelephoneNumbersResponse><TelephoneNumberCount>5</TelephoneNumberCount><Links><first></first><next></next></Links><TelephoneNumbers><TelephoneNumber><City>CARY</City><Lata>426</Lata><State>NC</State><FullNumber>9192381138</FullNumber><Tier>0</Tier><VendorId>49</VendorId><VendorName>Bandwidth CLEC</VendorName><RateCenter>CARY</RateCenter><Status>Inservice</Status><AccountId>9900008</AccountId><LastModified>2013-12-05T05:58:27.000Z</LastModified></TelephoneNumber><TelephoneNumber><City>CARY</City><Lata>426</Lata><FullNumber>9192381139</FullNumber><Tier>0</Tier><VendorId>49</VendorId><VendorName>Bandwidth CLEC</VendorName><RateCenter>CARY</RateCenter><Status>Inservice</Status><AccountId>9900000</AccountId><LastModified>2013-12-05T05:58:27.000Z</LastModified></TelephoneNumber></TelephoneNumbers></TelephoneNumbersResponse>";
+        public static string TnsListResponse = "<?xml version=\"1.0\"?><TelephoneNumbersResponse><TelephoneNumberCount>5</TelephoneNumberCount><Links><first></first><next></next></Links><TelephoneNumbers><TelephoneNumber><City>CARY</City><Lata>426</Lata><State>NC</State><FullNumber>9192381138</FullNumber><Tier>0</Tier><VendorId>49</VendorId><VendorName>Bandwidth CLEC</VendorName><RateCenter>CARY</RateCenter><Status>Inservice</Status><AccountId>9900008</AccountId><LastModified>2013-12-05T05:58:27.000Z</LastModified></TelephoneNumber><TelephoneNumber><City>CARY</City><Lata>426</Lata><FullNumber>9192381139</FullNumber><Tier>0</Tier><VendorId>49</VendorId><VendorName>Bandwidth CLEC</VendorName><RateCenter>CARY</RateCenter><Status>Inservice</Status><AccountId>9900000</AccountId><LastModified>2013-12-05T05:58:27.000Z</LastModified></TelephoneNumber></TelephoneNumbers></TelephoneNumbersResponse>";
         public static string TnSitesResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Site><Id>1435</Id><Name>Sales Training</Name></Site>";
         public static string TnSipPeersResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SipPeer><Id>4064</Id><Name>Sales</Name></SipPeer>";
         public static string TnRateCenterResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><TelephoneNumberResponse><TelephoneNumberDetails><State>CO</State><RateCenter>DENVER</RateCenter></TelephoneNumberDetails></TelephoneNumberResponse>";

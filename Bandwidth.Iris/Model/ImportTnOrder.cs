@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Bandwidth.Iris.Model
 {
     public class ImportTnOrder
     {
-       
+
         public string CustomerOrderId { get; set; }
         public string OrderCreateDate { get; set; }
         public string AccountId { get; set; }
         public string CreatedByUser { get; set; }
         public string OrderId { get; set; }
+        public string LastModifiedDate { get; set; }
         public int SiteId { get; set; }
         public int SipPeerId { get; set; }
         public Subscriber Subscriber { get; set; }

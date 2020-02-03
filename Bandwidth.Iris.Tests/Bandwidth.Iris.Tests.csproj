@@ -64,6 +64,7 @@
     <Compile Include="Models\CityTests.cs" />
     <Compile Include="Models\CoveredRateCenterTests.cs" />
     <Compile Include="Models\DiscNumberTest.cs" />
+    <Compile Include="Models\ImportTnOrderTests.cs" />
     <Compile Include="Models\LineOptionTests.cs" />
     <Compile Include="Models\HostTests.cs" />
     <Compile Include="Models\InServiceNumberTest.cs" />
