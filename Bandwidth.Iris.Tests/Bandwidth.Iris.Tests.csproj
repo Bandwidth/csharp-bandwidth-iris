@@ -64,7 +64,6 @@
     <Compile Include="Models\CityTests.cs" />
     <Compile Include="Models\CoveredRateCenterTests.cs" />
     <Compile Include="Models\DiscNumberTest.cs" />
-    <Compile Include="Models\ImportTnOrderTests.cs" />
     <Compile Include="Models\LineOptionTests.cs" />
     <Compile Include="Models\HostTests.cs" />
     <Compile Include="Models\InServiceNumberTest.cs" />
@@ -85,6 +84,7 @@
     <Compile Include="Models\TnReservationTests.cs" />
     <Compile Include="Models\SiteTests.cs" />
     <Compile Include="Models\TnTests.cs" />
+    <Compile Include="Models\ImportTnOrderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestXmlStrings.cs" />
   </ItemGroup>

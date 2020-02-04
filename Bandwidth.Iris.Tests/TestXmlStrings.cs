@@ -2,9 +2,178 @@
 {
     public static class TestXmlStrings
     {
-        public static string ImportTnOrderResponse = $@"<ImportTnOrderResponse>
-                                                            {ImportTnOrder}
-                                                       </ImportTnOrderResponse>";
+        public static string OrderHistoryWrapper = @"<OrderHistoryWrapper>
+                                                        <OrderHistory>
+                                                            <OrderDate>2020-02-04T14:09:07.824Z</OrderDate>
+                                                            <Note>Import TN order has been received by the system.</Note>
+                                                            <Author>jmulford-api</Author>
+                                                            <Status>received</Status>
+                                                        </OrderHistory>
+                                                        <OrderHistory>
+                                                            <OrderDate>2020-02-04T14:09:08.937Z</OrderDate>
+                                                            <Note>Import TN order has failed.</Note>
+                                                            <Author>jmulford-api</Author>
+                                                            <Status>failed</Status>
+                                                        </OrderHistory>
+                                                    </OrderHistoryWrapper>";
+
+        public static string ImportTnOrders = @"<ImportTnOrders>
+                                                    <TotalCount>14</TotalCount>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-04T14:09:08.937Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-04T14:09:07.824Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>fbd17609-be44-48e7-a301-90bd6cf42248</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:08:43.246Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:08:43.220Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>03012d35-f4ef-495d-9d2b-f05f60a98995</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:08:18.968Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:08:18.941Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>dde545c2-fab7-4f09-ba05-94270dc846c6</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:07:33.833Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:07:33.783Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>b6ce414c-efec-4cb7-878f-e55c5a1bb60a</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:07:09.875Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:07:09.831Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>a49cf67e-70d1-4239-8de8-47e5071c0f5a</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:06:31.635Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:06:31.595Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>589aecb2-e25e-42ca-94b6-3b6095ab0e24</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:06:11.904Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:06:11.866Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>2f6fdf1f-2288-4a6e-b7fa-d9900902059e</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:05:58.826Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:05:58.796Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>1691c7c0-53a5-4196-b46a-02b92f278bc5</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:05:31.226Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:05:31.189Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>5ab5ef80-f14d-47c9-b612-764120ccdcb0</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:04:19.615Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:04:19.569Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>d0574c61-368a-49e9-91df-e95fcec6216a</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:03:20.888Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:03:20.852Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>c3de02b3-9215-408f-870f-ceff2ce7bdc8</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:01:42.214Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:01:42.152Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>9796b4f6-90c7-4265-9919-e0bbaa42453b</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-01-31T21:04:03.284Z</lastModifiedDate>
+                                                        <OrderDate>2020-01-31T21:04:03.244Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>3cfcc5c3-230e-4ef6-9aec-64d5066dbaae</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>jmulford</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-01-31T20:49:54.560Z</lastModifiedDate>
+                                                        <OrderDate>2020-01-31T20:49:54.511Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>e5d2cd6d-664d-40ac-8c45-ff9916fcb8e0</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                </ImportTnOrders>";
 
         public static string ImportTnOrder = @"<ImportTnOrder>
                                                 <CustomerOrderId>SJM000001</CustomerOrderId>
@@ -37,6 +206,11 @@
                                                 <Errors/>
                                                 </ImportTnOrder>";
 
+        public static string ImportTnOrderResponse = $@"<ImportTnOrderResponse>
+                                                            {ImportTnOrder}
+                                                       </ImportTnOrderResponse>";
+
+        
         public static string SiteWithAddressPostDirectional = @"<SiteResponse>
                                                                     <Site>
                                                                         <Name>Raleigh</Name>

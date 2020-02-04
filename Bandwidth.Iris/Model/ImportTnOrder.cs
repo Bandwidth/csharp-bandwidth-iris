@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
 {
@@ -32,13 +33,13 @@ namespace Bandwidth.Iris.Model
             return Create(Client.GetInstance(), order);
         }
 
-        public async static Task<ImportTnOrder[]> List(Client client, Dictionary<string, object> query)
+        public async static Task<ImportTnOrders> List(Client client, Dictionary<string, object> query)
         {
-            var item = await client.MakeGetRequest<ImportTnOrder[]>(client.ConcatAccountPath(importTnOrdersPath), query);
+            var item = await client.MakeGetRequest<ImportTnOrders>(client.ConcatAccountPath(importTnOrdersPath), query);
             return item;
         }
 
-        public static Task<ImportTnOrder[]> List(Dictionary<string, object> query)
+        public static Task<ImportTnOrders> List(Dictionary<string, object> query)
         {
             return List(Client.GetInstance(), query);
         }
@@ -54,13 +55,13 @@ namespace Bandwidth.Iris.Model
             return Get(Client.GetInstance(), orderId);
         }
 
-        public async static Task<ImportTnOrder> GetHistory(Client client, string orderId)
+        public async static Task<OrderHistoryWrapper> GetHistory(Client client, string orderId)
         {
-            var item = await client.MakeGetRequest<ImportTnOrder>(client.ConcatAccountPath($"{importTnOrdersPath}/{orderId}/history"));
+            var item = await client.MakeGetRequest<OrderHistoryWrapper>(client.ConcatAccountPath($"{importTnOrdersPath}/{orderId}/history"));
             return item;
         }
 
-        public static Task<ImportTnOrder> GetHistory(string orderId)
+        public static Task<OrderHistoryWrapper> GetHistory(string orderId)
         {
             return GetHistory(Client.GetInstance(), orderId);
         }
@@ -72,6 +73,28 @@ namespace Bandwidth.Iris.Model
     public class ImportTnOrderResponse
     {
         public ImportTnOrder ImportTnOrder { get; set; }
+    }
+
+    public class ImportTnOrders
+    {
+        public int TotalCount { get; set; }
+
+        [XmlElement("ImportTnOrderSummary")]
+        public ImportTnOrderSummary[] ImportTnOrderSummarys { get; set; }
+    }
+
+    public class ImportTnOrderSummary
+    {
+        public int accountId { get; set; }
+        public int CountOfTNs { get; set; }
+        public string CustomerOrderId { get; set; }
+        public string userId { get; set; }
+        public string lastModifiedDate { get; set; }
+        public string OrderDate { get; set; }
+        public string OrderType { get; set; }
+        public string OrderStatus { get; set; }
+        public string OrderId { get; set; }
+
     }
 
 
