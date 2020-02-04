@@ -56,7 +56,6 @@
     <Compile Include="Model\DiscNumber.cs" />
     <Compile Include="Model\ImportTnChecker.cs" />
     <Compile Include="Model\ImportTnOrder.cs" />
-    <Compile Include="Model\InserviceNumbers.cs" />
     <Compile Include="Model\LineOptionOrder.cs" />
     <Compile Include="Model\Host.cs" />
     <Compile Include="Model\Dlda.cs" />

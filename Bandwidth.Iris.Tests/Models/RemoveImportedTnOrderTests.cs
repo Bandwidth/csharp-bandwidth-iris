@@ -21,7 +21,7 @@ namespace Bandwidth.Iris.Tests.Models
         {
             var order = new RemoveImportedTnOrder
             {
-
+                
             };
 
             using (var server = new HttpServer(new RequestHandler

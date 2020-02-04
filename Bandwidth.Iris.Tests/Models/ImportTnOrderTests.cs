@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
@@ -97,7 +98,7 @@ namespace Bandwidth.Iris.Tests.Models
         {
             var order = new ImportTnOrder
             {
-                OrderId = "1",
+                OrderId = "fbd17609-be44-48e7-a301-90bd6cf42248",
                 AccountId = "account",
                 SipPeerId = 1,
                 SiteId = 2
@@ -106,12 +107,12 @@ namespace Bandwidth.Iris.Tests.Models
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "GET",
-                EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/importTnOrders",
+                EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/importTnOrders?accountId=1",
                 ContentToSend = new StringContent(TestXmlStrings.ImportTnOrders, Encoding.UTF8, "application/xml")
             }))
             {
                 var client = Helper.CreateClient();
-                var result = ImportTnOrder.List(client, null).Result;
+                var result = ImportTnOrder.List(client, new Dictionary<string, object> { { "accountId", "1" } }).Result;
                 if (server.Error != null) throw server.Error;
 
                 Assert.AreEqual(result.TotalCount, 14);
@@ -152,7 +153,7 @@ namespace Bandwidth.Iris.Tests.Models
                 if (server.Error != null) throw server.Error;
 
                 Assert.AreEqual(result.Items.Length, 2);
-                Assert.AreEqual(result.Items[0].OrderDate, "2020-02-04T14:09:07.824Z");
+                Assert.AreEqual(result.Items[0].OrderDate, DateTime.Parse("2020-02-04T14:09:07.824"));
                 Assert.AreEqual(result.Items[0].Note, "Import TN order has been received by the system.");
                 Assert.AreEqual(result.Items[0].Author, "jmulford-api");
                 Assert.AreEqual(result.Items[0].Status, "received");

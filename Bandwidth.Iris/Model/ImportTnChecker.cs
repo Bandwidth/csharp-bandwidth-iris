@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
 {
@@ -22,12 +23,14 @@ namespace Bandwidth.Iris.Model
     public class ImportTnCheckerPayload
     {
         public TelephoneNumber[] TelephoneNumbers { get; set; }
+        [XmlArray("ImportTnErrors")]
+        [XmlArrayItem("ImportTnError")]
+        public ImportTnError[] ImportTnErrors { get; set; }
     }
 
     public class ImportTnCheckerResponse
     {
         public ImportTnCheckerPayload ImportTnCheckerPayload { get; set; }
-        public ImportTnError[] ImportTnErrors { get; set; }
 
     }
 

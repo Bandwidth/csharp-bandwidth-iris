@@ -2,6 +2,24 @@
 {
     public static class TestXmlStrings
     {
+        public static string ImportTnCheckerPayload = @"<ImportTnCheckerPayload>
+                                                            <TelephoneNumbers>
+                                                                <TelephoneNumber>3032281000</TelephoneNumber>
+                                                            </TelephoneNumbers>
+                                                            <ImportTnErrors>
+                                                                <ImportTnError>
+                                                                    <Code>19006</Code>
+                                                                    <Description>Bandwidth numbers cannot be imported by this account at this time.</Description>
+                                                                    <TelephoneNumbers>
+                                                                        <TelephoneNumber>4109235436</TelephoneNumber>
+                                                                        <TelephoneNumber>4104685864</TelephoneNumber>
+                                                                    </TelephoneNumbers>
+                                                                </ImportTnError>
+                                                            </ImportTnErrors>
+                                                        </ImportTnCheckerPayload>";
+
+        public static string ImportTnCheckerResponse = $"<ImportTnCheckerResponse>{ImportTnCheckerPayload}</ImportTnCheckerResponse>";
+
         public static string RemoveImportedOrder = @"<RemoveImportedTnOrder>
                                                         <CustomerOrderId>SJM000001</CustomerOrderId>
                                                         <OrderCreateDate>2018-01-20T02:59:54.000Z</OrderCreateDate>
