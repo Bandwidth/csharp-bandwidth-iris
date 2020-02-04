@@ -2,6 +2,106 @@
 {
     public static class TestXmlStrings
     {
+        public static string RemoveImportedOrder = @"<RemoveImportedTnOrder>
+                                                        <CustomerOrderId>SJM000001</CustomerOrderId>
+                                                        <OrderCreateDate>2018-01-20T02:59:54.000Z</OrderCreateDate>
+                                                        <AccountId>9900012</AccountId>
+                                                        <CreatedByUser>smckinnon</CreatedByUser>
+                                                        <OrderId>b05de7e6-0cab-4c83-81bb-9379cba8efd0</OrderId>
+                                                        <LastModifiedDate>2018-01-20T02:59:54.000Z</LastModifiedDate>
+                                                        <TelephoneNumbers>
+                                                            <TelephoneNumber>9199918388</TelephoneNumber>
+                                                            <TelephoneNumber>4158714245</TelephoneNumber>
+                                                            <TelephoneNumber>4352154439</TelephoneNumber>
+                                                            <TelephoneNumber>4352154466</TelephoneNumber>
+                                                        </TelephoneNumbers>
+                                                        <ProcessingStatus>PROCESSING</ProcessingStatus>
+                                                        <Errors/>
+                                                    </RemoveImportedTnOrder>";
+
+        public static string RemoveImportedOrderResponse = $"<RemoveImportedTnOrderResponse>{RemoveImportedOrder}</RemoveImportedTnOrderResponse>";
+
+        public static string RemoveImportedTnOrders = @"<RemoveImportedTnOrders>
+                                                            <TotalCount>7</TotalCount>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-02-03T18:08:44.256Z</lastModifiedDate>
+                                                                <OrderDate>2020-02-03T18:08:44.199Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>5bb3b642-cbbb-4438-9a44-56069550d603</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-02-03T18:08:19.955Z</lastModifiedDate>
+                                                                <OrderDate>2020-02-03T18:08:19.927Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>384ff500-ff33-4580-a910-45eff3d51f0d</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-02-03T15:51:14.496Z</lastModifiedDate>
+                                                                <OrderDate>2020-02-03T15:51:14.471Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>20943d4a-600c-44e0-ac97-dd3d6f1f2af5</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-02-03T15:48:28.440Z</lastModifiedDate>
+                                                                <OrderDate>2020-02-03T15:48:28.418Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>d3ed8a2e-7927-4fbc-8e6c-9c8408d443d5</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-01-31T21:12:23.731Z</lastModifiedDate>
+                                                                <OrderDate>2020-01-31T21:12:23.707Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>6ddec230-ca5f-4502-8273-15ba8968dc8c</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-01-31T21:12:08.200Z</lastModifiedDate>
+                                                                <OrderDate>2020-01-31T21:12:08.183Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>dc2ae1c7-b7db-44e7-bbb2-eb2b17e18413</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-01-31T21:11:46.368Z</lastModifiedDate>
+                                                                <OrderDate>2020-01-31T21:11:46.343Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>1bcfe0bd-6998-4198-b734-abd1fffe346a</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                        </RemoveImportedTnOrders>";
+
         public static string OrderHistoryWrapper = @"<OrderHistoryWrapper>
                                                         <OrderHistory>
                                                             <OrderDate>2020-02-04T14:09:07.824Z</OrderDate>

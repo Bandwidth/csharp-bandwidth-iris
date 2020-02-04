@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
 {
@@ -28,35 +29,35 @@ namespace Bandwidth.Iris.Model
             return Create(Client.GetInstance(), order);
         }
 
-        public async static Task<RemoveImportedTnOrderResponse[]> List(Client client, Dictionary<string, object> query)
+        public async static Task<RemoveImportedTnOrders> List(Client client, Dictionary<string, object> query)
         {
-            var item = await client.MakeGetRequest<RemoveImportedTnOrderResponse[]>(client.ConcatAccountPath(removeImportedTnOrdersPath), query);
+            var item = await client.MakeGetRequest<RemoveImportedTnOrders>(client.ConcatAccountPath(removeImportedTnOrdersPath), query);
             return item;
         }
 
-        public static Task<RemoveImportedTnOrderResponse[]> List(Dictionary<string, object> query)
+        public static Task<RemoveImportedTnOrders> List(Dictionary<string, object> query)
         {
             return List(Client.GetInstance(), query);
         }
 
-        public async static Task<RemoveImportedTnOrderResponse> Get(Client client, string orderId)
+        public async static Task<RemoveImportedTnOrder> Get(Client client, string orderId)
         {
-            var item = await client.MakeGetRequest<RemoveImportedTnOrderResponse>(client.ConcatAccountPath(($"{removeImportedTnOrdersPath}/{orderId}")));
+            var item = await client.MakeGetRequest<RemoveImportedTnOrder>(client.ConcatAccountPath(($"{removeImportedTnOrdersPath}/{orderId}")));
             return item;
         }
 
-        public static Task<RemoveImportedTnOrderResponse> Get(string orderId)
+        public static Task<RemoveImportedTnOrder> Get(string orderId)
         {
             return Get(Client.GetInstance(), orderId);
         }
 
-        public async static Task<RemoveImportedTnOrderResponse> GetHistory(Client client, string orderId)
+        public async static Task<OrderHistoryWrapper> GetHistory(Client client, string orderId)
         {
-            var item = await client.MakeGetRequest<RemoveImportedTnOrderResponse>(client.ConcatAccountPath($"{removeImportedTnOrdersPath}/{orderId}/history"));
+            var item = await client.MakeGetRequest<OrderHistoryWrapper>(client.ConcatAccountPath($"{removeImportedTnOrdersPath}/{orderId}/history"));
             return item;
         }
 
-        public static Task<RemoveImportedTnOrderResponse> GetHistory(string orderId)
+        public static Task<OrderHistoryWrapper> GetHistory(string orderId)
         {
             return GetHistory(Client.GetInstance(), orderId);
         }
@@ -66,6 +67,25 @@ namespace Bandwidth.Iris.Model
     public class RemoveImportedTnOrderResponse
     {
         public RemoveImportedTnOrder RemoveImportedTnOrder { get; set; }
-        public RemoveImportedTnOrder[] RemoveImportedTnOrders { get; set; }
+    }
+
+    public class RemoveImportedTnOrders
+    {
+        public int TotalCount { get; set; }
+        [XmlElement("RemoveImportedTnOrderSummary")]
+        public RemoveImportedTnOrderSummary[] Items { get; set; }
+    }
+
+    public class RemoveImportedTnOrderSummary
+    {
+        public int accountId { get; set; }
+        public int CountOfTNs { get; set; }
+        public string CustomerOrderId { get; set; }
+        public string userId { get; set; }
+        public string lastModifiedDate { get; set; }
+        public string OrderDate { get; set; }
+        public string OrderType { get; set; }
+        public string OrderStatus { get; set; }
+        public string OrderId { get; set; }
     }
 }
