@@ -146,7 +146,7 @@ namespace Bandwidth.Iris
 
 
 
-        internal async Task<HttpResponseMessage> MakePostRequest(string path, object data, bool disposeResponse = false)
+        public async Task<HttpResponseMessage> MakePostRequest(string path, object data, bool disposeResponse = false)
         {
             var serializer = new XmlSerializer(data.GetType());
             using (var writer = new Utf8StringWriter())
@@ -173,7 +173,7 @@ namespace Bandwidth.Iris
             }
         }
 
-        internal async Task<HttpResponseMessage> MakePatchRequest(string path, object data, bool disposeResponse = false)
+        public async Task<HttpResponseMessage> MakePatchRequest(string path, object data, bool disposeResponse = false)
         {
             var serializer = new XmlSerializer(data.GetType());
             using (var writer = new Utf8StringWriter())

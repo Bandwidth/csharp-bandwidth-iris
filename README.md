@@ -788,3 +788,91 @@ var totals = await DiscNumber.GetTotals();
 ```csharp
 var list = await Host.List(new Dictionary<string,object>{{"type", "SMS"}});
 ```
+
+## ImportTnOrders
+
+### Create A ImportTnOrders Reqeust
+
+```csharp
+var order = new ImportTnOrder
+    {
+        OrderId = "fbd17609-be44-48e7-a301-90bd6cf42248",
+        AccountId = "account",
+        SipPeerId = 1,
+        SiteId = 2
+    };
+
+var response = await ImportTnOrder.Create(client, order);
+```
+
+
+### Retrieve ImportOrders List
+
+```csharp
+var response = await ImportTnOrder.List(client, new Dictionary<string, object> { { "accountId", "1" } });
+```
+
+### Get ImportOrder by OrderId
+
+```csharp
+var response = await ImportTnOrder.Get(client, orderId);
+```
+
+### Get ImportOrder History by OrderId
+
+```csharp
+var response = await ImportTnOrder.GetHistory(client, orderId )
+```
+
+
+## RemoveImportedTnOrders
+
+### Create A ImportTnOrders Reqeust
+
+```csharp
+var order = new RemoveImportedTnOrder
+    {
+        OrderId = "fbd17609-be44-48e7-a301-90bd6cf42248",
+        AccountId = "account"
+    };
+
+var response = await RemoveImportedTnOrder.Create(client, order);
+```
+
+
+### Retrieve RemoveImportedTnOrders List
+
+```csharp
+var response = await RemoveImportedTnOrder.List(client, new Dictionary<string, object> { { "accountId", "1" } });
+```
+
+### Get RemoveImportedTnOrder by OrderId
+
+```csharp
+var response = await RemoveImportedTnOrder.Get(client, orderId);
+```
+
+### Get RemoveImportedTnOrder History by OrderId
+
+```csharp
+var response = await RemoveImportedTnOrder.GetHistory(client, orderId )
+```
+
+## ImportTnChecker
+
+### Request Portability Information on a Set of TNs
+
+```csharp
+var payload = new ImportTnCheckerPayload
+{
+    TelephoneNumbers = new TelephoneNumber[]
+    {
+        new TelephoneNumber
+        {
+            FullNumber = "3032281000"
+        }
+    }
+};
+
+var response = await ImportTnChecker.Create(client, payload);
+```

@@ -54,6 +54,8 @@
     <Compile Include="Model\City.cs" />
     <Compile Include="Model\CoveredRateCenter.cs" />
     <Compile Include="Model\DiscNumber.cs" />
+    <Compile Include="Model\ImportTnChecker.cs" />
+    <Compile Include="Model\ImportTnOrder.cs" />
     <Compile Include="Model\LineOptionOrder.cs" />
     <Compile Include="Model\Host.cs" />
     <Compile Include="Model\Dlda.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Model\ImportToAccount.cs" />
     <Compile Include="Model\PortOut.cs" />
     <Compile Include="Model\PortIn.cs" />
+    <Compile Include="Model\RemoveImportedTnOrder.cs" />
     <Compile Include="Model\SipPeer.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Lidb.cs" />

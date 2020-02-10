@@ -2,7 +2,333 @@
 {
     public static class TestXmlStrings
     {
+        public static string ImportTnCheckerPayload = @"<ImportTnCheckerPayload>
+                                                            <TelephoneNumbers>
+                                                                <TelephoneNumber>3032281000</TelephoneNumber>
+                                                            </TelephoneNumbers>
+                                                            <ImportTnErrors>
+                                                                <ImportTnError>
+                                                                    <Code>19006</Code>
+                                                                    <Description>Bandwidth numbers cannot be imported by this account at this time.</Description>
+                                                                    <TelephoneNumbers>
+                                                                        <TelephoneNumber>4109235436</TelephoneNumber>
+                                                                        <TelephoneNumber>4104685864</TelephoneNumber>
+                                                                    </TelephoneNumbers>
+                                                                </ImportTnError>
+                                                            </ImportTnErrors>
+                                                        </ImportTnCheckerPayload>";
 
+        public static string ImportTnCheckerResponse = $"<ImportTnCheckerResponse>{ImportTnCheckerPayload}</ImportTnCheckerResponse>";
+
+        public static string RemoveImportedOrder = @"<RemoveImportedTnOrder>
+                                                        <CustomerOrderId>SJM000001</CustomerOrderId>
+                                                        <OrderCreateDate>2018-01-20T02:59:54.000Z</OrderCreateDate>
+                                                        <AccountId>9900012</AccountId>
+                                                        <CreatedByUser>smckinnon</CreatedByUser>
+                                                        <OrderId>b05de7e6-0cab-4c83-81bb-9379cba8efd0</OrderId>
+                                                        <LastModifiedDate>2018-01-20T02:59:54.000Z</LastModifiedDate>
+                                                        <TelephoneNumbers>
+                                                            <TelephoneNumber>9199918388</TelephoneNumber>
+                                                            <TelephoneNumber>4158714245</TelephoneNumber>
+                                                            <TelephoneNumber>4352154439</TelephoneNumber>
+                                                            <TelephoneNumber>4352154466</TelephoneNumber>
+                                                        </TelephoneNumbers>
+                                                        <ProcessingStatus>PROCESSING</ProcessingStatus>
+                                                        <Errors/>
+                                                    </RemoveImportedTnOrder>";
+
+        public static string RemoveImportedOrderResponse = $"<RemoveImportedTnOrderResponse>{RemoveImportedOrder}</RemoveImportedTnOrderResponse>";
+
+        public static string RemoveImportedTnOrders = @"<RemoveImportedTnOrders>
+                                                            <TotalCount>7</TotalCount>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-02-03T18:08:44.256Z</lastModifiedDate>
+                                                                <OrderDate>2020-02-03T18:08:44.199Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>5bb3b642-cbbb-4438-9a44-56069550d603</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-02-03T18:08:19.955Z</lastModifiedDate>
+                                                                <OrderDate>2020-02-03T18:08:19.927Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>384ff500-ff33-4580-a910-45eff3d51f0d</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-02-03T15:51:14.496Z</lastModifiedDate>
+                                                                <OrderDate>2020-02-03T15:51:14.471Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>20943d4a-600c-44e0-ac97-dd3d6f1f2af5</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-02-03T15:48:28.440Z</lastModifiedDate>
+                                                                <OrderDate>2020-02-03T15:48:28.418Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>d3ed8a2e-7927-4fbc-8e6c-9c8408d443d5</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-01-31T21:12:23.731Z</lastModifiedDate>
+                                                                <OrderDate>2020-01-31T21:12:23.707Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>6ddec230-ca5f-4502-8273-15ba8968dc8c</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-01-31T21:12:08.200Z</lastModifiedDate>
+                                                                <OrderDate>2020-01-31T21:12:08.183Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>dc2ae1c7-b7db-44e7-bbb2-eb2b17e18413</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                            <RemoveImportedTnOrderSummary>
+                                                                <accountId>9900778</accountId>
+                                                                <CountOfTNs>2</CountOfTNs>
+                                                                <CustomerOrderId>custom string</CustomerOrderId>
+                                                                <userId>jmulford-api</userId>
+                                                                <lastModifiedDate>2020-01-31T21:11:46.368Z</lastModifiedDate>
+                                                                <OrderDate>2020-01-31T21:11:46.343Z</OrderDate>
+                                                                <OrderType>remove_imported_tn_orders</OrderType>
+                                                                <OrderStatus>FAILED</OrderStatus>
+                                                                <OrderId>1bcfe0bd-6998-4198-b734-abd1fffe346a</OrderId>
+                                                            </RemoveImportedTnOrderSummary>
+                                                        </RemoveImportedTnOrders>";
+
+        public static string OrderHistoryWrapper = @"<OrderHistoryWrapper>
+                                                        <OrderHistory>
+                                                            <OrderDate>2020-02-04T14:09:07.824Z</OrderDate>
+                                                            <Note>Import TN order has been received by the system.</Note>
+                                                            <Author>jmulford-api</Author>
+                                                            <Status>received</Status>
+                                                        </OrderHistory>
+                                                        <OrderHistory>
+                                                            <OrderDate>2020-02-04T14:09:08.937Z</OrderDate>
+                                                            <Note>Import TN order has failed.</Note>
+                                                            <Author>jmulford-api</Author>
+                                                            <Status>failed</Status>
+                                                        </OrderHistory>
+                                                    </OrderHistoryWrapper>";
+
+        public static string ImportTnOrders = @"<ImportTnOrders>
+                                                    <TotalCount>14</TotalCount>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-04T14:09:08.937Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-04T14:09:07.824Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>fbd17609-be44-48e7-a301-90bd6cf42248</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:08:43.246Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:08:43.220Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>03012d35-f4ef-495d-9d2b-f05f60a98995</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:08:18.968Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:08:18.941Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>dde545c2-fab7-4f09-ba05-94270dc846c6</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:07:33.833Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:07:33.783Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>b6ce414c-efec-4cb7-878f-e55c5a1bb60a</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:07:09.875Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:07:09.831Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>a49cf67e-70d1-4239-8de8-47e5071c0f5a</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:06:31.635Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:06:31.595Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>589aecb2-e25e-42ca-94b6-3b6095ab0e24</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:06:11.904Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:06:11.866Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>2f6fdf1f-2288-4a6e-b7fa-d9900902059e</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:05:58.826Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:05:58.796Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>1691c7c0-53a5-4196-b46a-02b92f278bc5</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:05:31.226Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:05:31.189Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>5ab5ef80-f14d-47c9-b612-764120ccdcb0</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:04:19.615Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:04:19.569Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>d0574c61-368a-49e9-91df-e95fcec6216a</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:03:20.888Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:03:20.852Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>c3de02b3-9215-408f-870f-ceff2ce7bdc8</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-02-03T18:01:42.214Z</lastModifiedDate>
+                                                        <OrderDate>2020-02-03T18:01:42.152Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>9796b4f6-90c7-4265-9919-e0bbaa42453b</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>id</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-01-31T21:04:03.284Z</lastModifiedDate>
+                                                        <OrderDate>2020-01-31T21:04:03.244Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>3cfcc5c3-230e-4ef6-9aec-64d5066dbaae</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                    <ImportTnOrderSummary>
+                                                        <accountId>9900778</accountId>
+                                                        <CountOfTNs>1</CountOfTNs>
+                                                        <CustomerOrderId>jmulford</CustomerOrderId>
+                                                        <userId>jmulford-api</userId>
+                                                        <lastModifiedDate>2020-01-31T20:49:54.560Z</lastModifiedDate>
+                                                        <OrderDate>2020-01-31T20:49:54.511Z</OrderDate>
+                                                        <OrderType>import_tn_orders</OrderType>
+                                                        <OrderStatus>FAILED</OrderStatus>
+                                                        <OrderId>e5d2cd6d-664d-40ac-8c45-ff9916fcb8e0</OrderId>
+                                                    </ImportTnOrderSummary>
+                                                </ImportTnOrders>";
+
+        public static string ImportTnOrder = @"<ImportTnOrder>
+                                                <CustomerOrderId>SJM000001</CustomerOrderId>
+                                                <OrderCreateDate>2018-01-20T02:59:54.000Z</OrderCreateDate>
+                                                <AccountId>9900012</AccountId>
+                                                <CreatedByUser>smckinnon</CreatedByUser>
+                                                <OrderId>b05de7e6-0cab-4c83-81bb-9379cba8efd0</OrderId>
+                                                <LastModifiedDate>2018-01-20T02:59:54.000Z</LastModifiedDate>
+                                                <SiteId>202</SiteId>
+                                                <SipPeerId>520565</SipPeerId>
+                                                <Subscriber>
+                                                    <Name>ABC Inc.</Name>
+                                                    <ServiceAddress>
+                                                        <HouseNumber>11235</HouseNumber>
+                                                        <StreetName>Back</StreetName>
+                                                        <City>Denver</City>
+                                                        <StateCode>CO</StateCode>
+                                                        <Zip>27541</Zip>
+                                                        <County>Canyon</County>
+                                                    </ServiceAddress>
+                                                </Subscriber>
+                                                <LoaAuthorizingPerson>The Authguy</LoaAuthorizingPerson>
+                                                <TelephoneNumbers>
+                                                    <TelephoneNumber>9199918388</TelephoneNumber>
+                                                    <TelephoneNumber>4158714245</TelephoneNumber>
+                                                    <TelephoneNumber>4352154439</TelephoneNumber>
+                                                    <TelephoneNumber>4352154466</TelephoneNumber>
+                                                </TelephoneNumbers>
+                                                <ProcessingStatus>PROCESSING</ProcessingStatus>
+                                                <Errors/>
+                                                </ImportTnOrder>";
+
+        public static string ImportTnOrderResponse = $@"<ImportTnOrderResponse>
+                                                            {ImportTnOrder}
+                                                       </ImportTnOrderResponse>";
+
+        
         public static string SiteWithAddressPostDirectional = @"<SiteResponse>
                                                                     <Site>
                                                                         <Name>Raleigh</Name>
@@ -73,7 +399,7 @@
                                                         {MmsFeature}
                                                     </MmsFeatureResponse>";
 
-        
+
 
         public static string SipPeerSmsFeature = @"<SipPeerSmsFeature>
                                                     <SipPeerSmsFeatureSettings>
@@ -230,7 +556,7 @@
         public static string ValidSipPeersResponseXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><TNSipPeersResponse><SipPeers><SipPeer xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"SipPeer\"><PeerId>12345</PeerId><PeerName>SIP Peer 1</PeerName><Description>Sip Peer 1 description</Description><IsDefaultPeer>true</IsDefaultPeer><ShortMessagingProtocol>SIP</ShortMessagingProtocol><VoiceHosts><Host><HostName>70.62.112.156</HostName></Host></VoiceHosts><VoiceHostGroups/><SmsHosts><Host><HostName>70.62.112.156</HostName></Host></SmsHosts><TerminationHosts><TerminationHost><HostName>70.62.112.156</HostName><Port>5060</Port><CustomerTrafficAllowed>DOMESTIC</CustomerTrafficAllowed><DataAllowed>true</DataAllowed></TerminationHost></TerminationHosts><CallingName><Display>true</Display><Enforced>false</Enforced></CallingName></SipPeer></SipPeers></TNSipPeersResponse>";
         public static string ValidSipPeerResponseXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SipPeerResponse><SipPeer><PeerId>10</PeerId><PeerName>SIP Peer 1</PeerName><Description>Sip Peer 1 description</Description><IsDefaultPeer>true</IsDefaultPeer><ShortMessagingProtocol>SIP</ShortMessagingProtocol><VoiceHosts/><VoiceHostGroups/><SmsHosts/><TerminationHosts/><CallingName><Display>true</Display><Enforced>false</Enforced></CallingName></SipPeer></SipPeerResponse>";
         public static string ValidSipPeerTnResponseXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SipPeerTelephoneNumberResponse><SipPeerTelephoneNumber><FullNumber>9195551212</FullNumber></SipPeerTelephoneNumber></SipPeerTelephoneNumberResponse>";
-        public static string ValidSipPeerTnsResponseXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SipPeerTelephoneNumbersResponse><SipPeerTelephoneNumbers><SipPeerTelephoneNumber><FullNumber>3034162216</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162218</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162227</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7025097265</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162212</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7024759964</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162226</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162231</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162223</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>2143770078</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3302699968</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>8665711365</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>9284448929</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3302710174</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7024797571</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7025091999</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7022579119</FullNumber></SipPeerTelephoneNumber></SipPeerTelephoneNumbers></SipPeerTelephoneNumbersResponse>"; 
+        public static string ValidSipPeerTnsResponseXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SipPeerTelephoneNumbersResponse><SipPeerTelephoneNumbers><SipPeerTelephoneNumber><FullNumber>3034162216</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162218</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162227</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7025097265</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162212</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7024759964</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162226</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162231</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3034162223</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>2143770078</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3302699968</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>8665711365</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>9284448929</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>3302710174</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7024797571</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7025091999</FullNumber></SipPeerTelephoneNumber><SipPeerTelephoneNumber><FullNumber>7022579119</FullNumber></SipPeerTelephoneNumber></SipPeerTelephoneNumbers></SipPeerTelephoneNumbersResponse>";
         /**
          * Order Xmls
          */
@@ -256,7 +582,7 @@
         public static string CoveredRateCentersResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><CoveredRateCenters><CoveredRateCenter><Abbreviation>ACME</Abbreviation><Name>ACME</Name></CoveredRateCenter></CoveredRateCenters>";
         public static string CitiesResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><CityResponse><ResultCount>2</ResultCount><Cities><City><RcAbbreviation>SOUTHEPINS</RcAbbreviation><Name>ABERDEEN</Name></City><City><RcAbbreviation>JULIAN</RcAbbreviation><Name>ADVANCE</Name></City></Cities></CityResponse>";
         public static string TnResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><TelephoneNumberResponse><TelephoneNumber>1234</TelephoneNumber><Status>Inservice</Status><LastModifiedDate>2014-05-09T21:12:03.000Z</LastModifiedDate><OrderCreateDate>2014-05-09T21:12:03.835Z</OrderCreateDate><OrderId>5f3a4dab-aac7-4b0a-8ee4-1b6a67ae04be</OrderId><OrderType>NEW_NUMBER_ORDER</OrderType><SiteId>1091</SiteId><AccountId>9500149</AccountId></TelephoneNumberResponse>";
-        public static string TnsListResponse ="<?xml version=\"1.0\"?><TelephoneNumbersResponse><TelephoneNumberCount>5</TelephoneNumberCount><Links><first></first><next></next></Links><TelephoneNumbers><TelephoneNumber><City>CARY</City><Lata>426</Lata><State>NC</State><FullNumber>9192381138</FullNumber><Tier>0</Tier><VendorId>49</VendorId><VendorName>Bandwidth CLEC</VendorName><RateCenter>CARY</RateCenter><Status>Inservice</Status><AccountId>9900008</AccountId><LastModified>2013-12-05T05:58:27.000Z</LastModified></TelephoneNumber><TelephoneNumber><City>CARY</City><Lata>426</Lata><FullNumber>9192381139</FullNumber><Tier>0</Tier><VendorId>49</VendorId><VendorName>Bandwidth CLEC</VendorName><RateCenter>CARY</RateCenter><Status>Inservice</Status><AccountId>9900000</AccountId><LastModified>2013-12-05T05:58:27.000Z</LastModified></TelephoneNumber></TelephoneNumbers></TelephoneNumbersResponse>";
+        public static string TnsListResponse = "<?xml version=\"1.0\"?><TelephoneNumbersResponse><TelephoneNumberCount>5</TelephoneNumberCount><Links><first></first><next></next></Links><TelephoneNumbers><TelephoneNumber><City>CARY</City><Lata>426</Lata><State>NC</State><FullNumber>9192381138</FullNumber><Tier>0</Tier><VendorId>49</VendorId><VendorName>Bandwidth CLEC</VendorName><RateCenter>CARY</RateCenter><Status>Inservice</Status><AccountId>9900008</AccountId><LastModified>2013-12-05T05:58:27.000Z</LastModified></TelephoneNumber><TelephoneNumber><City>CARY</City><Lata>426</Lata><FullNumber>9192381139</FullNumber><Tier>0</Tier><VendorId>49</VendorId><VendorName>Bandwidth CLEC</VendorName><RateCenter>CARY</RateCenter><Status>Inservice</Status><AccountId>9900000</AccountId><LastModified>2013-12-05T05:58:27.000Z</LastModified></TelephoneNumber></TelephoneNumbers></TelephoneNumbersResponse>";
         public static string TnSitesResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Site><Id>1435</Id><Name>Sales Training</Name></Site>";
         public static string TnSipPeersResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SipPeer><Id>4064</Id><Name>Sales</Name></SipPeer>";
         public static string TnRateCenterResponse = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><TelephoneNumberResponse><TelephoneNumberDetails><State>CO</State><RateCenter>DENVER</RateCenter></TelephoneNumberDetails></TelephoneNumberResponse>";
