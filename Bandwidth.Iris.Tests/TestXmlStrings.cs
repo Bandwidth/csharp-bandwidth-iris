@@ -2,6 +2,75 @@
 {
     public static class TestXmlStrings
     {
+
+        public static string notesResponse2 = @"<Notes>
+    <Note>
+        <Id>87037</Id>
+        <UserId>jbm</UserId>
+        <Description>This is a test note</Description>
+        <LastDateModifier>2014-11-16T04:01:10.000Z</LastDateModifier>
+    </Note>
+    <Note>
+        <Id>87039</Id>
+        <UserId>smckinnon</UserId>
+        <Description>This is a second test note</Description>
+        <LastDateModifier>2014-11-16T04:08:46.000Z</LastDateModifier>
+    </Note>
+</Notes>";
+
+        public static string csrResponse = @"<CsrResponse>
+    <CustomerOrderId>TEST BWDB-6506</CustomerOrderId>
+    <LastModifiedBy>systemUser</LastModifiedBy>
+    <OrderCreateDate>2020-01-13T21:14:35Z</OrderCreateDate>
+    <AccountId>14</AccountId>
+    <OrderId>5c3b8240-52b5-45a5-8d7d-42a71ebcd1ba</OrderId>
+    <LastModifiedDate>2020-01-13T16:51:21.920Z</LastModifiedDate>
+    <Status>COMPLETE</Status>
+    <AccountNumber>987654321</AccountNumber>
+    <AccountTelephoneNumber>9196194444</AccountTelephoneNumber>
+    <EndUserName>bandwidthGuy</EndUserName>
+    <AuthorizingUserName>importantAuthGuy</AuthorizingUserName>
+    <CustomerCode>123</CustomerCode>
+    <EndUserPIN>12345</EndUserPIN>
+    <EndUserPassword>enduserpassword123</EndUserPassword>
+    <AddressLine1>900 Main Campus Dr</AddressLine1>
+    <City>Raleigh</City>
+    <State>NC</State>
+    <ZIPCode>27612</ZIPCode>
+    <TypeOfService>residential</TypeOfService>
+    <CsrData>
+        <AccountNumber>123456789</AccountNumber>
+        <CustomerName>JOHN SMITH</CustomerName>
+        <ServiceAddress>
+            <UnparsedAddress>900 MAIN CAMPUS DR</UnparsedAddress>
+            <City>RALEIGH</City>
+            <State>NC</State>
+            <Zip>27616</Zip>
+        </ServiceAddress>
+        <WorkingTelephoneNumber>9196191156</WorkingTelephoneNumber>
+        <WorkingTelephoneNumbersOnAccount>
+            <TelephoneNumber>9196191156</TelephoneNumber>
+        </WorkingTelephoneNumbersOnAccount>
+    </CsrData>
+</CsrResponse>";
+
+        public static string csrRequest = @"<Csr>
+    <AccountNumber>987654321</AccountNumber>
+    <AccountTelephoneNumber>9196194444</AccountTelephoneNumber>
+    <EndUserName>bandwidthGuy</EndUserName>
+    <AuthorizingUserName>importantAuthGuy</AuthorizingUserName>
+    <CustomerCode>123</CustomerCode>
+    <EndUserPIN>12345</EndUserPIN>
+    <EndUserPassword>enduserpassword123</EndUserPassword>
+    <AddressLine1>900 Main Campus Dr</AddressLine1>
+    <City>Raleigh</City>
+    <State>NC</State>
+    <ZIPCode>27612</ZIPCode>
+    <TypeOfService>residential</TypeOfService>
+    <Status>REQUESTED_CANCEL</Status>
+</Csr>";
+
+
         public static string ImportTnCheckerPayload = @"<ImportTnCheckerPayload>
                                                             <TelephoneNumbers>
                                                                 <TelephoneNumber>3032281000</TelephoneNumber>
