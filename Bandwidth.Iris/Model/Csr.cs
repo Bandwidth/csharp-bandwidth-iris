@@ -9,7 +9,7 @@ namespace Bandwidth.Iris.Model
 {
 
     [XmlType("Csr")]
-    class Csr : BaseModel
+    public class Csr : BaseModel
     {
 
         [XmlElement("accountId")]
@@ -75,15 +75,15 @@ namespace Bandwidth.Iris.Model
             return ListNotes(Client.GetInstance(), orderId);
         }
 
-        public  static Task UpdateNote(Client client, string noteId, Note note)
+        public  static Task UpdateNote(Client client, string orderId, string noteId, Note note)
         {
-            var item = client.MakePutRequest<CsrResponse>(client.ConcatAccountPath($"{csrPath}/{notesPath}/{noteId}"), note);
+            var item = client.MakePutRequest<CsrResponse>(client.ConcatAccountPath($"{csrPath}/{orderId}/{notesPath}/{noteId}"), note);
             return item;
         }
 
-        public static Task UpdateNote(string noteId, Note note)
+        public static Task UpdateNote(string orderId, string noteId, Note note)
         {
-            return UpdateNote(Client.GetInstance(), noteId, note);
+            return UpdateNote(Client.GetInstance(), orderId, noteId, note);
         }
 
         public static Task CreateNote(Client client, string orderId, Note note)
@@ -134,10 +134,13 @@ namespace Bandwidth.Iris.Model
         public Address ServiceAddress { get; set; }
         public string WorkingTelephoneNumber { get; set; }
 
-        [XmlElement("WorkingTelephoneNumbersOnAccount")]
+        [XmlArray("WorkingTelephoneNumbersOnAccount")]
         [XmlArrayItem("TelephoneNumber")]
-        public TelephoneNumber[] WorkingTelephoneNumbersOnAccount { get; set; }
+        public string[] WorkingTelephoneNumbersOnAccount { get; set; }
+        
+
+    }
 
 
-    } 
+   
 }

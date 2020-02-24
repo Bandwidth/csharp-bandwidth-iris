@@ -14,7 +14,7 @@ namespace Bandwidth.Iris.Tests.Models
         {
             var csr = new Csr
             {
-                
+                AccountId =  "accountId"
             };
 
             using (var server = new HttpServer(new RequestHandler
@@ -51,7 +51,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.AreEqual(result.CsrData.CustomerName, "JOHN SMITH");
                 Assert.AreEqual(result.CsrData.WorkingTelephoneNumber, "9196191156");
                 Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount.Length, 1);
-                Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount[0].FullNumber, "9196191156");
+                Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount[0], "9196191156");
 
                 Assert.IsNotNull(result.CsrData.ServiceAddress);
 
@@ -98,7 +98,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.AreEqual(result.CsrData.CustomerName, "JOHN SMITH");
                 Assert.AreEqual(result.CsrData.WorkingTelephoneNumber, "9196191156");
                 Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount.Length, 1);
-                Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount[0].FullNumber, "9196191156");
+                Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount[0], "9196191156");
 
                 Assert.IsNotNull(result.CsrData.ServiceAddress);
 
@@ -149,7 +149,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.AreEqual(result.CsrData.CustomerName, "JOHN SMITH");
                 Assert.AreEqual(result.CsrData.WorkingTelephoneNumber, "9196191156");
                 Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount.Length, 1);
-                Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount[0].FullNumber, "9196191156");
+                Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount[0], "9196191156");
 
                 Assert.IsNotNull(result.CsrData.ServiceAddress);
 
@@ -180,7 +180,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.AreEqual(result.List[0].Description, "This is a test note");
                 Assert.AreEqual(result.List[0].Id, "87037");
                 Assert.AreEqual(result.List[0].UserId, "jbm");
-                Assert.AreEqual(result.List[0].LastDateModifier, "2014-11-16T04:01:10.000Z");
+                Assert.AreEqual(result.List[0].LastDateModifier, DateTime.Parse("2014-11-16T04:01:10.000"));
 
             }
         }
@@ -192,7 +192,7 @@ namespace Bandwidth.Iris.Tests.Models
 
             var note = new Note
             {
-
+                Description = "Description goes here"
             };
 
             using (var server = new HttpServer(new RequestHandler
@@ -212,6 +212,7 @@ namespace Bandwidth.Iris.Tests.Models
         public void TestUpdateNote()
         {
             var orderId = "123";
+            var noteId = "note123";
 
             var note = new Note
             {
@@ -221,11 +222,11 @@ namespace Bandwidth.Iris.Tests.Models
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "PUT",
-                EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/csrs/{orderId}/notes",
+                EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/csrs/{orderId}/notes/{noteId}",
             }))
             {
                 var client = Helper.CreateClient();
-                Csr.UpdateNote(client, orderId, note).Wait();
+                Csr.UpdateNote(client, orderId, noteId, note).Wait();
                 if (server.Error != null) throw server.Error;
 
             }
