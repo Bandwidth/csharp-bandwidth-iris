@@ -876,3 +876,64 @@ var payload = new ImportTnCheckerPayload
 
 var response = await ImportTnChecker.Create(client, payload);
 ```
+
+
+## Csrs 
+
+### Create Csrs Order 
+
+```csharp
+var csr = new Csr
+{
+    AccountId =  "accountId"
+    //Additional information
+};
+
+var response = await Csr.Create(client, csr);
+```
+
+### Get Csr Order 
+
+```csharp
+var response = await Csr.Get(client, orderId);
+```
+
+### Replace Csr Order 
+
+```csharp
+var csr = new Csr
+{
+    AccountId =  "new accountId"
+    //Additional information
+};
+
+var response = await Csr.Replace(client, orderId, csr);
+```
+
+### List Notes on Csr Order 
+
+```csharp
+var response = await Csr.ListNotes(client, orderId);
+```
+
+### Create Note on Csr Order
+
+```csharp
+var note = new Note
+{
+    Description = "Description goes here"
+};
+
+Csr.CreateNote(client, orderId, note)
+```
+
+### Update Note on Csr Order
+
+```csharp
+var note = new Note
+{
+    Description = "Updated description goes here"
+};
+
+Csr.UpdateNote(client, orderId, noteId, note) 
+```
