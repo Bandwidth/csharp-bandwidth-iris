@@ -27,6 +27,8 @@ namespace Bandwidth.Iris.Model
         public string State { get; set; }
         public string ZIPCode { get; set; }
         public string TypeOfService { get; set; }
+        public string WorkingOrBillingTelephoneNumber { get; set; }
+        public string Status { get; set; }
 
         private static string csrPath = "csrs";
         private static string notesPath = "notes";
@@ -103,6 +105,7 @@ namespace Bandwidth.Iris.Model
     public class CsrResponse
     {
         public string CustomerOrderId { get; set; }
+        public string CustomerName { get; set; }
         public string LastModifiedBy { get; set; }
         public string LastModifiedDate { get; set; }
         public string OrderCreateDate { get; set; }
