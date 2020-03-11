@@ -136,6 +136,14 @@ namespace Bandwidth.Iris
             {
                 using (var stream = await response.Content.ReadAsStreamAsync())
                 {
+                    if (typeof(TResult).Equals(typeof(Stream)))
+                    {
+                        var returnStream = new MemoryStream();
+                        stream.CopyTo(returnStream);
+
+                        return (TResult)(object)returnStream;
+                    }
+
                     var serializer = new XmlSerializer(typeof(TResult));
                     return stream.Length > 0
                         ? (TResult)serializer.Deserialize(stream)
@@ -222,17 +230,22 @@ namespace Bandwidth.Iris
                 if (data is string)
                 {
                     payload = (string)data;
-                } else
+                }
+                    
+                else if ( !(typeof(Stream)).IsAssignableFrom(data.GetType()))
                 {
                     var serializer = new XmlSerializer(data.GetType());
                     serializer.Serialize(writer, data);
                     payload = writer.ToString();
                 }
-                
+
                 using (var client = CreateHttpClient())
                 {
-                    var response =
-                        await client.PutAsync(FixPath(path), new StringContent(payload, Encoding.UTF8, "application/xml"));
+                    if ( (typeof(Stream)).IsAssignableFrom(data.GetType()) ) {
+                        return await client.PutAsync(FixPath(path), new StreamContent((Stream)data));
+                    }
+
+                    var response =  await client.PutAsync(FixPath(path), new StringContent(payload, Encoding.UTF8, "application/xml"));
                     try
                     {
                         await CheckResponse(response);
@@ -310,6 +323,14 @@ namespace Bandwidth.Iris
             {
                 using (var stream = await response.Content.ReadAsStreamAsync())
                 {
+                    if (typeof(TResult).IsAssignableFrom(typeof(Stream)))
+                    {
+                        var returnStream = new MemoryStream();
+                        stream.CopyTo(returnStream);
+
+                        return (TResult)(object)returnStream;
+                    }
+
                     var serializer = new XmlSerializer(typeof(TResult));
                     return stream.Length > 0
                         ? (TResult)serializer.Deserialize(stream)
