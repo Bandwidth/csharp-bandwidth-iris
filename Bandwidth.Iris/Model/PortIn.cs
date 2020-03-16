@@ -331,6 +331,15 @@ namespace Bandwidth.Iris.Model
 
         [XmlElement("fileData")]
         public FileData[] FileData { get; set; }
+
+        [XmlElement("fileNames")]
+        public string[] FileNames { get; set; }
+
+        [XmlElement("resultCode")]
+        public string ResultCode { get; set; }
+
+        [XmlElement("resultMessage")]
+        public string ResultMessage { get; set; }
     }
 
     public class FileData

@@ -3,6 +3,20 @@
     public static class TestXmlStrings
     {
 
+        public static string loasFileUploadResponse = @"<fileUploadResponse>
+    <filename>63097af1-37ae-432f-8a0d-9b0e6517a35b-1429550165581.pdf</filename>
+    <resultCode>0</resultCode>
+    <resultMessage>LOA file uploaded successfully for order 63097af1-37ae-432f-8a0d-9b0e6517a35b</resultMessage>
+</fileUploadResponse>";
+
+        public static string loasFileListResponse = @"<fileListResponse>
+    <fileCount>2</fileCount>
+    <fileNames>803f3cc5-beae-469e-bd65-e9891ccdffb9-1092874634747.pdf</fileNames>
+    <fileNames>803f3cc5-beae-469e-bd65-e9891ccdffb9-1430814967669.pdf</fileNames>
+    <resultCode>0</resultCode>
+    <resultMessage>LOA file list successfully returned</resultMessage>
+</fileListResponse>";
+
         public static string notesResponse2 = @"<Notes>
     <Note>
         <Id>87037</Id>
