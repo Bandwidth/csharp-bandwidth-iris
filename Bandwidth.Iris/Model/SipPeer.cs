@@ -539,7 +539,7 @@ namespace Bandwidth.Iris.Model
 
     public class MmsSettings
     {
-        public string protocol { get; set; }
+        public string Protocol { get; set; }
     }
 
     public class Protocols
