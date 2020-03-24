@@ -149,7 +149,7 @@ namespace Bandwidth.Iris.Model
         public static async Task<SipPeerOriginationSettingsResponse> GetOriginationSettings(Client client, string siteId, string id)
         {
             return await client.MakeGetRequest<SipPeerOriginationSettingsResponse>(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{ORIGINATION}/{SETTINGS}")
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{ORIGINATION}/{SETTINGS}")
                 );
         }
         public static async Task<SipPeerOriginationSettingsResponse> GetOriginationSettings( string siteId, string id)
@@ -160,7 +160,7 @@ namespace Bandwidth.Iris.Model
         public static async Task<SipPeerOriginationSettingsResponse> SetOriginationSettings(Client client, string siteId, string id, SipPeerOriginationSettings settings)
         {
             return await client.MakePostRequest<SipPeerOriginationSettingsResponse>(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{ORIGINATION}/{SETTINGS}"),
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{ORIGINATION}/{SETTINGS}"),
                     settings
                 );
         }
@@ -172,7 +172,7 @@ namespace Bandwidth.Iris.Model
         public static Task UpdateOriginationSettings(Client client, string siteId, string id, SipPeerOriginationSettings settings)
         {
             return client.MakePutRequest(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{ORIGINATION}/{SETTINGS}"),
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{ORIGINATION}/{SETTINGS}"),
                     settings,
                     true
                 );
@@ -191,7 +191,7 @@ namespace Bandwidth.Iris.Model
         public static async Task<SipPeerTerminationSettingsResponse> GetTerminationSetting(Client client, string siteId, string id)
         {
             return await client.MakeGetRequest<SipPeerTerminationSettingsResponse>(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{TERMINATION}/{SETTINGS}")
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{TERMINATION}/{SETTINGS}")
                 );
         }
 
@@ -203,7 +203,7 @@ namespace Bandwidth.Iris.Model
         public static async Task<SipPeerTerminationSettingsResponse> SetTerminationSettings(Client client, string siteId, string id, SipPeerTerminationSettings settings )
         {
             return await client.MakePostRequest<SipPeerTerminationSettingsResponse>(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{TERMINATION}/{SETTINGS}"),
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{TERMINATION}/{SETTINGS}"),
                     settings
                 );
         }
@@ -216,7 +216,7 @@ namespace Bandwidth.Iris.Model
         public static Task UpdateTerminationSettings(Client client, string siteId, string id, SipPeerTerminationSettings settings)
         {
             return client.MakePutRequest(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{TERMINATION}/{SETTINGS}"),
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{TERMINATION}/{SETTINGS}"),
                     settings,
                     true
                 );
@@ -239,7 +239,7 @@ namespace Bandwidth.Iris.Model
         public static async Task<SipPeerSmsFeatureResponse> GetSMSSetting(Client client, string siteId, string id)
         {
             return await client.MakeGetRequest<SipPeerSmsFeatureResponse>(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{SMS}")
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{SMS}")
                 );
         }
 
@@ -251,7 +251,7 @@ namespace Bandwidth.Iris.Model
         public static async Task<SipPeerSmsFeatureResponse> CreateSMSSettings(Client client, string siteId, string id, SipPeerSmsFeature settings)
         {
             return await client.MakePostRequest<SipPeerSmsFeatureResponse>(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{SMS}"),
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{SMS}"),
                     settings
                 );
         }
@@ -264,7 +264,7 @@ namespace Bandwidth.Iris.Model
         public static async Task<SipPeerSmsFeatureResponse> UpdateSMSSettings(Client client, string siteId, string id, SipPeerSmsFeature settings)
         {
             return await client.MakePutRequest<SipPeerSmsFeatureResponse>(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{SMS}"),
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{SMS}"),
                     settings
                 );
         }
@@ -277,7 +277,7 @@ namespace Bandwidth.Iris.Model
         public static Task DeleteSMSSettings(Client client, string siteId, string id)
         {
             return client.MakeDeleteRequest(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{SMS}")
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{SMS}")
                 );
         }
 
@@ -289,7 +289,7 @@ namespace Bandwidth.Iris.Model
         public static async Task<MmsFeatureResponse> GetMMSSetting(Client client, string siteId, string id)
         {
             return await client.MakeGetRequest<MmsFeatureResponse>(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{MMS}")
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{MMS}")
                 );
         }
 
@@ -301,7 +301,7 @@ namespace Bandwidth.Iris.Model
         public static async Task<MmsFeatureResponse> CreateMMSSettings(Client client, string siteId, string id, MmsFeature feature)
         {
             return await client.MakePostRequest<MmsFeatureResponse>(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{MMS}"),
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{MMS}"),
                     feature
                 );
         }
@@ -314,7 +314,7 @@ namespace Bandwidth.Iris.Model
         public static Task UpdateMMSSettings(Client client, string siteId, string id, MmsFeature feature)
         {
             return client.MakePutRequest(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{MMS}"),
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{MMS}"),
                     feature,
                     true
                 );
@@ -328,7 +328,7 @@ namespace Bandwidth.Iris.Model
         public static async Task<HttpResponseMessage> DeleteMMSSettings(Client client, string siteId, string id)
         {
             return await client.MakeDeleteRequestWithResponse(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{MMS}")
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{MESSAGING}/{FEATURES}/{MMS}")
                 );
         }
 
@@ -346,7 +346,7 @@ namespace Bandwidth.Iris.Model
         public static async Task<ApplicationsSettingsResponse> GetApplicationSetting(Client client, string siteId, string id)
         {
             return await client.MakeGetRequest<ApplicationsSettingsResponse>(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{APPLICATION_SETTINGS}")
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{MESSAGING}/{APPLICATION_SETTINGS}")
                 );
         }
 
@@ -358,7 +358,7 @@ namespace Bandwidth.Iris.Model
         public static Task UpdateApplicationSettings(Client client, string siteId, string id, ApplicationsSettings settings)
         {
             return client.MakePutRequest(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{APPLICATION_SETTINGS}"),
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{MESSAGING}/{APPLICATION_SETTINGS}"),
                     settings,
                     true
                 );
@@ -372,7 +372,7 @@ namespace Bandwidth.Iris.Model
         public static Task RemoveApplicationSettings(Client client, string siteId, string id)
         {
             return client.MakePutRequest(
-                    client.ConcatAccountPath($"/sites/{siteId}/sippers/{id}/{PRODUCTS}/{MESSAGING}/{APPLICATION_SETTINGS}"),
+                    client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{MESSAGING}/{APPLICATION_SETTINGS}"),
                     "<ApplicationsSettings>remove</ApplicationsSettings>",
                     true
                 );
