@@ -474,7 +474,6 @@ namespace Bandwidth.Iris.Model
     public class HttpSettings
     {
         public string HttpVoiceV2AppId { get; set; }
-
         public string proxyPeerId { get; set; }
     }
 
@@ -500,6 +499,7 @@ namespace Bandwidth.Iris.Model
 
         [XmlArrayItem("SmppHost")]
         public SmppHost[] SmppHosts { get; set; }
+        public HttpSettings HttpSettings { get; set; }
 
     }
 
