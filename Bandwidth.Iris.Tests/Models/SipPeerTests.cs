@@ -621,7 +621,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "POST",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/sms",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/messaging/features/sms",
                     ContentToSend = new StringContent(TestXmlStrings.SipPeerSmsFeatureResponse, Encoding.UTF8, "application/xml")
                 }
             }))
