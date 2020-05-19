@@ -174,6 +174,47 @@ order.GetTns();
 order.GetHistory();
 ```
 
+### List Orders
+```csharp
+var query = new Dictionary<string, object>();
+query.Add("page", "1");
+query.Add("size", "10");
+query.Add("zip", "27516");
+
+OrderListResponse orderListResponse = await Order.List(client, query);
+```
+
+### OrderListResponse 
+```csharp
+orderListResponse.Orders.TotalCount;
+orderListResponse.Orders.Links.First;
+orderListResponse.Orders.Links.Next;
+orderListResponse.Orders.Links.Last;
+orderListResponse.Orders.OrderDetails.Count;
+orderListResponse.Orders.OrderDetails[0].CountOfTns;
+orderListResponse.Orders.OrderDetails[0].OrderStatus;
+orderListResponse.Orders.OrderDetails[0].OrderId;
+orderListResponse.Orders.OrderDetails[0].LastModifiedDate;
+orderListResponse.Orders.OrderDetails[0].OrderDate;
+orderListResponse.Orders.OrderDetails[0].UserId;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.States.Count;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.States[0].Count;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.States[0].State;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.RateCenters.Count;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.RateCenters[0].Count;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.RateCenters[0].RateCenter;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Cities.Count;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Cities[0].Count;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Cities[0].City;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Tiers.Count;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Tiers[0].Count;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Tiers[0].Tier;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Vendors.Count;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Vendors[0].Count;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Vendors[0].VendorId;
+orderListResponse.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Vendors[0].VendorName;
+```
+
 ## Applications 
 
 ### Create Application 

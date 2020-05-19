@@ -167,6 +167,48 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
         [TestMethod]
+        public void ListTest()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/orders", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.listOrders, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                var result = Order.List(client).Result;
+                if (server.Error != null) throw server.Error;
+
+
+                Assert.AreEqual(122, result.Orders.TotalCount);
+                Assert.AreEqual(3, result.Orders.OrderDetails.Count);
+                Assert.AreEqual(1, result.Orders.OrderDetails[0].CountOfTns);
+                Assert.AreEqual("COMPLETE", result.Orders.OrderDetails[0].OrderStatus);
+                Assert.AreEqual("c5d8d076-345c-45d7-87b3-803a35cca89b", result.Orders.OrderDetails[0].OrderId);
+                Assert.AreEqual("2013-12-20T06", result.Orders.OrderDetails[0].LastModifiedDate);
+                Assert.AreEqual("2013-12-20T06", result.Orders.OrderDetails[0].OrderDate);
+                Assert.AreEqual("bwc_user", result.Orders.OrderDetails[0].UserId);
+                Assert.AreEqual(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.States.Count);
+                Assert.AreEqual(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.States[0].Count);
+                Assert.AreEqual("VA", result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.States[0].State);
+                Assert.AreEqual(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.RateCenters.Count);
+                Assert.AreEqual(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.RateCenters[0].Count);
+                Assert.AreEqual("LADYSMITH", result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.RateCenters[0].RateCenter);
+                Assert.AreEqual(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Cities.Count);
+                Assert.AreEqual(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Cities[0].Count);
+                Assert.AreEqual("LADYSMITH", result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Cities[0].City);
+                Assert.AreEqual(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Tiers.Count);
+                Assert.AreEqual(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Tiers[0].Count);
+                Assert.AreEqual(0, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Tiers[0].Tier);
+                Assert.AreEqual(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Vendors.Count);
+                Assert.AreEqual(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Vendors[0].Count);
+                Assert.AreEqual(49, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Vendors[0].VendorId);
+                Assert.AreEqual("Bandwidth CLEC", result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Vendors[0].VendorName);
+            }
+        }
+
+        [TestMethod]
         public void GetWithDefaultClientTest()
         {
             var orderResult = new OrderResult
