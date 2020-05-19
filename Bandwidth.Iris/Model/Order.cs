@@ -26,9 +26,9 @@ namespace Bandwidth.Iris.Model
             return client.MakeGetRequest<OrderResult>(client.ConcatAccountPath(OrderPath), null, id);
         }
 
-        public static async Task<OrderResult[]> List(Client client, IDictionary<string, object> query = null)
+        public static async Task<OrderListResponse> List(Client client, IDictionary<string, object> query = null)
         {
-            return (await client.MakeGetRequest<Orders>(client.ConcatAccountPath(OrderPath), query)).List;
+            return (await client.MakeGetRequest<OrderListResponse>(client.ConcatAccountPath(OrderPath), query));
         }
 
 #if !PCL
@@ -42,7 +42,7 @@ namespace Bandwidth.Iris.Model
             return Get(Client.GetInstance(), id);
         }
 
-        public static Task<OrderResult[]> List(IDictionary<string, object> query = null)
+        public static Task<OrderListResponse> List(IDictionary<string, object> query = null)
         {
             return List(Client.GetInstance(), query);
         }
@@ -271,4 +271,87 @@ namespace Bandwidth.Iris.Model
         [XmlElement("TelephoneDetailsReport")]
         public object[] List { get; set; }
     }
+
+    [XmlType("ResponseSelectWrapper")]
+    public class OrderListResponse
+    {
+        [XmlElement("ListOrderIdUserIdDate")]
+        public ListOrderIdUserIdDate Orders { get; set; }
+    }
+
+    [XmlType("ListOrderIdUserIdDate")]
+    public class ListOrderIdUserIdDate
+    {
+        public int? TotalCount { get; set; }
+        public Links Links { get; set; }
+        [XmlElement("OrderIdUserIdDate")]
+        public List<OrderDetail> OrderDetails {get; set;}
+    }
+
+    [XmlType("OrderIdUserIdDate")]
+    public class OrderDetail
+    {
+        [XmlElement("accountId")]
+        public string AccountId { get; set; }
+
+        [XmlElement("orderId")]
+        public string OrderId { get; set; }
+
+        [XmlElement("userId")]
+        public string UserId { get; set; }
+
+        public string OrderType { get; set; }
+        public string OrderStatus { get; set; }
+        public string OrderDate { get; set; }
+
+        [XmlElement("CountOfTNs")]
+        public int? CountOfTns { get; set; }
+
+        [XmlElement("lastModifiedDate")]
+        public string LastModifiedDate { get; set; }
+
+        [XmlElement("TelephoneNumberDetails")]
+        public TelephoneNumberDetailsWithCount TelephoneNumberDetailsWithCount { get; set; }
+        
+    }
+
+    [XmlType("TelephoneNumberDetails")]
+    public class TelephoneNumberDetailsWithCount
+    {
+        public List<StateWithCount> States { get; set; }
+        public List<RateCenterWithCount> RateCenters { get; set; }
+        public List<CityWithCount> Cities { get; set; }
+        public List<TierWithCount> Tiers { get; set; }
+        public List<VendorWithCount> Vendors { get; set; }
+    }
+
+    public class StateWithCount
+    {
+        public int? Count { get; set; }
+        public string State { get; set; }
+    }
+    public class RateCenterWithCount
+    {
+        public int? Count { get; set; }
+        public string RateCenter { get; set; }
+    }
+    public class CityWithCount
+    {
+        public int? Count { get; set; }
+        public string City { get; set; }
+    }
+    public class TierWithCount
+    {
+        public int? Count { get; set; }
+        public int Tier { get; set; }
+    }
+    public class VendorWithCount
+    {
+        public int? Count { get; set; }
+        public string VendorName { get; set; }
+        public int VendorId { get; set; }
+    }
+
+
+
 }

@@ -3,6 +3,77 @@
     public static class TestXmlStrings
     {
 
+        public static string listOrders = @"<ResponseSelectWrapper>
+    <ListOrderIdUserIdDate>
+        <TotalCount>122</TotalCount>
+        <Links>
+            <first>
+                test
+            </first>
+            <next>
+                test2
+            </next>
+        </Links>
+        <OrderIdUserIdDate>
+            <CountOfTNs>1</CountOfTNs>
+            <lastModifiedDate>2013-12-20T06</lastModifiedDate>
+            <OrderDate>2013-12-20T06</OrderDate>
+            <orderId>c5d8d076-345c-45d7-87b3-803a35cca89b</orderId>
+            <OrderStatus>COMPLETE</OrderStatus>
+            <TelephoneNumberDetails>
+                <States>
+                    <StateWithCount>
+                        <State>VA</State>
+                        <Count>1</Count>
+                    </StateWithCount>
+                </States>
+                <RateCenters>
+                    <RateCenterWithCount>
+                        <Count>1</Count>
+                        <RateCenter>LADYSMITH</RateCenter>
+                    </RateCenterWithCount>
+                </RateCenters>
+                <Cities>
+                    <CityWithCount>
+                        <City>LADYSMITH</City>
+                        <Count>1</Count>
+                    </CityWithCount>
+                </Cities>
+                <Tiers>
+                    <TierWithCount>
+                        <Tier>0</Tier>
+                        <Count>1</Count>
+                    </TierWithCount>
+                </Tiers>
+                <Vendors>
+                    <VendorWithCount>
+                        <VendorId>49</VendorId>
+                        <VendorName>Bandwidth CLEC</VendorName>
+                        <Count>1</Count>
+                    </VendorWithCount>
+                </Vendors>
+            </TelephoneNumberDetails>
+            <userId>bwc_user</userId>
+        </OrderIdUserIdDate>
+        <OrderIdUserIdDate>
+            <CountOfTNs>0</CountOfTNs>
+            <lastModifiedDate>2013-11-05T17</lastModifiedDate>
+            <OrderDate>2013-11-05T17</OrderDate>
+            <orderId>27da9f39-81f3-44ed-80ce-05ddf2db612d</orderId>
+            <OrderStatus>FAILED</OrderStatus>
+            <userId>wandedemo_user</userId>
+        </OrderIdUserIdDate>
+        <OrderIdUserIdDate>
+            <CountOfTNs>1</CountOfTNs>
+            <lastModifiedDate>2013-12-11T20</lastModifiedDate>
+            <OrderDate>2013-12-11T20</OrderDate>
+            <orderId>2bab589e-2cda-453b-9999-8f35441d4a1a</orderId>
+            <OrderStatus>COMPLETE</OrderStatus>
+            <userId>bwc_user</userId>
+        </OrderIdUserIdDate>
+    </ListOrderIdUserIdDate>
+</ResponseSelectWrapper>";
+
         public static string loasFileUploadResponse = @"<fileUploadResponse>
     <filename>63097af1-37ae-432f-8a0d-9b0e6517a35b-1429550165581.pdf</filename>
     <resultCode>0</resultCode>
