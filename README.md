@@ -965,7 +965,7 @@ var note = new Note
     Description = "Description goes here"
 };
 
-Csr.CreateNote(client, orderId, note)
+Csr.CreateNote(client, orderId, note);
 ```
 
 ### Update Note on Csr Order
@@ -976,5 +976,115 @@ var note = new Note
     Description = "Updated description goes here"
 };
 
-Csr.UpdateNote(client, orderId, noteId, note) 
+Csr.UpdateNote(client, orderId, noteId, note);
+```
+
+## Emergency Notifications
+
+### Get Recipients
+
+```csharp
+var result = await EmergencyNotification.GetRecipients(client, orderId);
+```
+
+### List Recipients 
+
+```csharp
+var result = await EmergencyNotification.ListRecipients(client, new Dictionary<string, Object>
+{
+    {"EnrNotificationType", "SMS" }
+});
+```
+
+### Create Recipients 
+
+```csharp
+var result = await EmergencyNotification.CreateRecipients(client, new EmergencyNotificationRecipient
+{
+    ModifiedByUser = "testuser",
+    Type = "EMAIL",
+    EmailAddress = "test@example.com"
+});
+```
+
+### Update Recipients
+
+```csharp
+var result = await EmergencyNotification.UpdateRecipients(client, id, new EmergencyNotificationRecipient
+{
+    ModifiedByUser = "testuser",
+    Type = "EMAIL",
+    EmailAddress = "test@example.com"
+});
+```
+
+### Delete Recipients
+
+```csharp
+EmergencyNotification.DeleteRecipients(client, id).Wait();
+```
+
+### Get Group Orders
+
+```csharp
+var result = await EmergencyNotification.GetGroupOrders(client, id);
+```
+
+### List Group Orders
+
+```csharp
+var result = await EmergencyNotification.ListGroupOrders(client, new Dictionary<string, Object>
+{
+    {"EnrNotificationType", "TTS" }
+});
+```
+
+### Create Group Order
+
+```csharp
+var result = await EmergencyNotification.CreateGroupOrders(client, new EmergencyNotificationGroupOrder
+{
+    CustomerOrderId = "test",
+    AddedEmergencyNotificationGroup = new EmergencyNotificationGroup
+    {
+        CreatedBy = "samwise"
+    }
+});
+```
+
+### Get Groups
+
+```csharp
+var result = await EmergencyNotification.GetGroups(client, id);
+```
+
+### List Groups
+
+```csharp
+var result = await EmergencyNotification.ListGroups(client, new Dictionary<string, Object>
+{
+    {"EnrDetails", "true" },
+    {"EnrEmailAddress", "test@example.com" }
+});
+```
+
+### Get Endpoint Order 
+
+```csharp
+var result = await EmergencyNotification.GetEndpointOrders(client, id);
+```
+
+### List Endpoint Orders 
+
+```csharp
+var result = await EmergencyNotification.ListEndpointOrders(client, new Dictionary<string, Object>
+{
+    {"EepTns", "404" }
+});
+```
+
+### Create Endpoint Order 
+
+```csharp
+var result = EmergencyNotification.CreateEndpointOrders(client, endpointOrder);
 ```
