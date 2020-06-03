@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -9,15 +10,15 @@ namespace Bandwidth.Iris.Model
 {
     public class EmergencyNotification : BaseModel
     {
-        public async static Task<EmergencyNotificationRecipientsResponse> ListRecipients(Client client)
+        public async static Task<EmergencyNotificationRecipientsResponse> ListRecipients(Client client, IDictionary<string, object> query = null)
         {
-            var item = await client.MakeGetRequest<EmergencyNotificationRecipientsResponse>(client.ConcatAccountPath($"/emergencyNotificationRecipients"));
+            var item = await client.MakeGetRequest<EmergencyNotificationRecipientsResponse>(client.ConcatAccountPath($"/emergencyNotificationRecipients"), query);
             return item;
         }
 
-        public static Task<EmergencyNotificationRecipientsResponse> ListRecipients()
+        public static Task<EmergencyNotificationRecipientsResponse> ListRecipients(IDictionary<string, object> query = null)
         {
-            return ListRecipients(Client.GetInstance());
+            return ListRecipients(Client.GetInstance(), query);
         }
 
         public async static Task<EmergencyNotificationRecipientsResponse> GetRecipients(Client client, string orderId)
@@ -42,26 +43,36 @@ namespace Bandwidth.Iris.Model
             return CreateRecipients(Client.GetInstance(), recipient);
         }
 
-        public async static Task<EmergencyNotificationRecipientsResponse> UpdateRecipients(Client client, EmergencyNotificationRecipient recipient)
+        public async static Task<EmergencyNotificationRecipientsResponse> UpdateRecipients(Client client, string id, EmergencyNotificationRecipient recipient)
         {
-            var item = await client.MakePutRequest<EmergencyNotificationRecipientsResponse>(client.ConcatAccountPath($"/emergencyNotificationRecipients"), recipient);
+            var item = await client.MakePutRequest<EmergencyNotificationRecipientsResponse>(client.ConcatAccountPath($"/emergencyNotificationRecipients/{id}"), recipient);
             return item;
         }
 
-        public static Task<EmergencyNotificationRecipientsResponse> UpdateRecipients(EmergencyNotificationRecipient recipient)
+        public static Task<EmergencyNotificationRecipientsResponse> UpdateRecipients(string id, EmergencyNotificationRecipient recipient)
         {
-            return UpdateRecipients(Client.GetInstance(), recipient);
+            return UpdateRecipients(Client.GetInstance(), id, recipient);
         }
 
-        public async static Task<EmergencyNotificationGroupOrderResponse> ListGroupOrders(Client client)
+        public async static Task DeleteRecipients(Client client, string id)
         {
-            var item = await client.MakeGetRequest<EmergencyNotificationGroupOrderResponse>(client.ConcatAccountPath($"/emergencyNotificationGroupOrders"));
+            await client.MakeDeleteRequest(client.ConcatAccountPath($"/emergencyNotificationRecipients/{id}"));
+        }
+
+        public static Task DeleteRecipients(string id)
+        {
+            return DeleteRecipients(Client.GetInstance(), id);
+        }
+
+        public async static Task<EmergencyNotificationGroupOrderResponse> ListGroupOrders(Client client, IDictionary<string, object> query = null)
+        {
+            var item = await client.MakeGetRequest<EmergencyNotificationGroupOrderResponse>(client.ConcatAccountPath($"/emergencyNotificationGroupOrders"), query);
             return item;
         }
 
-        public static Task<EmergencyNotificationGroupOrderResponse> ListGroupOrders()
+        public static Task<EmergencyNotificationGroupOrderResponse> ListGroupOrders(IDictionary<string, object> query = null)
         {
-            return ListGroupOrders(Client.GetInstance());
+            return ListGroupOrders(Client.GetInstance(), query);
         }
 
         public async static Task<EmergencyNotificationGroupOrderResponse> GetGroupOrders(Client client, string id)
@@ -86,15 +97,37 @@ namespace Bandwidth.Iris.Model
             return CreateGroupOrders(Client.GetInstance(), order);
         }
 
-        public async static Task<EmergencyNotificationGroupOrderResponse> ListEndpointOrders(Client client)
+        public async static Task<EmergencyNotificationEndpointOrderResponse> ListEndpointOrders(Client client, IDictionary<string, object> query = null)
         {
-            var item = await client.MakeGetRequest<EmergencyNotificationGroupOrderResponse>(client.ConcatAccountPath($"/emergencyNotificationEndpointOrders"));
+            var item = await client.MakeGetRequest<EmergencyNotificationEndpointOrderResponse>(client.ConcatAccountPath($"/emergencyNotificationEndpointOrders"), query);
             return item;
         }
 
-        public static Task<EmergencyNotificationGroupOrderResponse> ListEndpointOrders()
+        public static Task<EmergencyNotificationEndpointOrderResponse> ListEndpointOrders(IDictionary<string, object> query = null)
         {
-            return ListEndpointOrders(Client.GetInstance());
+            return ListEndpointOrders(Client.GetInstance(), query);
+        }
+
+        public async static Task<EmergencyNotificationGroupsResponse> GetGroups(Client client, string id)
+        {
+            var item = await client.MakeGetRequest<EmergencyNotificationGroupsResponse>(client.ConcatAccountPath($"/emergencyNotificationGroups/{id}"));
+            return item;
+        }
+
+        public static Task<EmergencyNotificationGroupsResponse> GetGroups(string id)
+        {
+            return GetGroups(Client.GetInstance(), id);
+        }
+
+        public async static Task<EmergencyNotificationGroupsResponse> ListGroups(Client client, IDictionary<string, object> query = null)
+        {
+            var item = await client.MakeGetRequest<EmergencyNotificationGroupsResponse>(client.ConcatAccountPath($"/emergencyNotificationGroups"), query);
+            return item;
+        }
+
+        public static Task<EmergencyNotificationGroupsResponse> ListGroups(IDictionary<string, object> query = null)
+        {
+            return ListGroups(Client.GetInstance(), query);
         }
 
         public async static Task<EmergencyNotificationEndpointOrderResponse> GetEndpointOrders(Client client, string id)
@@ -108,13 +141,13 @@ namespace Bandwidth.Iris.Model
             return GetEndpointOrders(Client.GetInstance(), id);
         }
 
-        public async static Task<EmergencyNotificationEndpointOrderResponse> CreateEndpointOrders(Client client, EmergencyNotificationEndpointOrder order)
+        public async static Task<EmergencyNotificationEndpointOrder> CreateEndpointOrders(Client client, EmergencyNotificationEndpointOrder order)
         {
-            var item = await client.MakePostRequest<EmergencyNotificationEndpointOrderResponse>(client.ConcatAccountPath($"/emergencyNotificationEndpointOrders"), order);
+            var item = await client.MakePostRequest<EmergencyNotificationEndpointOrder>(client.ConcatAccountPath($"/emergencyNotificationEndpointOrders"), order);
             return item;
         }
 
-        public static Task<EmergencyNotificationEndpointOrderResponse> CreateEndpointOrders(EmergencyNotificationEndpointOrder order)
+        public static Task<EmergencyNotificationEndpointOrder> CreateEndpointOrders(EmergencyNotificationEndpointOrder order)
         {
             return CreateEndpointOrders(Client.GetInstance(), order);
         }
@@ -124,20 +157,25 @@ namespace Bandwidth.Iris.Model
 
     public class EmergencyNotificationRecipientsResponse
     {
+        public Links Links { get; set; }
         public EmergencyNotificationRecipient EmergencyNotificationRecipient { get; set; }
+
+        [XmlArray("EmergencyNotificationRecipients")]
+        [XmlArrayItem("EmergencyNotificationRecipient")]
+        public EmergencyNotificationRecipient[] EmergencyNotificationRecipients { get; set; }
     }
 
     public class EmergencyNotificationRecipient
     {
         public string Identifier { get; set; }
-        public string CreadedDate { get; set; }
+        public string CreatedDate { get; set; }
         public string LastModifiedDate { get; set; }
         public string ModifiedByUser { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
         public string EmailAddress { get; set; }
-        public string Sms { get; set; }
-        public string Tts { get; set; }
+        public Sms Sms { get; set; }
+        public Tts Tts { get; set; }
         public Callback Callback { get; set; }
 
     }
@@ -145,7 +183,7 @@ namespace Bandwidth.Iris.Model
     public class Callback
     {
         public string Url { get; set; }
-        public string Credentials { get; set; }
+        public Credentials Credentials { get; set; }
 
     }
 
@@ -196,6 +234,9 @@ namespace Bandwidth.Iris.Model
         [XmlElement("ModifiedEmergencyNotificationGroup")]
         public EmergencyNotificationGroup ModifiedEmergencyNotificationGroup { get; set; }
 
+        [XmlElement("AddedEmergencyNotificationGroup")]
+        public EmergencyNotificationGroup AddedEmergencyNotificationGroup { get; set; }
+
 
     }
 
@@ -203,11 +244,15 @@ namespace Bandwidth.Iris.Model
     {
         public string Identifier { get; set; }
         public string Description { get; set; }
+        public string CreatedDate { get; set; }
         public string OrderId { get; set; }
         public string OrderCreatedDate { get; set; }
         public string CreatedBy { get; set; }
-        public string ProccessingStatus { get; set; }
+        public string ProcessingStatus { get; set; }
         public string CustomerOrderId { get; set; }
+        public string ModifiedBy { get; set; }
+        public string ModifiedDate { get; set; }
+
 
         [XmlElement("AddedEmergencyNotificationGroup")]
         public EmergencyNotificationGroup AddedEmergencyNotificationGroup { get; set; }
@@ -249,7 +294,7 @@ namespace Bandwidth.Iris.Model
         public string OrderId { get; set; }
         public string OrderCreatedDate { get; set; }
         public string CreatedBy { get; set; }
-        public string ProccessingStatus { get; set; }
+        public string ProcessingStatus { get; set; }
         public string CustomerOrderId { get; set; }
 
         public EmergencyNotificationEndpointAssociations EmergencyNotificationEndpointAssociations { get; set; }

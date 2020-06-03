@@ -2,6 +2,370 @@
 {
     public static class TestXmlStrings
     {
+        public static string listAeui = @"<AlternateEndUserIdentifiersResponse>
+    <TotalCount>2</TotalCount>
+    <Links>
+        <first>Link=&lt;http://localhost:8080/iris/accounts/14/aeuis?page=1&amp;size=500&gt;;rel=""first"";</first>
+    </Links>
+    <AlternateEndUserIdentifiers>
+        <AlternateEndUserIdentifier>
+            <Identifier>DavidAcid</Identifier>
+            <CallbackNumber>8042105760</CallbackNumber>
+            <EmergencyNotificationGroup>
+                <Identifier>63865500-0904-46b1-9b4f-7bd237a26363</Identifier>
+                <Description>Building 5, 5th Floor.</Description>
+            </EmergencyNotificationGroup>
+        </AlternateEndUserIdentifier>
+        <AlternateEndUserIdentifier>
+            <Identifier>JohnAcid</Identifier>
+            <CallbackNumber>8042105618</CallbackNumber>
+        </AlternateEndUserIdentifier>
+    </AlternateEndUserIdentifiers>
+</AlternateEndUserIdentifiersResponse>";
+
+        public static string getAeui = @"<AlternateEndUserIdentifierResponse>
+    <AlternateEndUserIdentifier>
+        <Identifier>DavidAcid</Identifier>
+        <CallbackNumber>8042105760</CallbackNumber>
+        <E911>
+            <CallerName>David</CallerName>
+            <Address>
+                <HouseNumber>900</HouseNumber>
+                <HouseSuffix></HouseSuffix>
+                <PreDirectional></PreDirectional>
+                <StreetName>MAIN CAMPUS</StreetName>
+                <StreetSuffix>DR</StreetSuffix>
+                <AddressLine2></AddressLine2>
+                <City>RALEIGH</City>
+                <StateCode>NC</StateCode>
+                <Zip>27606</Zip>
+                <PlusFour>5214</PlusFour>
+                <Country>United States</Country>
+                <AddressType>Billing</AddressType>
+            </Address>
+            <EmergencyNotificationGroup>
+                <Identifier>63865500-0904-46b1-9b4f-7bd237a26363</Identifier>
+                <Description>Building 5, 5th Floor.</Description>
+            </EmergencyNotificationGroup>
+        </E911>
+    </AlternateEndUserIdentifier>
+</AlternateEndUserIdentifierResponse>";
+
+        public static string createEnpointOrder = @"<EmergencyNotificationEndpointOrder>
+    <CustomerOrderId>ALG-31233884</CustomerOrderId>
+    <EmergencyNotificationEndpointAssociations>
+        <EmergencyNotificationGroup>
+            <Identifier>3e9a852e-2d1d-4e2d-84c3-04595ba2eb93</Identifier>
+        </EmergencyNotificationGroup>
+        <AddedAssociations>
+            <EepToEngAssociations>
+                <EepTns>
+                    <TelephoneNumber>2248838829</TelephoneNumber>
+                    <TelephoneNumber>4052397735</TelephoneNumber>
+                </EepTns>
+                <EepAeuiIds>
+                    <Identifier>Fred992834</Identifier>
+                    <Identifier>Bob00359</Identifier>
+                </EepAeuiIds>
+            </EepToEngAssociations>
+        </AddedAssociations>
+    </EmergencyNotificationEndpointAssociations>
+</EmergencyNotificationEndpointOrder>";
+
+        public static string listEndpointOrder = @"<EmergencyNotificationEndpointOrderResponse>
+    <Links>
+        <first> -- link to first page of results -- </first>
+        <next> -- link to next page of results -- </next>
+    </Links>
+    <EmergencyNotificationEndpointOrders>
+        <EmergencyNotificationEndpointOrder>
+            <OrderId>3e9a852e-2d1d-4e2d-84c3-87223a78cb70</OrderId>
+            <OrderCreatedDate>2020-01-23T18:34:17.284Z</OrderCreatedDate>
+            <CreatedBy>jgilmore</CreatedBy>
+            <ProcessingStatus>COMPLETED</ProcessingStatus>
+            <CustomerOrderId>ALG-31233884</CustomerOrderId>
+            <EmergencyNotificationEndpointAssociations>
+                <EmergencyNotificationGroup>
+                    <Identifier>3e9a852e-2d1d-4e2d-84c3-04595ba2eb93</Identifier>
+                </EmergencyNotificationGroup>
+                <AddedAssociations>
+                    <EepToEngAssociations>
+                        <EepTns>
+                            <TelephoneNumber>2248838829</TelephoneNumber>
+                            <TelephoneNumber>4052397735</TelephoneNumber>
+                        </EepTns>
+                        <EepAeuiIds>
+                            <Identifier>Fred992834</Identifier>
+                            <Identifier>Bob00359</Identifier>
+                        </EepAeuiIds>
+                    </EepToEngAssociations>
+                    <ErrorList />
+                </AddedAssociations>
+            </EmergencyNotificationEndpointAssociations>
+        </EmergencyNotificationEndpointOrder>
+    </EmergencyNotificationEndpointOrders>
+</EmergencyNotificationEndpointOrderResponse>";
+
+
+        public static string getEndpointOrder = @"<EmergencyNotificationEndpointOrderResponse>
+    <EmergencyNotificationEndpointOrder>
+        <OrderId>3e9a852e-2d1d-4e2d-84c3-87223a78cb70</OrderId>
+        <OrderCreatedDate>2020-01-23T18:34:17.284Z</OrderCreatedDate>
+        <CreatedBy>jgilmore</CreatedBy>
+        <ProcessingStatus>COMPLETED</ProcessingStatus>
+        <CustomerOrderId>ALG-31233884</CustomerOrderId>
+        <EmergencyNotificationEndpointAssociations>
+            <EmergencyNotificationGroup>
+                <Identifier>3e9a852e-2d1d-4e2d-84c3-04595ba2eb93</Identifier>
+            </EmergencyNotificationGroup>
+            <AddedAssociations>
+                <EepToEngAssociations>
+                    <EepTns>
+                        <TelephoneNumber>2248838829</TelephoneNumber>
+                        <TelephoneNumber>4052397735</TelephoneNumber>
+                    </EepTns>
+                    <EepAeuiIds>
+                        <Identifier>Fred992834</Identifier>
+                        <Identifier>Bob00359</Identifier>
+                    </EepAeuiIds>
+                </EepToEngAssociations>
+                <ErrorList />
+            </AddedAssociations>
+        </EmergencyNotificationEndpointAssociations>
+    </EmergencyNotificationEndpointOrder>
+</EmergencyNotificationEndpointOrderResponse>";
+
+        public static string listGroups = @"<EmergencyNotificationGroupsResponse>
+    <Links>
+        <first> -- link to first page of results -- </first>
+        <next> -- link to next page of results -- </next>
+    </Links>
+    <EmergencyNotificationGroups>
+        <EmergencyNotificationGroup>
+            <Identifier>63865500-0904-46b1-9b4f-7bd237a26363</Identifier>
+            <CreatedDate>2020-01-23T18:34:17.284Z</CreatedDate>
+            <ModifiedBy>jgilmore</ModifiedBy>
+            <ModifiedDate>2020-01-23T18:34:17.284Z</ModifiedDate>
+            <Description>This is a description of the emergency notification group.</Description>
+            <EmergencyNotificationRecipients>
+                <EmergencyNotificationRecipient>
+                    <Identifier>63865500-0904-46b1-9b4f-7bd237a26363</Identifier>
+                </EmergencyNotificationRecipient>
+                <EmergencyNotificationRecipient>
+                    <Identifier>ef47eb61-e3b1-449d-834b-0fbc5a11da30</Identifier>
+                </EmergencyNotificationRecipient>
+            </EmergencyNotificationRecipients>
+        </EmergencyNotificationGroup>
+        <EmergencyNotificationGroup>
+            <Identifier>29477382-23947-23c-2349-aa8238b22743</Identifier>
+            <CreatedDate>2020-01-23T18:36:51.987Z</CreatedDate>
+            <ModifiedBy>jgilmore</ModifiedBy>
+            <ModifiedDate>2020-01-23T18:36:51.987Z</ModifiedDate>
+            <Description>This is a description of the emergency notification group.</Description>
+            <EmergencyNotificationRecipients>
+                <EmergencyNotificationRecipient>
+                    <Identifier>37742335-8722-3abc-8722-e2434f123a4d</Identifier>
+                </EmergencyNotificationRecipient>
+            </EmergencyNotificationRecipients>
+        </EmergencyNotificationGroup>
+    </EmergencyNotificationGroups>
+</EmergencyNotificationGroupsResponse>";
+
+        public static string getGroup = @"<EmergencyNotificationGroupsResponse>
+    <EmergencyNotificationGroup>
+        <Identifier>63865500-0904-46b1-9b4f-7bd237a26363</Identifier>
+        <CreatedDate>2020-01-23T18:34:17.284Z</CreatedDate>
+        <ModifiedBy>jgilmore</ModifiedBy>
+        <ModifiedDate>2020-01-23T18:34:17.284Z</ModifiedDate>
+        <Description>This is a description of the emergency notification group.</Description>
+        <EmergencyNotificationRecipients>
+            <EmergencyNotificationRecipient>
+                <Identifier>63865500-0904-46b1-9b4f-7bd237a26363</Identifier>
+            </EmergencyNotificationRecipient>
+            <EmergencyNotificationRecipient>
+                <Identifier>ef47eb61-e3b1-449d-834b-0fbc5a11da30</Identifier>
+            </EmergencyNotificationRecipient>
+        </EmergencyNotificationRecipients>
+    </EmergencyNotificationGroup>
+</EmergencyNotificationGroupsResponse>";
+
+        public static string listGroupOrders = @"<EmergencyNotificationGroupOrderResponse>
+    <Links>
+        <first>Link=&lt;http://localhost:8080/v1.0/accounts/12346371/emergencyNotificationGroupOrders&gt;;rel=""first"";</first>
+    </Links>
+    <EmergencyNotificationGroupOrders>
+        <EmergencyNotificationGroupOrder>
+            <OrderId>092815dc-9ced-4d67-a070-a80eb243b914</OrderId>
+            <OrderCreatedDate>2020-04-29T15:40:01.449Z</OrderCreatedDate>
+            <CreatedBy>systemUser</CreatedBy>
+            <ProcessingStatus>COMPLETED</ProcessingStatus>
+            <CustomerOrderId>QTWeKMys</CustomerOrderId>
+            <AddedEmergencyNotificationGroup>
+                <Identifier>6daa55e1-e499-4cf0-9f3d-9524215f1bee</Identifier>
+                <Description>enr test description 3</Description>
+                <AddedEmergencyNotificationRecipients>
+                    <EmergencyNotificationRecipient>
+                        <Identifier>44f203915ca249b7b69bbc084af09a</Identifier>
+                        <Description>TestDesc SEHsbDMM</Description>
+                        <Type>SMS</Type>
+                        <Sms>
+                            <TelephoneNumber>15638765448</TelephoneNumber>
+                        </Sms>
+                    </EmergencyNotificationRecipient>
+                </AddedEmergencyNotificationRecipients>
+            </AddedEmergencyNotificationGroup>
+        </EmergencyNotificationGroupOrder>
+        <EmergencyNotificationGroupOrder>
+            <OrderId>89b4e0a1-2789-43fb-b948-38d368159142</OrderId>
+            <OrderCreatedDate>2020-04-29T15:39:59.325Z</OrderCreatedDate>
+            <CreatedBy>systemUser</CreatedBy>
+            <ProcessingStatus>COMPLETED</ProcessingStatus>
+            <CustomerOrderId>SDWupQpf</CustomerOrderId>
+            <AddedEmergencyNotificationGroup>
+                <Identifier>b49fa543-5bb3-4b9d-9213-96c8b63e77f5</Identifier>
+                <Description>enr test description 2</Description>
+                <AddedEmergencyNotificationRecipients>
+                    <EmergencyNotificationRecipient>
+                        <Identifier>c719e060a6ba4212a2c0642b87a784</Identifier>
+                        <Description>TestDesc zscxcAGG</Description>
+                        <Type>SMS</Type>
+                        <Sms>
+                            <TelephoneNumber>15678765448</TelephoneNumber>
+                        </Sms>
+                    </EmergencyNotificationRecipient>
+                    <EmergencyNotificationRecipient>
+                        <Identifier>93ad72dfe59c4992be6f8aa625466d</Identifier>
+                        <Description>TestDesc RTflsKBz</Description>
+                        <Type>TTS</Type>
+                        <Tts>
+                            <TelephoneNumber>17678765449</TelephoneNumber>
+                        </Tts>
+                    </EmergencyNotificationRecipient>
+                </AddedEmergencyNotificationRecipients>
+            </AddedEmergencyNotificationGroup>
+        </EmergencyNotificationGroupOrder>
+        <EmergencyNotificationGroupOrder>
+            <OrderId>247d1425-4247-4b27-99d8-83ce30038b14</OrderId>
+            <OrderCreatedDate>2020-04-29T15:39:57.058Z</OrderCreatedDate>
+            <CreatedBy>systemUser</CreatedBy>
+            <ProcessingStatus>COMPLETED</ProcessingStatus>
+            <CustomerOrderId>vgshuNMB</CustomerOrderId>
+            <AddedEmergencyNotificationGroup>
+                <Identifier>69a3d588-f314-42ca-8726-faa824bdf4be</Identifier>
+                <Description>eng test description</Description>
+                <AddedEmergencyNotificationRecipients>
+                    <EmergencyNotificationRecipient>
+                        <Identifier>aab78f87074940f1aaaf1c9658be4b</Identifier>
+                        <Description>enr test description</Description>
+                        <Type>EMAIL</Type>
+                        <EmailAddress>testEmail @gmail.com</EmailAddress>
+                    </EmergencyNotificationRecipient>
+                    <EmergencyNotificationRecipient>
+                        <Identifier>852e9eee161b4da6823c91173b05c4</Identifier>
+                        <Description>TestDesc WkHqpnNH</Description>
+                        <Type>TTS</Type>
+                        <Tts>
+                            <TelephoneNumber>15678765449</TelephoneNumber>
+                        </Tts>
+                    </EmergencyNotificationRecipient>
+                </AddedEmergencyNotificationRecipients>
+            </AddedEmergencyNotificationGroup>
+        </EmergencyNotificationGroupOrder>
+    </EmergencyNotificationGroupOrders>
+</EmergencyNotificationGroupOrderResponse>";
+
+        public static string getGroupOrders = @"<EmergencyNotificationGroupOrderResponse>
+    <EmergencyNotificationGroup>
+        <OrderId>3e9a852e-2d1d-4e2d-84c3-87223a78cb70</OrderId>
+        <OrderCreatedDate>2020-01-23T18:34:17.284Z</OrderCreatedDate>
+        <CreatedBy>jgilmore</CreatedBy>
+        <ProcessingStatus>COMPLETED</ProcessingStatus>
+        <CustomerOrderId>ALG-31233884</CustomerOrderId>
+        <AddedEmergencyNotificationGroup>
+            <Identifier>63865500-0904-46b1-9b4f-7bd237a26363</Identifier>
+            <Description>Building 5, 5th Floor.</Description>
+        </AddedEmergencyNotificationGroup>
+    </EmergencyNotificationGroup>
+</EmergencyNotificationGroupOrderResponse>";
+
+        public static string listRecipients = @"<EmergencyNotificationRecipientsResponse>
+    <Links>
+        <first> -- link to first page of results -- </first>
+        <next> -- link to next page of results -- </next>
+    </Links>
+    <EmergencyNotificationRecipients>
+        <EmergencyNotificationRecipient>
+            <Identifier> 63865500-0904-46b1-9b4f-7bd237a26363 </Identifier>
+            <CreatedDate>2020-03-18T21:26:47.403Z</CreatedDate>
+            <LastModifiedDate>2020-03-18T21:26:47.403Z</LastModifiedDate>
+            <ModifiedByUser>jgilmore</ModifiedByUser>
+            <Description> This is a description of the emergency notification recipient. </Description>
+            <Type>CALLBACK</Type>
+            <Callback>
+                <Url>https://foo.bar/baz</Url>
+                <Credentials>
+                    <Username>jgilmore</Username>
+                </Credentials>
+            </Callback>
+        </EmergencyNotificationRecipient>
+        <EmergencyNotificationRecipient>
+            <Identifier> 63865500-0904-46b1-9b4f-7bd237a26363 </Identifier>
+            <CreatedDate>2020-03-22T12:13:25.782Z</CreatedDate>
+            <LastModifiedDate>2020-03-22T12:13:25.782Z</LastModifiedDate>
+            <ModifiedByUser>gfranklin</ModifiedByUser>
+            <Description> This is a description of the emergency notification recipient. </Description>
+            <Type>EMAIL</Type>
+            <EmailAddress>fred@gmail.com</EmailAddress>
+        </EmergencyNotificationRecipient>
+        <EmergencyNotificationRecipient>
+            <Identifier> 63865500-0904-46b1-9b4f-7bd237a26363 </Identifier>
+            <CreatedDate>2020-03-25T17:04:53.042Z</CreatedDate>
+            <LastModifiedDate>2020-03-25T17:04:53.042Z</LastModifiedDate>
+            <ModifiedByUser>msimpson</ModifiedByUser>
+            <Description> This is a description of the emergency notification recipient. </Description>
+            <Type>SMS</Type>
+            <Sms>
+                <TelephoneNumber>12015551212</TelephoneNumber>
+            </Sms>
+        </EmergencyNotificationRecipient>
+        <EmergencyNotificationRecipient>
+            <Identifier> 63865500-0904-46b1-9b4f-7bd237a26363 </Identifier>
+            <CreatedDate>2020-03-29T20:14:01.736Z</CreatedDate>
+            <LastModifiedDate>2020-03-29T20:17:53.294Z</LastModifiedDate>
+            <ModifiedByUser>lsimpson</ModifiedByUser>
+            <Description> This is a description of the emergency notification recipient. </Description>
+            <Type>TTS</Type>
+            <Tts>
+                <TelephoneNumber>12015551212</TelephoneNumber>
+            </Tts>
+        </EmergencyNotificationRecipient>
+    </EmergencyNotificationRecipients>
+</EmergencyNotificationRecipientsResponse>";
+
+        public static string getRecipients = @"<EmergencyNotificationRecipientsResponse>
+    <EmergencyNotificationRecipient>
+        <Identifier> 63865500-0904-46b1-9b4f-7bd237a26363 </Identifier>
+        <CreatedDate>2020-03-18T21:26:47.403Z</CreatedDate>
+        <LastModifiedDate>2020-04-01T18:32:22.316Z</LastModifiedDate>
+        <ModifiedByUser>jgilmore</ModifiedByUser>
+        <Description> This is a description of the emergency notification recipient. </Description>
+        <Type>CALLBACK</Type>
+        <EmailAddress>fred@gmail.com</EmailAddress>
+        <Sms>
+            <TelephoneNumber>12015551212</TelephoneNumber>
+        </Sms>
+        <Tts>
+            <TelephoneNumber>12015551212</TelephoneNumber>
+        </Tts>
+        <Callback>
+            <Url>https://foo.bar/baz</Url>
+            <Credentials>
+                <Username>jgilmore</Username>
+                <!-- CallbackPassword is omitted for security -->
+            </Credentials>
+        </Callback>
+    </EmergencyNotificationRecipient>
+</EmergencyNotificationRecipientsResponse>";
 
         public static string listOrders = @"<ResponseSelectWrapper>
     <ListOrderIdUserIdDate>
