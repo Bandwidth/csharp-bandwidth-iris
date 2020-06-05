@@ -1086,5 +1086,19 @@ var result = await EmergencyNotification.ListEndpointOrders(client, new Dictiona
 ### Create Endpoint Order 
 
 ```csharp
-var result = EmergencyNotification.CreateEndpointOrders(client, endpointOrder);
+var result = await EmergencyNotification.CreateEndpointOrders(client, endpointOrder);
+```
+
+## Aeuis
+
+### Get Aeui
+
+```csharp
+var response = await Aeui.Get(client, id);
+```
+
+### List Aeui
+
+```csharp
+var response = await Aeui.List(client);
 ```
