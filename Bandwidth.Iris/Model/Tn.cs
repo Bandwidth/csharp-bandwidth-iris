@@ -140,6 +140,7 @@ namespace Bandwidth.Iris.Model
         public string VendorName { get; set; }
         public DateTime LastModified { get; set; }
         public string State { get; set; }
+        public Features Features { get; set; }
     }
 
     public class TelephoneNumbersResponse
@@ -147,5 +148,19 @@ namespace Bandwidth.Iris.Model
         public int TelephoneNumberCount { get; set; }
         public Links Links { get; set; }
         public TelephoneNumber[] TelephoneNumbers;
+    }
+
+    public class Features
+    {
+        public E911 E911 { get; set; }
+    }
+
+    public class E911
+    {
+        public string LastE911OrderOutcome { get; set; }
+        public string SipPeerAddress { get; set; }
+        public string CallerName { get; set; }
+        public Address Address { get; set; }
+        public EmergencyNotificationGroup EmergencyNotificationGroup { get; set; }
     }
 }

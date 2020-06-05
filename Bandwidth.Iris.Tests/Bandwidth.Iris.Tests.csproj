@@ -61,6 +61,7 @@
     <Compile Include="HttpServer.cs" />
     <Compile Include="Models\AccountTests.cs" />
     <Compile Include="Models\ApplicationTest.cs" />
+    <Compile Include="Models\AeuiTests.cs" />
     <Compile Include="Models\CityTests.cs" />
     <Compile Include="Models\CoveredRateCenterTests.cs" />
     <Compile Include="Models\DiscNumberTest.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Models\SipPeerTests.cs" />
     <Compile Include="Models\DldaTests.cs" />
     <Compile Include="Models\LidbTests.cs" />
+    <Compile Include="Models\EmergencyNotificationTests.cs" />
     <Compile Include="Models\SubscriptionTests.cs" />
     <Compile Include="Models\TnReservationTests.cs" />
     <Compile Include="Models\SiteTests.cs" />
