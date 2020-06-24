@@ -47,6 +47,7 @@ namespace Bandwidth.Iris.Model
         public string Description { get; set; }
         [XmlArrayItem("Tn")]
         public string[] TelephoneNumbers { get; set; }
+        public string TelephoneNumber { get; set; }
     }
 
     public class LosingCarriers

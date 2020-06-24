@@ -80,6 +80,7 @@
     <Compile Include="Model\Lidb.cs" />
     <Compile Include="Model\Subscription.cs" />
     <Compile Include="Model\Tn.cs" />
+    <Compile Include="Model\TnOptions.cs" />
     <Compile Include="Model\TnReservation.cs" />
     <Compile Include="Model\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
