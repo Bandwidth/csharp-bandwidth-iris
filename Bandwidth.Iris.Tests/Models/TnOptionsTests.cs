@@ -73,6 +73,12 @@ namespace Bandwidth.Iris.Tests.Models
                 } catch(Exception ex)
                 {
                     Assert.IsNotNull(ex);
+                    if (ex.InnerException is BandwidthIrisException)
+                    {
+                        var exInner = (BandwidthIrisException)ex.InnerException;
+                        Console.WriteLine(exInner.Message); //"Telephone number is not available"
+                        Console.WriteLine(exInner.Body);
+                    }
                 }
                 if (server.Error != null) throw server.Error;
 

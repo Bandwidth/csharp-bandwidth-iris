@@ -371,7 +371,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "GET",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/origination/settings",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/origination/settings",
                     ContentToSend = new StringContent(TestXmlStrings.SipPeerOriginationSettingsResponse, Encoding.UTF8, "application/xml")
                 }
             }))
@@ -409,7 +409,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "POST",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/origination/settings",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/origination/settings",
                     ContentToSend = new StringContent(TestXmlStrings.SipPeerOriginationSettingsResponse, Encoding.UTF8, "application/xml")
                 }
             }))
@@ -446,7 +446,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "PUT",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/origination/settings",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/origination/settings",
                 }
             }))
             {
@@ -469,7 +469,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "GET",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/termination/settings",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/termination/settings",
                     ContentToSend = new StringContent(TestXmlStrings.SipPeerTerminationSettingResponse, Encoding.UTF8, "application/xml")
                 }
             }))
@@ -507,7 +507,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "POST",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/termination/settings",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/termination/settings",
                     ContentToSend = new StringContent(TestXmlStrings.SipPeerTerminationSettingResponse, Encoding.UTF8, "application/xml")
                 }
             }))
@@ -544,7 +544,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "PUT",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/termination/settings",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/termination/settings",
                 }
             }))
             {
@@ -565,7 +565,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "GET",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/sms",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/messaging/features/sms",
                     ContentToSend = new StringContent(TestXmlStrings.SipPeerSmsFeatureResponse, Encoding.UTF8, "application/xml")
                 }
             }))
@@ -677,7 +677,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "PUT",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/sms",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/messaging/features/sms",
                     ContentToSend = new StringContent(TestXmlStrings.SipPeerSmsFeatureResponse, Encoding.UTF8, "application/xml")
                 }
             }))
@@ -717,7 +717,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "DELETE",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/sms",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/messaging/features/sms",
                 }
             }))
             {
@@ -739,7 +739,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "GET",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/mms",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/messaging/features/mms",
                     ContentToSend = new StringContent(TestXmlStrings.MmsFeatureResponse, Encoding.UTF8, "application/xml")
                 }
             }))
@@ -783,7 +783,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "POST",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/mms",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/messaging/features/mms",
                     ContentToSend = new StringContent(TestXmlStrings.MmsFeatureResponse, Encoding.UTF8, "application/xml")
                 }
             }))
@@ -827,7 +827,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "PUT",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/mms",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/messaging/features/mms",
                     ContentToSend = new StringContent(TestXmlStrings.SipPeerSmsFeatureResponse, Encoding.UTF8, "application/xml")
                 }
             }))
@@ -851,7 +851,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "DELETE",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/features/mms",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/messaging/features/mms",
                 }
             }))
             {
@@ -873,7 +873,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "GET",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/applicationSettings",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/messaging/applicationSettings",
                     ContentToSend = new StringContent(TestXmlStrings.ApplicationSettingsResponse, Encoding.UTF8, "application/xml")
                 }
             }))
@@ -905,7 +905,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "PUT",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/applicationSettings",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/messaging/applicationSettings",
                     ContentToSend = new StringContent(TestXmlStrings.ApplicationSettingsResponse, Encoding.UTF8, "application/xml")
                 }
             }))
@@ -927,7 +927,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "PUT",
-                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippers/{sipPeerId}/products/messaging/applicationSettings",
+                    EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/sites/{siteId}/sippeers/{sipPeerId}/products/messaging/applicationSettings",
                     EstimatedContent = TestXmlStrings.RemoveApplicationResponse
                 }
             }))
