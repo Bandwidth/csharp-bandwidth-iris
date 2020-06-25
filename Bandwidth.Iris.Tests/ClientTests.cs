@@ -41,7 +41,14 @@ namespace Bandwidth.Iris.Tests
         [TestMethod]
         public void MakeGetRequestTest()
         {
-            using (var server = new HttpServer(new RequestHandler { EstimatedMethod = "GET", EstimatedPathAndQuery = "/v1.0/test?test1=value1&test2=value2" }))
+            using (var server = new HttpServer(new RequestHandler { 
+                EstimatedMethod = "GET", 
+                EstimatedPathAndQuery = "/v1.0/test?test1=value1&test2=value2",
+                EstimatedHeaders = new Dictionary<string, string>
+                {
+                    {"User-Agent", Client.USER_AGENT }
+                }
+            }))
             {
                 var client = Helper.CreateClient();
                 client.MakeGetRequest("test",
