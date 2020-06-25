@@ -2,6 +2,242 @@
 {
     public static class TestXmlStrings
     {
+        public static string getTnOptions = @"<TnOptionOrder>
+    <OrderCreateDate>2016-01-15T11:22:58.789Z</OrderCreateDate>
+    <AccountId>14</AccountId>
+    <CreatedByUser>jbm</CreatedByUser>
+    <OrderId>409033ee-88ec-43e3-85f3-538f30733963</OrderId>
+    <LastModifiedDate>2016-01-15T11:22:58.969Z</LastModifiedDate>
+    <ProcessingStatus>COMPLETE</ProcessingStatus>
+    <TnOptionGroups>
+        <TnOptionGroup>
+            <CallingNameDisplay>on</CallingNameDisplay>
+            <Sms>on</Sms>
+            <TelephoneNumbers>
+                <TelephoneNumber>2174101601</TelephoneNumber>
+            </TelephoneNumbers>
+        </TnOptionGroup>
+        <TnOptionGroup>
+            <CallingNameDisplay>off</CallingNameDisplay>
+            <TelephoneNumbers>
+                <TelephoneNumber>2174101602</TelephoneNumber>
+            </TelephoneNumbers>
+        </TnOptionGroup>
+        <TnOptionGroup>
+            <CallingNameDisplay>systemdefault</CallingNameDisplay>
+            <FinalDestinationURI>sip:+12345678901@1.2.3.4:5060</FinalDestinationURI>
+            <TelephoneNumbers>
+                <TelephoneNumber>2174101603</TelephoneNumber>
+            </TelephoneNumbers>
+        </TnOptionGroup>
+    </TnOptionGroups>
+    <ErrorList/>
+    <Warnings>
+        <Warning>
+            <TelephoneNumber>2174101601</TelephoneNumber>
+            <Description>SMS is already Enabled or number is in processing.</Description>
+        </Warning>
+    </Warnings>
+</TnOptionOrder>";
+
+        public static string listTnOptions = @"<TnOptionOrders>
+    <TotalCount>2</TotalCount>
+    <TnOptionOrder>
+        <OrderCreateDate>2016-01-15T12:01:14.324Z</OrderCreateDate>
+        <AccountId>14</AccountId>
+        <CreatedByUser>jbm</CreatedByUser>
+        <OrderId>ddbdc72e-dc27-490c-904e-d0c11291b095</OrderId>
+        <LastModifiedDate>2016-01-15T12:01:14.363Z</LastModifiedDate>
+        <ProcessingStatus>FAILED</ProcessingStatus>
+        <TnOptionGroups>
+            <TnOptionGroup>
+                <NumberFormat>10digit</NumberFormat>
+                <RPIDFormat>10digit</RPIDFormat>
+                <RewriteUser>testUser1</RewriteUser>
+                <CallForward>6042661720</CallForward>
+                <CallingNameDisplay>on</CallingNameDisplay>
+                <Protected>true</Protected>
+                <Sms>on</Sms>
+                <FinalDestinationURI>sip:+12345678901@1.2.3.4:5060</FinalDestinationURI>
+                <TelephoneNumbers>
+                    <TelephoneNumber>2018551020</TelephoneNumber>
+                </TelephoneNumbers>
+            </TnOptionGroup>
+            <TnOptionGroup>
+                <CallingNameDisplay>off</CallingNameDisplay>
+                <Protected>false</Protected>
+                <Sms>off</Sms>
+                <TelephoneNumbers>
+                    <TelephoneNumber>2018551025</TelephoneNumber>
+                </TelephoneNumbers>
+            </TnOptionGroup>
+        </TnOptionGroups>
+         <ErrorList>
+            <Error>
+                <Code>5076</Code>
+                <Description>Telephone number is not available.</Description>
+                <TelephoneNumber>2018551025</TelephoneNumber>
+            </Error>
+            <Error>
+                <Code>5076</Code>
+                <Description>Telephone number is not available.</Description>
+                <TelephoneNumber>2018551020</TelephoneNumber>
+            </Error>
+        </ErrorList>
+    </TnOptionOrder>
+    <TnOptionOrder>
+        <OrderCreateDate>2016-01-15T11:22:58.789Z</OrderCreateDate>
+        <AccountId>14</AccountId>
+        <CreatedByUser>jbm</CreatedByUser>
+        <OrderId>409033ee-88ec-43e3-85f3-538f30733963</OrderId>
+        <LastModifiedDate>2016-01-15T11:22:58.969Z</LastModifiedDate>
+        <ProcessingStatus>COMPLETE</ProcessingStatus>
+        <TnOptionGroups>
+            <TnOptionGroup>
+                <CallingNameDisplay>on</CallingNameDisplay>
+                <TelephoneNumbers>
+                    <TelephoneNumber>2174101601</TelephoneNumber>
+                </TelephoneNumbers>
+            </TnOptionGroup>
+            <TnOptionGroup>
+                <CallingNameDisplay>off</CallingNameDisplay>
+                <TelephoneNumbers>
+                    <TelephoneNumber>2174101602</TelephoneNumber>
+                </TelephoneNumbers>
+            </TnOptionGroup>
+            <TnOptionGroup>
+                <CallingNameDisplay>systemdefault</CallingNameDisplay>
+                <TelephoneNumbers>
+                    <TelephoneNumber>2174101603</TelephoneNumber>
+                </TelephoneNumbers>
+            </TnOptionGroup>
+        </TnOptionGroups>
+        <ErrorList/>
+    </TnOptionOrder>
+</TnOptionOrders>";
+
+
+        public static string listTnOptionsNoError = @"<TnOptionOrders>
+    <TotalCount>2</TotalCount>
+    <TnOptionOrder>
+        <OrderCreateDate>2016-01-15T12:01:14.324Z</OrderCreateDate>
+        <AccountId>14</AccountId>
+        <CreatedByUser>jbm</CreatedByUser>
+        <OrderId>ddbdc72e-dc27-490c-904e-d0c11291b095</OrderId>
+        <LastModifiedDate>2016-01-15T12:01:14.363Z</LastModifiedDate>
+        <ProcessingStatus>FAILED</ProcessingStatus>
+        <TnOptionGroups>
+            <TnOptionGroup>
+                <NumberFormat>10digit</NumberFormat>
+                <RPIDFormat>10digit</RPIDFormat>
+                <RewriteUser>testUser1</RewriteUser>
+                <CallForward>6042661720</CallForward>
+                <CallingNameDisplay>on</CallingNameDisplay>
+                <Protected>true</Protected>
+                <Sms>on</Sms>
+                <FinalDestinationURI>sip:+12345678901@1.2.3.4:5060</FinalDestinationURI>
+                <TelephoneNumbers>
+                    <TelephoneNumber>2018551020</TelephoneNumber>
+                </TelephoneNumbers>
+            </TnOptionGroup>
+            <TnOptionGroup>
+                <CallingNameDisplay>off</CallingNameDisplay>
+                <Protected>false</Protected>
+                <Sms>off</Sms>
+                <TelephoneNumbers>
+                    <TelephoneNumber>2018551025</TelephoneNumber>
+                </TelephoneNumbers>
+            </TnOptionGroup>
+        </TnOptionGroups>
+    </TnOptionOrder>
+    <TnOptionOrder>
+        <OrderCreateDate>2016-01-15T11:22:58.789Z</OrderCreateDate>
+        <AccountId>14</AccountId>
+        <CreatedByUser>jbm</CreatedByUser>
+        <OrderId>409033ee-88ec-43e3-85f3-538f30733963</OrderId>
+        <LastModifiedDate>2016-01-15T11:22:58.969Z</LastModifiedDate>
+        <ProcessingStatus>COMPLETE</ProcessingStatus>
+        <TnOptionGroups>
+            <TnOptionGroup>
+                <CallingNameDisplay>on</CallingNameDisplay>
+                <TelephoneNumbers>
+                    <TelephoneNumber>2174101601</TelephoneNumber>
+                </TelephoneNumbers>
+            </TnOptionGroup>
+            <TnOptionGroup>
+                <CallingNameDisplay>off</CallingNameDisplay>
+                <TelephoneNumbers>
+                    <TelephoneNumber>2174101602</TelephoneNumber>
+                </TelephoneNumbers>
+            </TnOptionGroup>
+            <TnOptionGroup>
+                <CallingNameDisplay>systemdefault</CallingNameDisplay>
+                <TelephoneNumbers>
+                    <TelephoneNumber>2174101603</TelephoneNumber>
+                </TelephoneNumbers>
+            </TnOptionGroup>
+        </TnOptionGroups>
+    </TnOptionOrder>
+</TnOptionOrders>";
+
+        public static string listTnOptionsSummary = @"<TnOptionOrders>
+    <TotalCount>2</TotalCount>
+    <TnOptionOrderSummary>
+        <accountId>14</accountId>
+        <CountOfTNs>2</CountOfTNs>
+        <userId>jbm</userId>
+        <lastModifiedDate>2016-01-15T12:01:14.363Z</lastModifiedDate>
+        <OrderDate>2016-01-15T12:01:14.324Z</OrderDate>
+        <OrderType>tn_option</OrderType>
+        <OrderStatus>FAILED</OrderStatus>
+        <OrderId>ddbdc72e-dc27-490c-904e-d0c11291b095</OrderId>
+    </TnOptionOrderSummary>
+    <TnOptionOrderSummary>
+        <accountId>14</accountId>
+        <CountOfTNs>3</CountOfTNs>
+        <userId>jbm</userId>
+        <lastModifiedDate>2016-01-15T11:22:58.969Z</lastModifiedDate>
+        <OrderDate>2016-01-15T11:22:58.789Z</OrderDate>
+        <OrderType>tn_option</OrderType>
+        <OrderStatus>COMPLETE</OrderStatus>
+        <OrderId>409033ee-88ec-43e3-85f3-538f30733963</OrderId>
+    </TnOptionOrderSummary>
+</TnOptionOrders>";
+
+        public static string createTnOptionsResponse = @"<TnOptionOrderResponse>
+    <TnOptionOrder>
+        <OrderCreateDate>2016-01-15T12:01:14.324Z</OrderCreateDate>
+        <AccountId>14</AccountId>
+        <CreatedByUser>jbm</CreatedByUser>
+        <OrderId>ddbdc72e-dc27-490c-904e-d0c11291b095</OrderId>
+        <LastModifiedDate>2016-01-15T12:01:14.324Z</LastModifiedDate>
+        <ProcessingStatus>RECEIVED</ProcessingStatus>
+        <TnOptionGroups>
+            <TnOptionGroup>
+                <NumberFormat>10digit</NumberFormat>
+                <RPIDFormat>10digit</RPIDFormat>
+                <RewriteUser>testUser1</RewriteUser>
+                <CallForward>6042661720</CallForward>
+                <CallingNameDisplay>on</CallingNameDisplay>
+                <Protected>true</Protected>
+                <Sms>on</Sms>
+                <TelephoneNumbers>
+                    <TelephoneNumber>2018551020</TelephoneNumber>
+                </TelephoneNumbers>
+            </TnOptionGroup>
+            <TnOptionGroup>
+                <CallingNameDisplay>off</CallingNameDisplay>
+                <Protected>false</Protected>
+                <Sms>off</Sms>
+                <TelephoneNumbers>
+                    <TelephoneNumber>2018551025</TelephoneNumber>
+                </TelephoneNumbers>
+            </TnOptionGroup>
+        </TnOptionGroups>
+        <ErrorList/>
+    </TnOptionOrder>
+</TnOptionOrderResponse>";
+
         public static string listAeui = @"<AlternateEndUserIdentifiersResponse>
     <TotalCount>2</TotalCount>
     <Links>
@@ -1052,7 +1288,7 @@
                                                                 </ResponseStatus>
                                                             </AssociatedSipPeersResponse>";
 
-        public static string xmlError = " <?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SiteResponse><ResponseStatus><ErrorCode>12112</ErrorCode><Description>The verifiable address closest to the submitted access is included below. Please use that street address or another valid street address in your next request</Description></ResponseStatus><AddressErrorDescription><AddressInconsistencies>Some adjustments are required to allow the address to pass geocoding:Specified value - Street Suffix : \"PARKWAY\" Valid value - \"PKWY\"</AddressInconsistencies><RecommendedAddress><AddressLine1>320 DIVERSEY PKWY</AddressLine1><HouseNumber>320</HouseNumber><StreetName>DIVERSEY</StreetName><StreetSuffix>PKWY</StreetSuffix><City>WEST CHICAGO</City><StateCode>IL</StateCode><Zip>60185</Zip><PlusFour>6204</PlusFour><Country>US</Country></RecommendedAddress></AddressErrorDescription><Site><Name>Csharp Test Site</Name><Description>A site from the C# Example</Description><Address><HouseNumber>320</HouseNumber><StreetName>Diversey Parkway</StreetName><City>West Chicago</City><StateCode>IL</StateCode><Zip>60185</Zip><AddressType>Service</AddressType></Address></Site></SiteResponse>";
+        public static string xmlError = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><SiteResponse><ResponseStatus><ErrorCode>12112</ErrorCode><Description>The verifiable address closest to the submitted access is included below. Please use that street address or another valid street address in your next request</Description></ResponseStatus><AddressErrorDescription><AddressInconsistencies>Some adjustments are required to allow the address to pass geocoding:Specified value - Street Suffix : \"PARKWAY\" Valid value - \"PKWY\"</AddressInconsistencies><RecommendedAddress><AddressLine1>320 DIVERSEY PKWY</AddressLine1><HouseNumber>320</HouseNumber><StreetName>DIVERSEY</StreetName><StreetSuffix>PKWY</StreetSuffix><City>WEST CHICAGO</City><StateCode>IL</StateCode><Zip>60185</Zip><PlusFour>6204</PlusFour><Country>US</Country></RecommendedAddress></AddressErrorDescription><Site><Name>Csharp Test Site</Name><Description>A site from the C# Example</Description><Address><HouseNumber>320</HouseNumber><StreetName>Diversey Parkway</StreetName><City>West Chicago</City><StateCode>IL</StateCode><Zip>60185</Zip><AddressType>Service</AddressType></Address></Site></SiteResponse>";
         public static string xmlLNPResponseWrapper = "<LNPResponseWrapper><TotalCount>3176</TotalCount><Links><first> -- link -- </first><next> -- link -- </next></Links><lnpPortInfoForGivenStatus><CountOfTNs>1</CountOfTNs><userId>Neustar</userId><lastModifiedDate>2014-11-21T14:00:33.836Z</lastModifiedDate><OrderDate>2014-11-05T19:34:53.176Z</OrderDate><OrderId>982e3c10-3840-4251-abdd-505cd8610788</OrderId><OrderType>port_out</OrderType><ErrorCode>200</ErrorCode><ErrorMessage>Port out successful.</ErrorMessage><FullNumber>9727717577</FullNumber><ProcessingStatus>COMPLETE</ProcessingStatus><RequestedFOCDate>2014-11-20T00:00:00.000Z</RequestedFOCDate><VendorId>512E</VendorId></lnpPortInfoForGivenStatus><Snip>   ---   </Snip><lnpPortInfoForGivenStatus><CountOfTNs>1</CountOfTNs><userId>Neustar</userId><lastModifiedDate>2015-03-30T14:01:59.049Z</lastModifiedDate><OrderDate>2015-03-24T17:47:17.605Z</OrderDate><OrderId>f8f02d0a-d1a4-42eb-8f45-ce8187cd73ff</OrderId><OrderType>port_out</OrderType><ErrorCode>200</ErrorCode><ErrorMessage>Port out successful.</ErrorMessage><FullNumber>2092660315</FullNumber><ProcessingStatus>COMPLETE</ProcessingStatus><RequestedFOCDate>2015-03-27T00:00:00.000Z</RequestedFOCDate><VendorId>512E</VendorId></lnpPortInfoForGivenStatus></LNPResponseWrapper>";
 
         public static string xmlNumberPortabilityResponseWithPortabilityErrros = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><NumberPortabilityResponse><PortabilityErrors><Error><Code>7378</Code><Description>test description</Description><TelephoneNumbers><Tn>9199199999</Tn><Tn>9199199999</Tn></TelephoneNumbers></Error><Error><Code>7478</Code><Description>test description</Description><TelephoneNumbers><Tn>9199199999</Tn></TelephoneNumbers></Error></PortabilityErrors><PortableNumbers><Tn>9195551212</Tn><Tn>9195551213</Tn></PortableNumbers><SupportedRateCenters><RateCenterGroup><RateCenter>RALEIGH</RateCenter><City>RALEIGH</City><State>NC</State><LATA>426</LATA><Tiers><Tier>0</Tier></Tiers><TnList><Tn>9195551212</Tn><Tn>9195551213</Tn></TnList></RateCenterGroup></SupportedRateCenters><UnsupportedRateCenters/><SupportedLosingCarriers><LosingCarrierTnList><LosingCarrierSPID>6214</LosingCarrierSPID><LosingCarrierName>Cingular</LosingCarrierName><TnList><Tn>9195551212</Tn><Tn>9195551213</Tn></TnList></LosingCarrierTnList></SupportedLosingCarriers><UnsupportedLosingCarriers/></NumberPortabilityResponse>";

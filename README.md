@@ -1102,3 +1102,115 @@ var response = await Aeui.Get(client, id);
 ```csharp
 var response = await Aeui.List(client);
 ```
+
+## TN Options
+
+### Create TN Option
+
+Create TN Option order(s) to assign line features to the telephone number
+
+#### Add PortOutPasscode
+
+```csharp
+var order = new TnOptionOrder
+{
+    CustomerOrderId = "customerOrderId",
+    TnOptionGroups = new List<TnOptionGroup>
+    {
+        new TnOptionGroup {
+            PortOutPasscode = "a1b2c3",
+            TelephoneNumbers = new List<string>
+            {
+                "2018551020",
+                "2018551025"
+            }
+        }
+    }
+};
+
+var result = await TnOptions.Create(client, order);
+```
+
+#### Enable SMS
+
+```csharp
+var order = new TnOptionOrder
+{
+    CustomerOrderId = "customerOrderId",
+    TnOptionGroups = new List<TnOptionGroup>
+    {
+        new TnOptionGroup {
+            Sms = "on",
+            TelephoneNumbers = new List<string>
+            {
+                "2018551020",
+                "2018551025"
+            }
+        }
+    }
+};
+
+var result = await TnOptions.Create(client, order);
+```
+
+#### Add CallForward Number
+
+```csharp
+var order = new TnOptionOrder
+{
+    CustomerOrderId = "customerOrderId",
+    TnOptionGroups = new List<TnOptionGroup>
+    {
+        new TnOptionGroup {
+            CallForward = "6042661720",
+            TelephoneNumbers = new List<string>
+            {
+                "2018551020",
+                "2018551025"
+            }
+        }
+    }
+};
+
+var result = await TnOptions.Create(client, order);
+```
+
+### Get Tn Option Order
+
+#### Get Tn Option Order (No Error)
+
+```csharp
+TnOptionOrder response = null;
+try{
+response = await TnOptions.Get(client, orderId);
+} catch (Exception ex) {
+    //No error thrown
+}
+
+Console.WriteLine(response.OrderCreateDate); //"2016-01-15T11:22:58.789Z"
+```
+
+#### Get Tn Option Order (With Error)
+
+```csharp
+TnOptionOrder response = null;
+try{
+    response = await TnOptions.Get(client, orderId);
+} catch (Exception ex) {
+    if (ex.InnerException is BandwidthIrisException)
+    {
+        var exInner = (BandwidthIrisException)ex.InnerException;
+        Console.WriteLine(exInner.Message); //"Telephone number is not available"
+        Console.WriteLine(exInner.Body); // <TnOptionOrders><TotalCount>2</TotalCount><TnOptionOrder>..........</TnOptionOrder></TnOptionOrders>
+    } 
+}
+```
+
+### List Tn Option Orders
+
+```csharp
+var result = await TnOptions.List(client, new Dictionary<string, Object>
+    {
+        {"status", "9199918388" }
+    });
+```
