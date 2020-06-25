@@ -15,7 +15,7 @@ namespace Bandwidth.Iris
 {
     public sealed class Client
     {
-        public static readonly string USER_AGENT = "java-bandwidth-iris-2.0.0";
+        public static readonly string USER_AGENT = "csharp-bandwidth-iris-2.0.0";
 
         private readonly string _userName;
         private readonly string _password;
