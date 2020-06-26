@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -15,7 +16,7 @@ namespace Bandwidth.Iris
 {
     public sealed class Client
     {
-        public static readonly string USER_AGENT = "csharp-bandwidth-iris-2.0.0";
+        public static readonly string USER_AGENT = $"csharp-bandwidth-iris-{Assembly.GetAssembly(typeof(Bandwidth.Iris.Client)).GetName().Version.ToString()}";
 
         private readonly string _userName;
         private readonly string _password;
