@@ -292,7 +292,7 @@ namespace Bandwidth.Iris.Tests.Models
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "GET",
-                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers/10/tns", Helper.AccountId),
+                EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers/10/tns?page=1&size=50000", Helper.AccountId),
                 ContentToSend = new StringContent(TestXmlStrings.ValidSipPeerTnsResponseXml, Encoding.UTF8, "application/xml")
             }))
             {
