@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -15,6 +16,8 @@ namespace Bandwidth.Iris
 {
     public sealed class Client
     {
+        public static readonly string USER_AGENT = $"csharp-bandwidth-iris-{Assembly.GetAssembly(typeof(Bandwidth.Iris.Client)).GetName().Version.ToString()}";
+
         private readonly string _userName;
         private readonly string _password;
         private readonly string _apiEndpoint;
@@ -63,10 +66,11 @@ namespace Bandwidth.Iris
         private HttpClient CreateHttpClient()
         {
             var url = new UriBuilder(_apiEndpoint) { Path = string.Format("/{0}/", _apiVersion) };
-            var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { BaseAddress = url.Uri };
+            var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = true }) { BaseAddress = url.Uri };
             client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Basic",
                     Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", _userName, _password))));
+            client.DefaultRequestHeaders.Add("User-Agent", USER_AGENT);
             return client;
         }
 
