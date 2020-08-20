@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -113,10 +114,15 @@ namespace Bandwidth.Iris.Model
             return response.SipPeerTelephoneNumber;
         }
 
-        public async Task<SipPeerTelephoneNumber[]> GetTns()
+        public async Task<SipPeerTelephoneNumber[]> GetTns(int page = 1, int size = 50000)
         {
             if (SiteId == null) throw new ArgumentNullException("SiteId");
-            var response = await Client.MakeGetRequest<SipPeerTelephoneNumbersResponse>(Client.ConcatAccountPath(string.Format("{0}/{1}/{2}/{3}/{4}", Site.SitePath, SiteId, Site.SipPeerPath, Id, TnsPath)));
+            var query = new Dictionary<string, object>()
+            {
+                { "page", page },
+                { "size", size }
+            };
+            var response = await Client.MakeGetRequest<SipPeerTelephoneNumbersResponse>(Client.ConcatAccountPath($"{Site.SitePath}/{SiteId}/{Site.SipPeerPath}/{Id}/{TnsPath}"), query);
             return response.SipPeerTelephoneNumbers;
         }
 
