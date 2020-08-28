@@ -24,7 +24,7 @@ namespace Bandwidth.Iris
         private readonly string _apiVersion;
         private readonly string _accountPath;
 
-        public static Client GetInstance(string accountId, string userName, string password, string apiEndpoint = "https://dasbhoard.bandwidth.com", string apiVersion = "v1.0")
+        public static Client GetInstance(string accountId, string userName, string password, string apiEndpoint = "https://dashboard.bandwidth.com", string apiVersion = "v1.0")
         {
             return new Client(accountId, userName, password, apiEndpoint, apiVersion);
         }
