@@ -202,6 +202,8 @@ namespace Bandwidth.Iris.Model
         public string RateCenter { get; set; }
         public string State { get; set; }
         public int Quantity { get; set; }
+
+        public string AreaCode { get; set; }
     }
 
     public class ExistingTelephoneNumberOrderType
