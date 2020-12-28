@@ -9,7 +9,7 @@ jobs:
     if: ${{ !github.event.release.prerelease && github.event.release.target_commitish == 'master' }}
     env:
       BW_PROJECT_NAME: Bandwidth.Iris
-    runs-on: windows-2016
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - name: Set release version
