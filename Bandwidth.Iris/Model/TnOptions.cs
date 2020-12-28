@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
 {
-    class TnOptions : BaseModel
+    public class TnOptions : BaseModel
     {
 
         public async static Task<TnOptionOrders> List(Client client, IDictionary<string, object> query = null)
