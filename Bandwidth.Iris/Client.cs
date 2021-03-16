@@ -133,7 +133,7 @@ namespace Bandwidth.Iris
         }
 
 
-        internal async Task<TResult> MakeGetRequest<TResult>(string path, IDictionary<string, object> query = null,
+        public async Task<TResult> MakeGetRequest<TResult>(string path, IDictionary<string, object> query = null,
             string id = null)
         {
             using (var response = await MakeGetRequest(path, query, id))
@@ -307,7 +307,7 @@ namespace Bandwidth.Iris
         }
 
 
-        internal async Task<TResult> MakePostRequest<TResult>(string path, object data)
+        public async Task<TResult> MakePostRequest<TResult>(string path, object data)
         {
             using (var response = await MakePostRequest(path, data))
             {
@@ -321,7 +321,7 @@ namespace Bandwidth.Iris
             }
         }
 
-        internal async Task<TResult> MakePutRequest<TResult>(string path, object data)
+        public async Task<TResult> MakePutRequest<TResult>(string path, object data)
         {
             using (var response = await MakePutRequest(path, data))
             {
@@ -343,7 +343,7 @@ namespace Bandwidth.Iris
             }
         }
 
-        internal async Task<TResult> MakePatchRequest<TResult>(string path, object data)
+        public async Task<TResult> MakePatchRequest<TResult>(string path, object data)
         {
             using (var response = await MakePatchRequest(path, data)) 
             {
@@ -459,7 +459,7 @@ namespace Bandwidth.Iris
             return location.Substring(index + 1);
         }
 
-        internal string ConcatAccountPath(string path)
+        public string ConcatAccountPath(string path)
         {
             if (string.IsNullOrEmpty(path))
                 return _accountPath;
