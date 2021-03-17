@@ -9,7 +9,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Bandwidth.Iris</RootNamespace>
     <AssemblyName>Bandwidth.Iris</AssemblyName>
-    <TargetFramework>netstandard1.1</TargetFramework>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
