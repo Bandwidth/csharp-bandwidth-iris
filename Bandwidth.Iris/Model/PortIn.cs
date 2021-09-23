@@ -357,7 +357,7 @@ namespace Bandwidth.Iris.Model
 
     public enum PortType
     {
-        AUTOMATED, INTERNAL, MANUALOFFNET
+        AUTOMATED, INTERNAL, MANUALOFFNET, MANUALONNET, MANUALTOLLFREE
     }
     public sealed class FileContent : IDisposable
     {
