@@ -27,8 +27,8 @@ using System.Runtime.CompilerServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("2.3.0")]
-[assembly: AssemblyFileVersion("2.3.0")]
+[assembly: AssemblyVersion("2.3.1")]
+[assembly: AssemblyFileVersion("2.3.1")]
 
 #if DEBUG
 
