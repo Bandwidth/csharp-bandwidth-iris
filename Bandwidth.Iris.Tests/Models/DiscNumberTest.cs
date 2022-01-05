@@ -28,7 +28,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = DiscNumber.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
             }
         }
 
@@ -44,7 +44,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = DiscNumber.List().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
             }
         }
 
@@ -61,7 +61,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = DiscNumber.GetTotals(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(3, result.Count);
+                Assert.Equal(3, result.Count);
             }
         }
     }

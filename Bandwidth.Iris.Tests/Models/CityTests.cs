@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class CityTests
     {
         // [TestInitialize]
@@ -31,11 +31,11 @@ namespace Bandwidth.Iris.Tests.Models
                     {"state", "NC"}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
-                Assert.AreEqual("SOUTHEPINS", result[0].RcAbbreviation);
-                Assert.AreEqual("ABERDEEN", result[0].Name);
-                Assert.AreEqual("JULIAN", result[1].RcAbbreviation);
-                Assert.AreEqual("ADVANCE", result[1].Name);
+                Assert.Equal(2, result.Length);
+                Assert.Equal("SOUTHEPINS", result[0].RcAbbreviation);
+                Assert.Equal("ABERDEEN", result[0].Name);
+                Assert.Equal("JULIAN", result[1].RcAbbreviation);
+                Assert.Equal("ADVANCE", result[1].Name);
             }
         }
 
@@ -54,11 +54,11 @@ namespace Bandwidth.Iris.Tests.Models
                     {"state", "NC"}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
-                Assert.AreEqual("SOUTHEPINS", result[0].RcAbbreviation);
-                Assert.AreEqual("ABERDEEN", result[0].Name);
-                Assert.AreEqual("JULIAN", result[1].RcAbbreviation);
-                Assert.AreEqual("ADVANCE", result[1].Name);
+                Assert.Equal(2, result.Length);
+                Assert.Equal("SOUTHEPINS", result[0].RcAbbreviation);
+                Assert.Equal("ABERDEEN", result[0].Name);
+                Assert.Equal("JULIAN", result[1].RcAbbreviation);
+                Assert.Equal("ADVANCE", result[1].Name);
             }
         }
     }

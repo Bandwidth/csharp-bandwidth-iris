@@ -29,10 +29,10 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Tn.Get(client, "1234").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("1234", result.TelephoneNumber);
-                Assert.AreEqual("Inservice", result.Status);
-                Assert.AreEqual("5f3a4dab-aac7-4b0a-8ee4-1b6a67ae04be", result.OrderId);
-                Assert.AreEqual("NEW_NUMBER_ORDER", result.OrderType);
+                Assert.Equal("1234", result.TelephoneNumber);
+                Assert.Equal("Inservice", result.Status);
+                Assert.Equal("5f3a4dab-aac7-4b0a-8ee4-1b6a67ae04be", result.OrderId);
+                Assert.Equal("NEW_NUMBER_ORDER", result.OrderType);
                 
             }
         }
@@ -50,7 +50,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Tn.List(client, new Dictionary<string, object>{{"npa", "818"}}).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(5, result.TelephoneNumberCount);
+                Assert.Equal(5, result.TelephoneNumberCount);
 
             }
             
@@ -68,7 +68,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Tn.List(new Dictionary<string, object> { { "npa", "818" } }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(5, result.TelephoneNumberCount);
+                Assert.Equal(5, result.TelephoneNumberCount);
 
             }
             
@@ -87,10 +87,10 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Tn.Get("1234").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("1234", result.TelephoneNumber);
-                Assert.AreEqual("Inservice", result.Status);
-                Assert.AreEqual("5f3a4dab-aac7-4b0a-8ee4-1b6a67ae04be", result.OrderId);
-                Assert.AreEqual("NEW_NUMBER_ORDER", result.OrderType);
+                Assert.Equal("1234", result.TelephoneNumber);
+                Assert.Equal("Inservice", result.Status);
+                Assert.Equal("5f3a4dab-aac7-4b0a-8ee4-1b6a67ae04be", result.OrderId);
+                Assert.Equal("NEW_NUMBER_ORDER", result.OrderType);
 
             }
         }
@@ -110,8 +110,8 @@ namespace Bandwidth.Iris.Tests.Models
                 var tn = new Tn {TelephoneNumber = "1234", Client = client};
                 var result = tn.GetSites().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("1435", result.Id);
-                Assert.AreEqual("Sales Training", result.Name);
+                Assert.Equal("1435", result.Id);
+                Assert.Equal("Sales Training", result.Name);
 
             }
         }
@@ -131,8 +131,8 @@ namespace Bandwidth.Iris.Tests.Models
                 var tn = new Tn { TelephoneNumber = "1234", Client = client };
                 var result = tn.GetSipPeers().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("4064", result.Id);
-                Assert.AreEqual("Sales", result.Name);
+                Assert.Equal("4064", result.Id);
+                Assert.Equal("Sales", result.Name);
 
             }
         }
@@ -152,8 +152,8 @@ namespace Bandwidth.Iris.Tests.Models
                 var tn = new Tn { TelephoneNumber = "1234", Client = client };
                 var result = tn.GetRateCenter().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("CO", result.State);
-                Assert.AreEqual("DENVER", result.RateCenter);
+                Assert.Equal("CO", result.State);
+                Assert.Equal("DENVER", result.RateCenter);
 
             }
         }
@@ -173,7 +173,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var tn = new Tn { TelephoneNumber = "1234", Client = client };
                 var result = tn.GetLata().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("656", result);
+                Assert.Equal("656", result);
             }
         }
 
@@ -192,14 +192,14 @@ namespace Bandwidth.Iris.Tests.Models
                 var tn = new Tn { TelephoneNumber = "1234", Client = client };
                 var result = tn.GetDetails().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("9500149", result.AccountId);
-                Assert.AreEqual("DENVER", result.City);
-                Assert.AreEqual("656", result.Lata);
-                Assert.AreEqual("CO", result.State);
-                Assert.AreEqual("1234", result.FullNumber);
-                Assert.AreEqual("0", result.Tier);
-                Assert.AreEqual("49", result.VendorId);
-                Assert.AreEqual("9500149", result.AccountId);
+                Assert.Equal("9500149", result.AccountId);
+                Assert.Equal("DENVER", result.City);
+                Assert.Equal("656", result.Lata);
+                Assert.Equal("CO", result.State);
+                Assert.Equal("1234", result.FullNumber);
+                Assert.Equal("0", result.Tier);
+                Assert.Equal("49", result.VendorId);
+                Assert.Equal("9500149", result.AccountId);
             }
         }
     }

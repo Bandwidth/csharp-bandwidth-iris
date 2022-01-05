@@ -82,13 +82,13 @@ namespace Bandwidth.Iris.Tests.Models
                 disconnect.SetClient(client);
                 var list = disconnect.GetNotes("1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, list.Length);
-                Assert.AreEqual("11299", list[0].Id);
-                Assert.AreEqual("customer", list[0].UserId);
-                Assert.AreEqual("Test", list[0].Description);
-                Assert.AreEqual("11301", list[1].Id);
-                Assert.AreEqual("customer", list[1].UserId);
-                Assert.AreEqual("Test1", list[1].Description);
+                Assert.Equal(2, list.Length);
+                Assert.Equal("11299", list[0].Id);
+                Assert.Equal("customer", list[0].UserId);
+                Assert.Equal("Test", list[0].Description);
+                Assert.Equal("11301", list[1].Id);
+                Assert.Equal("customer", list[1].UserId);
+                Assert.Equal("Test1", list[1].Description);
             }
         }
 
@@ -123,9 +123,9 @@ namespace Bandwidth.Iris.Tests.Models
                 disconnect.SetClient(client);
                 var r = disconnect.AddNote("1", item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("11299", r.Id);
-                Assert.AreEqual("customer", r.UserId);
-                Assert.AreEqual("Test", r.Description);
+                Assert.Equal("11299", r.Id);
+                Assert.Equal("customer", r.UserId);
+                Assert.Equal("Test", r.Description);
             }
         }
     }

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class LnpCheckerTests
     {
         // [TestInitialize]
@@ -34,7 +34,7 @@ namespace Bandwidth.Iris.Tests.Models
                         Lata = "11",
                         Tiers = new []{"111", "222", "333"},
                         TnList = new []{"1111", "2222", "3333"}
-                    }, 
+                    },
                 },
                 UnsupportedRateCenters = new RateCenterGroup[0]
             };
@@ -97,7 +97,7 @@ namespace Bandwidth.Iris.Tests.Models
                 {
                     return;
                 }
-                Assert.Fail("The exception was not thrown");
+                Assert.True(false, "The exception was not thrown");
             }
         }
 
@@ -108,7 +108,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 TnList = new[] { "1111", "2222", "3333" }
             };
-            
+
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "POST",
@@ -120,9 +120,9 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = LnpChecker.Check(client, new[] { "1111", "2222", "3333" }, true).Result;
                 if (server.Error != null) throw server.Error;
-                CollectionAssert.AreEqual(new[] { "9195551212", "9195551213" }, result.PortableNumbers);
-                Assert.AreEqual("NC", result.SupportedRateCenters[0].State);
-                CollectionAssert.AreEqual(new[] { "9195551212", "9195551213" }, result.SupportedLosingCarriers.LosingCarrierTnList.TnList);
+                Assert.Equal(new[] { "9195551212", "9195551213" }, result.PortableNumbers);
+                Assert.Equal("NC", result.SupportedRateCenters[0].State);
+                Assert.Equal(new[] { "9195551212", "9195551213" }, result.SupportedLosingCarriers.LosingCarrierTnList.TnList);
 
             }
         }
@@ -146,7 +146,7 @@ namespace Bandwidth.Iris.Tests.Models
                         Lata = "11",
                         Tiers = new []{"111", "222", "333"},
                         TnList = new []{"1111", "2222", "3333"}
-                    }, 
+                    },
                 },
                 UnsupportedRateCenters = new RateCenterGroup[0]
             };
@@ -172,11 +172,11 @@ namespace Bandwidth.Iris.Tests.Models
             NumberPortabilityResponse numberPortabilityResponse = Helper.ParseXml<NumberPortabilityResponse>(xml);
 
 
-            Assert.AreEqual(2, numberPortabilityResponse.PortabilityErrors.Errors.Length);
-            Assert.AreEqual("7378", numberPortabilityResponse.PortabilityErrors.Errors[0].Code);
-            Assert.AreEqual("test description", numberPortabilityResponse.PortabilityErrors.Errors[0].Description);
-            Assert.AreEqual(2, numberPortabilityResponse.PortabilityErrors.Errors[0].TelephoneNumbers.Length);
-            Assert.AreEqual("9199199999", numberPortabilityResponse.PortabilityErrors.Errors[0].TelephoneNumbers[0]);
+            Assert.Equal(2, numberPortabilityResponse.PortabilityErrors.Errors.Length);
+            Assert.Equal("7378", numberPortabilityResponse.PortabilityErrors.Errors[0].Code);
+            Assert.Equal("test description", numberPortabilityResponse.PortabilityErrors.Errors[0].Description);
+            Assert.Equal(2, numberPortabilityResponse.PortabilityErrors.Errors[0].TelephoneNumbers.Length);
+            Assert.Equal("9199199999", numberPortabilityResponse.PortabilityErrors.Errors[0].TelephoneNumbers[0]);
 
         }
 

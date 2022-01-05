@@ -12,12 +12,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public void Setup()
         {
-            // Helper.SetEnvironmetVariables();
-            Environment.SetEnvironmentVariable(Client.BandwidthApiUserName, UserName);
-            Environment.SetEnvironmentVariable(Client.BandwidthApiPassword, Password);
-            Environment.SetEnvironmentVariable(Client.BandwidthApiAccountId, AccountId);
-            Environment.SetEnvironmentVariable(Client.BandwidthApiEndpoint, baseUrl ?? "http://localhost:3001/");
-            Environment.SetEnvironmentVariable(Client.BandwidthApiVersion, "v1.0");
+            Helper.SetEnvironmetVariables();
         }
 
         [Fact]
@@ -33,7 +28,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Account.Get(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("14", result.Id);
+                Assert.Equal("14", result.Id);
             }
         }
 
@@ -49,7 +44,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Account.Get().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("14", result.Id);
+                Assert.Equal("14", result.Id);
             }
         }
     }

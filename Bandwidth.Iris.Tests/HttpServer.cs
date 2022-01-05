@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-// using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests
 {
@@ -53,25 +53,25 @@ namespace Bandwidth.Iris.Tests
                 var response = context.Response;
                 if (handler.EstimatedMethod != null)
                 {
-                    Assert.AreEqual(handler.EstimatedMethod, request.HttpMethod);
+                    Assert.Equal(handler.EstimatedMethod, request.HttpMethod);
                 }
                 if (handler.EstimatedPathAndQuery != null)
                 {
-                    Assert.AreEqual(handler.EstimatedPathAndQuery, request.Url.PathAndQuery);
+                    Assert.Equal(handler.EstimatedPathAndQuery, request.Url.PathAndQuery);
                 }
                 if (handler.EstimatedContent != null)
                 {
                     using (var reader = new StreamReader(request.InputStream, Encoding.UTF8))
                     {
                         var content = reader.ReadToEnd();
-                        Assert.AreEqual(handler.EstimatedContent, content);
+                        Assert.Equal(handler.EstimatedContent, content);
                     }
                 }
                 if (handler.EstimatedHeaders != null)
                 {
                     foreach (var estimatedHeader in handler.EstimatedHeaders)
                     {
-                        Assert.AreEqual(estimatedHeader.Value, request.Headers[estimatedHeader.Key]);
+                        Assert.Equal(estimatedHeader.Value, request.Headers[estimatedHeader.Key]);
                     }
                 }
                 response.StatusCode = handler.StatusCodeToSend;

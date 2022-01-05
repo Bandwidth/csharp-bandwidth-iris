@@ -57,11 +57,11 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Subscription.Get(client, "1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("1", result.Id);
-                Assert.AreEqual("orders", result.OrderType);
-                Assert.AreEqual("8684b1c8-7d41-4877-bfc2-6bd8ea4dc89f", result.OrderId);
-                Assert.AreEqual("test@test", result.EmailSubscription.Email);
-                Assert.AreEqual("NONE", result.EmailSubscription.DigestRequested);
+                Assert.Equal("1", result.Id);
+                Assert.Equal("orders", result.OrderType);
+                Assert.Equal("8684b1c8-7d41-4877-bfc2-6bd8ea4dc89f", result.OrderId);
+                Assert.Equal("test@test", result.EmailSubscription.Email);
+                Assert.Equal("NONE", result.EmailSubscription.DigestRequested);
             }
         }
 
@@ -148,12 +148,12 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Subscription.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(1, result.Length);
-                Assert.AreEqual("1", result[0].Id);
-                Assert.AreEqual("orders", result[0].OrderType);
-                Assert.AreEqual("8684b1c8-7d41-4877-bfc2-6bd8ea4dc89f", result[0].OrderId);
-                Assert.AreEqual("test@test", result[0].EmailSubscription.Email);
-                Assert.AreEqual("NONE", result[0].EmailSubscription.DigestRequested);
+                Assert.Equal(1, result.Length);
+                Assert.Equal("1", result[0].Id);
+                Assert.Equal("orders", result[0].OrderType);
+                Assert.Equal("8684b1c8-7d41-4877-bfc2-6bd8ea4dc89f", result[0].OrderId);
+                Assert.Equal("test@test", result[0].EmailSubscription.Email);
+                Assert.Equal("NONE", result[0].EmailSubscription.DigestRequested);
             }
         }
 
@@ -237,7 +237,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var i = Subscription.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("1", i.Id);
+                Assert.Equal("1", i.Id);
             }
         }
 
@@ -278,7 +278,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var i = Subscription.Create(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("1", i.Id);
+                Assert.Equal("1", i.Id);
             }
         }
 

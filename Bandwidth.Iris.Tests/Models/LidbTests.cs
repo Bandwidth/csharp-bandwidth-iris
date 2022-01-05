@@ -28,7 +28,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Lidb.Get(client, "1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("255bda29-fc57-44e8-a6c2-59b45388c6d0", result.Id);
+                Assert.Equal("255bda29-fc57-44e8-a6c2-59b45388c6d0", result.Id);
             }
         }
                
@@ -45,7 +45,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Lidb.Get("1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("255bda29-fc57-44e8-a6c2-59b45388c6d0", result.Id);
+                Assert.Equal("255bda29-fc57-44e8-a6c2-59b45388c6d0", result.Id);
             }
         }
 
@@ -62,7 +62,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Lidb.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Lidb.List().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
             }
         }
 
@@ -123,7 +123,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var i = Lidb.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("255bda29-fc57-44e8-a6c2-59b45388c6d0", i.Id);
+                Assert.Equal("255bda29-fc57-44e8-a6c2-59b45388c6d0", i.Id);
             }
 
         }
@@ -167,7 +167,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var i = Lidb.Create(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("255bda29-fc57-44e8-a6c2-59b45388c6d0", i.Id);
+                Assert.Equal("255bda29-fc57-44e8-a6c2-59b45388c6d0", i.Id);
             }
         }
     }

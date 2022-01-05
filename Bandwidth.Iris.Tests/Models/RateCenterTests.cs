@@ -31,13 +31,13 @@ namespace Bandwidth.Iris.Tests.Models
                     {"state", "NC"}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(3, result.Length);
-                Assert.AreEqual("ACME", result[0].Abbreviation);
-                Assert.AreEqual("ACME", result[0].Name);
-                Assert.AreEqual("AHOSKIE", result[1].Abbreviation);
-                Assert.AreEqual("AHOSKIE", result[1].Name);
-                Assert.AreEqual("ALBEMARLE", result[2].Abbreviation);
-                Assert.AreEqual("ALBEMARLE", result[2].Name);
+                Assert.Equal(3, result.Length);
+                Assert.Equal("ACME", result[0].Abbreviation);
+                Assert.Equal("ACME", result[0].Name);
+                Assert.Equal("AHOSKIE", result[1].Abbreviation);
+                Assert.Equal("AHOSKIE", result[1].Name);
+                Assert.Equal("ALBEMARLE", result[2].Abbreviation);
+                Assert.Equal("ALBEMARLE", result[2].Name);
             }
         }
 
@@ -56,13 +56,13 @@ namespace Bandwidth.Iris.Tests.Models
                     {"state", "NC"}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(3, result.Length);
-                Assert.AreEqual("ACME", result[0].Abbreviation);
-                Assert.AreEqual("ACME", result[0].Name);
-                Assert.AreEqual("AHOSKIE", result[1].Abbreviation);
-                Assert.AreEqual("AHOSKIE", result[1].Name);
-                Assert.AreEqual("ALBEMARLE", result[2].Abbreviation);
-                Assert.AreEqual("ALBEMARLE", result[2].Name);
+                Assert.Equal(3, result.Length);
+                Assert.Equal("ACME", result[0].Abbreviation);
+                Assert.Equal("ACME", result[0].Name);
+                Assert.Equal("AHOSKIE", result[1].Abbreviation);
+                Assert.Equal("AHOSKIE", result[1].Name);
+                Assert.Equal("ALBEMARLE", result[2].Abbreviation);
+                Assert.Equal("ALBEMARLE", result[2].Name);
             }
         }
     }

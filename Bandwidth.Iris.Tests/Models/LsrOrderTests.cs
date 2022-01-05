@@ -28,7 +28,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = LsrOrder.Get(client, "1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("00cf7e08-cab0-4515-9a77-2d0a7da09415", result.Id);
+                Assert.Equal("00cf7e08-cab0-4515-9a77-2d0a7da09415", result.Id);
             }
         }
                
@@ -45,7 +45,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = LsrOrder.Get("1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("00cf7e08-cab0-4515-9a77-2d0a7da09415", result.Id);
+                Assert.Equal("00cf7e08-cab0-4515-9a77-2d0a7da09415", result.Id);
             }
         }
 
@@ -62,7 +62,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = LsrOrder.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = LsrOrder.List().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
             }
         }
 
@@ -134,7 +134,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var i = LsrOrder.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("00cf7e08-cab0-4515-9a77-2d0a7da09415", i.Id);
+                Assert.Equal("00cf7e08-cab0-4515-9a77-2d0a7da09415", i.Id);
             }
         }
 
@@ -193,7 +193,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var i = LsrOrder.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("00cf7e08-cab0-4515-9a77-2d0a7da09415", i.Id);
+                Assert.Equal("00cf7e08-cab0-4515-9a77-2d0a7da09415", i.Id);
             }
         }
 
@@ -249,7 +249,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var i = LsrOrder.Create(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("00cf7e08-cab0-4515-9a77-2d0a7da09415", i.Id);
+                Assert.Equal("00cf7e08-cab0-4515-9a77-2d0a7da09415", i.Id);
             }
         }
 
@@ -288,13 +288,13 @@ namespace Bandwidth.Iris.Tests.Models
                 order.SetClient(client);
                 var list = order.GetNotes().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, list.Length);
-                Assert.AreEqual("11299", list[0].Id);
-                Assert.AreEqual("customer", list[0].UserId);
-                Assert.AreEqual("Test", list[0].Description);
-                Assert.AreEqual("11301", list[1].Id);
-                Assert.AreEqual("customer", list[1].UserId);
-                Assert.AreEqual("Test1", list[1].Description);
+                Assert.Equal(2, list.Length);
+                Assert.Equal("11299", list[0].Id);
+                Assert.Equal("customer", list[0].UserId);
+                Assert.Equal("Test", list[0].Description);
+                Assert.Equal("11301", list[1].Id);
+                Assert.Equal("customer", list[1].UserId);
+                Assert.Equal("Test1", list[1].Description);
             }
         }
 
@@ -329,9 +329,9 @@ namespace Bandwidth.Iris.Tests.Models
                 order.SetClient(client);
                 var r = order.AddNote(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("11299", r.Id);
-                Assert.AreEqual("customer", r.UserId);
-                Assert.AreEqual("Test", r.Description);
+                Assert.Equal("11299", r.Id);
+                Assert.Equal("customer", r.UserId);
+                Assert.Equal("Test", r.Description);
             }
         }
 
@@ -353,7 +353,7 @@ namespace Bandwidth.Iris.Tests.Models
                 i.SetClient(client);
                 var result = i.GetHistory().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.IsTrue(result.Length > 0);
+                Assert.True(result.Length > 0);
             }
         }
     }

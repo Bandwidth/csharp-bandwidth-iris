@@ -51,7 +51,7 @@ namespace Bandwidth.Iris.Tests.Models
                     {"areaCode", 919}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
                 Helper.AssertObjects(list[0], result[0]);
                 Helper.AssertObjects(list[1], result[1]);
             }
@@ -94,7 +94,7 @@ namespace Bandwidth.Iris.Tests.Models
                     {"areaCode", 919}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
                 Helper.AssertObjects(list[0], result[0]);
                 Helper.AssertObjects(list[1], result[1]);
             }

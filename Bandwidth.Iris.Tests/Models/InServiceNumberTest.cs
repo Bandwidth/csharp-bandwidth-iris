@@ -28,7 +28,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = InServiceNumber.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(15, result.Length);
+                Assert.Equal(15, result.Length);
             }
         }
 
@@ -44,7 +44,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = InServiceNumber.List().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(15, result.Length);
+                Assert.Equal(15, result.Length);
             }
         }
 
@@ -61,7 +61,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = InServiceNumber.GetTotals(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(3, result.Count);
+                Assert.Equal(3, result.Count);
             }
         }
 
@@ -77,7 +77,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = InServiceNumber.GetTotals().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(3, result.Count);
+                Assert.Equal(3, result.Count);
             }
         }
     }

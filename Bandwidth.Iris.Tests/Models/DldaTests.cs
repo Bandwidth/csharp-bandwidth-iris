@@ -28,7 +28,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Dlda.Get(client, "1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", result.Id);
+                Assert.Equal("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", result.Id);
             }
         }
 
@@ -46,7 +46,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Dlda.Get("1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", result.Id);
+                Assert.Equal("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", result.Id);
             }
         }
 
@@ -63,7 +63,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Dlda.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(3, result.Length);
+                Assert.Equal(3, result.Length);
             }
         }
         [Fact]
@@ -78,7 +78,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Dlda.List().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(3, result.Length);
+                Assert.Equal(3, result.Length);
             }
         }
 
@@ -136,7 +136,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var i = Dlda.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", i.Id);
+                Assert.Equal("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", i.Id);
             }
 
         }
@@ -171,7 +171,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var i = Dlda.Create(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", i.Id);
+                Assert.Equal("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", i.Id);
             }
         }
 
@@ -217,7 +217,7 @@ namespace Bandwidth.Iris.Tests.Models
                 i.SetClient(client);
                 var result = i.GetHistory().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.IsTrue(result.Length > 0);
+                Assert.True(result.Length > 0);
             }
         }
     }

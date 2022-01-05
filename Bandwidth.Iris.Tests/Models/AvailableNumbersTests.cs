@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class AvailableNumbersTests
     {
         // [TestInitialize]
@@ -36,8 +36,8 @@ namespace Bandwidth.Iris.Tests.Models
                     {"quantity", 5}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.ResultCount);
-                CollectionAssert.AreEqual(new[] { "1111", "2222" }, result.TelephoneNumberList);
+                Assert.Equal(2, result.ResultCount);
+                Assert.Equal(new[] { "1111", "2222" }, result.TelephoneNumberList);
             }
         }
 
@@ -58,19 +58,19 @@ namespace Bandwidth.Iris.Tests.Models
                     {"quantity", 5}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.ResultCount);
+                Assert.Equal(2, result.ResultCount);
                 var d = result.TelephoneNumberDetailList[0];
-                Assert.AreEqual("JERSEY CITY", d.City);
-                Assert.AreEqual("224", d.Lata);
-                Assert.AreEqual("JERSEYCITY", d.RateCenter);
-                Assert.AreEqual("NJ", d.State);
-                Assert.AreEqual("2012001555", d.TelephoneNumber);
+                Assert.Equal("JERSEY CITY", d.City);
+                Assert.Equal("224", d.Lata);
+                Assert.Equal("JERSEYCITY", d.RateCenter);
+                Assert.Equal("NJ", d.State);
+                Assert.Equal("2012001555", d.TelephoneNumber);
                 d = result.TelephoneNumberDetailList[1];
-                Assert.AreEqual("JERSEY CITY", d.City);
-                Assert.AreEqual("224", d.Lata);
-                Assert.AreEqual("JERSEYCITY", d.RateCenter);
-                Assert.AreEqual("NJ", d.State);
-                Assert.AreEqual("123123123", d.TelephoneNumber);
+                Assert.Equal("JERSEY CITY", d.City);
+                Assert.Equal("224", d.Lata);
+                Assert.Equal("JERSEYCITY", d.RateCenter);
+                Assert.Equal("NJ", d.State);
+                Assert.Equal("123123123", d.TelephoneNumber);
             }
         }
 
@@ -94,8 +94,8 @@ namespace Bandwidth.Iris.Tests.Models
                     {"quantity", 5}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(3, result.ResultCount);
-                CollectionAssert.AreEqual(new[] { "1111", "2222", "3333" }, result.TelephoneNumberList);
+                Assert.Equal(3, result.ResultCount);
+                Assert.Equal(new[] { "1111", "2222", "3333" }, result.TelephoneNumberList);
             }
         }
     }
