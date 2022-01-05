@@ -345,7 +345,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "POST",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers/10/movetns", Helper.AccountId),
-                EstimatedContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<SipPeerTelephoneNumbers>\r\n  <FullNumber>111</FullNumber>\r\n  <FullNumber>222</FullNumber>\r\n</SipPeerTelephoneNumbers>"
+                EstimatedContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<SipPeerTelephoneNumbers>\n  <FullNumber>111</FullNumber>\n  <FullNumber>222</FullNumber>\n</SipPeerTelephoneNumbers>"
             }))
             {
                 var client = Helper.CreateClient();
