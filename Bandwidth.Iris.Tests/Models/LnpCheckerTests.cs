@@ -2,20 +2,20 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+    
     public class LnpCheckerTests
     {
-        [TestInitialize]
+        // [TestInitialize]
         public void Setup()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void CheckTest()
         {
             var request = new NumberPortabilityRequest
@@ -53,7 +53,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CheckThrowsErrorTest()
         {
             var request = new NumberPortabilityRequest
@@ -101,7 +101,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CheckWithXmlTest()
         {
             var request = new NumberPortabilityRequest
@@ -127,7 +127,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CheckWithDefaultClientTest()
         {
             var request = new NumberPortabilityRequest
@@ -164,7 +164,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void LnpCheckerPortabilityErrorsTest()
         {
             var xml = TestXmlStrings.xmlNumberPortabilityResponseWithPortabilityErrros;

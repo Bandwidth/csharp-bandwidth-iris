@@ -1,21 +1,26 @@
 ﻿using System.Collections.Generic;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using System.Net.Http;
 using System.Text;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class AccountTests
     {
-        [TestInitialize]
+        // [TestInitialize]
         public void Setup()
         {
-            Helper.SetEnvironmetVariables();
+            // Helper.SetEnvironmetVariables();
+            Environment.SetEnvironmentVariable(Client.BandwidthApiUserName, UserName);
+            Environment.SetEnvironmentVariable(Client.BandwidthApiPassword, Password);
+            Environment.SetEnvironmentVariable(Client.BandwidthApiAccountId, AccountId);
+            Environment.SetEnvironmentVariable(Client.BandwidthApiEndpoint, baseUrl ?? "http://localhost:3001/");
+            Environment.SetEnvironmentVariable(Client.BandwidthApiVersion, "v1.0");
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -32,7 +37,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetWithDefaultClientTest()
         {
             using (var server = new HttpServer(new RequestHandler

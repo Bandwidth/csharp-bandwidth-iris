@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+    
     public class EmergencyNotificationTests
     {
-        [TestInitialize]
+        // [TestInitialize]
         public void Setup()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetRecipients()
         {
 
@@ -53,7 +53,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestListRecipients()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -76,7 +76,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestCreateRecipients()
         {
 
@@ -102,7 +102,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUpdateRecipients()
         {
             string id = "123";
@@ -129,7 +129,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestDeleteRecipients()
         {
             string id = "123";
@@ -149,7 +149,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetGroupOrder()
         {
             string id = "123";
@@ -177,7 +177,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestListGroupOrder()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -202,7 +202,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestCreatGroupOrder()
         {
            
@@ -236,7 +236,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetGroups()
         {
             string id = "123";
@@ -265,7 +265,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestListGroups()
         {
 
@@ -293,7 +293,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetEndpointOrders()
         {
             string id = "123";
@@ -332,7 +332,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestListEndpointOrders()
         {
 
@@ -360,7 +360,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestCreateEndpointOrders()
         {
             var endpointOrder = new EmergencyNotificationEndpointOrder

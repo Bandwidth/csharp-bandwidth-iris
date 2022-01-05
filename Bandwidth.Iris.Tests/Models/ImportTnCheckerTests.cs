@@ -2,14 +2,14 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+    
     public class ImportTnCheckerTests
     {
-        [TestMethod]
+        [Fact]
         public void TestCreate()
         {
 

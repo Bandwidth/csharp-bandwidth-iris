@@ -2,21 +2,21 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+    
     public class RemoveImportedTnOrderTests
     {
 
-        [TestInitialize]
+        // [TestInitialize]
         public void Setup()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void TestCreate()
         {
             var order = new RemoveImportedTnOrder
@@ -49,7 +49,7 @@ namespace Bandwidth.Iris.Tests.Models
 
         }
 
-        [TestMethod]
+        [Fact]
         public void TestList()
         {
             var order = new RemoveImportedTnOrder
@@ -83,7 +83,7 @@ namespace Bandwidth.Iris.Tests.Models
 
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGet()
         {
             var order = new RemoveImportedTnOrder
@@ -116,7 +116,7 @@ namespace Bandwidth.Iris.Tests.Models
 
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetHistory()
         {
             var order = new RemoveImportedTnOrder

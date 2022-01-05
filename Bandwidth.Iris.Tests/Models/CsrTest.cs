@@ -2,14 +2,14 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+    
     public class CsrTest
     {
-        [TestMethod]
+        [Fact]
         public void TestCreate()
         {
             var csr = new Csr
@@ -59,7 +59,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGet()
         {
             var orderId = "123";
@@ -105,7 +105,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
     
-        [TestMethod]
+        [Fact]
         public void TestReplace()
         {
             var orderId = "123";
@@ -157,7 +157,7 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
 
-        [TestMethod]
+        [Fact]
         public void TestListNotes()
         {
             var orderId = "123";
@@ -185,7 +185,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestCreateNote()
         {
             var orderId = "123";
@@ -208,7 +208,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUpdateNote()
         {
             var orderId = "123";

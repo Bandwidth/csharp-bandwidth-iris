@@ -2,19 +2,19 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+    
     public class SipPeerTests
     {
-        [TestInitialize]
+        // [TestInitialize]
         public void Setup()
         {
             Helper.SetEnvironmetVariables();
         }
-        [TestMethod]
+        [Fact]
         public void CreateTest()
         {
             var item = new SipPeer
@@ -58,7 +58,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateWithDefaultClientTest()
         {
             var item = new SipPeer
@@ -101,7 +101,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTest()
         {
             var item = new SipPeer
@@ -129,7 +129,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetWithDefaultClientTest()
         {
             var item = new SipPeer
@@ -156,7 +156,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListTest()
         {
             var items = new[]{
@@ -194,7 +194,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListWithDefaultClientTest()
         {
             var items = new[]{
@@ -231,7 +231,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTnsTest()
         {
             var item = new SipPeerTelephoneNumber
@@ -263,7 +263,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTnsWithXmlTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -286,7 +286,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTns2WithXmlTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -311,7 +311,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateTnsTest()
         {
             var item = new SipPeerTelephoneNumber
@@ -338,7 +338,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void MoveTnsTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -360,7 +360,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetOriginationSettingsTest()
         {
 
@@ -388,7 +388,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void SetOriginationSettingsTest()
         {
 
@@ -426,7 +426,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateOriginationSettingsTest()
         {
             string siteId = "1";
@@ -458,7 +458,7 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
 
-        [TestMethod]
+        [Fact]
         public void GetTerminationSettingsTest()
         {
 
@@ -486,7 +486,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void SetTerminationSettingsTest()
         {
 
@@ -524,7 +524,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateTerminationSettingsTest()
         {
             string siteId = "1";
@@ -555,7 +555,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSMSSettingTest()
         {
             string siteId = "1";
@@ -595,7 +595,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void SetSMSSettingTest()
         {
             string siteId = "1";
@@ -651,7 +651,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateSMSSettingTest()
         {
             string siteId = "1";
@@ -707,7 +707,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void DeleteSMSSettingTest()
         {
             string siteId = "1";
@@ -729,7 +729,7 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
 
-        [TestMethod]
+        [Fact]
         public void GetMMSSettingTest()
         {
             string siteId = "1";
@@ -761,7 +761,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void SetMMSSettingTest()
         {
             string siteId = "1";
@@ -805,7 +805,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateMMSSettingTest()
         {
             string siteId = "1";
@@ -841,7 +841,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void DeleteMMSSettingTest()
         {
             string siteId = "1";
@@ -863,7 +863,7 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
 
-        [TestMethod]
+        [Fact]
         public void GetApplicationSettingTest()
         {
             string siteId = "1";
@@ -889,7 +889,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateApplicationSettingTest()
         {
             string siteId = "1";
@@ -916,7 +916,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void RemoveApplicationSettingsTest()
         {
             string siteId = "1";

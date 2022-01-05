@@ -4,20 +4,20 @@ using System.IO;
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+    
     public class ImportTnOrderTests
     {
-        [TestInitialize]
+        // [TestInitialize]
         public void Setup()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void TestImportTnOrderCreate()
         {
             var order = new ImportTnOrder
@@ -55,7 +55,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestImportTnOrderGet()
         {
             var order = new ImportTnOrder
@@ -94,7 +94,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestImportTnOrderList()
         {
             var order = new ImportTnOrder
@@ -131,7 +131,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestImportTnOrderHistory()
         {
             var order = new ImportTnOrder
@@ -162,7 +162,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestImportTnOrderListLoasFiles()
         {
             var order = new ImportTnOrder
@@ -194,7 +194,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestImportTnOrderUploadLoasFile()
         {
             var order = new ImportTnOrder
@@ -225,7 +225,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestImportTnOrderGetLoasFile()
         {
             var order = new ImportTnOrder
@@ -264,7 +264,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestImportTnOrderReplaceLoasFile()
         {
             var order = new ImportTnOrder
@@ -299,7 +299,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestImportTnOrderDeleteLoasFile()
         {
             var order = new ImportTnOrder
@@ -328,7 +328,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestImportTnOrderGetLoasFileMetadata()
         {
             var order = new ImportTnOrder
@@ -361,7 +361,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestImportTnOrderReplaceLoasFileMetadata()
         {
             var order = new ImportTnOrder
@@ -394,7 +394,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestImportTnOrderDeleteLoasFileMetadata()
         {
             var order = new ImportTnOrder

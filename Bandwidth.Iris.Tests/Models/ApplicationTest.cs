@@ -8,22 +8,22 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+    
     public class ApplicationTest
     {
 
-        [TestInitialize]
+        // [TestInitialize]
         public void Setup()
         {
             Helper.SetEnvironmetVariables();
 
         }
 
-        [TestMethod]
+        [Fact]
         public void TestApplicationProvisioningResponse()
         {
 
@@ -88,7 +88,7 @@ namespace Bandwidth.Iris.Tests.Models
 
         }
 
-        [TestMethod]
+        [Fact]
         public void TestAssociatedSipPeersResponse()
         {
 
@@ -124,7 +124,7 @@ namespace Bandwidth.Iris.Tests.Models
 
         }
 
-        [TestMethod]
+        [Fact]
         public void TestListApplications()
         {
 
@@ -155,7 +155,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestCreateApplication()
         {
 
@@ -206,7 +206,7 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
 
-        [TestMethod]
+        [Fact]
         public void TestGetApplication()
         {
 
@@ -243,7 +243,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestFullUpdateApplication()
         {
 
@@ -285,7 +285,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestPartialUpdateApplication()
         {
 
@@ -327,7 +327,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestDeleteApplication()
         {
 
@@ -353,7 +353,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetAssociatesSipPeers()
         {
 
@@ -385,7 +385,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetAssociatesSipPeers400()
         {
 
@@ -421,7 +421,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetAssociatesSipPeers404()
         {
 

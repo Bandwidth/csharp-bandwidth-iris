@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+// using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bandwidth.Iris.Tests
 {
@@ -64,7 +64,7 @@ namespace Bandwidth.Iris.Tests
                     using (var reader = new StreamReader(request.InputStream, Encoding.UTF8))
                     {
                         var content = reader.ReadToEnd();
-                        Assert.AreEqual(handler.EstimatedContent, content);    
+                        Assert.AreEqual(handler.EstimatedContent, content);
                     }
                 }
                 if (handler.EstimatedHeaders != null)
@@ -93,7 +93,7 @@ namespace Bandwidth.Iris.Tests
                     }
                     await handler.ContentToSend.CopyToAsync(response.OutputStream);
                 }
-                
+
                 response.Close();
             }
             catch(Exception ex)
@@ -121,7 +121,7 @@ namespace Bandwidth.Iris.Tests
             }
         }
 
-        private readonly List<Exception> _errors = new List<Exception>(); 
+        private readonly List<Exception> _errors = new List<Exception>();
     }
 
     public class RequestHandler

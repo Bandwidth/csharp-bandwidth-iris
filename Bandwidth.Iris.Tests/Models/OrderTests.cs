@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+    
     public class OrderTests
     {
-        [TestInitialize]
+        // [TestInitialize]
         public void Setup()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateTest()
         {
             var order = new Order
@@ -59,7 +59,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateWithXmlTest()
         {
             var order = new Order
@@ -95,7 +95,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateWithDefaultClientTest()
         {
             var order = new Order
@@ -136,7 +136,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTest()
         {
             var orderResult = new OrderResult
@@ -166,7 +166,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -208,7 +208,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetWithDefaultClientTest()
         {
             var orderResult = new OrderResult
@@ -236,7 +236,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Helper.AssertObjects(orderResult, result);
             }
         }
-        [TestMethod]
+        [Fact]
         public void UpdateTest()
         {
             var item = new Order {Id = "101"};
@@ -257,7 +257,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNotesTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -282,7 +282,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void AddNoteTest()
         {
             var item = new Note
@@ -319,7 +319,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetAreaCodesTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -339,7 +339,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNpaNxxTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -358,7 +358,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTotalsTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -377,7 +377,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetHistoryTest()
         {
             using (var server = new HttpServer(new[]

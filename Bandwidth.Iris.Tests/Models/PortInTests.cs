@@ -6,20 +6,20 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+    
     public class PortInTests
     {
-        [TestInitialize]
+        // [TestInitialize]
         public void Setup()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateTest()
         {
             var order = new LnpOrderResponse
@@ -54,7 +54,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateWithXmlTest()
         {
             var order = new PortIn
@@ -96,7 +96,7 @@ namespace Bandwidth.Iris.Tests.Models
                 
             }
         }
-        [TestMethod]
+        [Fact]
         public void CreateWithDefaultClientTest()
         {
             var order = new LnpOrderResponse
@@ -135,7 +135,7 @@ namespace Bandwidth.Iris.Tests.Models
             [XmlElementAttribute("filename")]
             public string FileName { get; set; }
         }
-        [TestMethod]
+        [Fact]
         public void CreateFileTest()
         {
             const string data = "hello";
@@ -160,7 +160,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateFile2Test()
         {
             const string data = "hello";
@@ -182,7 +182,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateFileTest()
         {
             const string data = "hello";
@@ -205,7 +205,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateFile2Test()
         {
             const string data = "hello";
@@ -225,7 +225,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void DeleteFileTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -242,7 +242,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFileTest()
         {
             const string data = "hello";
@@ -265,7 +265,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFile2Test()
         {
             const string data = "hello";
@@ -289,7 +289,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFilesTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -310,7 +310,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFileMetadataTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -329,7 +329,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void PutFileMetadataTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -353,7 +353,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void DeleteTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -370,7 +370,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateTest()
         {
             var data = new LnpOrderSupp
@@ -397,7 +397,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNotesTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -422,7 +422,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void AddNoteTest()
         {
             var item = new Note
@@ -459,7 +459,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetPortInTest()
         {
 
@@ -519,7 +519,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void LnpOrderResponseTest()
         {
             string xmlLnpOrderResponse = TestXmlStrings.xmlLnpOrderResponse;
@@ -576,7 +576,7 @@ namespace Bandwidth.Iris.Tests.Models
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GetPortInsTest()
         {
 

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+// using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bandwidth.Iris.Tests
 {
@@ -16,7 +16,7 @@ namespace Bandwidth.Iris.Tests
         public const string UserName = "FakeUserName";
         public const string Password = "FakePassword";
         public const string AccountId = "FakeAccountId";
-        
+
         public static Client CreateClient(string baseUrl = null)
         {
             return Client.GetInstance(AccountId, UserName, Password, baseUrl ?? "http://localhost:3001/");
