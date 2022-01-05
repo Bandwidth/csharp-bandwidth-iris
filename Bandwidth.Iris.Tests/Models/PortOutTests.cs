@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class PortOutTests
     {
         // [TestInitialize]
-        public void Setup()
+        public PortOutTests()
         {
             Helper.SetEnvironmetVariables();
         }
@@ -75,7 +75,7 @@ namespace Bandwidth.Iris.Tests.Models
                     EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portouts/1/notes", Helper.AccountId),
                     EstimatedContent = Helper.ToXmlString(item),
                     HeadersToSend = new Dictionary<string, string> {
-                        {"Location", string.Format("/v1.0/accounts/{0}/portins/1/portouts/11299", Helper.AccountId)} 
+                        {"Location", string.Format("/v1.0/accounts/{0}/portins/1/portouts/11299", Helper.AccountId)}
                     }
                 },
                 new RequestHandler
@@ -109,7 +109,7 @@ namespace Bandwidth.Iris.Tests.Models
                     EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portouts/1/notes", Helper.AccountId),
                     EstimatedContent = Helper.ToXmlString(item),
                     HeadersToSend = new Dictionary<string, string> {
-                        {"Location", string.Format("/v1.0/accounts/{0}/portins/1/portouts/11299", Helper.AccountId)} 
+                        {"Location", string.Format("/v1.0/accounts/{0}/portins/1/portouts/11299", Helper.AccountId)}
                     }
                 },
                 new RequestHandler

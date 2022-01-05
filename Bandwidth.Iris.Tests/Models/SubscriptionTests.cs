@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class SubscriptionTests
     {
         // [TestInitialize]
-        public void Setup()
+        public SubscriptionTests()
         {
             Helper.SetEnvironmetVariables();
         }
@@ -46,7 +46,7 @@ namespace Bandwidth.Iris.Tests.Models
         [Fact]
         public void GetWithXmlTest()
         {
-            
+
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "GET",
@@ -212,7 +212,7 @@ namespace Bandwidth.Iris.Tests.Models
                     DigestRequested = "NONE"
                 }
             };
-            
+
             using (var server = new HttpServer(new[]
             {
                 new RequestHandler
@@ -334,6 +334,6 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        
+
     }
 }

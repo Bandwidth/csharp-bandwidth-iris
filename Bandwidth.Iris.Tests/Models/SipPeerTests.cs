@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class SipPeerTests
     {
         // [TestInitialize]
-        public void Setup()
+        public SipPeerTests()
         {
             Helper.SetEnvironmetVariables();
         }
@@ -836,7 +836,7 @@ namespace Bandwidth.Iris.Tests.Models
                 SipPeer.UpdateMMSSettings(siteId, sipPeerId, MmsFeature).Wait();
                 if (server.Error != null) throw server.Error;
 
-              
+
 
             }
         }
@@ -884,7 +884,7 @@ namespace Bandwidth.Iris.Tests.Models
 
                 Assert.NotNull(r.ApplicationsSettings);
                 Assert.Equal("4a4ca6c1-156b-4fca-84e9-34e35e2afc32", r.ApplicationsSettings.HttpMessagingV2AppId);
-                
+
 
             }
         }

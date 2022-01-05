@@ -10,7 +10,7 @@ namespace Bandwidth.Iris.Tests.Models
     public class LnpCheckerTests
     {
         // [TestInitialize]
-        public void Setup()
+        public LnpCheckerTests()
         {
             Helper.SetEnvironmetVariables();
         }

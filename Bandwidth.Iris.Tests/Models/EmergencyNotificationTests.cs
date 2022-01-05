@@ -7,11 +7,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class EmergencyNotificationTests
     {
         // [TestInitialize]
-        public void Setup()
+        public EmergencyNotificationTests()
         {
             Helper.SetEnvironmetVariables();
         }
@@ -134,7 +134,7 @@ namespace Bandwidth.Iris.Tests.Models
         {
             string id = "123";
 
-    
+
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "DELETE",
@@ -144,7 +144,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 EmergencyNotification.DeleteRecipients(client, id).Wait();
 
-    
+
 
             }
         }
@@ -205,7 +205,7 @@ namespace Bandwidth.Iris.Tests.Models
         [Fact]
         public void TestCreatGroupOrder()
         {
-           
+
 
             using (var server = new HttpServer(new RequestHandler
             {
@@ -315,7 +315,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.Equal("jgilmore", result.EmergencyNotificationEndpointOrder.CreatedBy);
                 Assert.Equal("COMPLETED", result.EmergencyNotificationEndpointOrder.ProcessingStatus);
                 Assert.Equal("ALG-31233884", result.EmergencyNotificationEndpointOrder.CustomerOrderId);
-                
+
                 Assert.NotNull(result.EmergencyNotificationEndpointOrder.EmergencyNotificationEndpointAssociations);
                 Assert.NotNull(result.EmergencyNotificationEndpointOrder.EmergencyNotificationEndpointAssociations.EmergencyNotificationGroup);
 
@@ -356,7 +356,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.NotNull(result.Links);
                 Assert.NotNull(result.EmergencyNotificationEndpointOrders);
                 Assert.Equal(1, result.EmergencyNotificationEndpointOrders.Length);
-               
+
             }
         }
 

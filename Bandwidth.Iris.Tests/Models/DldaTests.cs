@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class DldaTests
     {
         // [TestInitialize]
-        public void Setup()
+        public DldaTests()
         {
             Helper.SetEnvironmetVariables();
         }
@@ -32,7 +32,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        
+
 
         [Fact]
         public void GetWithDefaultClientTest()
@@ -111,7 +111,7 @@ namespace Bandwidth.Iris.Tests.Models
               }
             };
 
-            
+
             using (var server = new HttpServer(new[]
             {
                 new RequestHandler

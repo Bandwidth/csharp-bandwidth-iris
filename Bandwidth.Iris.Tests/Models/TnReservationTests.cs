@@ -11,7 +11,7 @@ namespace Bandwidth.Iris.Tests.Models
     public class TnReservationTests
     {
         // [TestInitialize]
-        public void Setup()
+        public TnReservationTests()
         {
             Helper.SetEnvironmetVariables();
         }

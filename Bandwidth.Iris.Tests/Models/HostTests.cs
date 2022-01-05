@@ -6,15 +6,15 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class HostTests
     {
         // [TestInitialize]
-        public void Setup()
+        public HostTests()
         {
             Helper.SetEnvironmetVariables();
         }
-        
+
         [Fact]
         public void ListTest()
         {
@@ -49,6 +49,6 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        
+
     }
 }

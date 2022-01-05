@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class LineOptionTests
     {
         // [TestInitialize]
-        public void Setup()
+        public LineOptionTests()
         {
             Helper.SetEnvironmetVariables();
         }
@@ -23,7 +23,7 @@ namespace Bandwidth.Iris.Tests.Models
                 TelephoneNumber = "5209072451<",
                 CallingNameDisplay = "off"
             };
-           
+
             using (var server = new HttpServer(new[]
             {
                 new RequestHandler

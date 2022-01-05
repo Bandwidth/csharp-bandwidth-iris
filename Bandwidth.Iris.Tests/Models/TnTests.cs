@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class TnTests
     {
         // [TestInitialize]
-        public void Setup()
+        public TnTests()
         {
             Helper.SetEnvironmetVariables();
         }
@@ -33,7 +33,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.Equal("Inservice", result.Status);
                 Assert.Equal("5f3a4dab-aac7-4b0a-8ee4-1b6a67ae04be", result.OrderId);
                 Assert.Equal("NEW_NUMBER_ORDER", result.OrderType);
-                
+
             }
         }
 
@@ -53,7 +53,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.Equal(5, result.TelephoneNumberCount);
 
             }
-            
+
         }
 
         [Fact]
@@ -71,7 +71,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.Equal(5, result.TelephoneNumberCount);
 
             }
-            
+
         }
 
         [Fact]

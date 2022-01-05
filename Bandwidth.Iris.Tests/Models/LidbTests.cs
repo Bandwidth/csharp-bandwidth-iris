@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class LidbTests
     {
         // [TestInitialize]
-        public void Setup()
+        public LidbTests()
         {
             Helper.SetEnvironmetVariables();
         }
@@ -31,7 +31,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.Equal("255bda29-fc57-44e8-a6c2-59b45388c6d0", result.Id);
             }
         }
-               
+
 
         [Fact]
         public void GetWithDefaultClientTest()
@@ -89,14 +89,14 @@ namespace Bandwidth.Iris.Tests.Models
             var item = new Lidb
             {
                 CustomerOrderId = "A Test order",
-                LidbTnGroups = new[] { 
+                LidbTnGroups = new[] {
                     new LidbTnGroup{
                         TelephoneNumbers = new []{"8048030097", "8045030098"},
                         SubscriberInformation = "Joes Grarage",
                         UseType = "RESIDENTIAL",
                         Visibility = "PUBLIC"
                     }
-                } 
+                }
             };
 
             using (var server = new HttpServer(new[]
@@ -134,7 +134,7 @@ namespace Bandwidth.Iris.Tests.Models
             var item = new Lidb
             {
                 CustomerOrderId = "A Test order",
-                LidbTnGroups = new[] { 
+                LidbTnGroups = new[] {
                     new LidbTnGroup{
                         TelephoneNumbers = new []{"8048030097", "8045030098"},
                         SubscriberInformation = "Joes Grarage",

@@ -11,7 +11,7 @@ namespace Bandwidth.Iris.Tests.Models
     public class TnOptionsTests
     {
         // [TestInitialize]
-        public void Setup()
+        public TnOptionsTests()
         {
             Helper.SetEnvironmetVariables();
         }

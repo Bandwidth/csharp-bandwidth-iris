@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class AeuiTests
     {
         // [TestInitialize]
-        public void Setup()
+        public AeuiTests()
         {
             Helper.SetEnvironmetVariables();
         }

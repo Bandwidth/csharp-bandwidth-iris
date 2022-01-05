@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class LsrOrderTests
     {
         // [TestInitialize]
-        public void Setup()
+        public LsrOrderTests()
         {
             Helper.SetEnvironmetVariables();
         }
@@ -31,7 +31,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.Equal("00cf7e08-cab0-4515-9a77-2d0a7da09415", result.Id);
             }
         }
-               
+
 
         [Fact]
         public void GetWithDefaultClientTest()
@@ -313,7 +313,7 @@ namespace Bandwidth.Iris.Tests.Models
                     EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/lsrorders/1/notes", Helper.AccountId),
                     EstimatedContent = Helper.ToXmlString(item),
                     HeadersToSend = new Dictionary<string, string> {
-                        {"Location", string.Format("/v1.0/accounts/{0}/lsrorders/1/notes/11299", Helper.AccountId)} 
+                        {"Location", string.Format("/v1.0/accounts/{0}/lsrorders/1/notes/11299", Helper.AccountId)}
                     }
                 },
                 new RequestHandler

@@ -7,11 +7,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class SiteTests
     {
         // [TestInitialize]
-        public void Setup()
+        public SiteTests()
         {
             Helper.SetEnvironmetVariables();
         }
@@ -46,7 +46,7 @@ namespace Bandwidth.Iris.Tests.Models
         [Fact]
         public void GetWithXmlTest()
         {
-            
+
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "GET",
@@ -173,7 +173,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.Equal("1", result[0].Id);
                 Assert.Equal("Test Site", result[0].Name);
                 Assert.Equal("A site description", result[0].Description);
-                
+
             }
         }
 
@@ -256,7 +256,7 @@ namespace Bandwidth.Iris.Tests.Models
                 if (server.Error != null) throw server.Error;
                 Assert.Equal("1", i.Id);
 
-            
+
             }
 
         }
@@ -423,7 +423,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = i.GetSipPeer("10").Result;
                 if (server.Error != null) throw server.Error;
                 Helper.AssertObjects(item, r);
-                
+
             }
         }
 
@@ -564,7 +564,7 @@ namespace Bandwidth.Iris.Tests.Models
                     {
                         if(x is BandwidthIrisException)
                         {
-                            error = true; 
+                            error = true;
                             return true;
                         }
 

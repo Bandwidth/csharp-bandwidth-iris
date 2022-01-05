@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class DisconnectTests
     {
         // [TestInitialize]
-        public void Setup()
+        public DisconnectTests()
         {
             Helper.SetEnvironmetVariables();
         }
@@ -107,7 +107,7 @@ namespace Bandwidth.Iris.Tests.Models
                     EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/disconnects/1/notes", Helper.AccountId),
                     EstimatedContent = Helper.ToXmlString(item),
                     HeadersToSend = new Dictionary<string, string> {
-                        {"Location", string.Format("/v1.0/accounts/{0}/portins/1/disconnects/11299", Helper.AccountId)} 
+                        {"Location", string.Format("/v1.0/accounts/{0}/portins/1/disconnects/11299", Helper.AccountId)}
                     }
                 },
                 new RequestHandler

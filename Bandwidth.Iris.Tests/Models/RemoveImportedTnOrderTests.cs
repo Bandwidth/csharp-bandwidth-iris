@@ -6,12 +6,12 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class RemoveImportedTnOrderTests
     {
 
         // [TestInitialize]
-        public void Setup()
+        public RemoveImportedTnOrderTests()
         {
             Helper.SetEnvironmetVariables();
         }
@@ -21,7 +21,7 @@ namespace Bandwidth.Iris.Tests.Models
         {
             var order = new RemoveImportedTnOrder
             {
-                
+
             };
 
             using (var server = new HttpServer(new RequestHandler
@@ -135,7 +135,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = RemoveImportedTnOrder.GetHistory(client, order.OrderId).Result;
                 if (server.Error != null) throw server.Error;
 
-                
+
 
             }
 

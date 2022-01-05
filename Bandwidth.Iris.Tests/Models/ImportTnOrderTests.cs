@@ -8,11 +8,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class ImportTnOrderTests
     {
         // [TestInitialize]
-        public void Setup()
+        public ImportTnOrderTests()
         {
             Helper.SetEnvironmetVariables();
         }
@@ -407,7 +407,7 @@ namespace Bandwidth.Iris.Tests.Models
 
             var fileId = "fileId";
 
-            
+
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "DELETE",

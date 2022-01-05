@@ -4,11 +4,11 @@ using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class AvailableNpaNxxTests
     {
         // [TestInitialize]
-        public void Setup()
+        public AvailableNpaNxxTests()
         {
             Helper.SetEnvironmetVariables();
         }

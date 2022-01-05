@@ -10,7 +10,7 @@ namespace Bandwidth.Iris.Tests.Models
     public class CityTests
     {
         // [TestInitialize]
-        public void Setup()
+        public CityTests()
         {
             Helper.SetEnvironmetVariables();
         }

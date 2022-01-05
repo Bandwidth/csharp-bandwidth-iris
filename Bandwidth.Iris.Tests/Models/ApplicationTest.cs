@@ -17,7 +17,7 @@ namespace Bandwidth.Iris.Tests.Models
     {
 
         // [TestInitialize]
-        public void Setup()
+        public ApplicationTest()
         {
             Helper.SetEnvironmetVariables();
 
