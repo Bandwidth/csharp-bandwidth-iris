@@ -247,8 +247,8 @@ namespace Bandwidth.Iris.Tests
 
         }
 
-        // [XmlInclude(typeof(Error1))]
-        // [XmlInclude(typeof(Error))]
+        [XmlInclude(typeof(Error1))]
+        [XmlInclude(typeof(Error))]
         public class ErrorResponse
         {
             public object Error { get; set; }
@@ -276,70 +276,70 @@ namespace Bandwidth.Iris.Tests
             [XmlArrayItem("Errors")]
             public Error[] ErrorMessages { get; set; }
         }
-        
-        // [Fact]
-        // public void ErrorTest()
-        // {
-        //     using (new HttpServer(new RequestHandler
-        //     {
-        //         EstimatedMethod = "GET",
-        //         ContentToSend = Helper.CreateXmlContent(new ErrorResponse
-        //         {
-        //             Error = new Error1
-        //             {
-        //                 ErrorCode = "1000",
-        //                 Description = "Error text"
-        //             }
-        //         }),
-        //         StatusCodeToSend = 400
-        //     }))
-        //     {
-        //         var client = Helper.CreateClient();
-        //         try
-        //         {
-        //             Site.List(client).Wait();
-        //         }
-        //         catch (AggregateException ex)
-        //         {
-        //             var err = (BandwidthIrisException)ex.InnerExceptions.First();
-        //             Assert.Equal("1000", err.Code);
-        //             Assert.Equal("Error text", err.Message);
-        //             Assert.Equal(HttpStatusCode.BadRequest, err.HttpStatusCode);
-        //         }
-        //     }
-        // }
-        //
-        // [Fact]
-        // public void Error2Test()
-        // {
-        //     using (new HttpServer(new RequestHandler
-        //     {
-        //         EstimatedMethod = "GET",
-        //         ContentToSend = Helper.CreateXmlContent(new ErrorResponse
-        //         {
-        //             Error = new Error
-        //             {
-        //                 Code = "1001",
-        //                 Description = "Error text"
-        //             }
-        //         }),
-        //         StatusCodeToSend = 400
-        //     }))
-        //     {
-        //         var client = Helper.CreateClient();
-        //         try
-        //         {
-        //             Site.List(client).Wait();
-        //         }
-        //         catch (AggregateException ex)
-        //         {
-        //             var err = (BandwidthIrisException)ex.InnerExceptions.First();
-        //             Assert.Equal("1001", err.Code);
-        //             Assert.Equal("Error text", err.Message);
-        //             Assert.Equal(HttpStatusCode.BadRequest, err.HttpStatusCode);
-        //         }
-        //     }
-        // }
+
+        [Fact]
+        public void ErrorTest()
+        {
+            using (new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                ContentToSend = Helper.CreateXmlContent(new ErrorResponse
+                {
+                    Error = new Error1
+                    {
+                        ErrorCode = "1000",
+                        Description = "Error text"
+                    }
+                }),
+                StatusCodeToSend = 400
+            }))
+            {
+                var client = Helper.CreateClient();
+                try
+                {
+                    Site.List(client).Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    var err = (BandwidthIrisException)ex.InnerExceptions.First();
+                    Assert.Equal("1000", err.Code);
+                    Assert.Equal("Error text", err.Message);
+                    Assert.Equal(HttpStatusCode.BadRequest, err.HttpStatusCode);
+                }
+            }
+        }
+
+        [Fact]
+        public void Error2Test()
+        {
+            using (new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                ContentToSend = Helper.CreateXmlContent(new ErrorResponse
+                {
+                    Error = new Error
+                    {
+                        Code = "1001",
+                        Description = "Error text"
+                    }
+                }),
+                StatusCodeToSend = 400
+            }))
+            {
+                var client = Helper.CreateClient();
+                try
+                {
+                    Site.List(client).Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    var err = (BandwidthIrisException)ex.InnerExceptions.First();
+                    Assert.Equal("1001", err.Code);
+                    Assert.Equal("Error text", err.Message);
+                    Assert.Equal(HttpStatusCode.BadRequest, err.HttpStatusCode);
+                }
+            }
+        }
 
         [Fact]
         public void Error3Test()
