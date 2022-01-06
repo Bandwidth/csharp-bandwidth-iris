@@ -28,10 +28,10 @@ jobs:
           DOTNET: ${{ matrix.dotnet }}
         run: dotnet test Bandwidth.Iris.Tests
 
-      # - name: Notify Slack of failures
-      #   uses: Bandwidth/build-notify-slack-action@v1.0.0
-      #   if: failure() && !github.event.pull_request.draft
-      #   with:
-      #     job-status: ${{ job.status }}
-      #     slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
-      #     slack-channel: ${{ secrets.SLACK_CHANNEL }}
+      - name: Notify Slack of failures
+        uses: Bandwidth/build-notify-slack-action@v1.0.0
+        if: failure() && !github.event.pull_request.draft
+        with:
+          job-status: ${{ job.status }}
+          slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
+          slack-channel: ${{ secrets.SLACK_CHANNEL }}
