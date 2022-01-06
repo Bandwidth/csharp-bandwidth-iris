@@ -26,19 +26,6 @@ namespace Bandwidth.Iris.Tests
             Client.GetInstance("accountId", "userName", "password");
         }
 
-        // [Fact]
-        // public void GetInstanceTest2()
-        // {
-        //     Environment.SetEnvironmentVariable(Client.BandwidthApiAccountId, null);
-        //     Environment.SetEnvironmentVariable(Client.BandwidthApiUserName, null);
-        //     Environment.SetEnvironmentVariable(Client.BandwidthApiPassword, null);
-        //     Environment.SetEnvironmentVariable(Client.BandwidthApiEndpoint, null);
-        //     Environment.SetEnvironmentVariable(Client.BandwidthApiVersion, null);
-        //     Client.GetInstance();
-        //
-        //     Assert.Throws<ArgumentNullException>;
-        // }
-
         [Fact]
         public void MakeGetRequestTest()
         {
