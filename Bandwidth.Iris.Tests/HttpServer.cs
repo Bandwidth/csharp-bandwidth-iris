@@ -64,7 +64,7 @@ namespace Bandwidth.Iris.Tests
                     using (var reader = new StreamReader(request.InputStream, Encoding.UTF8))
                     {
                         var content = reader.ReadToEnd();
-                        Assert.Equal(handler.EstimatedContent, content);
+                        Assert.Equal(handler.EstimatedContent.Replace("\n", "").Replace("\r", ""), content.Replace("\n", "").Replace("\r", "")); 
                     }
                 }
                 if (handler.EstimatedHeaders != null)
