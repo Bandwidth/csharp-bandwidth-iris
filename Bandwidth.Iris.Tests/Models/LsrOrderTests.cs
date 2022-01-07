@@ -2,20 +2,20 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class LsrOrderTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public LsrOrderTests()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -28,12 +28,12 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = LsrOrder.Get(client, "1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("00cf7e08-cab0-4515-9a77-2d0a7da09415", result.Id);
+                Assert.Equal("00cf7e08-cab0-4515-9a77-2d0a7da09415", result.Id);
             }
         }
-               
 
-        [TestMethod]
+
+        [Fact]
         public void GetWithDefaultClientTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -45,11 +45,11 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = LsrOrder.Get("1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("00cf7e08-cab0-4515-9a77-2d0a7da09415", result.Id);
+                Assert.Equal("00cf7e08-cab0-4515-9a77-2d0a7da09415", result.Id);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -62,12 +62,12 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = LsrOrder.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
             }
         }
 
 
-        [TestMethod]
+        [Fact]
         public void ListWithDefaultClientTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -79,11 +79,11 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = LsrOrder.List().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateTest()
         {
             var item = new LsrOrder
@@ -134,11 +134,11 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var i = LsrOrder.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("00cf7e08-cab0-4515-9a77-2d0a7da09415", i.Id);
+                Assert.Equal("00cf7e08-cab0-4515-9a77-2d0a7da09415", i.Id);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateTestWithNames()
         {
             var item = new LsrOrder
@@ -193,11 +193,11 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var i = LsrOrder.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("00cf7e08-cab0-4515-9a77-2d0a7da09415", i.Id);
+                Assert.Equal("00cf7e08-cab0-4515-9a77-2d0a7da09415", i.Id);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateWithDefaultClientTest()
         {
             var item = new LsrOrder
@@ -249,11 +249,11 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var i = LsrOrder.Create(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("00cf7e08-cab0-4515-9a77-2d0a7da09415", i.Id);
+                Assert.Equal("00cf7e08-cab0-4515-9a77-2d0a7da09415", i.Id);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateTest()
         {
             var item = new LsrOrder { Id = "101" };
@@ -273,7 +273,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNotesTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -288,17 +288,17 @@ namespace Bandwidth.Iris.Tests.Models
                 order.SetClient(client);
                 var list = order.GetNotes().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, list.Length);
-                Assert.AreEqual("11299", list[0].Id);
-                Assert.AreEqual("customer", list[0].UserId);
-                Assert.AreEqual("Test", list[0].Description);
-                Assert.AreEqual("11301", list[1].Id);
-                Assert.AreEqual("customer", list[1].UserId);
-                Assert.AreEqual("Test1", list[1].Description);
+                Assert.Equal(2, list.Length);
+                Assert.Equal("11299", list[0].Id);
+                Assert.Equal("customer", list[0].UserId);
+                Assert.Equal("Test", list[0].Description);
+                Assert.Equal("11301", list[1].Id);
+                Assert.Equal("customer", list[1].UserId);
+                Assert.Equal("Test1", list[1].Description);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void AddNoteTest()
         {
             var item = new Note
@@ -313,7 +313,7 @@ namespace Bandwidth.Iris.Tests.Models
                     EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/lsrorders/1/notes", Helper.AccountId),
                     EstimatedContent = Helper.ToXmlString(item),
                     HeadersToSend = new Dictionary<string, string> {
-                        {"Location", string.Format("/v1.0/accounts/{0}/lsrorders/1/notes/11299", Helper.AccountId)} 
+                        {"Location", string.Format("/v1.0/accounts/{0}/lsrorders/1/notes/11299", Helper.AccountId)}
                     }
                 },
                 new RequestHandler
@@ -329,13 +329,13 @@ namespace Bandwidth.Iris.Tests.Models
                 order.SetClient(client);
                 var r = order.AddNote(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("11299", r.Id);
-                Assert.AreEqual("customer", r.UserId);
-                Assert.AreEqual("Test", r.Description);
+                Assert.Equal("11299", r.Id);
+                Assert.Equal("customer", r.UserId);
+                Assert.Equal("Test", r.Description);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetHistoryTest()
         {
             using (var server = new HttpServer(new[]
@@ -353,7 +353,7 @@ namespace Bandwidth.Iris.Tests.Models
                 i.SetClient(client);
                 var result = i.GetHistory().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.IsTrue(result.Length > 0);
+                Assert.True(result.Length > 0);
             }
         }
     }

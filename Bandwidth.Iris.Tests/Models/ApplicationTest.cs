@@ -8,22 +8,22 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class ApplicationTest
     {
 
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public ApplicationTest()
         {
             Helper.SetEnvironmetVariables();
 
         }
 
-        [TestMethod]
+        [Fact]
         public void TestApplicationProvisioningResponse()
         {
 
@@ -59,7 +59,7 @@ namespace Bandwidth.Iris.Tests.Models
             var xmlExpected = doc.ToString(SaveOptions.DisableFormatting);
 
 
-            Assert.AreEqual(xmlExpected, actual);
+            Assert.Equal(xmlExpected, actual);
 
 
             apresponse = new ApplicationProvisioningResponse
@@ -84,11 +84,11 @@ namespace Bandwidth.Iris.Tests.Models
             actual = Helper.ToXmlStringMinified(apresponse);
             xmlExpected = XDocument.Parse( TestXmlStrings.singleApplicationProvisionResponse ).ToString(SaveOptions.DisableFormatting);
 
-            Assert.AreEqual(xmlExpected, actual);
+            Assert.Equal(xmlExpected, actual);
 
         }
 
-        [TestMethod]
+        [Fact]
         public void TestAssociatedSipPeersResponse()
         {
 
@@ -120,11 +120,11 @@ namespace Bandwidth.Iris.Tests.Models
             XDocument doc = XDocument.Parse(TestXmlStrings.associatedSipPeerResponse);
             var expected = doc.ToString(SaveOptions.DisableFormatting);
 
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
 
         }
 
-        [TestMethod]
+        [Fact]
         public void TestListApplications()
         {
 
@@ -144,18 +144,18 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = t.Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.AreEqual(r.ApplicationList.Length, 2);
+                Assert.Equal(r.ApplicationList.Length, 2);
 
-                Assert.AreEqual(r.ApplicationList[0].ApplicationId, "2cfcb382-161c-46d4-8c67-87ca09a72c85");
-                Assert.AreEqual(r.ApplicationList[0].ServiceType, "Messaging-V2");
-                Assert.AreEqual(r.ApplicationList[0].AppName, "app1");
-                Assert.AreEqual(r.ApplicationList[0].MsgCallbackUrl, "http://a.com");
+                Assert.Equal(r.ApplicationList[0].ApplicationId, "2cfcb382-161c-46d4-8c67-87ca09a72c85");
+                Assert.Equal(r.ApplicationList[0].ServiceType, "Messaging-V2");
+                Assert.Equal(r.ApplicationList[0].AppName, "app1");
+                Assert.Equal(r.ApplicationList[0].MsgCallbackUrl, "http://a.com");
 
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestCreateApplication()
         {
 
@@ -190,23 +190,23 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = t.Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.Application);
+                Assert.NotNull(r.Application);
 
-                Assert.AreEqual(r.Application.ApplicationId, "d3e418e9-1833-49c1-b6c7-ca1700f79586");
-                Assert.AreEqual(r.Application.ServiceType, "Voice-V2");
-                Assert.AreEqual(r.Application.AppName, "v1");
-                Assert.AreEqual(r.Application.CallInitiatedCallbackUrl, "https://a.com");
-                Assert.AreEqual(r.Application.CallStatusCallbackUrl, "https://b.com");
-                Assert.AreEqual(r.Application.CallInitiatedMethod, "GET");
-                Assert.AreEqual(r.Application.CallStatusMethod, "GET");
-                Assert.AreEqual(r.Application.CallbackCreds.UserId, "login123");
+                Assert.Equal(r.Application.ApplicationId, "d3e418e9-1833-49c1-b6c7-ca1700f79586");
+                Assert.Equal(r.Application.ServiceType, "Voice-V2");
+                Assert.Equal(r.Application.AppName, "v1");
+                Assert.Equal(r.Application.CallInitiatedCallbackUrl, "https://a.com");
+                Assert.Equal(r.Application.CallStatusCallbackUrl, "https://b.com");
+                Assert.Equal(r.Application.CallInitiatedMethod, "GET");
+                Assert.Equal(r.Application.CallStatusMethod, "GET");
+                Assert.Equal(r.Application.CallbackCreds.UserId, "login123");
 
 
             }
         }
 
 
-        [TestMethod]
+        [Fact]
         public void TestGetApplication()
         {
 
@@ -228,22 +228,22 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = t.Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.Application);
+                Assert.NotNull(r.Application);
 
-                Assert.AreEqual(r.Application.ApplicationId, "d3e418e9-1833-49c1-b6c7-ca1700f79586");
-                Assert.AreEqual(r.Application.ServiceType, "Voice-V2");
-                Assert.AreEqual(r.Application.AppName, "v1");
-                Assert.AreEqual(r.Application.CallInitiatedCallbackUrl, "https://a.com");
-                Assert.AreEqual(r.Application.CallStatusCallbackUrl, "https://b.com");
-                Assert.AreEqual(r.Application.CallInitiatedMethod, "GET");
-                Assert.AreEqual(r.Application.CallStatusMethod, "GET");
-                Assert.AreEqual(r.Application.CallbackCreds.UserId, "login123");
+                Assert.Equal(r.Application.ApplicationId, "d3e418e9-1833-49c1-b6c7-ca1700f79586");
+                Assert.Equal(r.Application.ServiceType, "Voice-V2");
+                Assert.Equal(r.Application.AppName, "v1");
+                Assert.Equal(r.Application.CallInitiatedCallbackUrl, "https://a.com");
+                Assert.Equal(r.Application.CallStatusCallbackUrl, "https://b.com");
+                Assert.Equal(r.Application.CallInitiatedMethod, "GET");
+                Assert.Equal(r.Application.CallStatusMethod, "GET");
+                Assert.Equal(r.Application.CallbackCreds.UserId, "login123");
 
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestFullUpdateApplication()
         {
 
@@ -270,22 +270,22 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = t.Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.Application);
+                Assert.NotNull(r.Application);
 
-                Assert.AreEqual(r.Application.ApplicationId, "d3e418e9-1833-49c1-b6c7-ca1700f79586");
-                Assert.AreEqual(r.Application.ServiceType, "Voice-V2");
-                Assert.AreEqual(r.Application.AppName, "v1");
-                Assert.AreEqual(r.Application.CallInitiatedCallbackUrl, "https://a.com");
-                Assert.AreEqual(r.Application.CallStatusCallbackUrl, "https://b.com");
-                Assert.AreEqual(r.Application.CallInitiatedMethod, "GET");
-                Assert.AreEqual(r.Application.CallStatusMethod, "GET");
-                Assert.AreEqual(r.Application.CallbackCreds.UserId, "login123");
+                Assert.Equal(r.Application.ApplicationId, "d3e418e9-1833-49c1-b6c7-ca1700f79586");
+                Assert.Equal(r.Application.ServiceType, "Voice-V2");
+                Assert.Equal(r.Application.AppName, "v1");
+                Assert.Equal(r.Application.CallInitiatedCallbackUrl, "https://a.com");
+                Assert.Equal(r.Application.CallStatusCallbackUrl, "https://b.com");
+                Assert.Equal(r.Application.CallInitiatedMethod, "GET");
+                Assert.Equal(r.Application.CallStatusMethod, "GET");
+                Assert.Equal(r.Application.CallbackCreds.UserId, "login123");
 
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestPartialUpdateApplication()
         {
 
@@ -312,22 +312,22 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = t.Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.Application);
+                Assert.NotNull(r.Application);
 
-                Assert.AreEqual(r.Application.ApplicationId, "d3e418e9-1833-49c1-b6c7-ca1700f79586");
-                Assert.AreEqual(r.Application.ServiceType, "Voice-V2");
-                Assert.AreEqual(r.Application.AppName, "v1");
-                Assert.AreEqual(r.Application.CallInitiatedCallbackUrl, "https://a.com");
-                Assert.AreEqual(r.Application.CallStatusCallbackUrl, "https://b.com");
-                Assert.AreEqual(r.Application.CallInitiatedMethod, "GET");
-                Assert.AreEqual(r.Application.CallStatusMethod, "GET");
-                Assert.AreEqual(r.Application.CallbackCreds.UserId, "login123");
+                Assert.Equal(r.Application.ApplicationId, "d3e418e9-1833-49c1-b6c7-ca1700f79586");
+                Assert.Equal(r.Application.ServiceType, "Voice-V2");
+                Assert.Equal(r.Application.AppName, "v1");
+                Assert.Equal(r.Application.CallInitiatedCallbackUrl, "https://a.com");
+                Assert.Equal(r.Application.CallStatusCallbackUrl, "https://b.com");
+                Assert.Equal(r.Application.CallInitiatedMethod, "GET");
+                Assert.Equal(r.Application.CallStatusMethod, "GET");
+                Assert.Equal(r.Application.CallbackCreds.UserId, "login123");
 
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestDeleteApplication()
         {
 
@@ -347,13 +347,13 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = t.Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.AreEqual(System.Net.HttpStatusCode.OK, r.StatusCode);
+                Assert.Equal(System.Net.HttpStatusCode.OK, r.StatusCode);
 
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetAssociatesSipPeers()
         {
 
@@ -372,20 +372,20 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = t.Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.AssociatedSipPeers);
+                Assert.NotNull(r.AssociatedSipPeers);
 
-                Assert.AreEqual(r.AssociatedSipPeers.Length, 2);
-                Assert.AreEqual(r.AssociatedSipPeers[0].SiteId, "13651");
-                Assert.AreEqual(r.AssociatedSipPeers[0].SiteName, "Prod Sub-account");
-                Assert.AreEqual(r.AssociatedSipPeers[0].PeerId, "540341");
-                Assert.AreEqual(r.AssociatedSipPeers[0].PeerName, "Prod");
+                Assert.Equal(r.AssociatedSipPeers.Length, 2);
+                Assert.Equal(r.AssociatedSipPeers[0].SiteId, "13651");
+                Assert.Equal(r.AssociatedSipPeers[0].SiteName, "Prod Sub-account");
+                Assert.Equal(r.AssociatedSipPeers[0].PeerId, "540341");
+                Assert.Equal(r.AssociatedSipPeers[0].PeerName, "Prod");
 
 
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetAssociatesSipPeers400()
         {
 
@@ -404,14 +404,14 @@ namespace Bandwidth.Iris.Tests.Models
                 try
                 {
                     var r = t.Result;
-                    Assert.Fail("Error not caught");
+                    Assert.True(false, "The exception was not thrown");
                 } catch (AggregateException e)
                 {
                     e.Handle( ex =>
                     {
                         if(ex is BandwidthIrisException)
                         {
-                            Assert.AreEqual(ex.Message, " Current 1 Account have no Catapult association ");
+                            Assert.Equal(ex.Message, " Current 1 Account have no Catapult association ");
                             return true;
                         }
                         return true;
@@ -421,7 +421,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetAssociatesSipPeers404()
         {
 
@@ -440,7 +440,7 @@ namespace Bandwidth.Iris.Tests.Models
                 try
                 {
                     var r = t.Result;
-                    Assert.Fail("Error not caught");
+                    Assert.True(false, "The exception was not thrown");
                 }
                 catch (AggregateException e)
                 {
@@ -448,7 +448,7 @@ namespace Bandwidth.Iris.Tests.Models
                     {
                         if (ex is BandwidthIrisException)
                         {
-                            Assert.AreEqual(ex.Message, " Application with id 'non_existing' not found ");
+                            Assert.Equal(ex.Message, " Application with id 'non_existing' not found ");
                             return true;
                         }
                         return true;

@@ -2,20 +2,20 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class RateCenterTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public RateCenterTests()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void ListTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -31,13 +31,13 @@ namespace Bandwidth.Iris.Tests.Models
                     {"state", "NC"}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(1, result.Length);
-                Assert.AreEqual("ACME", result[0].Abbreviation);
-                Assert.AreEqual("ACME", result[0].Name);
+                Assert.Equal(1, result.Length);
+                Assert.Equal("ACME", result[0].Abbreviation);
+                Assert.Equal("ACME", result[0].Name);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListWithDefaultClientTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -52,9 +52,9 @@ namespace Bandwidth.Iris.Tests.Models
                     {"state", "NC"}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(1, result.Length);
-                Assert.AreEqual("ACME", result[0].Abbreviation);
-                Assert.AreEqual("ACME", result[0].Name);
+                Assert.Equal(1, result.Length);
+                Assert.Equal("ACME", result[0].Abbreviation);
+                Assert.Equal("ACME", result[0].Name);
             }
         }
     }

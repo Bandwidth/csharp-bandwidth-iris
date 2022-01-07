@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class AvailableNpaNxxTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public AvailableNpaNxxTests()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void ListTest()
         {
             var list = new[]
@@ -51,13 +51,13 @@ namespace Bandwidth.Iris.Tests.Models
                     {"areaCode", 919}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
                 Helper.AssertObjects(list[0], result[0]);
                 Helper.AssertObjects(list[1], result[1]);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListWithDefaultClientTest()
         {
             var list = new[]
@@ -94,7 +94,7 @@ namespace Bandwidth.Iris.Tests.Models
                     {"areaCode", 919}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
                 Helper.AssertObjects(list[0], result[0]);
                 Helper.AssertObjects(list[1], result[1]);
             }

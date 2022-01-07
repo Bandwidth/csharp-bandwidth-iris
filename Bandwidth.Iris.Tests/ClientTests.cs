@@ -7,14 +7,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Serialization;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests
 {
-    [TestClass]
     public class ClientTests
     {
-        [TestMethod]
+        [Fact]
         public void GetInstanceTest()
         {
             Environment.SetEnvironmentVariable(Client.BandwidthApiAccountId, "AccountId");
@@ -27,22 +26,11 @@ namespace Bandwidth.Iris.Tests
             Client.GetInstance("accountId", "userName", "password");
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
-        public void GetInstanceTest2()
-        {
-            Environment.SetEnvironmentVariable(Client.BandwidthApiAccountId, null);
-            Environment.SetEnvironmentVariable(Client.BandwidthApiUserName, null);
-            Environment.SetEnvironmentVariable(Client.BandwidthApiPassword, null);
-            Environment.SetEnvironmentVariable(Client.BandwidthApiEndpoint, null);
-            Environment.SetEnvironmentVariable(Client.BandwidthApiVersion, null);
-            Client.GetInstance();
-        }
-        
-        [TestMethod]
+        [Fact]
         public void MakeGetRequestTest()
         {
-            using (var server = new HttpServer(new RequestHandler { 
-                EstimatedMethod = "GET", 
+            using (var server = new HttpServer(new RequestHandler {
+                EstimatedMethod = "GET",
                 EstimatedPathAndQuery = "/v1.0/test?test1=value1&test2=value2",
                 EstimatedHeaders = new Dictionary<string, string>
                 {
@@ -56,11 +44,11 @@ namespace Bandwidth.Iris.Tests
                              .Wait();
                 if (server.Error != null) throw server.Error;
             }
-            
+
         }
 
-        
-        [TestMethod]
+
+        [Fact]
         public void MakeGetRequestWithIdTest()
         {
             using (var server = new HttpServer(new RequestHandler { EstimatedMethod = "GET", EstimatedPathAndQuery = "/v1.0/test/id?test1=value1&test2=value2" }))
@@ -80,12 +68,12 @@ namespace Bandwidth.Iris.Tests
             public string Name { get; set; }
             public bool? Flag { get; set; }
         }
-        [TestMethod]
+        [Fact]
         public void MakeGetRequestTTest()
         {
             using (var server = new HttpServer(new RequestHandler
             {
-                EstimatedMethod = "GET", 
+                EstimatedMethod = "GET",
                 EstimatedPathAndQuery = "/v1.0/test?test1=value1&test2=value2",
                 ContentToSend =  Helper.CreateXmlContent(new TestItem
                 {
@@ -99,8 +87,8 @@ namespace Bandwidth.Iris.Tests
                     var result = client.MakeGetRequest<TestItem>("test",
                         new Dictionary<string, object> { { "test1", "value1" }, { "test2", "value2" } }).Result;
                     if (server.Error != null) throw server.Error;
-                    Assert.AreEqual("Name", result.Name);
-                    Assert.IsTrue(result.Flag != null && result.Flag.Value);
+                    Assert.Equal("Name", result.Name);
+                    Assert.True(result.Flag != null && result.Flag.Value);
                 }
             }
         }
@@ -110,7 +98,7 @@ namespace Bandwidth.Iris.Tests
             public bool Test { get; set; }
         }
 
-        [TestMethod]
+        [Fact]
         public void MakePostRequestTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -128,7 +116,7 @@ namespace Bandwidth.Iris.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void MakePutRequestTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -146,7 +134,7 @@ namespace Bandwidth.Iris.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void MakePostRequestTTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -165,14 +153,14 @@ namespace Bandwidth.Iris.Tests
                 {
                     var result = client.MakePostRequest<TestItem>("test", new TestModel{ Test = true }).Result;
                     if (server.Error != null) throw server.Error;
-                    Assert.AreEqual("Name", result.Name);
-                    Assert.IsTrue(result.Flag != null && result.Flag.Value);
+                    Assert.Equal("Name", result.Name);
+                    Assert.True(result.Flag != null && result.Flag.Value);
                 }
             }
 
         }
 
-        [TestMethod]
+        [Fact]
         public void MakeDeleteRequestTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -189,7 +177,7 @@ namespace Bandwidth.Iris.Tests
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void AuthHeaderTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -206,7 +194,7 @@ namespace Bandwidth.Iris.Tests
                 }
             }
         }
-        [TestMethod]
+        [Fact]
         public void PutDataWithStreamTest()
         {
             var data = Encoding.UTF8.GetBytes("hello");
@@ -227,7 +215,7 @@ namespace Bandwidth.Iris.Tests
             }
 
         }
-        [TestMethod]
+        [Fact]
         public void SendDataWithByteArrayTest()
         {
             var data = Encoding.UTF8.GetBytes("hello");
@@ -275,7 +263,8 @@ namespace Bandwidth.Iris.Tests
             [XmlArrayItem("Errors")]
             public Error[] ErrorMessages { get; set; }
         }
-        [TestMethod]
+
+        [Fact]
         public void ErrorTest()
         {
             using (new HttpServer(new RequestHandler
@@ -300,14 +289,14 @@ namespace Bandwidth.Iris.Tests
                 catch (AggregateException ex)
                 {
                     var err = (BandwidthIrisException)ex.InnerExceptions.First();
-                    Assert.AreEqual("1000", err.Code);
-                    Assert.AreEqual("Error text", err.Message);
-                    Assert.AreEqual(HttpStatusCode.BadRequest, err.HttpStatusCode);
+                    Assert.Equal("1000", err.Code);
+                    Assert.Equal("Error text", err.Message);
+                    Assert.Equal(HttpStatusCode.BadRequest, err.HttpStatusCode);
                 }
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void Error2Test()
         {
             using (new HttpServer(new RequestHandler
@@ -332,14 +321,14 @@ namespace Bandwidth.Iris.Tests
                 catch (AggregateException ex)
                 {
                     var err = (BandwidthIrisException)ex.InnerExceptions.First();
-                    Assert.AreEqual("1001", err.Code);
-                    Assert.AreEqual("Error text", err.Message);
-                    Assert.AreEqual(HttpStatusCode.BadRequest, err.HttpStatusCode);
+                    Assert.Equal("1001", err.Code);
+                    Assert.Equal("Error text", err.Message);
+                    Assert.Equal(HttpStatusCode.BadRequest, err.HttpStatusCode);
                 }
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void Error3Test()
         {
             using (new HttpServer(new RequestHandler
@@ -373,14 +362,14 @@ namespace Bandwidth.Iris.Tests
                 {
                     var err = (AggregateException)ex.InnerExceptions.First();
                     var list = (from e in err.InnerExceptions select (BandwidthIrisException) e).ToArray();
-                    Assert.AreEqual("101", list[0].Code);
-                    Assert.AreEqual("Description1", list[0].Message);
-                    Assert.AreEqual("102", list[1].Code);
-                    Assert.AreEqual("Description2", list[1].Message);
+                    Assert.Equal("101", list[0].Code);
+                    Assert.Equal("Description1", list[0].Message);
+                    Assert.Equal("102", list[1].Code);
+                    Assert.Equal("Description2", list[1].Message);
                 }
             }
         }
-        [TestMethod]
+        [Fact]
         public void Error4Test()
         {
             using (new HttpServer(new RequestHandler
@@ -402,9 +391,9 @@ namespace Bandwidth.Iris.Tests
                 catch (AggregateException ex)
                 {
                     var err = (BandwidthIrisException)ex.InnerExceptions.First();
-                    Assert.AreEqual("1000", err.Code);
-                    Assert.AreEqual("Error text", err.Message);
-                    Assert.AreEqual(HttpStatusCode.BadRequest, err.HttpStatusCode);
+                    Assert.Equal("1000", err.Code);
+                    Assert.Equal("Error text", err.Message);
+                    Assert.Equal(HttpStatusCode.BadRequest, err.HttpStatusCode);
                 }
             }
         }

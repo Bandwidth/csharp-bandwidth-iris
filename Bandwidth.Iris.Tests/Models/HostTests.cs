@@ -2,20 +2,20 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class HostTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public HostTests()
         {
             Helper.SetEnvironmetVariables();
         }
-        
-        [TestMethod]
+
+        [Fact]
         public void ListTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -28,11 +28,11 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Host.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(1, result.Length);
-                Assert.AreEqual(1, result[0].SipPeerHosts[0].SmsHosts.Length);
+                Assert.Equal(1, result.Length);
+                Assert.Equal(1, result[0].SipPeerHosts[0].SmsHosts.Length);
             }
         }
-        [TestMethod]
+        [Fact]
         public void ListWithDefaultClientTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -44,11 +44,11 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Host.List().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(1, result.Length);
-                Assert.AreEqual(1, result[0].SipPeerHosts[0].SmsHosts.Length);
+                Assert.Equal(1, result.Length);
+                Assert.Equal(1, result[0].SipPeerHosts[0].SmsHosts.Length);
             }
         }
 
-        
+
     }
 }

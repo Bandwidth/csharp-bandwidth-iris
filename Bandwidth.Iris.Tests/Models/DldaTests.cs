@@ -2,20 +2,20 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class DldaTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public DldaTests()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -28,13 +28,13 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Dlda.Get(client, "1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", result.Id);
+                Assert.Equal("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", result.Id);
             }
         }
 
-        
 
-        [TestMethod]
+
+        [Fact]
         public void GetWithDefaultClientTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -46,11 +46,11 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Dlda.Get("1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", result.Id);
+                Assert.Equal("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", result.Id);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -63,10 +63,10 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Dlda.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(3, result.Length);
+                Assert.Equal(3, result.Length);
             }
         }
-        [TestMethod]
+        [Fact]
         public void ListWithDefaultClientTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -78,11 +78,11 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Dlda.List().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(3, result.Length);
+                Assert.Equal(3, result.Length);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateTest()
         {
             var item = new Dlda
@@ -111,7 +111,7 @@ namespace Bandwidth.Iris.Tests.Models
               }
             };
 
-            
+
             using (var server = new HttpServer(new[]
             {
                 new RequestHandler
@@ -136,12 +136,12 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var i = Dlda.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", i.Id);
+                Assert.Equal("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", i.Id);
             }
 
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateWithDefaultClientTest()
         {
             var item = new Dlda
@@ -171,11 +171,11 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var i = Dlda.Create(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", i.Id);
+                Assert.Equal("ea9e90c2-77a4-4f82-ac47-e1c5bb1311f4", i.Id);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateTest()
         {
             var item = new Dlda
@@ -199,7 +199,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetHistoryTest()
         {
             using (var server = new HttpServer(new[]
@@ -217,7 +217,7 @@ namespace Bandwidth.Iris.Tests.Models
                 i.SetClient(client);
                 var result = i.GetHistory().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.IsTrue(result.Length > 0);
+                Assert.True(result.Length > 0);
             }
         }
     }

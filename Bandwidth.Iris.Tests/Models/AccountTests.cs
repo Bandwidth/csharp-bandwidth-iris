@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using System.Net.Http;
 using System.Text;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class AccountTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public AccountTests()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -28,11 +28,11 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Account.Get(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("14", result.Id);
+                Assert.Equal("14", result.Id);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetWithDefaultClientTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -44,7 +44,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Account.Get().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("14", result.Id);
+                Assert.Equal("14", result.Id);
             }
         }
     }

@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class TnReservationTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public TnReservationTests()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTest()
         {
             var item = new TnReservation
@@ -40,7 +40,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetWithXmlTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -53,14 +53,14 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = TnReservation.Get(client, "1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("1", result.Id);
-                Assert.AreEqual("accountId", result.AccountId);
-                Assert.AreEqual(30, result.ReservationExpires);
-                Assert.AreEqual("9195551212", result.ReservedTn[0]);
+                Assert.Equal("1", result.Id);
+                Assert.Equal("accountId", result.AccountId);
+                Assert.Equal(30, result.ReservationExpires);
+                Assert.Equal("9195551212", result.ReservedTn[0]);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetWithErrorXmlTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -81,16 +81,16 @@ namespace Bandwidth.Iris.Tests.Models
                     var ex = exc.InnerExceptions[0] as BandwidthIrisException;
                     if (ex != null)
                     {
-                        Assert.AreEqual("Reservation failed: telephone number 9195551212 is not available.", ex.Message);
-                        Assert.AreEqual("5041", ex.Code);
+                        Assert.Equal("Reservation failed: telephone number 9195551212 is not available.", ex.Message);
+                        Assert.Equal("5041", ex.Code);
                         return;
                     }
                 }
-                Assert.Fail("should throw an error");
+                Assert.True(false, "The exception was not thrown");
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetWithDefaultClientTest()
         {
             var item = new TnReservation
@@ -113,7 +113,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateTest()
         {
             var item = new TnReservation
@@ -147,11 +147,11 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var i = TnReservation.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("1", i.Id);
+                Assert.Equal("1", i.Id);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateWithDefaultClientTest()
         {
             var item = new TnReservation
@@ -185,13 +185,13 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var i = TnReservation.Create(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("1", i.Id);
+                Assert.Equal("1", i.Id);
             }
         }
 
-        
 
-        [TestMethod]
+
+        [Fact]
         public void DeleteTest()
         {
             using (var server = new HttpServer(new[]
@@ -210,7 +210,7 @@ namespace Bandwidth.Iris.Tests.Models
                 if (server.Error != null) throw server.Error;
             }
         }
-        
+
     }
 
 }

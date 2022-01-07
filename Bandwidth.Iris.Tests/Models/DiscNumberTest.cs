@@ -2,20 +2,20 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class DiscNumberTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public DiscNumberTests()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void ListTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -28,11 +28,11 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = DiscNumber.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListWithDefaultClientTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -44,11 +44,11 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = DiscNumber.List().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTotalsTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -61,7 +61,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = DiscNumber.GetTotals(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(3, result.Count);
+                Assert.Equal(3, result.Count);
             }
         }
     }

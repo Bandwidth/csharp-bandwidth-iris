@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class SiteTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public SiteTests()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTest()
         {
             var item = new Site
@@ -43,10 +43,10 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetWithXmlTest()
         {
-            
+
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "GET",
@@ -57,20 +57,20 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Site.Get(client, "1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("1", result.Id);
-                Assert.AreEqual("Test Site", result.Name);
-                Assert.AreEqual("A Site Description", result.Description);
-                Assert.AreEqual("900", result.Address.HouseNumber);
-                Assert.AreEqual("Main Campus Drive", result.Address.StreetName);
-                Assert.AreEqual("Raleigh", result.Address.City);
-                Assert.AreEqual("NC", result.Address.StateCode);
-                Assert.AreEqual("27615", result.Address.Zip);
-                Assert.AreEqual("United States", result.Address.Country);
-                Assert.AreEqual("Service", result.Address.AddressType);
+                Assert.Equal("1", result.Id);
+                Assert.Equal("Test Site", result.Name);
+                Assert.Equal("A Site Description", result.Description);
+                Assert.Equal("900", result.Address.HouseNumber);
+                Assert.Equal("Main Campus Drive", result.Address.StreetName);
+                Assert.Equal("Raleigh", result.Address.City);
+                Assert.Equal("NC", result.Address.StateCode);
+                Assert.Equal("27615", result.Address.Zip);
+                Assert.Equal("United States", result.Address.Country);
+                Assert.Equal("Service", result.Address.AddressType);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void PostDirectionalAddressTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -83,13 +83,13 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Site.Get(client, "1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("Raleigh", result.Name);
-                Assert.AreEqual("NW", result.Address.PostDirectional);
+                Assert.Equal("Raleigh", result.Name);
+                Assert.Equal("NW", result.Address.PostDirectional);
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetWithDefaultClientTest()
         {
             var item = new Site
@@ -115,7 +115,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListTest()
         {
             var items = new[]
@@ -156,7 +156,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListWithXmlTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -169,15 +169,15 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Site.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(1, result.Length);
-                Assert.AreEqual("1", result[0].Id);
-                Assert.AreEqual("Test Site", result[0].Name);
-                Assert.AreEqual("A site description", result[0].Description);
-                
+                Assert.Equal(1, result.Length);
+                Assert.Equal("1", result[0].Id);
+                Assert.Equal("Test Site", result[0].Name);
+                Assert.Equal("A site description", result[0].Description);
+
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListWithDefaultClientTest()
         {
             var items = new[]
@@ -217,7 +217,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateTest()
         {
             var item = new Site
@@ -254,14 +254,14 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var i = Site.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("1", i.Id);
+                Assert.Equal("1", i.Id);
 
-            
+
             }
 
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateWithDefaultClientTest()
         {
             var item = new Site
@@ -297,11 +297,11 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var i = Site.Create(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("1", i.Id);
+                Assert.Equal("1", i.Id);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateTest()
         {
             var item = new Site
@@ -332,7 +332,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void DeleteTest()
         {
             using (var server = new HttpServer(new[]
@@ -352,7 +352,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateSipPeerTest()
         {
             var item = new SipPeer
@@ -397,7 +397,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSipPeerTest()
         {
             var item = new SipPeer
@@ -423,11 +423,11 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = i.GetSipPeer("10").Result;
                 if (server.Error != null) throw server.Error;
                 Helper.AssertObjects(item, r);
-                
+
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSipPeerWithXmlTest()
         {
             using (var server = new HttpServer(new[]
@@ -445,15 +445,15 @@ namespace Bandwidth.Iris.Tests.Models
                 i.SetClient(client);
                 var r = i.GetSipPeer("10").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("10", r.Id);
-                Assert.AreEqual("SIP Peer 1", r.Name);
-                Assert.AreEqual("Sip Peer 1 description", r.Description);
-                Assert.IsTrue(r.IsDefaultPeer);
-                Assert.AreEqual("SIP", r.ShortMessagingProtocol);
+                Assert.Equal("10", r.Id);
+                Assert.Equal("SIP Peer 1", r.Name);
+                Assert.Equal("Sip Peer 1 description", r.Description);
+                Assert.True(r.IsDefaultPeer);
+                Assert.Equal("SIP", r.ShortMessagingProtocol);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSipPeersTest()
         {
             var items = new[]{
@@ -493,7 +493,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSipPeersWithXmlTest()
         {
             using (var server = new HttpServer(new[]
@@ -511,23 +511,23 @@ namespace Bandwidth.Iris.Tests.Models
                 i.SetClient(client);
                 var r = i.GetSipPeers().Result[0];
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("12345", r.Id);
-                Assert.AreEqual("SIP Peer 1", r.Name);
-                Assert.AreEqual("Sip Peer 1 description", r.Description);
-                Assert.IsTrue(r.IsDefaultPeer);
-                Assert.AreEqual("SIP", r.ShortMessagingProtocol);
-                Assert.AreEqual("70.62.112.156", r.VoiceHosts[0].HostName);
-                Assert.AreEqual("70.62.112.156", r.SmsHosts[0].HostName);
-                Assert.AreEqual("70.62.112.156", r.TerminationHosts[0].HostName);
-                Assert.AreEqual(5060, r.TerminationHosts[0].Port);
-                Assert.AreEqual("DOMESTIC", r.TerminationHosts[0].CustomerTrafficAllowed);
-                Assert.IsTrue(r.TerminationHosts[0].DataAllowed);
-                Assert.IsFalse(r.CallingName.Enforced);
-                Assert.IsTrue(r.CallingName.Display);
+                Assert.Equal("12345", r.Id);
+                Assert.Equal("SIP Peer 1", r.Name);
+                Assert.Equal("Sip Peer 1 description", r.Description);
+                Assert.True(r.IsDefaultPeer);
+                Assert.Equal("SIP", r.ShortMessagingProtocol);
+                Assert.Equal("70.62.112.156", r.VoiceHosts[0].HostName);
+                Assert.Equal("70.62.112.156", r.SmsHosts[0].HostName);
+                Assert.Equal("70.62.112.156", r.TerminationHosts[0].HostName);
+                Assert.Equal(5060, r.TerminationHosts[0].Port);
+                Assert.Equal("DOMESTIC", r.TerminationHosts[0].CustomerTrafficAllowed);
+                Assert.True(r.TerminationHosts[0].DataAllowed);
+                Assert.False(r.CallingName.Enforced);
+                Assert.True(r.CallingName.Display);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void BandwidthIrisExcpetionTest()
         {
 
@@ -564,7 +564,7 @@ namespace Bandwidth.Iris.Tests.Models
                     {
                         if(x is BandwidthIrisException)
                         {
-                            error = true; 
+                            error = true;
                             return true;
                         }
 
@@ -572,7 +572,7 @@ namespace Bandwidth.Iris.Tests.Models
                     });
 
                 }
-                Assert.AreEqual(true, error);
+                Assert.Equal(true, error);
 
 
             }

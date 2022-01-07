@@ -6,20 +6,20 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class PortInTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public PortInTests()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateTest()
         {
             var order = new LnpOrderResponse
@@ -36,9 +36,9 @@ namespace Bandwidth.Iris.Tests.Models
                        Country = "County"
                    }
                 },
-                SiteId = "1"                 
+                SiteId = "1"
             };
-            
+
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "POST",
@@ -54,7 +54,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateWithXmlTest()
         {
             var order = new PortIn
@@ -85,18 +85,18 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var r = PortIn.Create(client, order).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("201", r.Status.Code);
-                Assert.AreEqual("Order request received. Please use the order id to check the status of your order later.", r.Status.Description);
-                Assert.AreEqual("PENDING_DOCUMENTS", r.ProcessingStatus);
-                Assert.AreEqual("John Doe", r.LoaAuthorizingPerson);
-                Assert.AreEqual("6882015002", r.BillingTelephoneNumber);
-                CollectionAssert.AreEqual(new[] { "6882015025", "6882015026" }, r.ListOfPhoneNumbers);
-                Assert.IsFalse(r.Triggered);
-                Assert.AreEqual("PORTIN", r.BillingType);
-                
+                Assert.Equal("201", r.Status.Code);
+                Assert.Equal("Order request received. Please use the order id to check the status of your order later.", r.Status.Description);
+                Assert.Equal("PENDING_DOCUMENTS", r.ProcessingStatus);
+                Assert.Equal("John Doe", r.LoaAuthorizingPerson);
+                Assert.Equal("6882015002", r.BillingTelephoneNumber);
+                Assert.Equal(new[] { "6882015025", "6882015026" }, r.ListOfPhoneNumbers);
+                Assert.False(r.Triggered);
+                Assert.Equal("PORTIN", r.BillingType);
+
             }
         }
-        [TestMethod]
+        [Fact]
         public void CreateWithDefaultClientTest()
         {
             var order = new LnpOrderResponse
@@ -135,7 +135,7 @@ namespace Bandwidth.Iris.Tests.Models
             [XmlElementAttribute("filename")]
             public string FileName { get; set; }
         }
-        [TestMethod]
+        [Fact]
         public void CreateFileTest()
         {
             const string data = "hello";
@@ -155,12 +155,12 @@ namespace Bandwidth.Iris.Tests.Models
                 {
                     var fileName = portIn.CreateFile(stream, "media/type").Result;
                     if (server.Error != null) throw server.Error;
-                    Assert.AreEqual("test", fileName);
+                    Assert.Equal("test", fileName);
                 }
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateFile2Test()
         {
             const string data = "hello";
@@ -178,11 +178,11 @@ namespace Bandwidth.Iris.Tests.Models
                 portIn.SetClient(client);
                 var fileName = portIn.CreateFile(Encoding.UTF8.GetBytes(data), "media/type").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("test", fileName);
+                Assert.Equal("test", fileName);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateFileTest()
         {
             const string data = "hello";
@@ -205,7 +205,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateFile2Test()
         {
             const string data = "hello";
@@ -225,7 +225,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void DeleteFileTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -242,7 +242,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFileTest()
         {
             const string data = "hello";
@@ -258,14 +258,14 @@ namespace Bandwidth.Iris.Tests.Models
                 portIn.SetClient(client);
                 using (var r = portIn.GetFile("test").Result)
                 {
-                    Assert.AreEqual("media/type", r.MediaType);
-                    Assert.AreEqual(data, Encoding.UTF8.GetString(r.Buffer));
+                    Assert.Equal("media/type", r.MediaType);
+                    Assert.Equal(data, Encoding.UTF8.GetString(r.Buffer));
                 }
                 if (server.Error != null) throw server.Error;
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFile2Test()
         {
             const string data = "hello";
@@ -282,14 +282,14 @@ namespace Bandwidth.Iris.Tests.Models
                 using (var r = portIn.GetFile("test", true).Result)
                 using(var reader = new StreamReader(r.Stream, Encoding.UTF8))
                 {
-                    Assert.AreEqual("media/type", r.MediaType);
-                    Assert.AreEqual(data, reader.ReadToEnd());
+                    Assert.Equal("media/type", r.MediaType);
+                    Assert.Equal(data, reader.ReadToEnd());
                 }
                 if (server.Error != null) throw server.Error;
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFilesTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -304,13 +304,13 @@ namespace Bandwidth.Iris.Tests.Models
                 portIn.SetClient(client);
                 var list = portIn.GetFiles(true).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(6, list.Length);
-                Assert.AreEqual("d28b36f7-fa96-49eb-9556-a40fca49f7c6-1416231534986.txt", list[0].FileName);
-                Assert.AreEqual("LOA", list[0].FileMetadata.DocumentType);
+                Assert.Equal(6, list.Length);
+                Assert.Equal("d28b36f7-fa96-49eb-9556-a40fca49f7c6-1416231534986.txt", list[0].FileName);
+                Assert.Equal("LOA", list[0].FileMetadata.DocumentType);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFileMetadataTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -325,11 +325,11 @@ namespace Bandwidth.Iris.Tests.Models
                 portIn.SetClient(client);
                 var r = portIn.GetFileMetadata("test").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("LOA", r.DocumentType);
+                Assert.Equal("LOA", r.DocumentType);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void PutFileMetadataTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -349,11 +349,11 @@ namespace Bandwidth.Iris.Tests.Models
                 portIn.SetClient(client);
                 var r = portIn.PutFileMetadata("test", fileMetadata).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("OK", r.StatusCode.ToString());
+                Assert.Equal("OK", r.StatusCode.ToString());
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void DeleteTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -370,7 +370,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateTest()
         {
             var data = new LnpOrderSupp
@@ -397,7 +397,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNotesTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -412,17 +412,17 @@ namespace Bandwidth.Iris.Tests.Models
                 portIn.SetClient(client);
                 var list = portIn.GetNotes().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, list.Length);
-                Assert.AreEqual("11299", list[0].Id);
-                Assert.AreEqual("customer", list[0].UserId);
-                Assert.AreEqual("Test", list[0].Description);
-                Assert.AreEqual("11301", list[1].Id);
-                Assert.AreEqual("customer", list[1].UserId);
-                Assert.AreEqual("Test1", list[1].Description);
+                Assert.Equal(2, list.Length);
+                Assert.Equal("11299", list[0].Id);
+                Assert.Equal("customer", list[0].UserId);
+                Assert.Equal("Test", list[0].Description);
+                Assert.Equal("11301", list[1].Id);
+                Assert.Equal("customer", list[1].UserId);
+                Assert.Equal("Test1", list[1].Description);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void AddNoteTest()
         {
             var item = new Note
@@ -437,7 +437,7 @@ namespace Bandwidth.Iris.Tests.Models
                     EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portins/1/notes", Helper.AccountId),
                     EstimatedContent = Helper.ToXmlString(item),
                     HeadersToSend = new Dictionary<string, string> {
-                        {"Location", string.Format("/v1.0/accounts/{0}/portins/1/notes/11299", Helper.AccountId)} 
+                        {"Location", string.Format("/v1.0/accounts/{0}/portins/1/notes/11299", Helper.AccountId)}
                     }
                 },
                 new RequestHandler
@@ -453,13 +453,13 @@ namespace Bandwidth.Iris.Tests.Models
                 portIn.SetClient(client);
                 var r = portIn.AddNote(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("11299", r.Id);
-                Assert.AreEqual("customer", r.UserId);
-                Assert.AreEqual("Test", r.Description);
+                Assert.Equal("11299", r.Id);
+                Assert.Equal("customer", r.UserId);
+                Assert.Equal("Test", r.Description);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetPortInTest()
         {
 
@@ -472,102 +472,102 @@ namespace Bandwidth.Iris.Tests.Models
                     EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portins/{1}", Helper.AccountId, portIn.Id),
                     EstimatedContent = "",
                     ContentToSend = new StringContent(TestXmlStrings.xmlLnpOrderResponseNoErrors, Encoding.UTF8, "application/xml")
-                }                
+                }
             }))
             {
                 var client = Helper.CreateClient();
-                
+
                 portIn.SetClient(client);
                 var r = portIn.GetOrder().Result;
-                Assert.AreEqual("SJM00002", r.CustomerOrderId);
-                Assert.AreEqual("CANCELLED", r.ProcessingStatus);
-                Assert.AreEqual(DateTime.Parse("2014-08-04T13:37:06.323"), r.OrderCreateDate);
-                Assert.AreEqual(DateTime.Parse("2014-08-04T13:37:08.676"), r.LastModifiedDate);
-                Assert.AreEqual(DateTime.Parse("2014-08-04T13:37:08.676"), r.RequestedFocDate);
-                Assert.AreEqual("The Authguy", r.LoaAuthorizingPerson);
-                Assert.AreEqual("9195551234", r.BillingTelephoneNumber);
-                Assert.AreEqual("9175131245", r.NewBillingTelephoneNumber);
-                Assert.AreEqual("Foo", r.AlternateSpid);
-                Assert.AreEqual("20", r.AccountId);
-                Assert.AreEqual("2857", r.SiteId);
-                Assert.AreEqual("317771", r.PeerId);
-                Assert.AreEqual("Mock Carrier", r.LosingCarrierName);
-                Assert.AreEqual("Bandwidth CLEC", r.VendorName);
+                Assert.Equal("SJM00002", r.CustomerOrderId);
+                Assert.Equal("CANCELLED", r.ProcessingStatus);
+                Assert.Equal(DateTime.Parse("2014-08-04T13:37:06.323"), r.OrderCreateDate);
+                Assert.Equal(DateTime.Parse("2014-08-04T13:37:08.676"), r.LastModifiedDate);
+                Assert.Equal(DateTime.Parse("2014-08-04T13:37:08.676"), r.RequestedFocDate);
+                Assert.Equal("The Authguy", r.LoaAuthorizingPerson);
+                Assert.Equal("9195551234", r.BillingTelephoneNumber);
+                Assert.Equal("9175131245", r.NewBillingTelephoneNumber);
+                Assert.Equal("Foo", r.AlternateSpid);
+                Assert.Equal("20", r.AccountId);
+                Assert.Equal("2857", r.SiteId);
+                Assert.Equal("317771", r.PeerId);
+                Assert.Equal("Mock Carrier", r.LosingCarrierName);
+                Assert.Equal("Bandwidth CLEC", r.VendorName);
 
-                Assert.AreEqual("jbm", r.UserId);
-                Assert.AreEqual("jbm", r.LastModifiedBy);
-                Assert.AreEqual(false, r.PartialPort);
-                Assert.AreEqual(false, r.Triggered);
-                Assert.AreEqual(PortType.AUTOMATED, r.PortType);
+                Assert.Equal("jbm", r.UserId);
+                Assert.Equal("jbm", r.LastModifiedBy);
+                Assert.Equal(false, r.PartialPort);
+                Assert.Equal(false, r.Triggered);
+                Assert.Equal(PortType.AUTOMATED, r.PortType);
 
                 //TnAttributes
-                Assert.AreEqual(1, r.TnAttributes.Length);
-                Assert.AreEqual("Protected", r.TnAttributes[0]);
+                Assert.Equal(1, r.TnAttributes.Length);
+                Assert.Equal("Protected", r.TnAttributes[0]);
 
                 //Suscriber
-                Assert.AreEqual("BUSINESS", r.Subscriber.SubscriberType);
-                Assert.AreEqual("First", r.Subscriber.FirstName);
-                Assert.AreEqual("Last", r.Subscriber.LastName);
-                Assert.AreEqual("11235", r.Subscriber.ServiceAddress.HouseNumber);
-                Assert.AreEqual("Back", r.Subscriber.ServiceAddress.StreetName);
-                Assert.AreEqual("Denver", r.Subscriber.ServiceAddress.City);
-                Assert.AreEqual("CO", r.Subscriber.ServiceAddress.StateCode);
-                Assert.AreEqual("27541", r.Subscriber.ServiceAddress.Zip);
-                Assert.AreEqual("Canyon", r.Subscriber.ServiceAddress.County);
-                Assert.AreEqual("United States", r.Subscriber.ServiceAddress.Country);
-                Assert.AreEqual("Service", r.Subscriber.ServiceAddress.AddressType);
+                Assert.Equal("BUSINESS", r.Subscriber.SubscriberType);
+                Assert.Equal("First", r.Subscriber.FirstName);
+                Assert.Equal("Last", r.Subscriber.LastName);
+                Assert.Equal("11235", r.Subscriber.ServiceAddress.HouseNumber);
+                Assert.Equal("Back", r.Subscriber.ServiceAddress.StreetName);
+                Assert.Equal("Denver", r.Subscriber.ServiceAddress.City);
+                Assert.Equal("CO", r.Subscriber.ServiceAddress.StateCode);
+                Assert.Equal("27541", r.Subscriber.ServiceAddress.Zip);
+                Assert.Equal("Canyon", r.Subscriber.ServiceAddress.County);
+                Assert.Equal("United States", r.Subscriber.ServiceAddress.Country);
+                Assert.Equal("Service", r.Subscriber.ServiceAddress.AddressType);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void LnpOrderResponseTest()
         {
             string xmlLnpOrderResponse = TestXmlStrings.xmlLnpOrderResponse;
 
             LnpOrderResponse lnpOrderResponse = Helper.ParseXml<LnpOrderResponse>(xmlLnpOrderResponse);
 
-            Assert.AreEqual("SJM00002", lnpOrderResponse.CustomerOrderId);
-            Assert.AreEqual("CANCELLED", lnpOrderResponse.ProcessingStatus);
-            Assert.AreEqual(DateTime.Parse("2014-08-04T13:37:06.323"), lnpOrderResponse.OrderCreateDate);
-            Assert.AreEqual(DateTime.Parse("2014-08-04T13:37:08.676"), lnpOrderResponse.LastModifiedDate);
-            Assert.AreEqual(DateTime.Parse("2014-08-04T13:37:08.676"), lnpOrderResponse.RequestedFocDate);
-            Assert.AreEqual("The Authguy", lnpOrderResponse.LoaAuthorizingPerson);
-            Assert.AreEqual("9195551234", lnpOrderResponse.BillingTelephoneNumber);
-            Assert.AreEqual("9175131245", lnpOrderResponse.NewBillingTelephoneNumber);
-            Assert.AreEqual("Foo", lnpOrderResponse.AlternateSpid);
-            Assert.AreEqual("20", lnpOrderResponse.AccountId);
-            Assert.AreEqual("2857", lnpOrderResponse.SiteId);
-            Assert.AreEqual("317771", lnpOrderResponse.PeerId);
-            Assert.AreEqual("Mock Carrier", lnpOrderResponse.LosingCarrierName);
-            Assert.AreEqual("Bandwidth CLEC", lnpOrderResponse.VendorName);
-            
-            Assert.AreEqual("jbm", lnpOrderResponse.UserId);
-            Assert.AreEqual("jbm", lnpOrderResponse.LastModifiedBy);
-            Assert.AreEqual(false, lnpOrderResponse.PartialPort);
-            Assert.AreEqual(false, lnpOrderResponse.Triggered);
-            Assert.AreEqual(PortType.AUTOMATED, lnpOrderResponse.PortType);
+            Assert.Equal("SJM00002", lnpOrderResponse.CustomerOrderId);
+            Assert.Equal("CANCELLED", lnpOrderResponse.ProcessingStatus);
+            Assert.Equal(DateTime.Parse("2014-08-04T13:37:06.323"), lnpOrderResponse.OrderCreateDate);
+            Assert.Equal(DateTime.Parse("2014-08-04T13:37:08.676"), lnpOrderResponse.LastModifiedDate);
+            Assert.Equal(DateTime.Parse("2014-08-04T13:37:08.676"), lnpOrderResponse.RequestedFocDate);
+            Assert.Equal("The Authguy", lnpOrderResponse.LoaAuthorizingPerson);
+            Assert.Equal("9195551234", lnpOrderResponse.BillingTelephoneNumber);
+            Assert.Equal("9175131245", lnpOrderResponse.NewBillingTelephoneNumber);
+            Assert.Equal("Foo", lnpOrderResponse.AlternateSpid);
+            Assert.Equal("20", lnpOrderResponse.AccountId);
+            Assert.Equal("2857", lnpOrderResponse.SiteId);
+            Assert.Equal("317771", lnpOrderResponse.PeerId);
+            Assert.Equal("Mock Carrier", lnpOrderResponse.LosingCarrierName);
+            Assert.Equal("Bandwidth CLEC", lnpOrderResponse.VendorName);
+
+            Assert.Equal("jbm", lnpOrderResponse.UserId);
+            Assert.Equal("jbm", lnpOrderResponse.LastModifiedBy);
+            Assert.Equal(false, lnpOrderResponse.PartialPort);
+            Assert.Equal(false, lnpOrderResponse.Triggered);
+            Assert.Equal(PortType.AUTOMATED, lnpOrderResponse.PortType);
 
             //Errors
-            Assert.AreEqual(2, lnpOrderResponse.Errors.Length);
-            Assert.AreEqual("7205", lnpOrderResponse.Errors[1].Code);
-            Assert.AreEqual("Telephone number is already being processed on another order", lnpOrderResponse.Errors[1].Description);
+            Assert.Equal(2, lnpOrderResponse.Errors.Length);
+            Assert.Equal("7205", lnpOrderResponse.Errors[1].Code);
+            Assert.Equal("Telephone number is already being processed on another order", lnpOrderResponse.Errors[1].Description);
 
             //TnAttributes
-            Assert.AreEqual(1, lnpOrderResponse.TnAttributes.Length);
-            Assert.AreEqual("Protected", lnpOrderResponse.TnAttributes[0]);
+            Assert.Equal(1, lnpOrderResponse.TnAttributes.Length);
+            Assert.Equal("Protected", lnpOrderResponse.TnAttributes[0]);
 
             //Suscriber
-            Assert.AreEqual("BUSINESS", lnpOrderResponse.Subscriber.SubscriberType);
-            Assert.AreEqual("First", lnpOrderResponse.Subscriber.FirstName);
-            Assert.AreEqual("Last", lnpOrderResponse.Subscriber.LastName);
-            Assert.AreEqual("11235", lnpOrderResponse.Subscriber.ServiceAddress.HouseNumber);
-            Assert.AreEqual("Back", lnpOrderResponse.Subscriber.ServiceAddress.StreetName);
-            Assert.AreEqual("Denver", lnpOrderResponse.Subscriber.ServiceAddress.City);
-            Assert.AreEqual("CO", lnpOrderResponse.Subscriber.ServiceAddress.StateCode);
-            Assert.AreEqual("27541", lnpOrderResponse.Subscriber.ServiceAddress.Zip);
-            Assert.AreEqual("Canyon", lnpOrderResponse.Subscriber.ServiceAddress.County);
-            Assert.AreEqual("United States", lnpOrderResponse.Subscriber.ServiceAddress.Country);
-            Assert.AreEqual("Service", lnpOrderResponse.Subscriber.ServiceAddress.AddressType);
+            Assert.Equal("BUSINESS", lnpOrderResponse.Subscriber.SubscriberType);
+            Assert.Equal("First", lnpOrderResponse.Subscriber.FirstName);
+            Assert.Equal("Last", lnpOrderResponse.Subscriber.LastName);
+            Assert.Equal("11235", lnpOrderResponse.Subscriber.ServiceAddress.HouseNumber);
+            Assert.Equal("Back", lnpOrderResponse.Subscriber.ServiceAddress.StreetName);
+            Assert.Equal("Denver", lnpOrderResponse.Subscriber.ServiceAddress.City);
+            Assert.Equal("CO", lnpOrderResponse.Subscriber.ServiceAddress.StateCode);
+            Assert.Equal("27541", lnpOrderResponse.Subscriber.ServiceAddress.Zip);
+            Assert.Equal("Canyon", lnpOrderResponse.Subscriber.ServiceAddress.County);
+            Assert.Equal("United States", lnpOrderResponse.Subscriber.ServiceAddress.Country);
+            Assert.Equal("Service", lnpOrderResponse.Subscriber.ServiceAddress.AddressType);
 
 
 
@@ -576,7 +576,7 @@ namespace Bandwidth.Iris.Tests.Models
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GetPortInsTest()
         {
 
@@ -590,7 +590,7 @@ namespace Bandwidth.Iris.Tests.Models
                 new RequestHandler
                 {
                     EstimatedMethod = "GET",
-                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portins/?page={1}&size={2}&date={3}&enddate={4}&startdate={5}&pon={6}&status={7}&tn={8}", 
+                    EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portins/?page={1}&size={2}&date={3}&enddate={4}&startdate={5}&pon={6}&status={7}&tn={8}",
                         Helper.AccountId, 1, 300,
                         Uri.EscapeDataString(date.ToString()),
                         Uri.EscapeDataString(enddate.ToString()),
@@ -606,21 +606,21 @@ namespace Bandwidth.Iris.Tests.Models
                 portIn.SetClient(client);
                 var r = portIn.GetPortIns(Helper.AccountId, date, enddate, startdate, "ponstr", "completed", "9199199191").Result;
 
-                Assert.AreEqual(" -- link -- ", r.Links.First);
-                Assert.AreEqual(" -- link -- ", r.Links.Next);
-                Assert.AreEqual(3176, r.TotalCount);
-                Assert.AreEqual(1, r.lnpPortInfoForGivenStatuses[0].CountOfTNs);
-                Assert.AreEqual("Neustar", r.lnpPortInfoForGivenStatuses[0].UserId);
-                Assert.AreEqual(DateTime.Parse("2014-11-21T14:00:33.836"), r.lnpPortInfoForGivenStatuses[0].LastModifiedDate);
-                Assert.AreEqual(DateTime.Parse("2014-11-05T19:34:53.176"), r.lnpPortInfoForGivenStatuses[0].OrderDate);
-                Assert.AreEqual("982e3c10-3840-4251-abdd-505cd8610788", r.lnpPortInfoForGivenStatuses[0].OrderId);
-                Assert.AreEqual("port_out", r.lnpPortInfoForGivenStatuses[0].OrderType);
-                Assert.AreEqual(200, r.lnpPortInfoForGivenStatuses[0].ErrorCode);
-                Assert.AreEqual("Port out successful.", r.lnpPortInfoForGivenStatuses[0].ErrorMessage);
-                Assert.AreEqual("9727717577", r.lnpPortInfoForGivenStatuses[0].FullNumber);
-                Assert.AreEqual("COMPLETE", r.lnpPortInfoForGivenStatuses[0].ProcessingStatus);
-                Assert.AreEqual(DateTime.Parse("2014-11-20T00:00:00.000"), r.lnpPortInfoForGivenStatuses[0].RequestedFOCDate);
-                Assert.AreEqual("512E", r.lnpPortInfoForGivenStatuses[0].VendorId);
+                Assert.Equal(" -- link -- ", r.Links.First);
+                Assert.Equal(" -- link -- ", r.Links.Next);
+                Assert.Equal(3176, r.TotalCount);
+                Assert.Equal(1, r.lnpPortInfoForGivenStatuses[0].CountOfTNs);
+                Assert.Equal("Neustar", r.lnpPortInfoForGivenStatuses[0].UserId);
+                Assert.Equal(DateTime.Parse("2014-11-21T14:00:33.836"), r.lnpPortInfoForGivenStatuses[0].LastModifiedDate);
+                Assert.Equal(DateTime.Parse("2014-11-05T19:34:53.176"), r.lnpPortInfoForGivenStatuses[0].OrderDate);
+                Assert.Equal("982e3c10-3840-4251-abdd-505cd8610788", r.lnpPortInfoForGivenStatuses[0].OrderId);
+                Assert.Equal("port_out", r.lnpPortInfoForGivenStatuses[0].OrderType);
+                Assert.Equal(200, r.lnpPortInfoForGivenStatuses[0].ErrorCode);
+                Assert.Equal("Port out successful.", r.lnpPortInfoForGivenStatuses[0].ErrorMessage);
+                Assert.Equal("9727717577", r.lnpPortInfoForGivenStatuses[0].FullNumber);
+                Assert.Equal("COMPLETE", r.lnpPortInfoForGivenStatuses[0].ProcessingStatus);
+                Assert.Equal(DateTime.Parse("2014-11-20T00:00:00.000"), r.lnpPortInfoForGivenStatuses[0].RequestedFOCDate);
+                Assert.Equal("512E", r.lnpPortInfoForGivenStatuses[0].VendorId);
 
 
             }

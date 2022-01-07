@@ -2,20 +2,20 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class LineOptionTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public LineOptionTests()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateTest()
         {
             var item = new TnLineOptions
@@ -23,7 +23,7 @@ namespace Bandwidth.Iris.Tests.Models
                 TelephoneNumber = "5209072451<",
                 CallingNameDisplay = "off"
             };
-           
+
             using (var server = new HttpServer(new[]
             {
                 new RequestHandler
@@ -38,13 +38,13 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var i = LineOptionOrder.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(1, i.Length);
-                Assert.AreEqual("2013223685", i[0]);
+                Assert.Equal(1, i.Length);
+                Assert.Equal("2013223685", i[0]);
             }
 
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateWithDefaultClientTest()
         {
             var item = new TnLineOptions
@@ -66,8 +66,8 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var i = LineOptionOrder.Create(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(1, i.Length);
-                Assert.AreEqual("2013223685", i[0]);
+                Assert.Equal(1, i.Length);
+                Assert.Equal("2013223685", i[0]);
             }
         }
     }

@@ -2,20 +2,20 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class LidbTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public LidbTests()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -28,12 +28,12 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Lidb.Get(client, "1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("255bda29-fc57-44e8-a6c2-59b45388c6d0", result.Id);
+                Assert.Equal("255bda29-fc57-44e8-a6c2-59b45388c6d0", result.Id);
             }
         }
-               
 
-        [TestMethod]
+
+        [Fact]
         public void GetWithDefaultClientTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -45,11 +45,11 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Lidb.Get("1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("255bda29-fc57-44e8-a6c2-59b45388c6d0", result.Id);
+                Assert.Equal("255bda29-fc57-44e8-a6c2-59b45388c6d0", result.Id);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -62,12 +62,12 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Lidb.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
             }
         }
 
 
-        [TestMethod]
+        [Fact]
         public void ListWithDefaultClientTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -79,24 +79,24 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Lidb.List().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(2, result.Length);
+                Assert.Equal(2, result.Length);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateTest()
         {
             var item = new Lidb
             {
                 CustomerOrderId = "A Test order",
-                LidbTnGroups = new[] { 
+                LidbTnGroups = new[] {
                     new LidbTnGroup{
                         TelephoneNumbers = new []{"8048030097", "8045030098"},
                         SubscriberInformation = "Joes Grarage",
                         UseType = "RESIDENTIAL",
                         Visibility = "PUBLIC"
                     }
-                } 
+                }
             };
 
             using (var server = new HttpServer(new[]
@@ -123,18 +123,18 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var i = Lidb.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("255bda29-fc57-44e8-a6c2-59b45388c6d0", i.Id);
+                Assert.Equal("255bda29-fc57-44e8-a6c2-59b45388c6d0", i.Id);
             }
 
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateWithDefaultClientTest()
         {
             var item = new Lidb
             {
                 CustomerOrderId = "A Test order",
-                LidbTnGroups = new[] { 
+                LidbTnGroups = new[] {
                     new LidbTnGroup{
                         TelephoneNumbers = new []{"8048030097", "8045030098"},
                         SubscriberInformation = "Joes Grarage",
@@ -167,7 +167,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var i = Lidb.Create(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("255bda29-fc57-44e8-a6c2-59b45388c6d0", i.Id);
+                Assert.Equal("255bda29-fc57-44e8-a6c2-59b45388c6d0", i.Id);
             }
         }
     }

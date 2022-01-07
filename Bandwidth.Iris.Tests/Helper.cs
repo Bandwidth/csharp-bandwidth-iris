@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests
 {
@@ -16,7 +16,7 @@ namespace Bandwidth.Iris.Tests
         public const string UserName = "FakeUserName";
         public const string Password = "FakePassword";
         public const string AccountId = "FakeAccountId";
-        
+
         public static Client CreateClient(string baseUrl = null)
         {
             return Client.GetInstance(AccountId, UserName, Password, baseUrl ?? "http://localhost:3001/");
@@ -62,7 +62,7 @@ namespace Bandwidth.Iris.Tests
                 var t = (val ?? est).GetType();
                 if (t.IsPrimitive || val is IComparable)
                 {
-                    Assert.AreEqual(est, val, string.Format("Values of property {0} are mismatched", property.Name));
+                    Assert.Equal(est, val);
                 }
                 else
                 {
@@ -70,13 +70,12 @@ namespace Bandwidth.Iris.Tests
                     var estCollection = est as IList;
                     if (valCollection != null && estCollection != null)
                     {
-                        Assert.AreEqual(estCollection.Count, valCollection.Count);
+                        Assert.Equal(estCollection.Count, valCollection.Count);
                         for (var i = 0; i < estCollection.Count; i++)
                         {
                             if (estCollection[i] is IComparable)
                             {
-                                Assert.AreEqual(estCollection[i], valCollection[i],
-                                    string.Format("Values of list of property {0} are mismatched", property.Name));
+                                Assert.Equal(estCollection[i], valCollection[i]);
                             }
                             else
                             {

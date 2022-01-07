@@ -2,20 +2,20 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class InServiceNumberTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public InServiceNumberTests()
         {
             Helper.SetEnvironmetVariables();
         }
 
-        [TestMethod]
+        [Fact]
         public void ListTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -28,11 +28,11 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = InServiceNumber.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(15, result.Length);
+                Assert.Equal(15, result.Length);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListWithDefaultClientTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -44,11 +44,11 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = InServiceNumber.List().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(15, result.Length);
+                Assert.Equal(15, result.Length);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTotalsTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -61,11 +61,11 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = InServiceNumber.GetTotals(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(3, result.Count);
+                Assert.Equal(3, result.Count);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTotalsWithDefaultClientTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -77,7 +77,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = InServiceNumber.GetTotals().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(3, result.Count);
+                Assert.Equal(3, result.Count);
             }
         }
     }

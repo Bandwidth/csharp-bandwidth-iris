@@ -2,19 +2,19 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+
     public class SipPeerTests
     {
-        [TestInitialize]
-        public void Setup()
+        // [TestInitialize]
+        public SipPeerTests()
         {
             Helper.SetEnvironmetVariables();
         }
-        [TestMethod]
+        [Fact]
         public void CreateTest()
         {
             var item = new SipPeer
@@ -58,7 +58,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateWithDefaultClientTest()
         {
             var item = new SipPeer
@@ -101,7 +101,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTest()
         {
             var item = new SipPeer
@@ -129,7 +129,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetWithDefaultClientTest()
         {
             var item = new SipPeer
@@ -156,7 +156,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListTest()
         {
             var items = new[]{
@@ -194,7 +194,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void ListWithDefaultClientTest()
         {
             var items = new[]{
@@ -231,7 +231,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTnsTest()
         {
             var item = new SipPeerTelephoneNumber
@@ -263,7 +263,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTnsWithXmlTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -282,11 +282,11 @@ namespace Bandwidth.Iris.Tests.Models
                 peer.SetClient(client);
                 var result = peer.GetTns("00").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual("9195551212", result.FullNumber);
+                Assert.Equal("9195551212", result.FullNumber);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTns2WithXmlTest()
         {
             using (var server = new HttpServer(new RequestHandler
@@ -305,13 +305,13 @@ namespace Bandwidth.Iris.Tests.Models
                 peer.SetClient(client);
                 var result = peer.GetTns().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.AreEqual(17, result.Length);
-                Assert.AreEqual("3034162216", result[0].FullNumber);
-                Assert.AreEqual("3034162218", result[1].FullNumber);
+                Assert.Equal(17, result.Length);
+                Assert.Equal("3034162216", result[0].FullNumber);
+                Assert.Equal("3034162218", result[1].FullNumber);
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateTnsTest()
         {
             var item = new SipPeerTelephoneNumber
@@ -338,14 +338,14 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void MoveTnsTest()
         {
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "POST",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1/sippeers/10/movetns", Helper.AccountId),
-                EstimatedContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<SipPeerTelephoneNumbers>\r\n  <FullNumber>111</FullNumber>\r\n  <FullNumber>222</FullNumber>\r\n</SipPeerTelephoneNumbers>"
+                EstimatedContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?><SipPeerTelephoneNumbers>  <FullNumber>111</FullNumber>  <FullNumber>222</FullNumber></SipPeerTelephoneNumbers>"
             }))
             {
                 var client = Helper.CreateClient();
@@ -360,7 +360,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetOriginationSettingsTest()
         {
 
@@ -380,15 +380,15 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = SipPeer.GetOriginationSettings(siteId, sipPeerId).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.SipPeerOriginationSettings);
-                Assert.AreEqual("HTTP", r.SipPeerOriginationSettings.VoiceProtocol);
-                Assert.AreEqual("469ebbac-4459-4d98-bc19-a038960e787f", r.SipPeerOriginationSettings.HttpSettings.HttpVoiceV2AppId);
+                Assert.NotNull(r.SipPeerOriginationSettings);
+                Assert.Equal("HTTP", r.SipPeerOriginationSettings.VoiceProtocol);
+                Assert.Equal("469ebbac-4459-4d98-bc19-a038960e787f", r.SipPeerOriginationSettings.HttpSettings.HttpVoiceV2AppId);
 
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void SetOriginationSettingsTest()
         {
 
@@ -418,15 +418,15 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = SipPeer.SetOriginationSettings(siteId, sipPeerId, SipPeerOriginationSettings).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.SipPeerOriginationSettings);
-                Assert.AreEqual("HTTP", r.SipPeerOriginationSettings.VoiceProtocol);
-                Assert.AreEqual("469ebbac-4459-4d98-bc19-a038960e787f", r.SipPeerOriginationSettings.HttpSettings.HttpVoiceV2AppId);
+                Assert.NotNull(r.SipPeerOriginationSettings);
+                Assert.Equal("HTTP", r.SipPeerOriginationSettings.VoiceProtocol);
+                Assert.Equal("469ebbac-4459-4d98-bc19-a038960e787f", r.SipPeerOriginationSettings.HttpSettings.HttpVoiceV2AppId);
 
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateOriginationSettingsTest()
         {
             string siteId = "1";
@@ -458,7 +458,7 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
 
-        [TestMethod]
+        [Fact]
         public void GetTerminationSettingsTest()
         {
 
@@ -478,15 +478,15 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = SipPeer.GetTerminationSetting(siteId, sipPeerId).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.SipPeerTerminationSettings);
-                Assert.AreEqual("HTTP", r.SipPeerTerminationSettings.VoiceProtocol);
-                Assert.AreEqual("469ebbac-4459-4d98-bc19-a038960e787f", r.SipPeerTerminationSettings.HttpSettings.HttpVoiceV2AppId);
+                Assert.NotNull(r.SipPeerTerminationSettings);
+                Assert.Equal("HTTP", r.SipPeerTerminationSettings.VoiceProtocol);
+                Assert.Equal("469ebbac-4459-4d98-bc19-a038960e787f", r.SipPeerTerminationSettings.HttpSettings.HttpVoiceV2AppId);
 
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void SetTerminationSettingsTest()
         {
 
@@ -516,15 +516,15 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = SipPeer.SetTerminationSettings(client, siteId, sipPeerId, SipPeerTerminationSettings).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.SipPeerTerminationSettings);
-                Assert.AreEqual("HTTP", r.SipPeerTerminationSettings.VoiceProtocol);
-                Assert.AreEqual("469ebbac-4459-4d98-bc19-a038960e787f", r.SipPeerTerminationSettings.HttpSettings.HttpVoiceV2AppId);
+                Assert.NotNull(r.SipPeerTerminationSettings);
+                Assert.Equal("HTTP", r.SipPeerTerminationSettings.VoiceProtocol);
+                Assert.Equal("469ebbac-4459-4d98-bc19-a038960e787f", r.SipPeerTerminationSettings.HttpSettings.HttpVoiceV2AppId);
 
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateTerminationSettingsTest()
         {
             string siteId = "1";
@@ -555,7 +555,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSMSSettingTest()
         {
             string siteId = "1";
@@ -574,28 +574,28 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = SipPeer.GetSMSSetting(siteId, sipPeerId).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.SipPeerSmsFeature);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
-                Assert.AreEqual("DefaultOff", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pLongCode);
-                Assert.AreEqual("SomeMessageClass", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pMessageClass);
-                Assert.AreEqual("SomeCampaignId", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pCampaignId);
-                Assert.AreEqual("SMPP", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Protocol);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
+                Assert.NotNull(r.SipPeerSmsFeature);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
+                Assert.Equal("DefaultOff", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pLongCode);
+                Assert.Equal("SomeMessageClass", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pMessageClass);
+                Assert.Equal("SomeCampaignId", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pCampaignId);
+                Assert.Equal("SMPP", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Protocol);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
 
-                Assert.AreEqual(2, r.SipPeerSmsFeature.SmppHosts.Length);
-                Assert.AreEqual("RECEIVER_ONLY", r.SipPeerSmsFeature.SmppHosts[0].ConnectionType);
-                Assert.AreEqual("54.10.88.146", r.SipPeerSmsFeature.SmppHosts[0].HostName);
-                Assert.AreEqual(0, r.SipPeerSmsFeature.SmppHosts[0].Priority);
+                Assert.Equal(2, r.SipPeerSmsFeature.SmppHosts.Length);
+                Assert.Equal("RECEIVER_ONLY", r.SipPeerSmsFeature.SmppHosts[0].ConnectionType);
+                Assert.Equal("54.10.88.146", r.SipPeerSmsFeature.SmppHosts[0].HostName);
+                Assert.Equal(0, r.SipPeerSmsFeature.SmppHosts[0].Priority);
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void SetSMSSettingTest()
         {
             string siteId = "1";
@@ -630,28 +630,28 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = SipPeer.CreateSMSSettings(siteId, sipPeerId, SipPeerSmsFeature).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.SipPeerSmsFeature);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
-                Assert.AreEqual("DefaultOff", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pLongCode);
-                Assert.AreEqual("SomeMessageClass", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pMessageClass);
-                Assert.AreEqual("SomeCampaignId", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pCampaignId);
-                Assert.AreEqual("SMPP", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Protocol);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
+                Assert.NotNull(r.SipPeerSmsFeature);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
+                Assert.Equal("DefaultOff", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pLongCode);
+                Assert.Equal("SomeMessageClass", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pMessageClass);
+                Assert.Equal("SomeCampaignId", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pCampaignId);
+                Assert.Equal("SMPP", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Protocol);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
 
-                Assert.AreEqual(2, r.SipPeerSmsFeature.SmppHosts.Length);
-                Assert.AreEqual("RECEIVER_ONLY", r.SipPeerSmsFeature.SmppHosts[0].ConnectionType);
-                Assert.AreEqual("54.10.88.146", r.SipPeerSmsFeature.SmppHosts[0].HostName);
-                Assert.AreEqual(0, r.SipPeerSmsFeature.SmppHosts[0].Priority);
+                Assert.Equal(2, r.SipPeerSmsFeature.SmppHosts.Length);
+                Assert.Equal("RECEIVER_ONLY", r.SipPeerSmsFeature.SmppHosts[0].ConnectionType);
+                Assert.Equal("54.10.88.146", r.SipPeerSmsFeature.SmppHosts[0].HostName);
+                Assert.Equal(0, r.SipPeerSmsFeature.SmppHosts[0].Priority);
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateSMSSettingTest()
         {
             string siteId = "1";
@@ -686,28 +686,28 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = SipPeer.UpdateSMSSettings(siteId, sipPeerId, SipPeerSmsFeature).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.SipPeerSmsFeature);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
-                Assert.AreEqual("DefaultOff", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pLongCode);
-                Assert.AreEqual("SomeMessageClass", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pMessageClass);
-                Assert.AreEqual("SomeCampaignId", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pCampaignId);
-                Assert.AreEqual("SMPP", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Protocol);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
-                Assert.AreEqual(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
+                Assert.NotNull(r.SipPeerSmsFeature);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
+                Assert.Equal("DefaultOff", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pLongCode);
+                Assert.Equal("SomeMessageClass", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pMessageClass);
+                Assert.Equal("SomeCampaignId", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pCampaignId);
+                Assert.Equal("SMPP", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Protocol);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
+                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
 
-                Assert.AreEqual(2, r.SipPeerSmsFeature.SmppHosts.Length);
-                Assert.AreEqual("RECEIVER_ONLY", r.SipPeerSmsFeature.SmppHosts[0].ConnectionType);
-                Assert.AreEqual("54.10.88.146", r.SipPeerSmsFeature.SmppHosts[0].HostName);
-                Assert.AreEqual(0, r.SipPeerSmsFeature.SmppHosts[0].Priority);
+                Assert.Equal(2, r.SipPeerSmsFeature.SmppHosts.Length);
+                Assert.Equal("RECEIVER_ONLY", r.SipPeerSmsFeature.SmppHosts[0].ConnectionType);
+                Assert.Equal("54.10.88.146", r.SipPeerSmsFeature.SmppHosts[0].HostName);
+                Assert.Equal(0, r.SipPeerSmsFeature.SmppHosts[0].Priority);
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void DeleteSMSSettingTest()
         {
             string siteId = "1";
@@ -729,7 +729,7 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
 
-        [TestMethod]
+        [Fact]
         public void GetMMSSettingTest()
         {
             string siteId = "1";
@@ -748,20 +748,20 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = SipPeer.GetMMSSetting(siteId, sipPeerId).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.MmsFeature);
-                Assert.AreEqual("OFF", r.MmsFeature.Protocols.MM4.Tls);
-                Assert.AreEqual(1, r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts.Length);
-                Assert.AreEqual("206.107.248.58", r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts[0].HostName);
+                Assert.NotNull(r.MmsFeature);
+                Assert.Equal("OFF", r.MmsFeature.Protocols.MM4.Tls);
+                Assert.Equal(1, r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts.Length);
+                Assert.Equal("206.107.248.58", r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts[0].HostName);
 
-                Assert.AreEqual(2, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts.Length);
-                Assert.AreEqual("30.239.72.55", r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].HostName);
-                Assert.AreEqual(8726, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].Port);
-                Assert.AreEqual(0, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].Priority);
+                Assert.Equal(2, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts.Length);
+                Assert.Equal("30.239.72.55", r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].HostName);
+                Assert.Equal(8726, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].Port);
+                Assert.Equal(0, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].Priority);
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void SetMMSSettingTest()
         {
             string siteId = "1";
@@ -792,20 +792,20 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = SipPeer.CreateMMSSettings(siteId, sipPeerId, MmsFeature).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.MmsFeature);
-                Assert.AreEqual("OFF", r.MmsFeature.Protocols.MM4.Tls);
-                Assert.AreEqual(1, r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts.Length);
-                Assert.AreEqual("206.107.248.58", r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts[0].HostName);
+                Assert.NotNull(r.MmsFeature);
+                Assert.Equal("OFF", r.MmsFeature.Protocols.MM4.Tls);
+                Assert.Equal(1, r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts.Length);
+                Assert.Equal("206.107.248.58", r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts[0].HostName);
 
-                Assert.AreEqual(2, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts.Length);
-                Assert.AreEqual("30.239.72.55", r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].HostName);
-                Assert.AreEqual(8726, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].Port);
-                Assert.AreEqual(0, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].Priority);
+                Assert.Equal(2, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts.Length);
+                Assert.Equal("30.239.72.55", r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].HostName);
+                Assert.Equal(8726, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].Port);
+                Assert.Equal(0, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts[0].Priority);
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateMMSSettingTest()
         {
             string siteId = "1";
@@ -836,12 +836,12 @@ namespace Bandwidth.Iris.Tests.Models
                 SipPeer.UpdateMMSSettings(siteId, sipPeerId, MmsFeature).Wait();
                 if (server.Error != null) throw server.Error;
 
-              
+
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void DeleteMMSSettingTest()
         {
             string siteId = "1";
@@ -863,7 +863,7 @@ namespace Bandwidth.Iris.Tests.Models
         }
 
 
-        [TestMethod]
+        [Fact]
         public void GetApplicationSettingTest()
         {
             string siteId = "1";
@@ -882,14 +882,14 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = SipPeer.GetApplicationSetting(siteId, sipPeerId).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(r.ApplicationsSettings);
-                Assert.AreEqual("4a4ca6c1-156b-4fca-84e9-34e35e2afc32", r.ApplicationsSettings.HttpMessagingV2AppId);
-                
+                Assert.NotNull(r.ApplicationsSettings);
+                Assert.Equal("4a4ca6c1-156b-4fca-84e9-34e35e2afc32", r.ApplicationsSettings.HttpMessagingV2AppId);
+
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateApplicationSettingTest()
         {
             string siteId = "1";
@@ -916,7 +916,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void RemoveApplicationSettingsTest()
         {
             string siteId = "1";

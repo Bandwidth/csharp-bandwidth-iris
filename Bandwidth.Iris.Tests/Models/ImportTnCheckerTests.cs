@@ -2,14 +2,14 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+    
     public class ImportTnCheckerTests
     {
-        [TestMethod]
+        [Fact]
         public void TestCreate()
         {
 
@@ -35,12 +35,12 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = ImportTnChecker.Create(client, order).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.AreEqual(result.ImportTnCheckerPayload.TelephoneNumbers.Length, 1);
-                Assert.AreEqual(result.ImportTnCheckerPayload.ImportTnErrors.Length, 1);
+                Assert.Equal(result.ImportTnCheckerPayload.TelephoneNumbers.Length, 1);
+                Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors.Length, 1);
 
-                Assert.AreEqual(result.ImportTnCheckerPayload.ImportTnErrors[0].Code, 19006);
-                Assert.AreEqual(result.ImportTnCheckerPayload.ImportTnErrors[0].Description, "Bandwidth numbers cannot be imported by this account at this time.");
-                Assert.AreEqual(result.ImportTnCheckerPayload.ImportTnErrors[0].TelephoneNumbers.Length, 2);
+                Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors[0].Code, 19006);
+                Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors[0].Description, "Bandwidth numbers cannot be imported by this account at this time.");
+                Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors[0].TelephoneNumbers.Length, 2);
 
             }
         }

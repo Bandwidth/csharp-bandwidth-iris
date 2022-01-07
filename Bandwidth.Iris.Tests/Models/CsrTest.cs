@@ -2,14 +2,14 @@
 using System.Net.Http;
 using System.Text;
 using Bandwidth.Iris.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    [TestClass]
+    
     public class CsrTest
     {
-        [TestMethod]
+        [Fact]
         public void TestCreate()
         {
             var csr = new Csr
@@ -28,38 +28,38 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = Csr.Create(client, csr).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.AreEqual(result.CustomerOrderId, "TEST BWDB-6506");
-                Assert.AreEqual(result.LastModifiedBy, "systemUser");
-                Assert.AreEqual(result.OrderCreateDate, "2020-01-13T21:14:35Z");
-                Assert.AreEqual(result.AccountId, "14");
-                Assert.AreEqual(result.OrderId, "5c3b8240-52b5-45a5-8d7d-42a71ebcd1ba");
-                Assert.AreEqual(result.LastModifiedDate, "2020-01-13T16:51:21.920Z");
-                Assert.AreEqual(result.Status, "COMPLETE");
-                Assert.AreEqual(result.AccountNumber, "987654321");
-                Assert.AreEqual(result.AccountTelephoneNumber, "9196194444");
-                Assert.AreEqual(result.EndUserName, "bandwidthGuy");
-                Assert.AreEqual(result.AuthorizingUserName, "importantAuthGuy");
-                Assert.AreEqual(result.CustomerCode, "123");
-                Assert.AreEqual(result.EndUserPIN, "12345");
-                Assert.AreEqual(result.EndUserPassword, "enduserpassword123");
-                Assert.AreEqual(result.AddressLine1, "900 Main Campus Dr");
-                Assert.AreEqual(result.City, "Raleigh");
-                Assert.AreEqual(result.State, "NC");
-                Assert.AreEqual(result.ZIPCode, "27612");
-                Assert.AreEqual(result.TypeOfService, "residential");
-                Assert.AreEqual(result.CsrData.AccountNumber, "123456789");
-                Assert.AreEqual(result.CsrData.CustomerName, "JOHN SMITH");
-                Assert.AreEqual(result.CsrData.WorkingTelephoneNumber, "9196191156");
-                Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount.Length, 1);
-                Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount[0], "9196191156");
+                Assert.Equal(result.CustomerOrderId, "TEST BWDB-6506");
+                Assert.Equal(result.LastModifiedBy, "systemUser");
+                Assert.Equal(result.OrderCreateDate, "2020-01-13T21:14:35Z");
+                Assert.Equal(result.AccountId, "14");
+                Assert.Equal(result.OrderId, "5c3b8240-52b5-45a5-8d7d-42a71ebcd1ba");
+                Assert.Equal(result.LastModifiedDate, "2020-01-13T16:51:21.920Z");
+                Assert.Equal(result.Status, "COMPLETE");
+                Assert.Equal(result.AccountNumber, "987654321");
+                Assert.Equal(result.AccountTelephoneNumber, "9196194444");
+                Assert.Equal(result.EndUserName, "bandwidthGuy");
+                Assert.Equal(result.AuthorizingUserName, "importantAuthGuy");
+                Assert.Equal(result.CustomerCode, "123");
+                Assert.Equal(result.EndUserPIN, "12345");
+                Assert.Equal(result.EndUserPassword, "enduserpassword123");
+                Assert.Equal(result.AddressLine1, "900 Main Campus Dr");
+                Assert.Equal(result.City, "Raleigh");
+                Assert.Equal(result.State, "NC");
+                Assert.Equal(result.ZIPCode, "27612");
+                Assert.Equal(result.TypeOfService, "residential");
+                Assert.Equal(result.CsrData.AccountNumber, "123456789");
+                Assert.Equal(result.CsrData.CustomerName, "JOHN SMITH");
+                Assert.Equal(result.CsrData.WorkingTelephoneNumber, "9196191156");
+                Assert.Equal(result.CsrData.WorkingTelephoneNumbersOnAccount.Length, 1);
+                Assert.Equal(result.CsrData.WorkingTelephoneNumbersOnAccount[0], "9196191156");
 
-                Assert.IsNotNull(result.CsrData.ServiceAddress);
+                Assert.NotNull(result.CsrData.ServiceAddress);
 
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGet()
         {
             var orderId = "123";
@@ -75,37 +75,37 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = Csr.Get(client, orderId).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.AreEqual(result.CustomerOrderId, "TEST BWDB-6506");
-                Assert.AreEqual(result.LastModifiedBy, "systemUser");
-                Assert.AreEqual(result.OrderCreateDate, "2020-01-13T21:14:35Z");
-                Assert.AreEqual(result.AccountId, "14");
-                Assert.AreEqual(result.OrderId, "5c3b8240-52b5-45a5-8d7d-42a71ebcd1ba");
-                Assert.AreEqual(result.LastModifiedDate, "2020-01-13T16:51:21.920Z");
-                Assert.AreEqual(result.Status, "COMPLETE");
-                Assert.AreEqual(result.AccountNumber, "987654321");
-                Assert.AreEqual(result.AccountTelephoneNumber, "9196194444");
-                Assert.AreEqual(result.EndUserName, "bandwidthGuy");
-                Assert.AreEqual(result.AuthorizingUserName, "importantAuthGuy");
-                Assert.AreEqual(result.CustomerCode, "123");
-                Assert.AreEqual(result.EndUserPIN, "12345");
-                Assert.AreEqual(result.EndUserPassword, "enduserpassword123");
-                Assert.AreEqual(result.AddressLine1, "900 Main Campus Dr");
-                Assert.AreEqual(result.City, "Raleigh");
-                Assert.AreEqual(result.State, "NC");
-                Assert.AreEqual(result.ZIPCode, "27612");
-                Assert.AreEqual(result.TypeOfService, "residential");
-                Assert.AreEqual(result.CsrData.AccountNumber, "123456789");
-                Assert.AreEqual(result.CsrData.CustomerName, "JOHN SMITH");
-                Assert.AreEqual(result.CsrData.WorkingTelephoneNumber, "9196191156");
-                Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount.Length, 1);
-                Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount[0], "9196191156");
+                Assert.Equal(result.CustomerOrderId, "TEST BWDB-6506");
+                Assert.Equal(result.LastModifiedBy, "systemUser");
+                Assert.Equal(result.OrderCreateDate, "2020-01-13T21:14:35Z");
+                Assert.Equal(result.AccountId, "14");
+                Assert.Equal(result.OrderId, "5c3b8240-52b5-45a5-8d7d-42a71ebcd1ba");
+                Assert.Equal(result.LastModifiedDate, "2020-01-13T16:51:21.920Z");
+                Assert.Equal(result.Status, "COMPLETE");
+                Assert.Equal(result.AccountNumber, "987654321");
+                Assert.Equal(result.AccountTelephoneNumber, "9196194444");
+                Assert.Equal(result.EndUserName, "bandwidthGuy");
+                Assert.Equal(result.AuthorizingUserName, "importantAuthGuy");
+                Assert.Equal(result.CustomerCode, "123");
+                Assert.Equal(result.EndUserPIN, "12345");
+                Assert.Equal(result.EndUserPassword, "enduserpassword123");
+                Assert.Equal(result.AddressLine1, "900 Main Campus Dr");
+                Assert.Equal(result.City, "Raleigh");
+                Assert.Equal(result.State, "NC");
+                Assert.Equal(result.ZIPCode, "27612");
+                Assert.Equal(result.TypeOfService, "residential");
+                Assert.Equal(result.CsrData.AccountNumber, "123456789");
+                Assert.Equal(result.CsrData.CustomerName, "JOHN SMITH");
+                Assert.Equal(result.CsrData.WorkingTelephoneNumber, "9196191156");
+                Assert.Equal(result.CsrData.WorkingTelephoneNumbersOnAccount.Length, 1);
+                Assert.Equal(result.CsrData.WorkingTelephoneNumbersOnAccount[0], "9196191156");
 
-                Assert.IsNotNull(result.CsrData.ServiceAddress);
+                Assert.NotNull(result.CsrData.ServiceAddress);
 
             }
         }
     
-        [TestMethod]
+        [Fact]
         public void TestReplace()
         {
             var orderId = "123";
@@ -126,38 +126,38 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = Csr.Replace(client, orderId, csr).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.AreEqual(result.CustomerOrderId, "TEST BWDB-6506");
-                Assert.AreEqual(result.LastModifiedBy, "systemUser");
-                Assert.AreEqual(result.OrderCreateDate, "2020-01-13T21:14:35Z");
-                Assert.AreEqual(result.AccountId, "14");
-                Assert.AreEqual(result.OrderId, "5c3b8240-52b5-45a5-8d7d-42a71ebcd1ba");
-                Assert.AreEqual(result.LastModifiedDate, "2020-01-13T16:51:21.920Z");
-                Assert.AreEqual(result.Status, "COMPLETE");
-                Assert.AreEqual(result.AccountNumber, "987654321");
-                Assert.AreEqual(result.AccountTelephoneNumber, "9196194444");
-                Assert.AreEqual(result.EndUserName, "bandwidthGuy");
-                Assert.AreEqual(result.AuthorizingUserName, "importantAuthGuy");
-                Assert.AreEqual(result.CustomerCode, "123");
-                Assert.AreEqual(result.EndUserPIN, "12345");
-                Assert.AreEqual(result.EndUserPassword, "enduserpassword123");
-                Assert.AreEqual(result.AddressLine1, "900 Main Campus Dr");
-                Assert.AreEqual(result.City, "Raleigh");
-                Assert.AreEqual(result.State, "NC");
-                Assert.AreEqual(result.ZIPCode, "27612");
-                Assert.AreEqual(result.TypeOfService, "residential");
-                Assert.AreEqual(result.CsrData.AccountNumber, "123456789");
-                Assert.AreEqual(result.CsrData.CustomerName, "JOHN SMITH");
-                Assert.AreEqual(result.CsrData.WorkingTelephoneNumber, "9196191156");
-                Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount.Length, 1);
-                Assert.AreEqual(result.CsrData.WorkingTelephoneNumbersOnAccount[0], "9196191156");
+                Assert.Equal(result.CustomerOrderId, "TEST BWDB-6506");
+                Assert.Equal(result.LastModifiedBy, "systemUser");
+                Assert.Equal(result.OrderCreateDate, "2020-01-13T21:14:35Z");
+                Assert.Equal(result.AccountId, "14");
+                Assert.Equal(result.OrderId, "5c3b8240-52b5-45a5-8d7d-42a71ebcd1ba");
+                Assert.Equal(result.LastModifiedDate, "2020-01-13T16:51:21.920Z");
+                Assert.Equal(result.Status, "COMPLETE");
+                Assert.Equal(result.AccountNumber, "987654321");
+                Assert.Equal(result.AccountTelephoneNumber, "9196194444");
+                Assert.Equal(result.EndUserName, "bandwidthGuy");
+                Assert.Equal(result.AuthorizingUserName, "importantAuthGuy");
+                Assert.Equal(result.CustomerCode, "123");
+                Assert.Equal(result.EndUserPIN, "12345");
+                Assert.Equal(result.EndUserPassword, "enduserpassword123");
+                Assert.Equal(result.AddressLine1, "900 Main Campus Dr");
+                Assert.Equal(result.City, "Raleigh");
+                Assert.Equal(result.State, "NC");
+                Assert.Equal(result.ZIPCode, "27612");
+                Assert.Equal(result.TypeOfService, "residential");
+                Assert.Equal(result.CsrData.AccountNumber, "123456789");
+                Assert.Equal(result.CsrData.CustomerName, "JOHN SMITH");
+                Assert.Equal(result.CsrData.WorkingTelephoneNumber, "9196191156");
+                Assert.Equal(result.CsrData.WorkingTelephoneNumbersOnAccount.Length, 1);
+                Assert.Equal(result.CsrData.WorkingTelephoneNumbersOnAccount[0], "9196191156");
 
-                Assert.IsNotNull(result.CsrData.ServiceAddress);
+                Assert.NotNull(result.CsrData.ServiceAddress);
 
             }
         }
 
 
-        [TestMethod]
+        [Fact]
         public void TestListNotes()
         {
             var orderId = "123";
@@ -173,19 +173,19 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = Csr.ListNotes(client, orderId).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.IsNotNull(result.List);
+                Assert.NotNull(result.List);
 
-                Assert.AreEqual(result.List.Length, 2);
+                Assert.Equal(result.List.Length, 2);
 
-                Assert.AreEqual(result.List[0].Description, "This is a test note");
-                Assert.AreEqual(result.List[0].Id, "87037");
-                Assert.AreEqual(result.List[0].UserId, "jbm");
-                Assert.AreEqual(result.List[0].LastDateModifier, DateTime.Parse("2014-11-16T04:01:10.000"));
+                Assert.Equal(result.List[0].Description, "This is a test note");
+                Assert.Equal(result.List[0].Id, "87037");
+                Assert.Equal(result.List[0].UserId, "jbm");
+                Assert.Equal(result.List[0].LastDateModifier, DateTime.Parse("2014-11-16T04:01:10.000"));
 
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestCreateNote()
         {
             var orderId = "123";
@@ -208,7 +208,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUpdateNote()
         {
             var orderId = "123";
