@@ -141,7 +141,23 @@ namespace Bandwidth.Iris.Model
         public ZipSearchAndOrderType ZipSearchAndOrderType { get; set; }
         [XmlElement("LATASearchAndOrderType")]
         public LataSearchAndOrderType LataSearchAndOrderType { get; set; }
+        public LataSearchAndOrderType CombinedSearchAndOrderType { get; set; }
 
+    }
+
+    public class CombinedSearchAndOrderType
+    {
+        public int Quantity { get; set; }
+        public string AreaCode { get; set; }
+        public string State { get; set; }
+        public string City { get; set; }
+        public string NpaNxx { get; set; }
+        public string NpaNxxX { get; set; }
+        public string Lata { get; set; }
+        [XmlElement("EnableLCA")]
+        public bool EnableLca { get; set; }
+        public string Zip { get; set; }
+        public string RateCenter { get; set; }
     }
 
     public class LataSearchAndOrderType
