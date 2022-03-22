@@ -141,7 +141,7 @@ namespace Bandwidth.Iris.Model
         public ZipSearchAndOrderType ZipSearchAndOrderType { get; set; }
         [XmlElement("LATASearchAndOrderType")]
         public LataSearchAndOrderType LataSearchAndOrderType { get; set; }
-        public LataSearchAndOrderType CombinedSearchAndOrderType { get; set; }
+        public CombinedSearchAndOrderType CombinedSearchAndOrderType { get; set; }
 
     }
 
