@@ -19,12 +19,9 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 SiteId = "486",
                 SipPeerId = "500025",
-                TelephoneNumbers = new TelephoneNumbers
+                TelephoneNumbers = new string[]
                 {
-                    Numbers = new string[]
-                    {
-                        "3032281000"
-                    }
+                    "3032281000"
                 }
             };
 
@@ -39,7 +36,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = ImportTnChecker.Create(client, order).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.Equal(result.ImportTnCheckerPayload.TelephoneNumbers.Numbers.Length, 1);
+                Assert.Equal(result.ImportTnCheckerPayload.TelephoneNumbers.Length, 1);
                 Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors.Length, 1);
 
                 Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors[0].Code, 19006);
@@ -56,12 +53,9 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 SiteId = "486",
                 SipPeerId = "500025",
-                TelephoneNumbers = new TelephoneNumbers
+                TelephoneNumbers = new string[]
                 {
-                    Numbers = new string[]
-                    {
-                        "3032281000"
-                    }
+                    "3032281000"
                 }
             };
 

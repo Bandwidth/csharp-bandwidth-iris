@@ -26,8 +26,9 @@ namespace Bandwidth.Iris.Model
 
         public string SipPeerId { get; set; }
 
-        [XmlElement("TelephoneNumbers")]
-        public TelephoneNumbers TelephoneNumbers { get; set; }
+        [XmlArray("TelephoneNumbers")]
+        [XmlArrayItem("TelephoneNumber")]
+        public string[] TelephoneNumbers { get; set; }
 
         [XmlArray("ImportTnErrors")]
         [XmlArrayItem("ImportTnError")]
