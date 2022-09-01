@@ -17,16 +17,14 @@ namespace Bandwidth.Iris.Tests.Models
 
             var order = new ImportTnCheckerPayload
             {
-                //     TelephoneNumbers = new TelephoneNumber[]
-                //    {
-                //        new TelephoneNumber
-                //        {
-                //            FullNumber = "3032281000"
-                //        }
-                //    }
-                TelephoneNumbers = new string[]
+                SiteId = "486",
+                SipPeerId = "500025",
+                TelephoneNumbers = new TelephoneNumbers
                 {
-                    "3032281000"
+                    Numbers = new string[]
+                    {
+                        "3032281000"
+                    }
                 }
             };
 
@@ -41,7 +39,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = ImportTnChecker.Create(client, order).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.Equal(result.ImportTnCheckerPayload.TelephoneNumbers.Length, 1);
+                Assert.Equal(result.ImportTnCheckerPayload.TelephoneNumbers.Numbers.Length, 1);
                 Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors.Length, 1);
 
                 Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors[0].Code, 19006);
@@ -58,16 +56,12 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 SiteId = "486",
                 SipPeerId = "500025",
-                // TelephoneNumbers = new TelephoneNumber[]
-                // {
-                //     new TelephoneNumber
-                //     {
-                //         FullNumber = "3032281000"
-                //     }
-                // }
-                TelephoneNumbers = new string[]
+                TelephoneNumbers = new TelephoneNumbers
                 {
-                    "3032281000"
+                    Numbers = new string[]
+                    {
+                        "3032281000"
+                    }
                 }
             };
 
@@ -78,6 +72,8 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 xs.Serialize(writer, order);
                 xmlStringResult = writer.ToString();
+
+                Console.WriteLine(xmlStringResult);
                 Assert.Equal(TestXmlStrings.ImportTnCheckerSampleSerialization, xmlStringResult);
             }
         }
