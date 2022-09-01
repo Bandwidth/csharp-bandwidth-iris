@@ -195,5 +195,6 @@ FakesAssemblies/
 .tmproj
 nbproject
 Thumbs.db
+.vscode
 
 .vs

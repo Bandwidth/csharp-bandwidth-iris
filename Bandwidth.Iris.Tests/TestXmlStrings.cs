@@ -774,6 +774,8 @@
 
         public static string ImportTnCheckerResponse = $"<ImportTnCheckerResponse>{ImportTnCheckerPayload}</ImportTnCheckerResponse>";
 
+        public static string ImportTnCheckerSampleSerialization = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<ImportTnCheckerPayload xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n  <SiteId>486</SiteId>\n  <SipPeerId>500025</SipPeerId>\n  <TelephoneNumbers>\n    <TelephoneNumber>3032281000</TelephoneNumber>\n  </TelephoneNumbers>\n</ImportTnCheckerPayload>";
+
         public static string RemoveImportedOrder = @"<RemoveImportedTnOrder>
                                                         <CustomerOrderId>SJM000001</CustomerOrderId>
                                                         <OrderCreateDate>2018-01-20T02:59:54.000Z</OrderCreateDate>

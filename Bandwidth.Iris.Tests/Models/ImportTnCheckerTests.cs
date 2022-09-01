@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Net.Http;
 using System.Text;
+using System.Xml.Serialization;
+using System.IO;
 using Bandwidth.Iris.Model;
 using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
 {
-    
+
     public class ImportTnCheckerTests
     {
         [Fact]
@@ -15,13 +17,17 @@ namespace Bandwidth.Iris.Tests.Models
 
             var order = new ImportTnCheckerPayload
             {
-                TelephoneNumbers = new TelephoneNumber[]
-               {
-                   new TelephoneNumber
-                   {
-                       FullNumber = "3032281000"
-                   }
-               }
+                //     TelephoneNumbers = new TelephoneNumber[]
+                //    {
+                //        new TelephoneNumber
+                //        {
+                //            FullNumber = "3032281000"
+                //        }
+                //    }
+                TelephoneNumbers = new string[]
+                {
+                    "3032281000"
+                }
             };
 
             using (var server = new HttpServer(new RequestHandler
@@ -42,6 +48,37 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors[0].Description, "Bandwidth numbers cannot be imported by this account at this time.");
                 Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors[0].TelephoneNumbers.Length, 2);
 
+            }
+        }
+
+        [Fact]
+        public void TestSerialize()
+        {
+            var order = new ImportTnCheckerPayload
+            {
+                SiteId = "486",
+                SipPeerId = "500025",
+                // TelephoneNumbers = new TelephoneNumber[]
+                // {
+                //     new TelephoneNumber
+                //     {
+                //         FullNumber = "3032281000"
+                //     }
+                // }
+                TelephoneNumbers = new string[]
+                {
+                    "3032281000"
+                }
+            };
+
+            XmlSerializer xs = new XmlSerializer(typeof(ImportTnCheckerPayload));
+
+            string xmlStringResult = null;
+            using (StringWriter writer = new StringWriter())
+            {
+                xs.Serialize(writer, order);
+                xmlStringResult = writer.ToString();
+                Assert.Equal(TestXmlStrings.ImportTnCheckerSampleSerialization, xmlStringResult);
             }
         }
     }

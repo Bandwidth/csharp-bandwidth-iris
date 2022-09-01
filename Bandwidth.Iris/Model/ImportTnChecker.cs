@@ -22,7 +22,14 @@ namespace Bandwidth.Iris.Model
 
     public class ImportTnCheckerPayload
     {
-        public TelephoneNumber[] TelephoneNumbers { get; set; }
+        public string SiteId { get; set; }
+
+        public string SipPeerId { get; set; }
+
+        [XmlArray("TelephoneNumbers")]
+        [XmlArrayItem("TelephoneNumber")]
+        public string[] TelephoneNumbers { get; set; }
+
         [XmlArray("ImportTnErrors")]
         [XmlArrayItem("ImportTnError")]
         public ImportTnError[] ImportTnErrors { get; set; }
