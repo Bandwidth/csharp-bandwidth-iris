@@ -67,7 +67,6 @@ namespace Bandwidth.Iris.Tests.Models
                 xs.Serialize(writer, order);
                 xmlStringResult = writer.ToString();
 
-                Console.WriteLine(xmlStringResult);
                 Assert.Equal(TestXmlStrings.ImportTnCheckerSampleSerialization, xmlStringResult);
             }
         }
