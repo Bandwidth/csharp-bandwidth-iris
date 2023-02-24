@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 using Bandwidth.Iris.Model;
+using System.Text.RegularExpressions;
 using Xunit;
 
 namespace Bandwidth.Iris.Tests.Models
@@ -67,7 +68,10 @@ namespace Bandwidth.Iris.Tests.Models
                 xs.Serialize(writer, order);
                 xmlStringResult = writer.ToString().Replace("\r", "").Replace("\n", "");
 
-                Assert.Equal(TestXmlStrings.ImportTnCheckerSampleSerialization, xmlStringResult);
+
+                var strippedContent = Regex.Replace(xmlStringResult, ">[ \r\n]+<", "><");
+                var strippedEstimated = Regex.Replace(TestXmlStrings.ImportTnCheckerSampleSerialization, ">[ \r\n]+<", "><");
+                Assert.Equal(strippedEstimated, strippedContent);
             }
         }
     }
