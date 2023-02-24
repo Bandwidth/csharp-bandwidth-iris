@@ -71,7 +71,8 @@ namespace Bandwidth.Iris.Tests.Models
                     {"status", "9199918388" }
                 }).Result;
                     throw new Exception("Should have found error");
-                } catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Assert.NotNull(ex);
                     if (ex.InnerException is BandwidthIrisException)

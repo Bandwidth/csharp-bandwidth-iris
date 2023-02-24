@@ -5,11 +5,12 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using Xunit;
 
 namespace Bandwidth.Iris.Tests
 {
-    public sealed class HttpServer: IDisposable
+    public sealed class HttpServer : IDisposable
     {
         private readonly RequestHandler[] _handlers;
         private readonly HttpListener _listener;
@@ -43,7 +44,7 @@ namespace Bandwidth.Iris.Tests
 
         private async void HandlerRequest(Task<HttpListenerContext> obj)
         {
-            if(obj.Status == TaskStatus.Faulted) return;
+            if (obj.Status == TaskStatus.Faulted) return;
             var context = obj.Result;
             var handler = GetRequestHandler();
             try
@@ -63,8 +64,9 @@ namespace Bandwidth.Iris.Tests
                 {
                     using (var reader = new StreamReader(request.InputStream, Encoding.UTF8))
                     {
-                        var content = reader.ReadToEnd();
-                        Assert.Equal(handler.EstimatedContent.Replace(Environment.NewLine, ""), content.Replace(Environment.NewLine, "")); 
+                        var strippedContent = Regex.Replace(reader.ReadToEnd(), ">[ \r\n]+<", "><");
+                        var strippedEstimated = Regex.Replace(handler.EstimatedContent, ">[ \r\n]+<", "><");
+                        Assert.Equal(strippedEstimated, strippedContent);
                     }
                 }
                 if (handler.EstimatedHeaders != null)
@@ -96,12 +98,12 @@ namespace Bandwidth.Iris.Tests
 
                 response.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 context.Response.Close();
                 _errors.Add(ex);
             }
-            RequestCount ++;
+            RequestCount++;
         }
 
         private RequestHandler GetRequestHandler()
