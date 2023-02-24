@@ -66,8 +66,7 @@ namespace Bandwidth.Iris.Tests.Models
             using (StringWriter writer = new StringWriter())
             {
                 xs.Serialize(writer, order);
-                xmlStringResult = writer.ToString().Replace("\r", "").Replace("\n", "");
-
+                xmlStringResult = writer.ToString();
 
                 var strippedContent = Regex.Replace(xmlStringResult, ">[ \r\n]+<", "><");
                 var strippedEstimated = Regex.Replace(TestXmlStrings.ImportTnCheckerSampleSerialization, ">[ \r\n]+<", "><");

@@ -201,29 +201,30 @@ namespace Bandwidth.Iris.Tests.Models
                 ContentToSend = new StringContent(TestXmlStrings.createTnOptionsResponse, Encoding.UTF8, "application/xml"),
                 EstimatedContent = @"<?xml version=""1.0"" encoding=""utf-8""?>
 <TnOptionOrder xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-<CustomerOrderId>customerOrderId</CustomerOrderId>
-<TnOptionGroups><TnOptionGroup>
-<PortOutPasscode>a1b2c3</PortOutPasscode>
-<TelephoneNumbers>
-<TelephoneNumber>2018551020</TelephoneNumber>
-<TelephoneNumber>2018551025</TelephoneNumber>
-</TelephoneNumbers>
-</TnOptionGroup>
-<TnOptionGroup>
-<Sms>on</Sms>
-<TelephoneNumbers>
-<TelephoneNumber>2018551020</TelephoneNumber>
-<TelephoneNumber>2018551025</TelephoneNumber>
-</TelephoneNumbers>
-</TnOptionGroup>
-<TnOptionGroup>
-<CallForward>6042661720</CallForward>
-<TelephoneNumbers>
-<TelephoneNumber>2018551020</TelephoneNumber>
-<TelephoneNumber>2018551025</TelephoneNumber>
-</TelephoneNumbers>
-</TnOptionGroup>
-</TnOptionGroups>
+  <CustomerOrderId>customerOrderId</CustomerOrderId>
+  <TnOptionGroups>
+    <TnOptionGroup>
+      <PortOutPasscode>a1b2c3</PortOutPasscode>
+      <TelephoneNumbers>
+        <TelephoneNumber>2018551020</TelephoneNumber>
+        <TelephoneNumber>2018551025</TelephoneNumber>
+      </TelephoneNumbers>
+    </TnOptionGroup>
+    <TnOptionGroup>
+      <Sms>on</Sms>
+      <TelephoneNumbers>
+        <TelephoneNumber>2018551020</TelephoneNumber>
+        <TelephoneNumber>2018551025</TelephoneNumber>
+      </TelephoneNumbers>
+    </TnOptionGroup>
+    <TnOptionGroup>
+      <CallForward>6042661720</CallForward>
+      <TelephoneNumbers>
+        <TelephoneNumber>2018551020</TelephoneNumber>
+        <TelephoneNumber>2018551025</TelephoneNumber>
+      </TelephoneNumbers>
+    </TnOptionGroup>
+  </TnOptionGroups>
 </TnOptionOrder>"
             }))
             {
