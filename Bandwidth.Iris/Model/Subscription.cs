@@ -85,7 +85,7 @@ namespace Bandwidth.Iris.Model
         [XmlElement("URL")]
         public string Url { get; set; }
         public string User { get; set; }
-        public int Expiry { get; set; }
+        public Int64 Expiry { get; set; }
     }
 
     public class EmailSubscription
