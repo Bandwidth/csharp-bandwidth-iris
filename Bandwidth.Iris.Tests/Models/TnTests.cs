@@ -37,6 +37,26 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
+        public void GetTestWithNullDateTime()
+        {
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "GET",
+                EstimatedPathAndQuery = string.Format("/v1.0/tns/1234", Helper.AccountId),
+                ContentToSend = new StringContent(TestXmlStrings.TnResponseWithNullDates, Encoding.UTF8, "application/xml")
+            }))
+            {
+                var client = Helper.CreateClient();
+                var result = Tn.Get(client, "1234").Result;
+                if (server.Error != null) throw server.Error;
+                Assert.Equal("1234", result.TelephoneNumber);
+                Assert.Equal("Inservice", result.Status);
+                Assert.Equal("5f3a4dab-aac7-4b0a-8ee4-1b6a67ae04be", result.OrderId);
+                Assert.Equal("NEW_NUMBER_ORDER", result.OrderType);
+                Assert.Null(result.LastModifiedDate);
+            }
+        }
+
         [Fact]
         public void ListTest()
         {
@@ -48,7 +68,7 @@ namespace Bandwidth.Iris.Tests.Models
             }))
             {
                 var client = Helper.CreateClient();
-                var result = Tn.List(client, new Dictionary<string, object>{{"npa", "818"}}).Result;
+                var result = Tn.List(client, new Dictionary<string, object> { { "npa", "818" } }).Result;
                 if (server.Error != null) throw server.Error;
                 Assert.Equal(5, result.TelephoneNumberCount);
 
@@ -107,7 +127,7 @@ namespace Bandwidth.Iris.Tests.Models
             }))
             {
                 var client = Helper.CreateClient();
-                var tn = new Tn {TelephoneNumber = "1234", Client = client};
+                var tn = new Tn { TelephoneNumber = "1234", Client = client };
                 var result = tn.GetSites().Result;
                 if (server.Error != null) throw server.Error;
                 Assert.Equal("1435", result.Id);

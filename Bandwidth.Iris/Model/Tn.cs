@@ -24,7 +24,7 @@ namespace Bandwidth.Iris.Model
         {
             return await client.MakeGetRequest<TelephoneNumbersResponse>(TnsPath, query);
         }
-        
+
 #if !PCL
         public static Task<Tn> Get(string number)
         {
@@ -72,7 +72,7 @@ namespace Bandwidth.Iris.Model
             }
         }
 
-        
+
         public async Task<TelephoneNumberDetails> GetDetails()
         {
             return
@@ -89,17 +89,17 @@ namespace Bandwidth.Iris.Model
                 return xml.Descendants("Lata").First().Value;
             }
         }
-        
+
         public string TelephoneNumber { get; set; }
         public string Status { get; set; }
-        public DateTime LastModifiedDate { get; set; }
-        public DateTime OrderCreateDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
+        public DateTime? OrderCreateDate { get; set; }
         public string OrderId { get; set; }
         public string OrderType { get; set; }
         public string SiteId { get; set; }
         public string AccountId { get; set; }
 
-        
+
     }
 
     [XmlType("SipPeer")]
@@ -124,7 +124,7 @@ namespace Bandwidth.Iris.Model
 
     public class TelephoneNumberResponse
     {
-        public TelephoneNumberDetails TelephoneNumberDetails { get; set; } 
+        public TelephoneNumberDetails TelephoneNumberDetails { get; set; }
     }
 
     public class TelephoneNumberDetails
@@ -138,7 +138,7 @@ namespace Bandwidth.Iris.Model
         public string Tier { get; set; }
         public string VendorId { get; set; }
         public string VendorName { get; set; }
-        public DateTime LastModified { get; set; }
+        public DateTime? LastModified { get; set; }
         public string State { get; set; }
         public Features Features { get; set; }
     }
