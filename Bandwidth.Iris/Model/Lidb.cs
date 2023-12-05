@@ -66,7 +66,7 @@ namespace Bandwidth.Iris.Model
         
         public string CustomerOrderId { get; set; }
         
-        [XmlElement("orderId")]
+        [XmlElement("OrderId")]
         public string OrderId { get; set; }
 
         public DateTime OrderCreateDate { get; set; }

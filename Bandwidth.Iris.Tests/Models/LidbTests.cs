@@ -28,7 +28,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Lidb.Get(client, "1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal("255bda29-fc57-44e8-a6c2-59b45388c6d0", result.Id);
+                Assert.Equal("255bda29-fc57-44e8-a6c2-59b45388c6d0", result.OrderId);
             }
         }
 
@@ -45,7 +45,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Lidb.Get("1").Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal("255bda29-fc57-44e8-a6c2-59b45388c6d0", result.Id);
+                Assert.Equal("255bda29-fc57-44e8-a6c2-59b45388c6d0", result.OrderId);
             }
         }
 
