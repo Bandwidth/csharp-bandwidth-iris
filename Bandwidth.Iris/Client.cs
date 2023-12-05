@@ -66,7 +66,7 @@ namespace Bandwidth.Iris
         private HttpClient CreateHttpClient()
         {
             var url = new UriBuilder(_apiEndpoint) { Path = string.Format("/{0}/", _apiVersion) };
-            var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = true }) { BaseAddress = url.Uri };
+            var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { BaseAddress = url.Uri };
             client.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Basic",
                     Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", _userName, _password))));
