@@ -421,5 +421,27 @@ namespace Bandwidth.Iris.Tests.Models
 
             }
         }
+
+        [Fact]
+        public void TestImportTnOrderWithSubscriber()
+        {
+            var address = new Address
+            {
+                HouseNumber = "123"
+            };
+
+            var subscriber = new ImportTnOrderSubscriber
+            {
+                Name = "test",
+                ServiceAddress = address
+            };
+
+            var order = new ImportTnOrder
+            {
+                Subscriber = subscriber
+            };
+
+            Assert.Equal("test", order.Subscriber.Name);
+        }
     }
 }
