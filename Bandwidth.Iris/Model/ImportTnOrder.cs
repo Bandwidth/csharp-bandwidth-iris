@@ -17,7 +17,7 @@ namespace Bandwidth.Iris.Model
         public string LastModifiedDate { get; set; }
         public int SiteId { get; set; }
         public int SipPeerId { get; set; }
-        public Subscriber Subscriber { get; set; }
+        public ImportTnOrderSubscriber Subscriber { get; set; }
         public TelephoneNumber[] TelephoneNumbers { get; set; }
         public string LoaAuthorizingPerson { get; set; }
         public string ProcessingStatus { get; set; }
@@ -155,6 +155,12 @@ namespace Bandwidth.Iris.Model
 
     }
 
+    public class ImportTnOrderSubscriber
+    {
+        public string Name { get; set; }
+        public Address ServiceAddress { get; set; }
+    }
+
     public class fileUploadResponse
     {
         [XmlElement("filename")]
@@ -194,5 +200,3 @@ namespace Bandwidth.Iris.Model
 
 
 }
-
-
