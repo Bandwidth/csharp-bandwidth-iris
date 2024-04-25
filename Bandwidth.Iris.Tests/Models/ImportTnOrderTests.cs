@@ -442,6 +442,17 @@ namespace Bandwidth.Iris.Tests.Models
             };
 
             Assert.Equal("test", order.Subscriber.Name);
+
+            using (var server = new HttpServer(new RequestHandler
+            {
+                EstimatedMethod = "POST",
+                EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/importTnOrders",
+            }))
+            {
+                var client = Helper.CreateClient();
+                ImportTnOrder.Create(client, order).Wait();
+                if (server.Error != null) throw server.Error;
+            }
         }
     }
 }

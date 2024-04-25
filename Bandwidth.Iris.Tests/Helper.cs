@@ -36,8 +36,8 @@ namespace Bandwidth.Iris.Tests
         {
             using (var stream = await content.ReadAsStreamAsync())
             {
-                var serializer = new XmlSerializer(typeof (T));
-                return (T) serializer.Deserialize(stream);
+                var serializer = new XmlSerializer(typeof(T));
+                return (T)serializer.Deserialize(stream);
             }
         }
 
@@ -54,11 +54,11 @@ namespace Bandwidth.Iris.Tests
         public static void AssertObjects(object estimated, object value)
         {
             var type = estimated.GetType();
-            foreach(var property in type.GetProperties(BindingFlags.Instance | BindingFlags.Public))
+            foreach (var property in type.GetProperties(BindingFlags.Instance | BindingFlags.Public))
             {
                 var est = property.GetValue(estimated);
                 var val = property.GetValue(value);
-                if(est == null && val == null) continue;
+                if (est == null && val == null) continue;
                 var t = (val ?? est).GetType();
                 if (t.IsPrimitive || val is IComparable)
                 {
@@ -108,7 +108,7 @@ namespace Bandwidth.Iris.Tests
 
 
             using (var writer = new Utf8StringWriter())
-            using (var xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent = false, OmitXmlDeclaration = true}))
+            using (var xmlWriter = XmlWriter.Create(writer, new XmlWriterSettings { Indent = false, OmitXmlDeclaration = true }))
             {
                 serializer.Serialize(xmlWriter, data);
                 return writer.ToString();
