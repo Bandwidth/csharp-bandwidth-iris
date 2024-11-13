@@ -12,7 +12,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public LnpCheckerTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace Bandwidth.Iris.Tests.Models
                 "170",
                 "error thrown",
                 System.Net.HttpStatusCode.ExpectationFailed
-            ) ;
+            );
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "POST",
@@ -72,20 +72,21 @@ namespace Bandwidth.Iris.Tests.Models
                 EstimatedContent = Helper.ToXmlString(request),
                 ContentToSend = new StringContent("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><NumberPortabilityResponse><PortableNumbers><Tn>9192202164</Tn><Tn>9197891146</Tn></PortableNumbers><PortabilityErrors><Error><Code>7331</Code><Description>Rate Center Not Present in Bandwidth Dashboard</Description><TelephoneNumbers><Tn>5555555555</Tn></TelephoneNumbers></Error></PortabilityErrors><SupportedRateCenters><RateCenterGroup><RateCenter>DURHAM</RateCenter><City>DURHAM</City><State>NC</State><LATA>426</LATA><Tiers><Tier>0</Tier></Tiers><TnList><Tn>9192202164</Tn></TnList></RateCenterGroup><RateCenterGroup><RateCenter>RALEIGH</RateCenter><City>RALEIGH</City><State>NC</State><LATA>426</LATA><Tiers><Tier>0</Tier></Tiers><TnList><Tn>9197891146</Tn></TnList></RateCenterGroup></SupportedRateCenters><UnsupportedRateCenters/></NumberPortabilityResponse>", Encoding.UTF8, "application/xml")
 
-        }))
+            }))
             {
                 var client = Helper.CreateClient();
                 try
                 {
                     var result = LnpChecker.Check(client, new[] { "1111" }, true).Result;
-                } catch (BandwidthIrisException e )
+                }
+                catch (BandwidthIrisException e)
                 {
                     return;
                 }
                 catch (AggregateException e)
                 {
                     Exception innerEx = e;
-                    while(innerEx != null)
+                    while (innerEx != null)
                     {
                         string mesg = innerEx.Message;
                         innerEx = innerEx.InnerException;
@@ -93,7 +94,7 @@ namespace Bandwidth.Iris.Tests.Models
                     }
                     return;
                 }
-                 catch (Exception e)
+                catch (Exception e)
                 {
                     return;
                 }

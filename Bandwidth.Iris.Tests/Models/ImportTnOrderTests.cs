@@ -14,7 +14,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public ImportTnOrderTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]

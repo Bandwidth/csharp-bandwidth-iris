@@ -115,7 +115,7 @@ namespace Bandwidth.Iris.Tests
             }
         }
 
-        public static void SetEnvironmetVariables(string baseUrl = null)
+        public static void SetEnvironmentVariables(string baseUrl = null)
         {
             Environment.SetEnvironmentVariable(Client.BandwidthApiUserName, UserName);
             Environment.SetEnvironmentVariable(Client.BandwidthApiPassword, Password);

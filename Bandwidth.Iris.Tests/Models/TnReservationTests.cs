@@ -13,7 +13,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public TnReservationTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -23,7 +23,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 Id = "1",
                 AccountId = "111",
-                ReservedTn = new[]{"000"},
+                ReservedTn = new[] { "000" },
                 ReservationExpires = 0
             };
             using (var server = new HttpServer(new RequestHandler
@@ -97,7 +97,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 Id = "1",
                 AccountId = "111",
-                ReservedTn = new []{"000"},
+                ReservedTn = new[] { "000" },
                 ReservationExpires = 0
             };
             using (var server = new HttpServer(new RequestHandler
@@ -119,7 +119,7 @@ namespace Bandwidth.Iris.Tests.Models
             var item = new TnReservation
             {
                 AccountId = "111",
-                ReservedTn = new[]{"000"},
+                ReservedTn = new[] { "000" },
                 ReservationExpires = 0
             };
 
@@ -157,7 +157,7 @@ namespace Bandwidth.Iris.Tests.Models
             var item = new TnReservation
             {
                 AccountId = "111",
-                ReservedTn = new []{"000"},
+                ReservedTn = new[] { "000" },
                 ReservationExpires = 0
             };
 

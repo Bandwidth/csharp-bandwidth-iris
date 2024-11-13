@@ -16,7 +16,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public PortInTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -27,14 +27,14 @@ namespace Bandwidth.Iris.Tests.Models
                 BillingTelephoneNumber = "1111",
                 Subscriber = new Subscriber
                 {
-                   SubscriberType = "BUSINESS",
-                   BusinessName = "Company",
-                   ServiceAddress = new Address
-                   {
-                       City = "City",
-                       StateCode = "State",
-                       Country = "County"
-                   }
+                    SubscriberType = "BUSINESS",
+                    BusinessName = "Company",
+                    ServiceAddress = new Address
+                    {
+                        City = "City",
+                        StateCode = "State",
+                        Country = "County"
+                    }
                 },
                 SiteId = "1"
             };
@@ -145,11 +145,11 @@ namespace Bandwidth.Iris.Tests.Models
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/portins/1/loas", Helper.AccountId),
                 EstimatedContent = data,
                 EstimatedHeaders = new Dictionary<string, string> { { "Content-Type", "media/type" } },
-                ContentToSend = Helper.CreateXmlContent(new FileResult{FileName = "test"})
+                ContentToSend = Helper.CreateXmlContent(new FileResult { FileName = "test" })
             }))
             {
                 var client = Helper.CreateClient();
-                var portIn = new PortIn{Id = "1"};
+                var portIn = new PortIn { Id = "1" };
                 portIn.SetClient(client);
                 using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(data)))
                 {
@@ -280,7 +280,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var portIn = new PortIn { Id = "1" };
                 portIn.SetClient(client);
                 using (var r = portIn.GetFile("test", true).Result)
-                using(var reader = new StreamReader(r.Stream, Encoding.UTF8))
+                using (var reader = new StreamReader(r.Stream, Encoding.UTF8))
                 {
                     Assert.Equal("media/type", r.MediaType);
                     Assert.Equal(data, reader.ReadToEnd());
@@ -340,7 +340,8 @@ namespace Bandwidth.Iris.Tests.Models
             }))
             {
 
-                var fileMetadata = new FileMetadata {
+                var fileMetadata = new FileMetadata
+                {
                     DocumentType = "INVOICE",
                     DocumentName = "docName"
                 };
@@ -376,7 +377,7 @@ namespace Bandwidth.Iris.Tests.Models
             var data = new LnpOrderSupp
             {
                 RequestedFocDate = DateTime.Parse("2014-11-18T00:00:00.000Z"),
-                WirelessInfo = new []{new WirelessInfo
+                WirelessInfo = new[]{new WirelessInfo
                 {
                     AccountNumber = "77129766500001",
                     PinNumber = "0000"
@@ -430,7 +431,7 @@ namespace Bandwidth.Iris.Tests.Models
                 UserId = "customer",
                 Description = "Test"
             };
-            using (var server = new HttpServer(new []{
+            using (var server = new HttpServer(new[]{
                 new RequestHandler
                 {
                     EstimatedMethod = "POST",

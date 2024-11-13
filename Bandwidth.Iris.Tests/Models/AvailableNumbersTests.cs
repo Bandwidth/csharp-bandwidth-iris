@@ -12,7 +12,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public AvailableNumbersTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace Bandwidth.Iris.Tests.Models
                 ContentToSend = Helper.CreateXmlContent(new AvailableNumbersResult
                 {
                     ResultCount = 2,
-                    TelephoneNumberList = new[] { "1111", "2222"}
+                    TelephoneNumberList = new[] { "1111", "2222" }
                 })
             }))
             {

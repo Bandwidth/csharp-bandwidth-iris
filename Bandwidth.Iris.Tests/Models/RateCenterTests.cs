@@ -12,7 +12,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public CoveredRateCenterTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace Bandwidth.Iris.Tests.Models
                 ContentToSend = new StringContent(TestXmlStrings.RateCentersResponse, Encoding.UTF8, "application/xml")
             }))
             {
-                var result = RateCenter.List( new Dictionary<string, object>
+                var result = RateCenter.List(new Dictionary<string, object>
                 {
                     {"state", "NC"}
                 }).Result;

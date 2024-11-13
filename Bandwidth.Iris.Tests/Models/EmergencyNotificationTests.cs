@@ -13,7 +13,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public EmergencyNotificationTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -195,7 +195,7 @@ namespace Bandwidth.Iris.Tests.Models
                 if (server.Error != null) throw server.Error;
 
                 Assert.NotNull(result);
-                Assert.NotNull( result.Links);
+                Assert.NotNull(result.Links);
                 Assert.NotNull(result.EmergencyNotificationGroupOrders);
                 Assert.Equal(3, result.EmergencyNotificationGroupOrders.Length);
 

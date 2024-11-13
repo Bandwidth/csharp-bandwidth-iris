@@ -12,7 +12,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public DldaTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -22,7 +22,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/dldas/1", Helper.AccountId),
-                ContentToSend = new  StringContent(TestXmlStrings.Dlda, Encoding.UTF8, "application/xml")
+                ContentToSend = new StringContent(TestXmlStrings.Dlda, Encoding.UTF8, "application/xml")
             }))
             {
                 var client = Helper.CreateClient();
@@ -41,7 +41,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/dldas/1", Helper.AccountId),
-                ContentToSend = new  StringContent(TestXmlStrings.Dlda, Encoding.UTF8, "application/xml")
+                ContentToSend = new StringContent(TestXmlStrings.Dlda, Encoding.UTF8, "application/xml")
             }))
             {
                 var result = Dlda.Get("1").Result;
@@ -57,7 +57,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/dldas", Helper.AccountId),
-                ContentToSend = new  StringContent(TestXmlStrings.Dldas, Encoding.UTF8, "application/xml")
+                ContentToSend = new StringContent(TestXmlStrings.Dldas, Encoding.UTF8, "application/xml")
             }))
             {
                 var client = Helper.CreateClient();
@@ -73,7 +73,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/dldas", Helper.AccountId),
-                ContentToSend = new  StringContent(TestXmlStrings.Dldas, Encoding.UTF8, "application/xml")
+                ContentToSend = new StringContent(TestXmlStrings.Dldas, Encoding.UTF8, "application/xml")
             }))
             {
                 var result = Dlda.List().Result;
@@ -213,7 +213,7 @@ namespace Bandwidth.Iris.Tests.Models
             }))
             {
                 var client = Helper.CreateClient();
-                var i = new Dlda {Id = "1"};
+                var i = new Dlda { Id = "1" };
                 i.SetClient(client);
                 var result = i.GetHistory().Result;
                 if (server.Error != null) throw server.Error;

@@ -12,7 +12,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public DisconnectTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace Bandwidth.Iris.Tests.Models
                 {
                     TelephoneNumberList = new TelephoneNumberList
                     {
-                        TelephoneNumbers = new[] {"111", "222" }
+                        TelephoneNumbers = new[] { "111", "222" }
                     }
                 }
             };

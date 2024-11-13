@@ -19,7 +19,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public ApplicationTest()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
 
         }
 
@@ -55,7 +55,7 @@ namespace Bandwidth.Iris.Tests.Models
             var actual = Helper.ToXmlStringMinified(apresponse);
 
             //Linerize the XML
-            XDocument doc = XDocument.Parse( TestXmlStrings.multiApplicationProvisionResponse );
+            XDocument doc = XDocument.Parse(TestXmlStrings.multiApplicationProvisionResponse);
             var xmlExpected = doc.ToString(SaveOptions.DisableFormatting);
 
 
@@ -82,7 +82,7 @@ namespace Bandwidth.Iris.Tests.Models
             };
 
             actual = Helper.ToXmlStringMinified(apresponse);
-            xmlExpected = XDocument.Parse( TestXmlStrings.singleApplicationProvisionResponse ).ToString(SaveOptions.DisableFormatting);
+            xmlExpected = XDocument.Parse(TestXmlStrings.singleApplicationProvisionResponse).ToString(SaveOptions.DisableFormatting);
 
             Assert.Equal(xmlExpected, actual);
 
@@ -128,7 +128,7 @@ namespace Bandwidth.Iris.Tests.Models
         public void TestListApplications()
         {
 
-            string strResponse = XDocument.Parse(TestXmlStrings.multiApplicationProvisionResponse ).ToString(SaveOptions.DisableFormatting);
+            string strResponse = XDocument.Parse(TestXmlStrings.multiApplicationProvisionResponse).ToString(SaveOptions.DisableFormatting);
 
             using (var server = new HttpServer(new RequestHandler
             {
@@ -405,11 +405,12 @@ namespace Bandwidth.Iris.Tests.Models
                 {
                     var r = t.Result;
                     Assert.True(false, "The exception was not thrown");
-                } catch (AggregateException e)
+                }
+                catch (AggregateException e)
                 {
-                    e.Handle( ex =>
+                    e.Handle(ex =>
                     {
-                        if(ex is BandwidthIrisException)
+                        if (ex is BandwidthIrisException)
                         {
                             Assert.Equal(ex.Message, " Current 1 Account have no Catapult association ");
                             return true;

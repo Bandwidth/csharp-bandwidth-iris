@@ -13,7 +13,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public OrderTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -239,7 +239,7 @@ namespace Bandwidth.Iris.Tests.Models
         [Fact]
         public void UpdateTest()
         {
-            var item = new Order {Id = "101"};
+            var item = new Order { Id = "101" };
             var data = new Order
             {
                 Name = "Test",

@@ -10,7 +10,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public AvailableNpaNxxTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
