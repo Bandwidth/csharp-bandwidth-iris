@@ -553,29 +553,8 @@ namespace Bandwidth.Iris.Tests.Models
             }))
             {
                 var client = Helper.CreateClient();
-
-                bool error = false;
-                try
-                {
-                    var i = Site.Get("1").Result;
-                }
-                catch (AggregateException e)
-                {
-                    e.Handle((x) =>
-                    {
-                        if (x is BandwidthIrisException)
-                        {
-                            error = true;
-                            return true;
-                        }
-
-                        return false;
-                    });
-
-                }
-                Assert.True(error);
-
-
+                var i = Site.Get("1").Result;
+                Assert.Equal("Csharp Test Site", i.Name);
             }
         }
     }

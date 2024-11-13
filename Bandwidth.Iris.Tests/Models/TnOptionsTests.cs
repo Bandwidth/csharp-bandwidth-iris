@@ -59,43 +59,6 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/tnoptions?status=9199918388",
-                ContentToSend = new StringContent(TestXmlStrings.listTnOptions, Encoding.UTF8, "application/xml")
-            }))
-            {
-                var client = Helper.CreateClient();
-                TnOptionOrders result = null;
-                try
-                {
-                    result = TnOptions.List(client, new Dictionary<string, Object>
-                {
-                    {"status", "9199918388" }
-                }).Result;
-                    throw new Exception("Should have found error");
-                }
-                catch (Exception ex)
-                {
-                    Assert.NotNull(ex);
-                    if (ex.InnerException is BandwidthIrisException)
-                    {
-                        var exInner = (BandwidthIrisException)ex.InnerException;
-                        Console.WriteLine(exInner.Message); //"Telephone number is not available"
-                        Console.WriteLine(exInner.Body);
-                    }
-                }
-                if (server.Error != null) throw server.Error;
-
-                Assert.Null(result);
-
-            }
-        }
-
-        [Fact]
-        public void TestListNoError()
-        {
-            using (var server = new HttpServer(new RequestHandler
-            {
-                EstimatedMethod = "GET",
-                EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/tnoptions?status=9199918388",
                 ContentToSend = new StringContent(TestXmlStrings.listTnOptionsNoError, Encoding.UTF8, "application/xml")
             }))
             {

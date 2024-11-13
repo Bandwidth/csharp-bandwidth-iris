@@ -395,7 +395,8 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/applications/{applicationId}/associatedsippeers",
-                ContentToSend = new StringContent(TestXmlStrings.associatedSipPeerResponse400, Encoding.UTF8, "application/xml")
+                ContentToSend = new StringContent(TestXmlStrings.associatedSipPeerResponse400, Encoding.UTF8, "application/xml"),
+                StatusCodeToSend = 400
             }))
 
             {
@@ -432,7 +433,8 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = $"/v1.0/accounts/{Helper.AccountId}/applications/{applicationId}/associatedsippeers",
-                ContentToSend = new StringContent(TestXmlStrings.associatedSipPeerResponse404, Encoding.UTF8, "application/xml")
+                ContentToSend = new StringContent(TestXmlStrings.associatedSipPeerResponse404, Encoding.UTF8, "application/xml"),
+                StatusCodeToSend = 404
             }))
 
             {

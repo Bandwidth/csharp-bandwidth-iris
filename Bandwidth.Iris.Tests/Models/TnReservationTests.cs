@@ -67,7 +67,8 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/tnreservation/1", Helper.AccountId),
-                ContentToSend = new StringContent(TestXmlStrings.InvalidReservationResponseXml, Encoding.UTF8, "application/xml")
+                ContentToSend = new StringContent(TestXmlStrings.InvalidReservationResponseXml, Encoding.UTF8, "application/xml"),
+                StatusCodeToSend = 400
             }))
             {
                 var client = Helper.CreateClient();
