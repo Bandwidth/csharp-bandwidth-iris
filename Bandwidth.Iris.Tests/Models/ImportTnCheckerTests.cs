@@ -37,12 +37,12 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = ImportTnChecker.Create(client, order).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.Equal(result.ImportTnCheckerPayload.TelephoneNumbers.Length, 1);
-                Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors.Length, 1);
+                Assert.Single(result.ImportTnCheckerPayload.TelephoneNumbers);
+                Assert.Single(result.ImportTnCheckerPayload.ImportTnErrors);
 
-                Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors[0].Code, 19006);
-                Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors[0].Description, "Bandwidth numbers cannot be imported by this account at this time.");
-                Assert.Equal(result.ImportTnCheckerPayload.ImportTnErrors[0].TelephoneNumbers.Length, 2);
+                Assert.Equal(19006, result.ImportTnCheckerPayload.ImportTnErrors[0].Code);
+                Assert.Equal("Bandwidth numbers cannot be imported by this account at this time.", result.ImportTnCheckerPayload.ImportTnErrors[0].Description);
+                Assert.Equal(2, result.ImportTnCheckerPayload.ImportTnErrors[0].TelephoneNumbers.Length);
 
             }
         }

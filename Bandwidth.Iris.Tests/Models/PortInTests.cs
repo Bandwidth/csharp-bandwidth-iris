@@ -502,7 +502,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.Equal(PortType.AUTOMATED, r.PortType);
 
                 //TnAttributes
-                Assert.Equal(1, r.TnAttributes.Length);
+                Assert.Single(r.TnAttributes);
                 Assert.Equal("Protected", r.TnAttributes[0]);
 
                 //Suscriber
@@ -554,7 +554,7 @@ namespace Bandwidth.Iris.Tests.Models
             Assert.Equal("Telephone number is already being processed on another order", lnpOrderResponse.Errors[1].Description);
 
             //TnAttributes
-            Assert.Equal(1, lnpOrderResponse.TnAttributes.Length);
+            Assert.Single(lnpOrderResponse.TnAttributes);
             Assert.Equal("Protected", lnpOrderResponse.TnAttributes[0]);
 
             //Suscriber

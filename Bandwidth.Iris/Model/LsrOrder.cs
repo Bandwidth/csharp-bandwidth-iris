@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
 {
-    public class LsrOrder: BaseModel
+    public class LsrOrder : BaseModel
     {
         internal const string LsrOrderPath = "lsrorders";
 
@@ -43,7 +43,7 @@ namespace Bandwidth.Iris.Model
 
         public static async Task<LsrOrder> Create(Client client, LsrOrder item)
         {
-            using (var response = await client.MakePostRequest(client.ConcatAccountPath(LsrOrderPath), item, false)) 
+            using (var response = await client.MakePostRequest(client.ConcatAccountPath(LsrOrderPath), item, false))
             {
                 return await Get(client, client.GetIdFromLocationHeader(response.Headers.Location));
             }
@@ -89,30 +89,31 @@ namespace Bandwidth.Iris.Model
         }
 
 
-        public override string Id {
+        public override string Id
+        {
             get { return OrderId; }
-            set { OrderId = value; } 
+            set { OrderId = value; }
         }
-        
+
         public string OrderId { get; set; }
-        public string CustomerOrderId {get; set;}
-        public string LastModifiedBy {get; set;}
-        public DateTime OrderCreateDate {get; set;}
-        public DateTime LastModifiedDate {get; set;}
-        public string AccountId {get; set;}
-        public string OrderStatus {get; set;}
+        public string CustomerOrderId { get; set; }
+        public string LastModifiedBy { get; set; }
+        public DateTime OrderCreateDate { get; set; }
+        public DateTime LastModifiedDate { get; set; }
+        public string AccountId { get; set; }
+        public string OrderStatus { get; set; }
         [XmlElement("SPID")]
-        public string Spid {get; set;}
-        public string BillingTelephoneNumber {get; set;}
-        public string Pon {get; set;}
-        public string PonVersion {get; set;}
-        public DateTime RequestedFocDate {get; set;}
-        public string AuthorizingPerson {get; set;}
-        public Subscriber Subscriber {get; set;}
+        public string Spid { get; set; }
+        public string BillingTelephoneNumber { get; set; }
+        public string Pon { get; set; }
+        public string PonVersion { get; set; }
+        public DateTime RequestedFocDate { get; set; }
+        public string AuthorizingPerson { get; set; }
+        public Subscriber Subscriber { get; set; }
         [XmlArrayItem("TelephoneNumber")]
-        public string[] ListOfTelephoneNumbers {get;set;}
+        public string[] ListOfTelephoneNumbers { get; set; }
         [XmlElement("CountOfTNs")]
-        public int CountOfTns {get;set;}
+        public int CountOfTns { get; set; }
     }
 
     public class LsrOrders

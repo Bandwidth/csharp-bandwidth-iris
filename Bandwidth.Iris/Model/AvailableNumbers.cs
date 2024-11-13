@@ -23,7 +23,7 @@ namespace Bandwidth.Iris.Model
     public class AvailableNumbersResult
     {
         public int ResultCount { get; set; }
-        
+
         [XmlArrayItem("TelephoneNumber")]
         public string[] TelephoneNumberList { get; set; }
 

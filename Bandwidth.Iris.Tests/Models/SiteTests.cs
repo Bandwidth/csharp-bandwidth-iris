@@ -169,7 +169,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Site.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal(1, result.Length);
+                Assert.Single(result);
                 Assert.Equal("1", result[0].Id);
                 Assert.Equal("Test Site", result[0].Name);
                 Assert.Equal("A site description", result[0].Description);
@@ -573,7 +573,7 @@ namespace Bandwidth.Iris.Tests.Models
                     });
 
                 }
-                Assert.Equal(true, error);
+                Assert.True(error);
 
 
             }

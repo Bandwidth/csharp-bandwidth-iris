@@ -10,7 +10,7 @@ using System.Net.Http;
 namespace Bandwidth.Iris.Model
 {
     [XmlType("LnpOrder")]
-    public class PortIn: BaseModel
+    public class PortIn : BaseModel
     {
         private const string PortInPath = "portins";
         private const string LoasPath = "loas";
@@ -87,8 +87,8 @@ namespace Bandwidth.Iris.Model
         {
             var r = (await Client.MakeGetRequest<FileListResponse>(
                 Client.ConcatAccountPath(string.Format("{0}/{1}/{2}", PortInPath, Id, LoasPath)),
-                new Dictionary<string, object> {{"metadata", metadata.ToString().ToLowerInvariant()}}));
-            return (r == null)?new FileData[0]: r.FileData.ToArray();
+                new Dictionary<string, object> { { "metadata", metadata.ToString().ToLowerInvariant() } }));
+            return (r == null) ? new FileData[0] : r.FileData.ToArray();
         }
 
         public async Task<FileContent> GetFile(string fileName, bool asStream = false)
@@ -123,7 +123,7 @@ namespace Bandwidth.Iris.Model
 
         public Task<LnpOrderResponse> GetOrder()
         {
-            return Client.MakeGetRequest<LnpOrderResponse>( Client.ConcatAccountPath(string.Format("{0}/{1}", PortInPath, Id)) );
+            return Client.MakeGetRequest<LnpOrderResponse>(Client.ConcatAccountPath(string.Format("{0}/{1}", PortInPath, Id)));
         }
         public async Task<Note> AddNote(Note note)
         {
@@ -157,13 +157,14 @@ namespace Bandwidth.Iris.Model
             if (pon != null) query.Add("pon", pon);
             if (status != null) query.Add("status", status);
             if (tn != null) query.Add("tn", tn);
-            
-            return Client.MakeGetRequest<LnpResponseWrapper>(Client.ConcatAccountPath( "/portins/"), query);
+
+            return Client.MakeGetRequest<LnpResponseWrapper>(Client.ConcatAccountPath("/portins/"), query);
         }
 
-        public override string Id {
+        public override string Id
+        {
             get { return OrderId; }
-            set { OrderId = value; } 
+            set { OrderId = value; }
         }
 
         public string CustomerOrderId { get; set; }
@@ -185,7 +186,7 @@ namespace Bandwidth.Iris.Model
         public string SiteId { get; set; }
         public string PeerId { get; set; }
         public bool Triggered { get; set; }
-  
+
     }
 
     [XmlType("LNPResponseWrapper")]
@@ -212,7 +213,7 @@ namespace Bandwidth.Iris.Model
         [XmlElement("lastModifiedDate")]
         public DateTime LastModifiedDate { get; set; }
 
-        public DateTime OrderDate { get; set;  }
+        public DateTime OrderDate { get; set; }
 
         public string OrderId { get; set; }
 
@@ -232,7 +233,7 @@ namespace Bandwidth.Iris.Model
 
 
     }
-   
+
     public class LnpOrderResponse : PortIn
     {
         public string OrderId { get; set; }
@@ -252,7 +253,7 @@ namespace Bandwidth.Iris.Model
         public string[] ListOfPhoneNumbers { get; set; }
         public string AlternateSpid { get; set; }
         public string AccountId { get; set; }
-        public string SiteId { get; set;}
+        public string SiteId { get; set; }
         public string PeerId { get; set; }
         public string VendorName { get; set; }
         public DateTime OrderCreateDate { get; set; }
@@ -269,7 +270,7 @@ namespace Bandwidth.Iris.Model
 
     }
 
-    public class LnpOrderSupp: PortIn
+    public class LnpOrderSupp : PortIn
     {
         public string CustomerOrderId { get; set; }
         public string BillingTelephoneNumber { get; set; }
@@ -348,7 +349,7 @@ namespace Bandwidth.Iris.Model
         [XmlElement("FileMetaData")]
         public FileMetadata FileMetadata { get; set; }
     }
-    
+
     public class Errors
     {
         public string Code { get; set; }

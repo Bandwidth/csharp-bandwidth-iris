@@ -31,7 +31,7 @@ namespace Bandwidth.Iris.Tests.Models
                     {"state", "NC"}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal(1, result.Length);
+                Assert.Single(result);
                 Assert.Equal("ACME", result[0].Abbreviation);
                 Assert.Equal("ACME", result[0].Name);
             }
@@ -52,7 +52,7 @@ namespace Bandwidth.Iris.Tests.Models
                     {"state", "NC"}
                 }).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal(1, result.Length);
+                Assert.Single(result);
                 Assert.Equal("ACME", result[0].Abbreviation);
                 Assert.Equal("ACME", result[0].Name);
             }

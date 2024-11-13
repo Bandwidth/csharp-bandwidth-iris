@@ -28,8 +28,8 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Host.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal(1, result.Length);
-                Assert.Equal(1, result[0].SipPeerHosts[0].SmsHosts.Length);
+                Assert.Single(result);
+                Assert.Single(result[0].SipPeerHosts[0].SmsHosts);
             }
         }
         [Fact]
@@ -44,8 +44,8 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var result = Host.List().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal(1, result.Length);
-                Assert.Equal(1, result[0].SipPeerHosts[0].SmsHosts.Length);
+                Assert.Single(result);
+                Assert.Single(result[0].SipPeerHosts[0].SmsHosts);
             }
         }
 

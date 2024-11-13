@@ -29,7 +29,7 @@ namespace Bandwidth.Iris
             return new Client(accountId, userName, password, apiEndpoint, apiVersion);
         }
 
-        
+
 #if !PCL
         public const string BandwidthApiAccountId = "BANDWIDTH_API_ACCOUNT_ID";
         public const string BandwidthApiUserName = "BANDWIDTH_API_USERNAME";
@@ -47,7 +47,7 @@ namespace Bandwidth.Iris
                 Environment.GetEnvironmentVariable(BandwidthApiVersion));
         }
 
-        
+
 #endif
         private Client(string accountId, string userName, string password, string apiEndpoint, string apiVersion)
         {
@@ -121,7 +121,7 @@ namespace Bandwidth.Iris
                 {
                     await CheckResponse(response);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     response.Dispose();
                     throw ex;
@@ -195,7 +195,7 @@ namespace Bandwidth.Iris
 
                 HttpContent content = new StringContent(xml, Encoding.UTF8, "application/xml");
 
-                
+
 
                 using (var client = CreateHttpClient())
                 {
@@ -227,7 +227,7 @@ namespace Bandwidth.Iris
 
         internal async Task<HttpResponseMessage> MakePutRequest(string path, object data, bool disposeResponse = false)
         {
-            
+
             using (var writer = new Utf8StringWriter())
             {
                 var payload = "";
@@ -235,8 +235,8 @@ namespace Bandwidth.Iris
                 {
                     payload = (string)data;
                 }
-                    
-                else if ( !(typeof(Stream)).IsAssignableFrom(data.GetType()))
+
+                else if (!(typeof(Stream)).IsAssignableFrom(data.GetType()))
                 {
                     var serializer = new XmlSerializer(data.GetType());
                     serializer.Serialize(writer, data);
@@ -245,11 +245,12 @@ namespace Bandwidth.Iris
 
                 using (var client = CreateHttpClient())
                 {
-                    if ( (typeof(Stream)).IsAssignableFrom(data.GetType()) ) {
+                    if ((typeof(Stream)).IsAssignableFrom(data.GetType()))
+                    {
                         return await client.PutAsync(FixPath(path), new StreamContent((Stream)data));
                     }
 
-                    var response =  await client.PutAsync(FixPath(path), new StringContent(payload, Encoding.UTF8, "application/xml"));
+                    var response = await client.PutAsync(FixPath(path), new StringContent(payload, Encoding.UTF8, "application/xml"));
                     try
                     {
                         await CheckResponse(response);
@@ -273,7 +274,7 @@ namespace Bandwidth.Iris
             return await SendFileContent(path, mediaType, disposeResponse, new StreamContent(stream), method);
         }
 
-        internal async Task<HttpResponseMessage> SendData(string path,  byte[] buffer, string mediaType, string method = "POST",
+        internal async Task<HttpResponseMessage> SendData(string path, byte[] buffer, string mediaType, string method = "POST",
             bool disposeResponse = false)
         {
             if (buffer == null) throw new ArgumentNullException("buffer");
@@ -345,7 +346,7 @@ namespace Bandwidth.Iris
 
         public async Task<TResult> MakePatchRequest<TResult>(string path, object data)
         {
-            using (var response = await MakePatchRequest(path, data)) 
+            using (var response = await MakePatchRequest(path, data))
             {
                 using (var stream = await response.Content.ReadAsStreamAsync())
                 {
@@ -411,9 +412,9 @@ namespace Bandwidth.Iris
                         {
                             var exceptions =
                                 (from item in doc.Descendants("Errors")
-                                    select
-                                        (Exception) new BandwidthIrisException(item.Element("Code").Value,
-                                            item.Element("Description").Value, response.StatusCode)).ToArray();
+                                 select
+                                     (Exception)new BandwidthIrisException(item.Element("Code").Value,
+                                         item.Element("Description").Value, response.StatusCode)).ToArray();
                             if (exceptions.Length > 0)
                             {
                                 throw new AggregateException(exceptions);
@@ -424,7 +425,7 @@ namespace Bandwidth.Iris
                         else
                         {
                             code = error.Element("Code");
-                            description = error.Element("Description");    
+                            description = error.Element("Description");
                         }
                     }
                     if (code != null && description != null && !string.IsNullOrEmpty(code.Value) && code.Value != "0")

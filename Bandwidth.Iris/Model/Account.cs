@@ -26,14 +26,14 @@ namespace Bandwidth.Iris.Model
         public string CompanyName { get; set; }
         public string AccountType { get; set; }
         public string NenaId { get; set; }
-        
+
         [XmlArrayItem("Tier")]
         public int[] Tiers { get; set; }
 
         public bool ReservationAllowed { get; set; }
         public bool LnpEnabled { get; set; }
         public string AltSpid { get; set; }
-        
+
         [XmlElement("SPID")]
         public string Spid { get; set; }
         public string PortCarrierType { get; set; }

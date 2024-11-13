@@ -148,7 +148,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Subscription.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal(1, result.Length);
+                Assert.Single(result);
                 Assert.Equal("1", result[0].Id);
                 Assert.Equal("orders", result[0].OrderType);
                 Assert.Equal("8684b1c8-7d41-4877-bfc2-6bd8ea4dc89f", result[0].OrderId);

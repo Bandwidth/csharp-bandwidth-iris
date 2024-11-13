@@ -11,7 +11,7 @@ namespace Bandwidth.Iris.Model
         public string UserId { get; set; }
         public string Description { get; set; }
     }
- 
+
     public class Notes
     {
         [XmlElementAttribute("Note")]

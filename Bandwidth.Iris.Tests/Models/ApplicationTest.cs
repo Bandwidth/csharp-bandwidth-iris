@@ -144,12 +144,12 @@ namespace Bandwidth.Iris.Tests.Models
                 var r = t.Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.Equal(r.ApplicationList.Length, 2);
+                Assert.Equal(2, r.ApplicationList.Length);
 
-                Assert.Equal(r.ApplicationList[0].ApplicationId, "2cfcb382-161c-46d4-8c67-87ca09a72c85");
-                Assert.Equal(r.ApplicationList[0].ServiceType, "Messaging-V2");
-                Assert.Equal(r.ApplicationList[0].AppName, "app1");
-                Assert.Equal(r.ApplicationList[0].MsgCallbackUrl, "http://a.com");
+                Assert.Equal("2cfcb382-161c-46d4-8c67-87ca09a72c85", r.ApplicationList[0].ApplicationId);
+                Assert.Equal("Messaging-V2", r.ApplicationList[0].ServiceType);
+                Assert.Equal("app1", r.ApplicationList[0].AppName);
+                Assert.Equal("http://a.com", r.ApplicationList[0].MsgCallbackUrl);
 
 
             }
@@ -192,14 +192,14 @@ namespace Bandwidth.Iris.Tests.Models
 
                 Assert.NotNull(r.Application);
 
-                Assert.Equal(r.Application.ApplicationId, "d3e418e9-1833-49c1-b6c7-ca1700f79586");
-                Assert.Equal(r.Application.ServiceType, "Voice-V2");
-                Assert.Equal(r.Application.AppName, "v1");
-                Assert.Equal(r.Application.CallInitiatedCallbackUrl, "https://a.com");
-                Assert.Equal(r.Application.CallStatusCallbackUrl, "https://b.com");
-                Assert.Equal(r.Application.CallInitiatedMethod, "GET");
-                Assert.Equal(r.Application.CallStatusMethod, "GET");
-                Assert.Equal(r.Application.CallbackCreds.UserId, "login123");
+                Assert.Equal("d3e418e9-1833-49c1-b6c7-ca1700f79586", r.Application.ApplicationId);
+                Assert.Equal("Voice-V2", r.Application.ServiceType);
+                Assert.Equal("v1", r.Application.AppName);
+                Assert.Equal("https://a.com", r.Application.CallInitiatedCallbackUrl);
+                Assert.Equal("https://b.com", r.Application.CallStatusCallbackUrl);
+                Assert.Equal("GET", r.Application.CallInitiatedMethod);
+                Assert.Equal("GET", r.Application.CallStatusMethod);
+                Assert.Equal("login123", r.Application.CallbackCreds.UserId);
 
 
             }
@@ -230,14 +230,14 @@ namespace Bandwidth.Iris.Tests.Models
 
                 Assert.NotNull(r.Application);
 
-                Assert.Equal(r.Application.ApplicationId, "d3e418e9-1833-49c1-b6c7-ca1700f79586");
-                Assert.Equal(r.Application.ServiceType, "Voice-V2");
-                Assert.Equal(r.Application.AppName, "v1");
-                Assert.Equal(r.Application.CallInitiatedCallbackUrl, "https://a.com");
-                Assert.Equal(r.Application.CallStatusCallbackUrl, "https://b.com");
-                Assert.Equal(r.Application.CallInitiatedMethod, "GET");
-                Assert.Equal(r.Application.CallStatusMethod, "GET");
-                Assert.Equal(r.Application.CallbackCreds.UserId, "login123");
+                Assert.Equal("d3e418e9-1833-49c1-b6c7-ca1700f79586", r.Application.ApplicationId);
+                Assert.Equal("Voice-V2", r.Application.ServiceType);
+                Assert.Equal("v1", r.Application.AppName);
+                Assert.Equal("https://a.com", r.Application.CallInitiatedCallbackUrl);
+                Assert.Equal("https://b.com", r.Application.CallStatusCallbackUrl);
+                Assert.Equal("GET", r.Application.CallInitiatedMethod);
+                Assert.Equal("GET", r.Application.CallStatusMethod);
+                Assert.Equal("login123", r.Application.CallbackCreds.UserId);
 
 
             }
@@ -272,14 +272,14 @@ namespace Bandwidth.Iris.Tests.Models
 
                 Assert.NotNull(r.Application);
 
-                Assert.Equal(r.Application.ApplicationId, "d3e418e9-1833-49c1-b6c7-ca1700f79586");
-                Assert.Equal(r.Application.ServiceType, "Voice-V2");
-                Assert.Equal(r.Application.AppName, "v1");
-                Assert.Equal(r.Application.CallInitiatedCallbackUrl, "https://a.com");
-                Assert.Equal(r.Application.CallStatusCallbackUrl, "https://b.com");
-                Assert.Equal(r.Application.CallInitiatedMethod, "GET");
-                Assert.Equal(r.Application.CallStatusMethod, "GET");
-                Assert.Equal(r.Application.CallbackCreds.UserId, "login123");
+                Assert.Equal("d3e418e9-1833-49c1-b6c7-ca1700f79586", r.Application.ApplicationId);
+                Assert.Equal("Voice-V2", r.Application.ServiceType);
+                Assert.Equal("v1", r.Application.AppName);
+                Assert.Equal("https://a.com", r.Application.CallInitiatedCallbackUrl);
+                Assert.Equal("https://b.com", r.Application.CallStatusCallbackUrl);
+                Assert.Equal("GET", r.Application.CallInitiatedMethod);
+                Assert.Equal("GET", r.Application.CallStatusMethod);
+                Assert.Equal("login123", r.Application.CallbackCreds.UserId);
 
 
             }
@@ -314,14 +314,14 @@ namespace Bandwidth.Iris.Tests.Models
 
                 Assert.NotNull(r.Application);
 
-                Assert.Equal(r.Application.ApplicationId, "d3e418e9-1833-49c1-b6c7-ca1700f79586");
-                Assert.Equal(r.Application.ServiceType, "Voice-V2");
-                Assert.Equal(r.Application.AppName, "v1");
-                Assert.Equal(r.Application.CallInitiatedCallbackUrl, "https://a.com");
-                Assert.Equal(r.Application.CallStatusCallbackUrl, "https://b.com");
-                Assert.Equal(r.Application.CallInitiatedMethod, "GET");
-                Assert.Equal(r.Application.CallStatusMethod, "GET");
-                Assert.Equal(r.Application.CallbackCreds.UserId, "login123");
+                Assert.Equal("d3e418e9-1833-49c1-b6c7-ca1700f79586", r.Application.ApplicationId);
+                Assert.Equal("Voice-V2", r.Application.ServiceType);
+                Assert.Equal("v1", r.Application.AppName);
+                Assert.Equal("https://a.com", r.Application.CallInitiatedCallbackUrl);
+                Assert.Equal("https://b.com", r.Application.CallStatusCallbackUrl);
+                Assert.Equal("GET", r.Application.CallInitiatedMethod);
+                Assert.Equal("GET", r.Application.CallStatusMethod);
+                Assert.Equal("login123", r.Application.CallbackCreds.UserId);
 
 
             }
@@ -374,11 +374,11 @@ namespace Bandwidth.Iris.Tests.Models
 
                 Assert.NotNull(r.AssociatedSipPeers);
 
-                Assert.Equal(r.AssociatedSipPeers.Length, 2);
-                Assert.Equal(r.AssociatedSipPeers[0].SiteId, "13651");
-                Assert.Equal(r.AssociatedSipPeers[0].SiteName, "Prod Sub-account");
-                Assert.Equal(r.AssociatedSipPeers[0].PeerId, "540341");
-                Assert.Equal(r.AssociatedSipPeers[0].PeerName, "Prod");
+                Assert.Equal(2, r.AssociatedSipPeers.Length);
+                Assert.Equal("13651", r.AssociatedSipPeers[0].SiteId);
+                Assert.Equal("Prod Sub-account", r.AssociatedSipPeers[0].SiteName);
+                Assert.Equal("540341", r.AssociatedSipPeers[0].PeerId);
+                Assert.Equal("Prod", r.AssociatedSipPeers[0].PeerName);
 
 
 
@@ -412,7 +412,7 @@ namespace Bandwidth.Iris.Tests.Models
                     {
                         if (ex is BandwidthIrisException)
                         {
-                            Assert.Equal(ex.Message, " Current 1 Account have no Catapult association ");
+                            Assert.Equal(" Current 1 Account have no Catapult association ", ex.Message);
                             return true;
                         }
                         return true;
@@ -449,7 +449,7 @@ namespace Bandwidth.Iris.Tests.Models
                     {
                         if (ex is BandwidthIrisException)
                         {
-                            Assert.Equal(ex.Message, " Application with id 'non_existing' not found ");
+                            Assert.Equal(" Application with id 'non_existing' not found ", ex.Message);
                             return true;
                         }
                         return true;

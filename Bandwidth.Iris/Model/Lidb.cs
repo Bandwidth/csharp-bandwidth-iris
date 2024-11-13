@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Bandwidth.Iris.Model
 {
     [XmlRoot("LidbOrder")]
-    public class Lidb: BaseModel
+    public class Lidb : BaseModel
     {
         internal const string LidbPath = "lidbs";
         public static async Task<Lidb> Get(Client client, string id)
@@ -27,7 +27,7 @@ namespace Bandwidth.Iris.Model
             return (await client.MakeGetRequest<ResponseSelectWrapper>(client.ConcatAccountPath(LidbPath))).ListOrderIdUserIdDate ?? new OrderIdUserIdDate[0];
         }
 
-        
+
 
 #if !PCL
         public static Task<OrderIdUserIdDate[]> List()
@@ -63,9 +63,9 @@ namespace Bandwidth.Iris.Model
                 OrderId = value;
             }
         }
-        
+
         public string CustomerOrderId { get; set; }
-        
+
         [XmlElement("OrderId")]
         public string OrderId { get; set; }
 
@@ -74,26 +74,26 @@ namespace Bandwidth.Iris.Model
         public string ProcessingStatus { get; set; }
 
         public string CreatedByUser { get; set; }
-        
+
         public DateTime LastModifiedDate { get; set; }
 
         public DateTime OrderCompleteDate { get; set; }
 
-        public LidbTnGroup[] LidbTnGroups{get; set;}
+        public LidbTnGroup[] LidbTnGroups { get; set; }
     }
-        
+
     public class LidbTnGroup
     {
         [XmlArrayItem("TelephoneNumber")]
-        public string[] TelephoneNumbers{get; set;}
-        
-        public string FullNumber {get; set;}
-        
-        public string SubscriberInformation {get; set;}
-        
-        public string UseType {get; set;}
-        
-        public string Visibility {get; set;}
+        public string[] TelephoneNumbers { get; set; }
+
+        public string FullNumber { get; set; }
+
+        public string SubscriberInformation { get; set; }
+
+        public string UseType { get; set; }
+
+        public string Visibility { get; set; }
     }
 
 }

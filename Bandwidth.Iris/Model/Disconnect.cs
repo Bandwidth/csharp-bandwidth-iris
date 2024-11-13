@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
 {
-    public class Disconnect: BaseModel
+    public class Disconnect : BaseModel
     {
         private const string DisconnectNumbersPath = "disconnects";
         public static Task Create(Client client, string orderName, params string[] numbers)
@@ -15,9 +15,9 @@ namespace Bandwidth.Iris.Model
                 Name = orderName,
                 DisconnectTelephoneNumberOrderType = new DisconnectTelephoneNumberOrderType
                 {
-                    TelephoneNumberList = new TelephoneNumberList 
+                    TelephoneNumberList = new TelephoneNumberList
                     {
-                         TelephoneNumbers = numbers
+                        TelephoneNumbers = numbers
                     }
                 }
             };
@@ -55,13 +55,13 @@ namespace Bandwidth.Iris.Model
         [XmlElement("name")]
         public string Name { get; set; }
         [XmlElement("DisconnectTelephoneNumberOrderType")]
-        public DisconnectTelephoneNumberOrderType DisconnectTelephoneNumberOrderType { get; set; } 
+        public DisconnectTelephoneNumberOrderType DisconnectTelephoneNumberOrderType { get; set; }
     }
 
     public class DisconnectTelephoneNumberOrderType
     {
         [XmlElement("TelephoneNumberList")]
-        public TelephoneNumberList TelephoneNumberList { get; set; } 
+        public TelephoneNumberList TelephoneNumberList { get; set; }
     }
 
     public class TelephoneNumberList

@@ -6,7 +6,7 @@ namespace Bandwidth.Iris.Model
     public class PortOut
     {
         private const string PortOutPath = "portouts";
-        
+
         public static async Task<Note> AddNote(Client client, string orderId, Note note)
         {
             using (var response = await client.MakePostRequest(client.ConcatAccountPath(string.Format("{0}/{1}/notes", PortOutPath, orderId)), note))

@@ -38,19 +38,19 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = ImportTnOrder.Create(client, order).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.Equal(result.ImportTnOrder.CustomerOrderId, "SJM000001");
-                Assert.Equal(result.ImportTnOrder.OrderCreateDate, "2018-01-20T02:59:54.000Z");
-                Assert.Equal(result.ImportTnOrder.AccountId, "9900012");
-                Assert.Equal(result.ImportTnOrder.CreatedByUser, "smckinnon");
-                Assert.Equal(result.ImportTnOrder.OrderId, "b05de7e6-0cab-4c83-81bb-9379cba8efd0");
-                Assert.Equal(result.ImportTnOrder.LastModifiedDate, "2018-01-20T02:59:54.000Z");
-                Assert.Equal(result.ImportTnOrder.SiteId, 202);
-                Assert.Equal(result.ImportTnOrder.SipPeerId, 520565);
-                Assert.Equal(result.ImportTnOrder.ProcessingStatus, "PROCESSING");
+                Assert.Equal("SJM000001", result.ImportTnOrder.CustomerOrderId);
+                Assert.Equal("2018-01-20T02:59:54.000Z", result.ImportTnOrder.OrderCreateDate);
+                Assert.Equal("9900012", result.ImportTnOrder.AccountId);
+                Assert.Equal("smckinnon", result.ImportTnOrder.CreatedByUser);
+                Assert.Equal("b05de7e6-0cab-4c83-81bb-9379cba8efd0", result.ImportTnOrder.OrderId);
+                Assert.Equal("2018-01-20T02:59:54.000Z", result.ImportTnOrder.LastModifiedDate);
+                Assert.Equal(202, result.ImportTnOrder.SiteId);
+                Assert.Equal(520565, result.ImportTnOrder.SipPeerId);
+                Assert.Equal("PROCESSING", result.ImportTnOrder.ProcessingStatus);
 
                 Assert.NotNull(result.ImportTnOrder.Subscriber);
 
-                Assert.Equal(result.ImportTnOrder.TelephoneNumbers.Length, 4);
+                Assert.Equal(4, result.ImportTnOrder.TelephoneNumbers.Length);
 
             }
         }
@@ -77,19 +77,19 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = ImportTnOrder.Get(client, order.OrderId).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.Equal(result.CustomerOrderId, "SJM000001");
-                Assert.Equal(result.OrderCreateDate, "2018-01-20T02:59:54.000Z");
-                Assert.Equal(result.AccountId, "9900012");
-                Assert.Equal(result.CreatedByUser, "smckinnon");
-                Assert.Equal(result.OrderId, "b05de7e6-0cab-4c83-81bb-9379cba8efd0");
-                Assert.Equal(result.LastModifiedDate, "2018-01-20T02:59:54.000Z");
-                Assert.Equal(result.SiteId, 202);
-                Assert.Equal(result.SipPeerId, 520565);
-                Assert.Equal(result.ProcessingStatus, "PROCESSING");
+                Assert.Equal("SJM000001", result.CustomerOrderId);
+                Assert.Equal("2018-01-20T02:59:54.000Z", result.OrderCreateDate);
+                Assert.Equal("9900012", result.AccountId);
+                Assert.Equal("smckinnon", result.CreatedByUser);
+                Assert.Equal("b05de7e6-0cab-4c83-81bb-9379cba8efd0", result.OrderId);
+                Assert.Equal("2018-01-20T02:59:54.000Z", result.LastModifiedDate);
+                Assert.Equal(202, result.SiteId);
+                Assert.Equal(520565, result.SipPeerId);
+                Assert.Equal("PROCESSING", result.ProcessingStatus);
 
                 Assert.NotNull(result.Subscriber);
 
-                Assert.Equal(result.TelephoneNumbers.Length, 4);
+                Assert.Equal(4, result.TelephoneNumbers.Length);
 
             }
         }
@@ -116,17 +116,17 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = ImportTnOrder.List(client, new Dictionary<string, object> { { "accountId", "1" } }).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.Equal(result.TotalCount, 14);
-                Assert.Equal(result.ImportTnOrderSummarys.Length, 14);
-                Assert.Equal(result.ImportTnOrderSummarys[0].accountId, 9900778);
-                Assert.Equal(result.ImportTnOrderSummarys[0].CountOfTNs, 1);
-                Assert.Equal(result.ImportTnOrderSummarys[0].CustomerOrderId, "id");
-                Assert.Equal(result.ImportTnOrderSummarys[0].userId, "jmulford-api");
-                Assert.Equal(result.ImportTnOrderSummarys[0].lastModifiedDate, "2020-02-04T14:09:08.937Z");
-                Assert.Equal(result.ImportTnOrderSummarys[0].OrderDate, "2020-02-04T14:09:07.824Z");
-                Assert.Equal(result.ImportTnOrderSummarys[0].OrderType, "import_tn_orders");
-                Assert.Equal(result.ImportTnOrderSummarys[0].OrderStatus, "FAILED");
-                Assert.Equal(result.ImportTnOrderSummarys[0].OrderId, "fbd17609-be44-48e7-a301-90bd6cf42248");
+                Assert.Equal(14, result.TotalCount);
+                Assert.Equal(14, result.ImportTnOrderSummarys.Length);
+                Assert.Equal(9900778, result.ImportTnOrderSummarys[0].accountId);
+                Assert.Equal(1, result.ImportTnOrderSummarys[0].CountOfTNs);
+                Assert.Equal("id", result.ImportTnOrderSummarys[0].CustomerOrderId);
+                Assert.Equal("jmulford-api", result.ImportTnOrderSummarys[0].userId);
+                Assert.Equal("2020-02-04T14:09:08.937Z", result.ImportTnOrderSummarys[0].lastModifiedDate);
+                Assert.Equal("2020-02-04T14:09:07.824Z", result.ImportTnOrderSummarys[0].OrderDate);
+                Assert.Equal("import_tn_orders", result.ImportTnOrderSummarys[0].OrderType);
+                Assert.Equal("FAILED", result.ImportTnOrderSummarys[0].OrderStatus);
+                Assert.Equal("fbd17609-be44-48e7-a301-90bd6cf42248", result.ImportTnOrderSummarys[0].OrderId);
 
             }
         }
@@ -153,11 +153,11 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = ImportTnOrder.GetHistory(client, order.OrderId).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.Equal(result.Items.Length, 2);
+                Assert.Equal(2, result.Items.Length);
                 Assert.Equal(result.Items[0].OrderDate, DateTime.Parse("2020-02-04T14:09:07.824"));
-                Assert.Equal(result.Items[0].Note, "Import TN order has been received by the system.");
-                Assert.Equal(result.Items[0].Author, "jmulford-api");
-                Assert.Equal(result.Items[0].Status, "received");
+                Assert.Equal("Import TN order has been received by the system.", result.Items[0].Note);
+                Assert.Equal("jmulford-api", result.Items[0].Author);
+                Assert.Equal("received", result.Items[0].Status);
 
             }
         }
@@ -184,11 +184,11 @@ namespace Bandwidth.Iris.Tests.Models
                 var result = ImportTnOrder.ListLoasFiles(client, order.OrderId).Result;
                 if (server.Error != null) throw server.Error;
 
-                Assert.Equal(result.FileCount, 2);
-                Assert.Equal(result.FileNames.Length, 2);
-                Assert.Equal(result.FileNames[0], "803f3cc5-beae-469e-bd65-e9891ccdffb9-1092874634747.pdf");
-                Assert.Equal(result.ResultCode, "0");
-                Assert.Equal(result.ResultMessage, "LOA file list successfully returned");
+                Assert.Equal(2, result.FileCount);
+                Assert.Equal(2, result.FileNames.Length);
+                Assert.Equal("803f3cc5-beae-469e-bd65-e9891ccdffb9-1092874634747.pdf", result.FileNames[0]);
+                Assert.Equal("0", result.ResultCode);
+                Assert.Equal("LOA file list successfully returned", result.ResultMessage);
 
 
             }

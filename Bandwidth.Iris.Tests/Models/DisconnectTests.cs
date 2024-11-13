@@ -42,6 +42,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
+        [Fact]
         public void DisconnectNumbersWithDefaultClientTest()
         {
             var data = new DisconnectTelephoneNumberOrder

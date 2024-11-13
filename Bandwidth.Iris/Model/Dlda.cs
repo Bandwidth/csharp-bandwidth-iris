@@ -8,14 +8,14 @@ using System.Xml.Serialization;
 namespace Bandwidth.Iris.Model
 {
     [XmlRoot("DldaOrder")]
-    public class Dlda: BaseModel
+    public class Dlda : BaseModel
     {
         internal const string DldaPath = "dldas";
 
 
         public static async Task<Dlda> Create(Client client, Dlda item)
         {
-            using (var response = await client.MakePostRequest(client.ConcatAccountPath(DldaPath), item, false)) 
+            using (var response = await client.MakePostRequest(client.ConcatAccountPath(DldaPath), item, false))
             {
                 return await Get(client, client.GetIdFromLocationHeader(response.Headers.Location));
             }
@@ -53,7 +53,7 @@ namespace Bandwidth.Iris.Model
             return Client.MakePutRequest(Client.ConcatAccountPath(string.Format("{0}/{1}", DldaPath, Id)),
                 item, true);
         }
-        
+
         public async Task<OrderHistoryItem[]> GetHistory()
         {
             return
@@ -87,10 +87,10 @@ namespace Bandwidth.Iris.Model
 
     public class DldaOrderResponse
     {
-        public  Dlda DldaOrder { get; set; }
+        public Dlda DldaOrder { get; set; }
     }
 
-    
+
     public class DldaTnGroup
     {
         public TelephoneNumbers TelephoneNumbers { get; set; }
@@ -99,7 +99,7 @@ namespace Bandwidth.Iris.Model
         public ListingName ListingName { get; set; }
         public Address Address { get; set; }
         public string SubscriberType { get; set; }
-        public bool ListAddress { get; set;}
+        public bool ListAddress { get; set; }
     }
 
     public class ListingName
@@ -143,9 +143,9 @@ namespace Bandwidth.Iris.Model
 
     public class OrderHistoryItem
     {
-        public DateTime OrderDate {get; set;}
-        public string Note{ get; set; }
-        public string Author{ get; set; }
-        public string Status{ get; set; }
+        public DateTime OrderDate { get; set; }
+        public string Note { get; set; }
+        public string Author { get; set; }
+        public string Status { get; set; }
     }
 }

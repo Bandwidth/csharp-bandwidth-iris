@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Bandwidth.Iris.Model
 {
     [XmlType("Reservation")]
-    public class TnReservation: BaseModel
+    public class TnReservation : BaseModel
     {
         internal const string TnReservationPath = "tnreservation";
         public static async Task<TnReservation> Get(Client client, string id)
@@ -39,7 +39,7 @@ namespace Bandwidth.Iris.Model
         }
 
 #endif
-        
+
         public Task Delete()
         {
             return Client.MakeDeleteRequest(Client.ConcatAccountPath(string.Format("{0}/{1}", TnReservationPath, Id)));

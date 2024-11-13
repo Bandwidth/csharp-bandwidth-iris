@@ -46,7 +46,7 @@ namespace Bandwidth.Iris.Model
 
         public async static Task<ApplicationProvisioningResponse> Get(Client client, string applicationId)
         {
-            var item = await client.MakeGetRequest<ApplicationProvisioningResponse>(client.ConcatAccountPath($"{applicatoinPath}/{applicationId}") );
+            var item = await client.MakeGetRequest<ApplicationProvisioningResponse>(client.ConcatAccountPath($"{applicatoinPath}/{applicationId}"));
             item.Client = client;
             return item;
         }
@@ -56,7 +56,7 @@ namespace Bandwidth.Iris.Model
             return Get(Client.GetInstance(), applicationId);
         }
 
-        public async static Task<ApplicationProvisioningResponse> PartialUpdate(Client client, string applicationId, Application application )
+        public async static Task<ApplicationProvisioningResponse> PartialUpdate(Client client, string applicationId, Application application)
         {
             //TODO need Patch
             var item = await client.MakePatchRequest<ApplicationProvisioningResponse>(client.ConcatAccountPath($"{applicatoinPath}/{applicationId}"), application);
@@ -88,7 +88,7 @@ namespace Bandwidth.Iris.Model
         }
 
         public async static Task<AssociatedSipPeersResponse> ListAssociatedSippeers(Client client, string applicationId)
-        { 
+        {
             var item = await client.MakeGetRequest<AssociatedSipPeersResponse>(client.ConcatAccountPath($"{applicatoinPath}/{applicationId}/{associatedSipppeersPath}"));
             item.Client = client;
             return item;

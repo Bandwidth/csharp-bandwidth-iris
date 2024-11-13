@@ -575,17 +575,17 @@ namespace Bandwidth.Iris.Tests.Models
                 if (server.Error != null) throw server.Error;
 
                 Assert.NotNull(r.SipPeerSmsFeature);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
                 Assert.Equal("DefaultOff", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pLongCode);
                 Assert.Equal("SomeMessageClass", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pMessageClass);
                 Assert.Equal("SomeCampaignId", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pCampaignId);
                 Assert.Equal("SMPP", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Protocol);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
 
                 Assert.Equal(2, r.SipPeerSmsFeature.SmppHosts.Length);
                 Assert.Equal("RECEIVER_ONLY", r.SipPeerSmsFeature.SmppHosts[0].ConnectionType);
@@ -631,17 +631,17 @@ namespace Bandwidth.Iris.Tests.Models
                 if (server.Error != null) throw server.Error;
 
                 Assert.NotNull(r.SipPeerSmsFeature);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
                 Assert.Equal("DefaultOff", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pLongCode);
                 Assert.Equal("SomeMessageClass", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pMessageClass);
                 Assert.Equal("SomeCampaignId", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pCampaignId);
                 Assert.Equal("SMPP", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Protocol);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
 
                 Assert.Equal(2, r.SipPeerSmsFeature.SmppHosts.Length);
                 Assert.Equal("RECEIVER_ONLY", r.SipPeerSmsFeature.SmppHosts[0].ConnectionType);
@@ -687,17 +687,17 @@ namespace Bandwidth.Iris.Tests.Models
                 if (server.Error != null) throw server.Error;
 
                 Assert.NotNull(r.SipPeerSmsFeature);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.TollFree);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.ShortCode);
                 Assert.Equal("DefaultOff", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pLongCode);
                 Assert.Equal("SomeMessageClass", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pMessageClass);
                 Assert.Equal("SomeCampaignId", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.A2pCampaignId);
                 Assert.Equal("SMPP", r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Protocol);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
-                Assert.Equal(true, r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone1);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone2);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone3);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone4);
+                Assert.True(r.SipPeerSmsFeature.SipPeerSmsFeatureSettings.Zone5);
 
                 Assert.Equal(2, r.SipPeerSmsFeature.SmppHosts.Length);
                 Assert.Equal("RECEIVER_ONLY", r.SipPeerSmsFeature.SmppHosts[0].ConnectionType);
@@ -750,7 +750,7 @@ namespace Bandwidth.Iris.Tests.Models
 
                 Assert.NotNull(r.MmsFeature);
                 Assert.Equal("OFF", r.MmsFeature.Protocols.MM4.Tls);
-                Assert.Equal(1, r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts.Length);
+                Assert.Single(r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts);
                 Assert.Equal("206.107.248.58", r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts[0].HostName);
 
                 Assert.Equal(2, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts.Length);
@@ -794,7 +794,7 @@ namespace Bandwidth.Iris.Tests.Models
 
                 Assert.NotNull(r.MmsFeature);
                 Assert.Equal("OFF", r.MmsFeature.Protocols.MM4.Tls);
-                Assert.Equal(1, r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts.Length);
+                Assert.Single(r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts);
                 Assert.Equal("206.107.248.58", r.MmsFeature.Protocols.MM4.MmsMM4TermHosts.TermHosts[0].HostName);
 
                 Assert.Equal(2, r.MmsFeature.Protocols.MM4.MmsMM4OrigHosts.OrigHosts.Length);

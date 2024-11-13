@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
 {
-    public class SipPeer: BaseModel
+    public class SipPeer : BaseModel
     {
 
         public string SiteId { get; set; }
@@ -44,7 +44,7 @@ namespace Bandwidth.Iris.Model
         public static Task<SipPeer> Create(Client client, SipPeer item)
         {
             if (item.SiteId == null) throw new ArgumentException("SiteId is required");
-            var site = new Site {Id = item.SiteId};
+            var site = new Site { Id = item.SiteId };
             site.SetClient(client);
             return site.CreateSipPeer(item);
         }
@@ -98,7 +98,7 @@ namespace Bandwidth.Iris.Model
 #endif
         public Task Delete()
         {
-            if(SiteId == null) throw new ArgumentNullException("SiteId");
+            if (SiteId == null) throw new ArgumentNullException("SiteId");
             return Client.MakeDeleteRequest(Client.ConcatAccountPath(string.Format("{0}/{1}/{2}/{3}", Site.SitePath, SiteId, Site.SipPeerPath, Id)));
         }
 
@@ -132,7 +132,7 @@ namespace Bandwidth.Iris.Model
             if (SiteId == null) throw new ArgumentNullException("SiteId");
             return Client.MakePutRequest(
                 Client.ConcatAccountPath(
-                    string.Format("{0}/{1}/{2}/{3}/{4}/{5}", Site.SitePath, SiteId, 
+                    string.Format("{0}/{1}/{2}/{3}/{4}/{5}", Site.SitePath, SiteId,
                     Site.SipPeerPath, Id, TnsPath, number)), data, true);
         }
 
@@ -140,9 +140,9 @@ namespace Bandwidth.Iris.Model
         {
             if (SiteId == null) throw new ArgumentNullException("SiteId");
             return Client.MakePostRequest(
-                Client.ConcatAccountPath(string.Format("{0}/{1}/{2}/{3}/{4}", 
-                    Site.SitePath, SiteId, Site.SipPeerPath, Id, MoveTnsPath)), 
-                    new SipPeerTelephoneNumbers{Numbers = numbers}, true);
+                Client.ConcatAccountPath(string.Format("{0}/{1}/{2}/{3}/{4}",
+                    Site.SitePath, SiteId, Site.SipPeerPath, Id, MoveTnsPath)),
+                    new SipPeerTelephoneNumbers { Numbers = numbers }, true);
         }
 
         #endregion
@@ -158,7 +158,7 @@ namespace Bandwidth.Iris.Model
                     client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{ORIGINATION}/{SETTINGS}")
                 );
         }
-        public static async Task<SipPeerOriginationSettingsResponse> GetOriginationSettings( string siteId, string id)
+        public static async Task<SipPeerOriginationSettingsResponse> GetOriginationSettings(string siteId, string id)
         {
             return await GetOriginationSettings(Client.GetInstance(), siteId, id);
         }
@@ -193,7 +193,7 @@ namespace Bandwidth.Iris.Model
         #region .../product/termination/settings
 
         public static readonly string TERMINATION = "termination";
-        
+
         public static async Task<SipPeerTerminationSettingsResponse> GetTerminationSetting(Client client, string siteId, string id)
         {
             return await client.MakeGetRequest<SipPeerTerminationSettingsResponse>(
@@ -206,7 +206,7 @@ namespace Bandwidth.Iris.Model
             return await GetTerminationSetting(Client.GetInstance(), siteId, id);
         }
 
-        public static async Task<SipPeerTerminationSettingsResponse> SetTerminationSettings(Client client, string siteId, string id, SipPeerTerminationSettings settings )
+        public static async Task<SipPeerTerminationSettingsResponse> SetTerminationSettings(Client client, string siteId, string id, SipPeerTerminationSettings settings)
         {
             return await client.MakePostRequest<SipPeerTerminationSettingsResponse>(
                     client.ConcatAccountPath($"/sites/{siteId}/sippeers/{id}/{PRODUCTS}/{TERMINATION}/{SETTINGS}"),
@@ -287,7 +287,7 @@ namespace Bandwidth.Iris.Model
                 );
         }
 
-        public static Task DeleteSMSSettings(string siteId, string id )
+        public static Task DeleteSMSSettings(string siteId, string id)
         {
             return DeleteSMSSettings(Client.GetInstance(), siteId, id);
         }
@@ -347,7 +347,7 @@ namespace Bandwidth.Iris.Model
 
         #region .../products/messaging/applicationSettings
 
-        public static readonly string  APPLICATION_SETTINGS = "applicationSettings";
+        public static readonly string APPLICATION_SETTINGS = "applicationSettings";
 
         public static async Task<ApplicationsSettingsResponse> GetApplicationSetting(Client client, string siteId, string id)
         {
@@ -392,8 +392,8 @@ namespace Bandwidth.Iris.Model
 
 
 
-            #endregion
-        }
+        #endregion
+    }
 
 
     public class CallingName
@@ -416,9 +416,9 @@ namespace Bandwidth.Iris.Model
         public bool DataAllowed { get; set; }
     }
 
-    public class SipPeerTelephoneNumbers: IXmlSerializable
+    public class SipPeerTelephoneNumbers : IXmlSerializable
     {
-        
+
         public string[] Numbers { get; set; }
 
         public System.Xml.Schema.XmlSchema GetSchema()
@@ -485,7 +485,7 @@ namespace Bandwidth.Iris.Model
 
     public class SipPeerTerminationSettingsResponse
     {
-        public SipPeerTerminationSettings SipPeerTerminationSettings  { get; set;}
+        public SipPeerTerminationSettings SipPeerTerminationSettings { get; set; }
     }
 
     public class SipPeerTerminationSettings

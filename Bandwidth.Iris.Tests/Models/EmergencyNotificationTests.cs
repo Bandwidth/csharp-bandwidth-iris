@@ -323,7 +323,7 @@ namespace Bandwidth.Iris.Tests.Models
 
                 Assert.NotNull(addedAssoc);
                 Assert.NotNull(addedAssoc.AddedEepToEngAssociations);
-                Assert.Equal(1, addedAssoc.AddedEepToEngAssociations.Length);
+                Assert.Single(addedAssoc.AddedEepToEngAssociations);
                 Assert.Equal(2, addedAssoc.AddedEepToEngAssociations[0].EepTns.Length);
                 Assert.Equal(2, addedAssoc.AddedEepToEngAssociations[0].EepAeuiIds.Length);
 
@@ -355,7 +355,7 @@ namespace Bandwidth.Iris.Tests.Models
 
                 Assert.NotNull(result.Links);
                 Assert.NotNull(result.EmergencyNotificationEndpointOrders);
-                Assert.Equal(1, result.EmergencyNotificationEndpointOrders.Length);
+                Assert.Single(result.EmergencyNotificationEndpointOrders);
 
             }
         }

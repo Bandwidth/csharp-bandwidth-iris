@@ -38,7 +38,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var i = LineOptionOrder.Create(client, item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal(1, i.Length);
+                Assert.Single(i);
                 Assert.Equal("2013223685", i[0]);
             }
 
@@ -66,7 +66,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 var i = LineOptionOrder.Create(item).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal(1, i.Length);
+                Assert.Single(i);
                 Assert.Equal("2013223685", i[0]);
             }
         }
