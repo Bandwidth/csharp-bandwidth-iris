@@ -13,7 +13,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public EmergencyNotificationTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -195,7 +195,7 @@ namespace Bandwidth.Iris.Tests.Models
                 if (server.Error != null) throw server.Error;
 
                 Assert.NotNull(result);
-                Assert.NotNull( result.Links);
+                Assert.NotNull(result.Links);
                 Assert.NotNull(result.EmergencyNotificationGroupOrders);
                 Assert.Equal(3, result.EmergencyNotificationGroupOrders.Length);
 
@@ -323,7 +323,7 @@ namespace Bandwidth.Iris.Tests.Models
 
                 Assert.NotNull(addedAssoc);
                 Assert.NotNull(addedAssoc.AddedEepToEngAssociations);
-                Assert.Equal(1, addedAssoc.AddedEepToEngAssociations.Length);
+                Assert.Single(addedAssoc.AddedEepToEngAssociations);
                 Assert.Equal(2, addedAssoc.AddedEepToEngAssociations[0].EepTns.Length);
                 Assert.Equal(2, addedAssoc.AddedEepToEngAssociations[0].EepAeuiIds.Length);
 
@@ -355,7 +355,7 @@ namespace Bandwidth.Iris.Tests.Models
 
                 Assert.NotNull(result.Links);
                 Assert.NotNull(result.EmergencyNotificationEndpointOrders);
-                Assert.Equal(1, result.EmergencyNotificationEndpointOrders.Length);
+                Assert.Single(result.EmergencyNotificationEndpointOrders);
 
             }
         }

@@ -37,7 +37,7 @@ namespace Bandwidth.Iris.Model
     public class SipPeerHost
     {
         public string SipPeerId { get; set; }
-        
+
         [XmlArrayItem("Host")]
         public HostData[] VoiceHosts { get; set; }
 

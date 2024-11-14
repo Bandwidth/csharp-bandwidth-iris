@@ -12,7 +12,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public ImportToAccountTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]

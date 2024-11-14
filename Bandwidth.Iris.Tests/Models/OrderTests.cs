@@ -13,7 +13,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public OrderTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -189,19 +189,19 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.Equal("2013-12-20T06", result.Orders.OrderDetails[0].LastModifiedDate);
                 Assert.Equal("2013-12-20T06", result.Orders.OrderDetails[0].OrderDate);
                 Assert.Equal("bwc_user", result.Orders.OrderDetails[0].UserId);
-                Assert.Equal(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.States.Count);
+                Assert.Single(result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.States);
                 Assert.Equal(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.States[0].Count);
                 Assert.Equal("VA", result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.States[0].State);
-                Assert.Equal(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.RateCenters.Count);
+                Assert.Single(result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.RateCenters);
                 Assert.Equal(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.RateCenters[0].Count);
                 Assert.Equal("LADYSMITH", result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.RateCenters[0].RateCenter);
-                Assert.Equal(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Cities.Count);
+                Assert.Single(result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Cities);
                 Assert.Equal(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Cities[0].Count);
                 Assert.Equal("LADYSMITH", result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Cities[0].City);
-                Assert.Equal(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Tiers.Count);
+                Assert.Single(result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Tiers);
                 Assert.Equal(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Tiers[0].Count);
                 Assert.Equal(0, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Tiers[0].Tier);
-                Assert.Equal(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Vendors.Count);
+                Assert.Single(result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Vendors);
                 Assert.Equal(1, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Vendors[0].Count);
                 Assert.Equal(49, result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Vendors[0].VendorId);
                 Assert.Equal("Bandwidth CLEC", result.Orders.OrderDetails[0].TelephoneNumberDetailsWithCount.Vendors[0].VendorName);
@@ -239,7 +239,7 @@ namespace Bandwidth.Iris.Tests.Models
         [Fact]
         public void UpdateTest()
         {
-            var item = new Order {Id = "101"};
+            var item = new Order { Id = "101" };
             var data = new Order
             {
                 Name = "Test",
@@ -334,7 +334,7 @@ namespace Bandwidth.Iris.Tests.Models
                 order.SetClient(client);
                 var list = order.GetAreaCodes().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal(1, list.Length);
+                Assert.Single(list);
                 Assert.Equal("888", list[0].Code);
             }
         }
@@ -354,7 +354,7 @@ namespace Bandwidth.Iris.Tests.Models
                 order.SetClient(client);
                 var list = order.GetNpaNxx().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal(1, list.Length);
+                Assert.Single(list);
             }
         }
 
@@ -373,7 +373,7 @@ namespace Bandwidth.Iris.Tests.Models
                 order.SetClient(client);
                 var list = order.GetTotals().Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal(1, list.Length);
+                Assert.Single(list);
             }
         }
 

@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
 {
-    public class Order: BaseModel
+    public class Order : BaseModel
     {
         internal const string OrderPath = "orders";
 
@@ -109,11 +109,12 @@ namespace Bandwidth.Iris.Model
         }
 
 
-        public override string Id {
+        public override string Id
+        {
             get { return OrderId; }
-            set { OrderId = value; } 
+            set { OrderId = value; }
         }
-        
+
         [XmlElement("id")]
         public string OrderId { get; set; }
         public string Name { get; set; }
@@ -126,7 +127,7 @@ namespace Bandwidth.Iris.Model
         public string CustomerOrderId { get; set; }
         [DefaultValue(true)]
         public bool PartialAllowed { get; set; }
-        [DefaultValue(false)] 
+        [DefaultValue(false)]
         public bool CloseOrder { get; set; }
         public ExistingTelephoneNumberOrderType ExistingTelephoneNumberOrderType { get; set; }
         public AreaCodeSearchAndOrderType AreaCodeSearchAndOrderType { get; set; }
@@ -174,7 +175,7 @@ namespace Bandwidth.Iris.Model
 
     public class CitySearchAndOrderType
     {
-        public string City{ get; set; }
+        public string City { get; set; }
         public string State { get; set; }
         public int Quantity { get; set; }
     }
@@ -303,7 +304,7 @@ namespace Bandwidth.Iris.Model
         public int? TotalCount { get; set; }
         public Links Links { get; set; }
         [XmlElement("OrderIdUserIdDate")]
-        public List<OrderDetail> OrderDetails {get; set;}
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 
     [XmlType("OrderIdUserIdDate")]
@@ -330,7 +331,7 @@ namespace Bandwidth.Iris.Model
 
         [XmlElement("TelephoneNumberDetails")]
         public TelephoneNumberDetailsWithCount TelephoneNumberDetailsWithCount { get; set; }
-        
+
     }
 
     [XmlType("TelephoneNumberDetails")]

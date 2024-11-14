@@ -9,5 +9,5 @@ namespace Bandwidth.Iris
         {
             get { return Encoding.UTF8; }
         }
-    } 
+    }
 }

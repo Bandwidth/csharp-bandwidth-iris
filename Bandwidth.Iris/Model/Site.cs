@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
 {
-    public class Site: BaseModel
+    public class Site : BaseModel
     {
         internal const string SitePath = "sites";
         public static async Task<Site> Get(Client client, string id)
@@ -31,7 +31,7 @@ namespace Bandwidth.Iris.Model
             return items;
         }
 
-        
+
 
 #if !PCL
         public static Task<Site[]> List()
@@ -75,7 +75,7 @@ namespace Bandwidth.Iris.Model
             {
                 return await GetSipPeer(Client.GetIdFromLocationHeader(response.Headers.Location));
             }
-            
+
         }
 
         public async Task<SipPeer> GetSipPeer(string id)
@@ -103,10 +103,10 @@ namespace Bandwidth.Iris.Model
             var items =
                 (await Client.MakeGetRequest<SipPeersResponse>(
                     Client.ConcatAccountPath(string.Format("{0}/{1}/{2}", SitePath, Id, SipPeerPath)))).SipPeers;
-            foreach(var item in items)
+            foreach (var item in items)
             {
                 item.Client = Client;
-                item.SiteId = Id;    
+                item.SiteId = Id;
             }
             return items;
         }
@@ -132,7 +132,7 @@ namespace Bandwidth.Iris.Model
         public SipPeer[] SipPeers { get; set; }
     }
 
-    
+
     public class Address
     {
         public string HouseNumber { get; set; }

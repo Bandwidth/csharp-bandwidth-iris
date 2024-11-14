@@ -13,7 +13,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public SiteTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites/1", Helper.AccountId),
-                ContentToSend = Helper.CreateXmlContent(new SiteResponse{Site = item})
+                ContentToSend = Helper.CreateXmlContent(new SiteResponse { Site = item })
             }))
             {
                 var client = Helper.CreateClient();
@@ -145,7 +145,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/sites", Helper.AccountId),
-                ContentToSend = Helper.CreateXmlContent(new SitesResponse{Sites = items})
+                ContentToSend = Helper.CreateXmlContent(new SitesResponse { Sites = items })
             }))
             {
                 var client = Helper.CreateClient();
@@ -169,7 +169,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Site.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal(1, result.Length);
+                Assert.Single(result);
                 Assert.Equal("1", result[0].Id);
                 Assert.Equal("Test Site", result[0].Name);
                 Assert.Equal("A site description", result[0].Description);
@@ -325,7 +325,7 @@ namespace Bandwidth.Iris.Tests.Models
             }))
             {
                 var client = Helper.CreateClient();
-                var i = new Site {Id = "1"};
+                var i = new Site { Id = "1" };
                 i.SetClient(client);
                 i.Update(item).Wait();
                 if (server.Error != null) throw server.Error;
@@ -553,28 +553,8 @@ namespace Bandwidth.Iris.Tests.Models
             }))
             {
                 var client = Helper.CreateClient();
-
-                bool error = false;
-                try
-                {
-                    var i = Site.Get("1").Result;
-                } catch (AggregateException e)
-                {
-                    e.Handle((x) =>
-                    {
-                        if(x is BandwidthIrisException)
-                        {
-                            error = true;
-                            return true;
-                        }
-
-                        return false;
-                    });
-
-                }
-                Assert.Equal(true, error);
-
-
+                var i = Site.Get("1").Result;
+                Assert.Equal("Csharp Test Site", i.Name);
             }
         }
     }

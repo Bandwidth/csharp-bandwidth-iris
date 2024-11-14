@@ -12,7 +12,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public LsrOrderTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -88,26 +88,28 @@ namespace Bandwidth.Iris.Tests.Models
         {
             var item = new LsrOrder
             {
-               Pon = "Some Pon",
-               CustomerOrderId = "MyId5",
-               Spid = "123C",
-               BillingTelephoneNumber = "9192381468",
-               AuthorizingPerson = "Jim Hopkins",
-               Subscriber = new Subscriber{
-                   SubscriberType = "BUSINESS",
-                   BusinessName = "BusinessName",
-                   ServiceAddress = new Address {
-                    HouseNumber ="11",
-                    StreetName = "Park",
-                    StreetSuffix = "Ave",
-                    City = "New York",
-                    StateCode = "NY",
-                    Zip = "90025"
-                  },
-                  AccountNumber = "123463",
-                  PinNumber = "1231"
-               },
-               ListOfTelephoneNumbers = new[]{"9192381848", "9192381467"}
+                Pon = "Some Pon",
+                CustomerOrderId = "MyId5",
+                Spid = "123C",
+                BillingTelephoneNumber = "9192381468",
+                AuthorizingPerson = "Jim Hopkins",
+                Subscriber = new Subscriber
+                {
+                    SubscriberType = "BUSINESS",
+                    BusinessName = "BusinessName",
+                    ServiceAddress = new Address
+                    {
+                        HouseNumber = "11",
+                        StreetName = "Park",
+                        StreetSuffix = "Ave",
+                        City = "New York",
+                        StateCode = "NY",
+                        Zip = "90025"
+                    },
+                    AccountNumber = "123463",
+                    PinNumber = "1231"
+                },
+                ListOfTelephoneNumbers = new[] { "9192381848", "9192381467" }
             };
 
             using (var server = new HttpServer(new[]

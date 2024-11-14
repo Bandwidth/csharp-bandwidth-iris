@@ -13,7 +13,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public TnReservationTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -23,7 +23,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 Id = "1",
                 AccountId = "111",
-                ReservedTn = new[]{"000"},
+                ReservedTn = new[] { "000" },
                 ReservationExpires = 0
             };
             using (var server = new HttpServer(new RequestHandler
@@ -67,7 +67,8 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/tnreservation/1", Helper.AccountId),
-                ContentToSend = new StringContent(TestXmlStrings.InvalidReservationResponseXml, Encoding.UTF8, "application/xml")
+                ContentToSend = new StringContent(TestXmlStrings.InvalidReservationResponseXml, Encoding.UTF8, "application/xml"),
+                StatusCodeToSend = 400
             }))
             {
                 var client = Helper.CreateClient();
@@ -97,7 +98,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 Id = "1",
                 AccountId = "111",
-                ReservedTn = new []{"000"},
+                ReservedTn = new[] { "000" },
                 ReservationExpires = 0
             };
             using (var server = new HttpServer(new RequestHandler
@@ -119,7 +120,7 @@ namespace Bandwidth.Iris.Tests.Models
             var item = new TnReservation
             {
                 AccountId = "111",
-                ReservedTn = new[]{"000"},
+                ReservedTn = new[] { "000" },
                 ReservationExpires = 0
             };
 
@@ -157,7 +158,7 @@ namespace Bandwidth.Iris.Tests.Models
             var item = new TnReservation
             {
                 AccountId = "111",
-                ReservedTn = new []{"000"},
+                ReservedTn = new[] { "000" },
                 ReservationExpires = 0
             };
 

@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
 {
-    public class InServiceNumber: BaseModel
+    public class InServiceNumber : BaseModel
     {
         internal const string InServiceNumberPath = "inserviceNumbers";
 
@@ -20,7 +20,7 @@ namespace Bandwidth.Iris.Model
         }
 
 #if !PCL
-        
+
         public static Task<string[]> List(IDictionary<string, object> query = null)
         {
             return List(Client.GetInstance(), query);

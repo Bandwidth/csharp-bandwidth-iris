@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace Bandwidth.Iris.Model
 {
-    public class LineOptionOrder: BaseModel
+    public class LineOptionOrder : BaseModel
     {
         internal const string LineOptionOrderPath = "lineOptionOrders";
 
@@ -13,9 +13,9 @@ namespace Bandwidth.Iris.Model
             return
                 (await
                     client.MakePostRequest<LineOptionOrderResponse>(client.ConcatAccountPath(LineOptionOrderPath),
-                        new LineOptionOrderRequest {TnLineOptions = options})).LineOptions.CompletedNumbers;
+                        new LineOptionOrderRequest { TnLineOptions = options })).LineOptions.CompletedNumbers;
         }
-        
+
 #if !PCL
         public static Task<string[]> Create(params TnLineOptions[] options)
         {

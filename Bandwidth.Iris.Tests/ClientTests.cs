@@ -29,7 +29,8 @@ namespace Bandwidth.Iris.Tests
         [Fact]
         public void MakeGetRequestTest()
         {
-            using (var server = new HttpServer(new RequestHandler {
+            using (var server = new HttpServer(new RequestHandler
+            {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = "/v1.0/test?test1=value1&test2=value2",
                 EstimatedHeaders = new Dictionary<string, string>
@@ -75,7 +76,7 @@ namespace Bandwidth.Iris.Tests
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = "/v1.0/test?test1=value1&test2=value2",
-                ContentToSend =  Helper.CreateXmlContent(new TestItem
+                ContentToSend = Helper.CreateXmlContent(new TestItem
                 {
                     Name = "Name",
                     Flag = true
@@ -141,7 +142,7 @@ namespace Bandwidth.Iris.Tests
             {
                 EstimatedMethod = "POST",
                 EstimatedPathAndQuery = "/v1.0/test",
-                EstimatedContent = Helper.ToXmlString(new TestModel{Test = true}),
+                EstimatedContent = Helper.ToXmlString(new TestModel { Test = true }),
                 ContentToSend = Helper.CreateXmlContent(new TestItem
                 {
                     Name = "Name",
@@ -151,7 +152,7 @@ namespace Bandwidth.Iris.Tests
             {
                 var client = Helper.CreateClient();
                 {
-                    var result = client.MakePostRequest<TestItem>("test", new TestModel{ Test = true }).Result;
+                    var result = client.MakePostRequest<TestItem>("test", new TestModel { Test = true }).Result;
                     if (server.Error != null) throw server.Error;
                     Assert.Equal("Name", result.Name);
                     Assert.True(result.Flag != null && result.Flag.Value);
@@ -183,7 +184,7 @@ namespace Bandwidth.Iris.Tests
             using (var server = new HttpServer(new RequestHandler
             {
                 EstimatedMethod = "GET",
-                EstimatedHeaders = new Dictionary<string, string> { { "Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", Helper.UserName, Helper.Password)))} },
+                EstimatedHeaders = new Dictionary<string, string> { { "Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", Helper.UserName, Helper.Password))) } },
                 ContentToSend = Helper.CreateXmlContent(new SitesResponse())
             }))
             {
@@ -203,13 +204,13 @@ namespace Bandwidth.Iris.Tests
                 EstimatedMethod = "PUT",
                 EstimatedPathAndQuery = "/v1.0/test",
                 EstimatedContent = "hello",
-                EstimatedHeaders = new Dictionary<string, string> {{"Content-Type", "media/type"}}
+                EstimatedHeaders = new Dictionary<string, string> { { "Content-Type", "media/type" } }
             }))
             {
                 var client = Helper.CreateClient();
                 using (var stream = new MemoryStream(data))
                 {
-                    client.SendData("test",  stream, "media/type", "PUT",  true).Wait();
+                    client.SendData("test", stream, "media/type", "PUT", true).Wait();
                     if (server.Error != null) throw server.Error;
                 }
             }
@@ -228,7 +229,7 @@ namespace Bandwidth.Iris.Tests
             }))
             {
                 var client = Helper.CreateClient();
-                client.SendData("test", new MemoryStream( data), "media/type", "PUT", true).Wait();
+                client.SendData("test", new MemoryStream(data), "media/type", "PUT", true).Wait();
                 if (server.Error != null) throw server.Error;
             }
 
@@ -361,7 +362,7 @@ namespace Bandwidth.Iris.Tests
                 catch (AggregateException ex)
                 {
                     var err = (AggregateException)ex.InnerExceptions.First();
-                    var list = (from e in err.InnerExceptions select (BandwidthIrisException) e).ToArray();
+                    var list = (from e in err.InnerExceptions select (BandwidthIrisException)e).ToArray();
                     Assert.Equal("101", list[0].Code);
                     Assert.Equal("Description1", list[0].Message);
                     Assert.Equal("102", list[1].Code);

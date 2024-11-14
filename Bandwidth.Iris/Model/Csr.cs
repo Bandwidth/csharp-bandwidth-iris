@@ -77,7 +77,7 @@ namespace Bandwidth.Iris.Model
             return ListNotes(Client.GetInstance(), orderId);
         }
 
-        public  static Task UpdateNote(Client client, string orderId, string noteId, Note note)
+        public static Task UpdateNote(Client client, string orderId, string noteId, Note note)
         {
             var item = client.MakePutRequest<CsrResponse>(client.ConcatAccountPath($"{csrPath}/{orderId}/{notesPath}/{noteId}"), note);
             return item;
@@ -140,10 +140,10 @@ namespace Bandwidth.Iris.Model
         [XmlArray("WorkingTelephoneNumbersOnAccount")]
         [XmlArrayItem("TelephoneNumber")]
         public string[] WorkingTelephoneNumbersOnAccount { get; set; }
-        
+
 
     }
 
 
-   
+
 }

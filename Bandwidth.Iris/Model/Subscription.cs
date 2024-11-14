@@ -23,7 +23,7 @@ namespace Bandwidth.Iris.Model
         }
 #endif
 
-        public static async Task<Subscription[]> List(Client client, IDictionary<string, object> query = null )
+        public static async Task<Subscription[]> List(Client client, IDictionary<string, object> query = null)
         {
             var items = (await client.MakeGetRequest<SubscriptionsResponse>(client.ConcatAccountPath(SubscriptionPath), query)).Subscriptions ?? new Subscription[0];
             foreach (var item in items)
@@ -33,7 +33,7 @@ namespace Bandwidth.Iris.Model
             return items;
         }
 
-        
+
 
 #if !PCL
         public static Task<Subscription[]> List(IDictionary<string, object> query = null)
@@ -69,9 +69,10 @@ namespace Bandwidth.Iris.Model
             return Client.MakeDeleteRequest(Client.ConcatAccountPath(string.Format("{0}/{1}", SubscriptionPath, Id)));
         }
 
-        public override string Id {
+        public override string Id
+        {
             get { return SubscriptionId; }
-            set { SubscriptionId = value; } 
+            set { SubscriptionId = value; }
         }
         public string SubscriptionId { get; set; }
         public string OrderType { get; set; }

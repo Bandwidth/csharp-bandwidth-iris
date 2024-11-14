@@ -12,7 +12,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public SubscriptionTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/subscriptions/1", Helper.AccountId),
-                ContentToSend = Helper.CreateXmlContent(new SubscriptionsResponse { Subscriptions = new []{item} })
+                ContentToSend = Helper.CreateXmlContent(new SubscriptionsResponse { Subscriptions = new[] { item } })
             }))
             {
                 var client = Helper.CreateClient();
@@ -124,7 +124,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/subscriptions", Helper.AccountId),
-                ContentToSend = Helper.CreateXmlContent(new SubscriptionsResponse{Subscriptions = items})
+                ContentToSend = Helper.CreateXmlContent(new SubscriptionsResponse { Subscriptions = items })
             }))
             {
                 var client = Helper.CreateClient();
@@ -148,7 +148,7 @@ namespace Bandwidth.Iris.Tests.Models
                 var client = Helper.CreateClient();
                 var result = Subscription.List(client).Result;
                 if (server.Error != null) throw server.Error;
-                Assert.Equal(1, result.Length);
+                Assert.Single(result);
                 Assert.Equal("1", result[0].Id);
                 Assert.Equal("orders", result[0].OrderType);
                 Assert.Equal("8684b1c8-7d41-4877-bfc2-6bd8ea4dc89f", result[0].OrderId);
@@ -307,7 +307,7 @@ namespace Bandwidth.Iris.Tests.Models
             }))
             {
                 var client = Helper.CreateClient();
-                var i = new Subscription {Id = "1"};
+                var i = new Subscription { Id = "1" };
                 i.SetClient(client);
                 i.Update(item).Wait();
                 if (server.Error != null) throw server.Error;

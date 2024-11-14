@@ -12,7 +12,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public InServiceNumberTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -22,7 +22,7 @@ namespace Bandwidth.Iris.Tests.Models
             {
                 EstimatedMethod = "GET",
                 EstimatedPathAndQuery = string.Format("/v1.0/accounts/{0}/inserviceNumbers", Helper.AccountId),
-                ContentToSend = new  StringContent(TestXmlStrings.InServiceNumbers, Encoding.UTF8, "application/xml")
+                ContentToSend = new StringContent(TestXmlStrings.InServiceNumbers, Encoding.UTF8, "application/xml")
             }))
             {
                 var client = Helper.CreateClient();

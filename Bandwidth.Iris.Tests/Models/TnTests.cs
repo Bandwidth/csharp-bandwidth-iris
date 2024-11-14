@@ -12,7 +12,7 @@ namespace Bandwidth.Iris.Tests.Models
         // [TestInitialize]
         public TnTests()
         {
-            Helper.SetEnvironmetVariables();
+            Helper.SetEnvironmentVariables();
         }
 
         [Fact]
@@ -37,6 +37,7 @@ namespace Bandwidth.Iris.Tests.Models
             }
         }
 
+        [Fact(Skip = "throws a System.FormatException, most likely due to the serializer expecting a value in LastModifiedDate")]
         public void GetTestWithNullDateTime()
         {
             using (var server = new HttpServer(new RequestHandler
