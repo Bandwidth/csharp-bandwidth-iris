@@ -397,50 +397,47 @@ namespace Bandwidth.Iris
 
         private async Task CheckResponse(HttpResponseMessage response)
         {
-            if (!response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode) return;
+            try
             {
-                try
+                var xml = await response.Content.ReadAsStringAsync();
+                if (xml.Length > 0)
                 {
-                    var xml = await response.Content.ReadAsStringAsync();
-                    if (xml.Length > 0)
+                    var doc = XDocument.Parse(xml);
+                    var code = doc.Descendants("ErrorCode").FirstOrDefault();
+                    var description = doc.Descendants("Description").FirstOrDefault();
+                    if (code == null)
                     {
-                        var doc = XDocument.Parse(xml);
-                        var code = doc.Descendants("ErrorCode").FirstOrDefault();
-                        var description = doc.Descendants("Description").FirstOrDefault();
-                        if (code == null)
+                        var error = doc.Descendants("Error").FirstOrDefault();
+                        if (error == null)
                         {
-                            var error = doc.Descendants("Error").FirstOrDefault();
-                            if (error == null)
+                            var exceptions =
+                                (from item in doc.Descendants("Errors")
+                                 select
+                                     (Exception)new BandwidthIrisException(item.Element("Code").Value,
+                                         item.Element("Description").Value, response.StatusCode)).ToArray();
+                            if (exceptions.Length > 0)
                             {
-                                var exceptions =
-                                    (from item in doc.Descendants("Errors")
-                                     select
-                                         (Exception)new BandwidthIrisException(item.Element("Code").Value,
-                                             item.Element("Description").Value, response.StatusCode)).ToArray();
-                                if (exceptions.Length > 0)
-                                {
-                                    throw new AggregateException(exceptions);
-                                }
-                                code = doc.Descendants("resultCode").FirstOrDefault();
-                                description = doc.Descendants("resultMessage").FirstOrDefault();
+                                throw new AggregateException(exceptions);
                             }
-                            else
-                            {
-                                code = error.Element("Code");
-                                description = error.Element("Description");
-                            }
+                            code = doc.Descendants("resultCode").FirstOrDefault();
+                            description = doc.Descendants("resultMessage").FirstOrDefault();
                         }
-                        if (code != null && description != null && !string.IsNullOrEmpty(code.Value) && code.Value != "0")
+                        else
                         {
-                            throw new BandwidthIrisException(code.Value, description.Value, response.StatusCode, doc);
+                            code = error.Element("Code");
+                            description = error.Element("Description");
                         }
                     }
+                    if (code != null && description != null && !string.IsNullOrEmpty(code.Value) && code.Value != "0")
+                    {
+                        throw new BandwidthIrisException(code.Value, description.Value, response.StatusCode, doc);
+                    }
                 }
-                catch (Exception ex) when (!(ex is BandwidthIrisException) && !(ex is AggregateException))
-                {
-
-                    throw new BandwidthIrisException("", string.Format("Http code {0}", response.StatusCode), response.StatusCode);
-                }
+            }
+            catch (Exception ex) when (!(ex is BandwidthIrisException) && !(ex is AggregateException))
+            {
+                throw new BandwidthIrisException("", string.Format("Http code {0}", response.StatusCode), response.StatusCode);
             }
         }
 
