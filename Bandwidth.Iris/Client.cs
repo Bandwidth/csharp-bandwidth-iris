@@ -430,7 +430,7 @@ namespace Bandwidth.Iris
                                 description = error.Element("Description");
                             }
                         }
-                        if (description != null && !string.IsNullOrEmpty(code.Value) && code.Value != "0")
+                        if (code != null && description != null && !string.IsNullOrEmpty(code.Value) && code.Value != "0")
                         {
                             throw new BandwidthIrisException(code.Value, description.Value, response.StatusCode, doc);
                         }
