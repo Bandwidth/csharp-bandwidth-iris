@@ -71,6 +71,7 @@ namespace Bandwidth.Iris
                 new AuthenticationHeaderValue("Basic",
                     Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", _userName, _password))));
             client.DefaultRequestHeaders.Add("User-Agent", USER_AGENT);
+            client.DefaultRequestHeaders.Add("Accept", "application/xml");
             return client;
         }
 
