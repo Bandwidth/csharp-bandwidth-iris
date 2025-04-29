@@ -168,7 +168,7 @@ namespace Bandwidth.Iris.Model
         }
 
         public string CustomerOrderId { get; set; }
-        public DateTime RequestedFocDate { get; set; }
+        public DateTimeOffset RequestedFocDate { get; set; }
         public string AlternateSpid { get; set; }
         public string AccountNumber { get; set; }
         public string PinNumber { get; set; }
@@ -275,7 +275,7 @@ namespace Bandwidth.Iris.Model
         public string CustomerOrderId { get; set; }
         public string BillingTelephoneNumber { get; set; }
         public string NewBillingTelephoneNumber { get; set; }
-        public DateTime RequestedFocDate { get; set; }
+        public DateTimeOffset RequestedFocDate { get; set; }
         [XmlElement("WirelessInfo")]
         public WirelessInfo[] WirelessInfo { get; set; }
         [XmlArrayItem("TnAttribute")]
