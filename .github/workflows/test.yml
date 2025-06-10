@@ -9,14 +9,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ windows-2019, windows-2022, ubuntu-22.04, ubuntu-24.04 ]
+        os: [ windows-2022, windows-2025, ubuntu-22.04, ubuntu-24.04 ]
         dotnet: [6.0.x, 7.0.x]
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ matrix.dotnet }}
 
