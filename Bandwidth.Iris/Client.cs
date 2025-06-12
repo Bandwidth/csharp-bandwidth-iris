@@ -435,6 +435,7 @@ namespace Bandwidth.Iris
                         throw new BandwidthIrisException(code.Value, description.Value, response.StatusCode, doc);
                     }
                 }
+                throw new BandwidthIrisException("", string.Format("Http code {0}", response.StatusCode), response.StatusCode);
             }
             catch (Exception ex) when (!(ex is BandwidthIrisException) && !(ex is AggregateException))
             {
