@@ -376,7 +376,7 @@ namespace Bandwidth.Iris.Tests.Models
         {
             var data = new LnpOrderSupp
             {
-                RequestedFocDate = DateTime.Parse("2014-11-18T00:00:00.000Z"),
+                RequestedFocDate = new DateTimeOffset(DateTime.Parse("2014-11-18T00:00:00.000Z")),
                 WirelessInfo = new[]{new WirelessInfo
                 {
                     AccountNumber = "77129766500001",
@@ -484,7 +484,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.Equal("CANCELLED", r.ProcessingStatus);
                 Assert.Equal(DateTime.Parse("2014-08-04T13:37:06.323"), r.OrderCreateDate);
                 Assert.Equal(DateTime.Parse("2014-08-04T13:37:08.676"), r.LastModifiedDate);
-                Assert.Equal(DateTime.Parse("2014-08-04T13:37:08.676"), r.RequestedFocDate);
+                Assert.Equal(DateTime.SpecifyKind(DateTime.Parse("2014-08-04T13:37:08.676"), DateTimeKind.Utc), r.RequestedFocDate);
                 Assert.Equal("The Authguy", r.LoaAuthorizingPerson);
                 Assert.Equal("9195551234", r.BillingTelephoneNumber);
                 Assert.Equal("9175131245", r.NewBillingTelephoneNumber);
@@ -531,7 +531,7 @@ namespace Bandwidth.Iris.Tests.Models
             Assert.Equal("CANCELLED", lnpOrderResponse.ProcessingStatus);
             Assert.Equal(DateTime.Parse("2014-08-04T13:37:06.323"), lnpOrderResponse.OrderCreateDate);
             Assert.Equal(DateTime.Parse("2014-08-04T13:37:08.676"), lnpOrderResponse.LastModifiedDate);
-            Assert.Equal(DateTime.Parse("2014-08-04T13:37:08.676"), lnpOrderResponse.RequestedFocDate);
+            Assert.Equal(DateTime.SpecifyKind(DateTime.Parse("2014-08-04T13:37:08.676"), DateTimeKind.Utc), lnpOrderResponse.RequestedFocDate);
             Assert.Equal("The Authguy", lnpOrderResponse.LoaAuthorizingPerson);
             Assert.Equal("9195551234", lnpOrderResponse.BillingTelephoneNumber);
             Assert.Equal("9175131245", lnpOrderResponse.NewBillingTelephoneNumber);
@@ -620,7 +620,7 @@ namespace Bandwidth.Iris.Tests.Models
                 Assert.Equal("Port out successful.", r.lnpPortInfoForGivenStatuses[0].ErrorMessage);
                 Assert.Equal("9727717577", r.lnpPortInfoForGivenStatuses[0].FullNumber);
                 Assert.Equal("COMPLETE", r.lnpPortInfoForGivenStatuses[0].ProcessingStatus);
-                Assert.Equal(DateTime.Parse("2014-11-20T00:00:00.000"), r.lnpPortInfoForGivenStatuses[0].RequestedFOCDate);
+                Assert.Equal(DateTime.SpecifyKind(DateTime.Parse("2014-11-20T00:00:00.000"), DateTimeKind.Utc), r.lnpPortInfoForGivenStatuses[0].RequestedFOCDate);
                 Assert.Equal("512E", r.lnpPortInfoForGivenStatuses[0].VendorId);
 
 
