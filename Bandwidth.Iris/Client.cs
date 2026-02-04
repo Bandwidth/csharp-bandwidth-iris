@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -11,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using Newtonsoft.Json.Linq;
+using System.Threading;
 
 namespace Bandwidth.Iris
 {
@@ -23,10 +24,34 @@ namespace Bandwidth.Iris
         private readonly string _apiEndpoint;
         private readonly string _apiVersion;
         private readonly string _accountPath;
+        private string _accessToken;
+        private DateTimeOffset _accessTokenExpiration;
+        private readonly string _clientId;
+        private readonly string _clientSecret;
+        private readonly TimeSpan _tokenRefreshSkew = TimeSpan.FromMinutes(1);
+        private readonly SemaphoreSlim _tokenLock = new SemaphoreSlim(1, 1);
 
         public static Client GetInstance(string accountId, string userName, string password, string apiEndpoint = "https://dashboard.bandwidth.com", string apiVersion = "v1.0")
         {
             return new Client(accountId, userName, password, apiEndpoint, apiVersion);
+        }
+
+        // Factory: Access token with explicit expiration (absolute time)
+        public static Client GetInstanceWithAccessToken(string accountId, string accessToken, DateTimeOffset? accessTokenExpiration = null, string apiEndpoint = "https://dashboard.bandwidth.com", string apiVersion = "v1.0")
+        {
+            return new Client(accountId, apiEndpoint, apiVersion, accessToken, accessTokenExpiration);
+        }
+
+        // Factory: Use client credentials to acquire/refresh tokens
+        public static Client GetInstanceWithClientCredentials(string accountId, string clientId, string clientSecret, string apiEndpoint = "https://dashboard.bandwidth.com", string apiVersion = "v1.0")
+        {
+            return new Client(accountId, clientId, clientSecret, apiEndpoint, apiVersion, null, null);
+        }
+
+        // Factory: Use client credentials to acquire/refresh tokens, with initial access token and expiration
+        public static Client GetInstanceWithClientCredentialsAndAccessToken(string accountId, string clientId, string clientSecret, string accessToken, DateTimeOffset? accessTokenExpiration = null, string apiEndpoint = "https://dashboard.bandwidth.com", string apiVersion = "v1.0")
+        {
+            return new Client(accountId, clientId, clientSecret, apiEndpoint, apiVersion, accessToken, accessTokenExpiration);
         }
 
 
@@ -52,8 +77,6 @@ namespace Bandwidth.Iris
         private Client(string accountId, string userName, string password, string apiEndpoint, string apiVersion)
         {
             if (accountId == null) throw new ArgumentNullException("accountId");
-            if (userName == null) throw new ArgumentNullException("userName");
-            if (password == null) throw new ArgumentNullException("password");
             if (apiEndpoint == null) throw new ArgumentNullException("apiEndpoint");
             if (apiVersion == null) throw new ArgumentNullException("apiVersion");
             _userName = userName;
@@ -61,18 +84,143 @@ namespace Bandwidth.Iris
             _apiEndpoint = apiEndpoint;
             _apiVersion = apiVersion;
             _accountPath = string.Format("accounts/{0}", accountId);
+            _clientId = null;
+            _clientSecret = null;
+        }
+
+        // Constructor for access-token
+        private Client(string accountId, string apiEndpoint, string apiVersion, string accessToken, DateTimeOffset? accessTokenExpiration = null)
+        {
+            if (accountId == null) throw new ArgumentNullException("accountId");
+            if (accessToken == null) throw new ArgumentNullException("accessToken");
+            if (apiEndpoint == null) throw new ArgumentNullException("apiEndpoint");
+            if (apiVersion == null) throw new ArgumentNullException("apiVersion");
+            _userName = null;
+            _password = null;
+            _apiEndpoint = apiEndpoint;
+            _apiVersion = apiVersion;
+            _accountPath = string.Format("accounts/{0}", accountId);
+            _accessToken = accessToken;
+            if (accessTokenExpiration.HasValue)
+            {
+                _accessTokenExpiration = accessTokenExpiration.Value;
+            }
+            else
+            {
+                _accessTokenExpiration = DateTimeOffset.UtcNow.AddMinutes(60);
+            }
+            _clientId = null;
+            _clientSecret = null;
+        }
+
+        // Constructor for client-credentials flow with optional initial access token
+        private Client(string accountId, string clientId, string clientSecret, string apiEndpoint, string apiVersion, string accessToken = null, DateTimeOffset? accessTokenExpiration = null)
+        {
+            if (accountId == null) throw new ArgumentNullException("accountId");
+            if (clientId == null) throw new ArgumentNullException("clientId");
+            if (clientSecret == null) throw new ArgumentNullException("clientSecret");
+            if (apiEndpoint == null) throw new ArgumentNullException("apiEndpoint");
+            if (apiVersion == null) throw new ArgumentNullException("apiVersion");
+            _userName = null;
+            _password = null;
+            _apiEndpoint = apiEndpoint;
+            _apiVersion = apiVersion;
+            _accountPath = string.Format("accounts/{0}", accountId);
+            _clientId = clientId;
+            _clientSecret = clientSecret;
+            _accessToken = accessToken;
+            if (accessTokenExpiration.HasValue)
+            {
+                _accessTokenExpiration = accessTokenExpiration.Value;
+            }
+            else
+            {
+                _accessTokenExpiration = DateTimeOffset.UtcNow.AddMinutes(60);
+            }
         }
 
         private HttpClient CreateHttpClient()
         {
             var url = new UriBuilder(_apiEndpoint) { Path = string.Format("/{0}/", _apiVersion) };
             var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { BaseAddress = url.Uri };
-            client.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Basic",
-                    Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", _userName, _password))));
+            if (!string.IsNullOrEmpty(_accessToken))
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
+            }
+            else if (!string.IsNullOrEmpty(_userName) && !string.IsNullOrEmpty(_password))
+            {
+                client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Basic",
+                        Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", _userName, _password))));
+            }
             client.DefaultRequestHeaders.Add("User-Agent", USER_AGENT);
             client.DefaultRequestHeaders.Add("Accept", "application/xml");
             return client;
+        }
+
+        // Use valid access token, or acquire new one using client credentials
+        private async Task EnsureAccessTokenAsync()
+        {
+            if (!string.IsNullOrEmpty(_accessToken) &&
+                _accessTokenExpiration > DateTimeOffset.UtcNow.Add(_tokenRefreshSkew))
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(_clientId) || string.IsNullOrEmpty(_clientSecret))
+            {
+                return;
+            }
+
+            await _tokenLock.WaitAsync();
+            try
+            {
+                using (var http = new HttpClient())
+                {
+                    var form = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("grant_type", "client_credentials")
+                    };
+
+                    var tokenEndpoint = new UriBuilder("https://api.bandwidth.com/api/v1/oauth2/token").Uri;
+                    var request = new HttpRequestMessage(HttpMethod.Post, tokenEndpoint)
+                    {
+                        Content = new FormUrlEncodedContent(form)
+                    };
+
+                    var authString = Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", _clientId, _clientSecret)));
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authString);
+
+                    using (var response = await http.SendAsync(request))
+                    {
+                        if (!response.IsSuccessStatusCode)
+                        {
+
+                            return;
+                        }
+                        var json = await response.Content.ReadAsStringAsync();
+                        var obj = JObject.Parse(json);
+                        var token = (string)obj["access_token"];
+                        var expiresIn = (int?)obj["expires_in"];
+                        if (!string.IsNullOrEmpty(token))
+                        {
+                            _accessToken = token;
+                            if (expiresIn.HasValue)
+                            {
+                                _accessTokenExpiration = DateTimeOffset.UtcNow.AddSeconds(expiresIn.Value);
+                            }
+                            else
+                            {
+                                _accessTokenExpiration = DateTimeOffset.UtcNow.AddMinutes(60);
+                            }
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                _tokenLock.Release();
+            }
         }
 
         #region Base Http methods
@@ -80,6 +228,7 @@ namespace Bandwidth.Iris
         internal async Task<HttpResponseMessage> MakeGetRequest(string path, IDictionary<string, object> query = null,
             string id = null, bool disposeResponse = false)
         {
+            await EnsureAccessTokenAsync();
             var urlPath = FixPath(path);
             if (id != null)
             {
@@ -161,6 +310,7 @@ namespace Bandwidth.Iris
 
         public async Task<HttpResponseMessage> MakePostRequest(string path, object data, bool disposeResponse = false)
         {
+            await EnsureAccessTokenAsync();
             var serializer = new XmlSerializer(data.GetType());
             using (var writer = new Utf8StringWriter())
             {
@@ -188,6 +338,7 @@ namespace Bandwidth.Iris
 
         public async Task<HttpResponseMessage> MakePatchRequest(string path, object data, bool disposeResponse = false)
         {
+            await EnsureAccessTokenAsync();
             var serializer = new XmlSerializer(data.GetType());
             using (var writer = new Utf8StringWriter())
             {
@@ -228,6 +379,7 @@ namespace Bandwidth.Iris
 
         internal async Task<HttpResponseMessage> MakePutRequest(string path, object data, bool disposeResponse = false)
         {
+            await EnsureAccessTokenAsync();
 
             using (var writer = new Utf8StringWriter())
             {
@@ -285,6 +437,7 @@ namespace Bandwidth.Iris
         private async Task<HttpResponseMessage> SendFileContent(string path, string mediaType, bool disposeResponse,
             HttpContent content, string method)
         {
+            await EnsureAccessTokenAsync();
             if (mediaType != null)
             {
                 content.Headers.ContentType = new MediaTypeHeaderValue(mediaType);
@@ -367,6 +520,7 @@ namespace Bandwidth.Iris
             {
                 path = path + "/" + id;
             }
+            await EnsureAccessTokenAsync();
             using (var client = CreateHttpClient())
             using (var response = await client.DeleteAsync(FixPath(path)))
             {
@@ -380,6 +534,7 @@ namespace Bandwidth.Iris
             {
                 path = path + "/" + id;
             }
+            await EnsureAccessTokenAsync();
             using (var client = CreateHttpClient())
             using (var response = await client.DeleteAsync(FixPath(path)))
             {
