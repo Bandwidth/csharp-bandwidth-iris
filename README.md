@@ -15,6 +15,13 @@ Or install Bandwidth.Iris via UI in Visual Studio
 * Configure the Client
 
 ```csharp
+// Auth using Bearer token
+var client = Client.GetInstanceWithAccessToken("accountId", "accessToken");
+
+// Auth using client credentials
+var client = Client.GetInstanceWithClientCredentials("accountId", "clientId", "clientSecret");
+
+// Auth using basic auth
 var client = Client.GetInstance("accountId", "username", "password", "apiEndpoint")
 //Or
 //Uses the System Environment Variables as detailed below

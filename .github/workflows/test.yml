@@ -13,10 +13,10 @@ jobs:
         dotnet: [6.0.x, 7.0.x]
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ matrix.dotnet }}
 
@@ -26,10 +26,15 @@ jobs:
           DOTNET: ${{ matrix.dotnet }}
         run: dotnet test Bandwidth.Iris.Tests
 
-      - name: Notify Slack of failures
-        uses: Bandwidth/build-notify-slack-action@v1.0.0
-        if: failure() && !github.event.pull_request.draft
+  notify_for_failures:
+    name: Notify for Failures
+    needs: [test]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Slack of Failures
+        uses: Bandwidth/build-notify-slack-action@v2
         with:
-          job-status: ${{ job.status }}
+          job-status: failure
           slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
           slack-channel: ${{ secrets.SLACK_CHANNEL }}
