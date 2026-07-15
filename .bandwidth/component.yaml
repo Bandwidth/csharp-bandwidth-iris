@@ -6,6 +6,7 @@ metadata:
   description: Dot Net SDK for Bandwidth's Phone Number Dashboard (AKA Dashboard, Iris)
   annotations:
     github.com/project-slug: Bandwidth/csharp-bandwidth-iris
+    bandwidth.com/languages: C#
     organization: BW
     costCenter: Development - Software Infra
 spec:
